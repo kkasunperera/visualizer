@@ -33,11 +33,11 @@ text {
     System.out.println(filename);
 %>
 <script>
+var linkedByIndex = {};
 var color = d3.scale.category10();
-var width = 1300,
+var width = 1000,
     height = 1000;
-
-    var nodes=[
+var nodes=[
   {
     "group":1,
     "nodeId":"11",
@@ -306,8 +306,8 @@ var svg = d3.select("body").append("svg")
 
 var force = d3.layout.force()
     .gravity(.05)
-    .distance(600)
-    .charge(-600)
+    .distance(400)
+    .charge(-400)
     .size([width, height]);
     
     <%//input to the file name which is taken previously%>
@@ -323,7 +323,7 @@ d3.json(<%= name%>, function(error, json) {
     .enter().append("line")
       .attr("class", "link");
       
-  svg.append("svg:defs").selectAll("marker")
+ var arrow_head = svg.append("svg:defs").selectAll("marker")
     .data(["end"])      // Different link/path types can be defined here
   .enter().append("svg:marker")    // This section adds in the arrows
     .attr("id", String)
@@ -351,7 +351,7 @@ d3.json(<%= name%>, function(error, json) {
       .style("fill", function(d) { return color(d.group); })
       .on("click",click)
       .on("dblclick", dblclick)
-      .on("mouseover", mouseover)
+      .on("mouseover", fade(.001))
       .on("mouseout", fade(1))
       .call(force.drag);
 
@@ -362,7 +362,11 @@ d3.json(<%= name%>, function(error, json) {
       .attr("dx", 12)
       .attr("dy", ".35em")
       .text(function(d) { return d.name});
-  
+
+json.links.forEach(function(d) {
+//alert(d.source.index + "," + d.target.index);
+  linkedByIndex[d.source.index + "," + d.target.index] = 1;
+});
  
     function tick() {
     path.attr("d", function(d) {
@@ -385,7 +389,7 @@ d3.json(<%= name%>, function(error, json) {
   	    return "translate(" + d.x + "," + d.y + ")"; });
 }
 
-});
+
 
 function click() {
     d3.select(this).select("text").transition()
@@ -422,20 +426,23 @@ function mouseover() {
 
  function fade(opacity) {
         return function(d) {
-            node.style("stroke-opacity", function(o) {
+            node
+                .style("stroke-opacity", function(o) {
                 thisOpacity = isConnected(d, o) ? 1 : opacity;
                 this.setAttribute('fill-opacity', thisOpacity);
                 return thisOpacity;
             });
-
             path.style("stroke-opacity", function(o) {
 		//return o.source === d || o.target === d ? 1 : opacity;
                 return o.source === d ? 1 : opacity;
             });
-
+            
+            arrow_head.style("opacity",function(o) {
+		//return o.source === d || o.target === d ? 1 : opacity;
+                return o.source === d ? 1 : opacity;
+            });
         };
-    }
-    
+  }
 function neighboring(a, b) {
   return linkedByIndex[a.index + "," + b.index];
 }
@@ -447,6 +454,6 @@ function isConnected(a, b) {
 //alert(a.index + "," + b.index);
 	return linkedByIndex[a.index + "," + b.index];
 	}
-
+});
 </script>
 </div>
