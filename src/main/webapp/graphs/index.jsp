@@ -23,6 +23,8 @@ text {
 <body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
+    
+var linkedByIndex = {};
 var color = d3.scale.category10();
 var width = 1300,
     height = 1300
@@ -38,6 +40,8 @@ var force = d3.layout.force()
     .size([width, height]);
 
 d3.json("graph.json", function(error, json) {
+    
+    var nodes =json.nodes;
   force
       .nodes(json.nodes)
       .links(json.links)
@@ -49,7 +53,7 @@ d3.json("graph.json", function(error, json) {
     .enter().append("line")
       .attr("class", "link");
       
-  svg.append("svg:defs").selectAll("marker")
+ var arrow_head = svg.append("svg:defs").selectAll("marker")
     .data(["end"])      // Different link/path types can be defined here
   .enter().append("svg:marker")    // This section adds in the arrows
     .attr("id", String)
@@ -60,25 +64,26 @@ d3.json("graph.json", function(error, json) {
     .attr("markerHeight", 6)
     .attr("orient", "auto")
   .append("svg:path")
-    .attr("d", "M0,-5L10,0L0,5");
+    .attr("d", "M0,-5L10,0L0,5")
+    .attr("fill","black");
       
       
   var path = svg.append("svg:g").selectAll("path")
     .data(force.links())
   .enter().append("svg:path")
-	.attr("class", function(d) { return "link " + d.type; })
-	.attr("class", "link")
-	.attr("marker-end", "url(#end)");
+  .attr("class", function(d) { return "link " + d.type; })
+  .attr("class", "link")
+  .attr("marker-end", "url(#end)");
 
   var node = svg.selectAll(".node")
-      .data(json.nodes)
+      .data(force.nodes())
     .enter().append("g")
       .attr("class", "node")
       .style("fill", function(d) { return color(d.group); })
       .on("click",click)
       .on("dblclick", dblclick)
-      .on("mouseover", mouseover)
-      .on("mouseout", fade(1))
+      .on("mouseover",fade(.01))
+      .on("mouseout",fade(1))
       .call(force.drag);
 
   node.append("circle")
@@ -89,11 +94,15 @@ d3.json("graph.json", function(error, json) {
       .attr("dy", ".35em")
       .text(function(d) { return d.name});
   
- 
+json.links.forEach(function(d) {
+//alert(d.source.index + "," + d.target.index);
+  linkedByIndex[d.source.index + "," + d.target.index] = 1;
+});
+
     function tick() {
     path.attr("d", function(d) {
 
-	
+  
         var dx = d.target.x - d.source.x,
             dy = d.target.y - d.source.y,
             dr = Math.sqrt(dx * dx + dy * dy);
@@ -103,15 +112,13 @@ d3.json("graph.json", function(error, json) {
             dr + "," + dr + " 0 0,1 " + 
             d.target.x + "," + 
             d.target.y;
-		
+    
    });
 
-    node
-        .attr("transform", function(d) { 
-  	    return "translate(" + d.x + "," + d.y + ")"; });
+    node.attr("transform", function(d) { 
+        return "translate(" + d.x + "," + d.y + ")"; });
 }
 
-});
 
 function click() {
     d3.select(this).select("text").transition()
@@ -148,20 +155,24 @@ function mouseover() {
 
  function fade(opacity) {
         return function(d) {
-            node.style("stroke-opacity", function(o) {
+            node
+                .style("stroke-opacity", function(o) {
                 thisOpacity = isConnected(d, o) ? 1 : opacity;
                 this.setAttribute('fill-opacity', thisOpacity);
                 return thisOpacity;
             });
-
             path.style("stroke-opacity", function(o) {
-		//return o.source === d || o.target === d ? 1 : opacity;
+    //return o.source === d || o.target === d ? 1 : opacity;
                 return o.source === d ? 1 : opacity;
             });
-
+            
+            arrow_head.style("opacity",function(o) {
+    //return o.source === d || o.target === d ? 1 : opacity;
+                return o.source === d ? 1 : opacity;
+            });
         };
-    }
-    
+  }
+  
 function neighboring(a, b) {
   return linkedByIndex[a.index + "," + b.index];
 }
@@ -171,7 +182,7 @@ function isConnected(a, b) {
 //return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
 //return outgong
 //alert(a.index + "," + b.index);
-	return linkedByIndex[a.index + "," + b.index];
-	}
-
+  return linkedByIndex[a.index + "," + b.index];
+  }
+});
 </script>
