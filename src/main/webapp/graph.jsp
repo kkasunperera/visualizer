@@ -3,7 +3,6 @@
 //this is the page where graph is drawn accordin to the year 
 //json data dynamically upadated according to the year
 %>
-<div>
     <style>
 
 .link {
@@ -30,13 +29,13 @@ text {
     
     String filename = request.getParameter("filename");
     String name = "\'"+"json/"+filename+"\'";
-    System.out.println(filename);
+    //System.out.println(filename);
 %>
 <script>
 var linkedByIndex = {};
 var color = d3.scale.category10();
-var width = 1000,
-    height = 1000;
+var width = 1200,
+    height = 1200;
 var nodes=[
   {
     "group":1,
@@ -300,7 +299,7 @@ var nodes=[
   }
 ];
     
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#gc_network").append("svg")
     .attr("width", width)
     .attr("height", height);
 
@@ -456,4 +455,3 @@ function isConnected(a, b) {
 	}
 });
 </script>
-</div>

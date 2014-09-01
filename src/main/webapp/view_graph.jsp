@@ -22,6 +22,9 @@
     rel="stylesheet" type="text/css">
 
 </head>
+<% String year = request.getParameter("year");
+
+%>
 
 <body style="background-color: white">
     <div id="wrapper">
@@ -46,7 +49,7 @@
                         
                         <ul id="demo" name="demo" class="collapse">
                             <% for(int i = 2004;i < 2014;i++) {%>
-                            <li><a href="view_graph.jsp?filename=data<%=i%>.json"><%=i%></a></li>                            
+                            <li><a href="view_graph.jsp?filename=data<%=i%>.json&year=<%=i%>"><%=i%></a></li>                            
                             <%}%>
                         </ul></li>
                     <li><a href="Overall.html"><i
@@ -59,14 +62,63 @@
            </div>
         </nav>
                         
-</div>
+
     
-    <div class="container-fluid">
+  <div id="page-wrapper">
+
+            <div class="container-fluid">
                 <div class="row">
-                    <!-- include the graph.jsp page which has graph according to the year-->
-                   
-                    <div class="col-md-8">
-                        <div>
+                    <div class="col-lg-12">
+                        <div id="gc_network" style="border:2px solid;">
+                            <h2><center><%= year%> - Granger causality Analysis</center> </h2>
+                            <center>
+                                <canvas id="graph_note" width="400" height="50" style="float: right">                                
+                            </canvas>
+                            </center>
+                            <script>
+
+                            var c = document.getElementById("graph_note");
+                            var ctx = c.getContext("2d");
+                            
+                            ctx.fillStyle = "#1f77b4";
+                            ctx.beginPath();
+                            ctx.arc(200,10,8,0,2*Math.PI);
+                            ctx.closePath();
+                            ctx.fill();
+                            
+                            
+                            ctx.fillStyle = "#ff7f0d";
+                            ctx.beginPath();
+                            ctx.arc(200,35,8,0,2*Math.PI);
+                            ctx.closePath();
+                            ctx.fill();
+                            
+                            ctx.fillStyle = "#ff7f0d";
+                            ctx.beginPath();
+                            ctx.fillText("Equity", 214,40); 
+                            ctx.closePath();
+                            ctx.fill();
+                            
+                            ctx.fillStyle = "#1f77b4";
+                            ctx.beginPath();
+                            ctx.fillText("Bond", 214,14); 
+                            ctx.closePath();
+                            ctx.fill();
+
+                            </script>
+                        </div>
+                    </div>
+                </div>
+               
+
+            </div>
+           
+
+        </div> 
+                        
+       </div>                 
+                        
+ 
     <style>
 
 .link {
@@ -98,8 +150,8 @@ text {
 <script>
 var linkedByIndex = {};
 var color = d3.scale.category10();
-var width = 1000,
-    height = 1000;
+var width = 900,
+    height = 900;
 var nodes=[
   {
     "group":1,
@@ -363,14 +415,14 @@ var nodes=[
   }
 ];
     
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#gc_network").append("svg")
     .attr("width", width)
     .attr("height", height);
 
 var force = d3.layout.force()
-    .gravity(.05)
-    .distance(400)
-    .charge(-400)
+    .gravity(.15)
+    .distance(350)
+    .charge(-350)
     .size([width, height]);
     
     <%//input to the file name which is taken previously%>
@@ -518,11 +570,7 @@ function isConnected(a, b) {
 	return linkedByIndex[a.index + "," + b.index];
 	}
 });
-</script>
-</div>
-                    </div>
-                </div>
-            </div>
+</script>                  
     <!-- /#wrapper -->
 
     <!-- jQuery Version 1.11.0 -->
