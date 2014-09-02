@@ -22,9 +22,7 @@
     rel="stylesheet" type="text/css">
 
 </head>
-<% String year = request.getParameter("year");
 
-%>
 
 <body style="background-color: white">
     <div id="wrapper">
@@ -62,7 +60,9 @@
            </div>
         </nav>
                         
-
+<% 
+String year = request.getParameter("year");
+%>
     
   <div id="page-wrapper">
 
@@ -72,7 +72,7 @@
                         <div id="gc_network" style="border:2px solid;">
                             <h2><center><%= year%> - Granger causality Analysis</center> </h2>
                             <center>
-                                <canvas id="graph_note" width="400" height="50" style="float: right">                                
+                                <canvas id="graph_note" width="500" height="50" style="float: left">                                
                             </canvas>
                             </center>
                             <script>
@@ -102,6 +102,43 @@
                             ctx.fillStyle = "#1f77b4";
                             ctx.beginPath();
                             ctx.fillText("Bond", 214,14); 
+                            ctx.closePath();
+                            ctx.fill();
+                            
+                            ctx.strokeStyle="#FF0000";
+                            ctx.beginPath();
+                            ctx.moveTo(350,10);
+                            ctx.lineTo(301,10);
+                            ctx.stroke();
+                            
+                            ctx.strokeStyle="#0000FF";
+                            ctx.beginPath();
+                            ctx.moveTo(350,35);
+                            ctx.lineTo(301,35);
+                            ctx.stroke();
+                            
+                            ctx.fillStyle = "#1f77b4";
+                            ctx.beginPath();
+                            ctx.arc(300,10,8,0,2*Math.PI);
+                            ctx.closePath();
+                            ctx.fill();
+                            
+                            
+                            ctx.fillStyle = "#1f77b4";
+                            ctx.beginPath();
+                            ctx.arc(300,35,8,0,2*Math.PI);
+                            ctx.closePath();
+                            ctx.fill();
+                            
+                            ctx.fillStyle = "#0000FF";
+                            ctx.beginPath();
+                            ctx.fillText("Output Edge from the Node", 360,40); 
+                            ctx.closePath();
+                            ctx.fill();
+                            
+                            ctx.fillStyle = "#FF0000";
+                            ctx.beginPath();
+                            ctx.fillText("Input Edge to the Node", 360,14); 
                             ctx.closePath();
                             ctx.fill();
 
@@ -464,10 +501,10 @@ d3.json(<%= name%>, function(error, json) {
     .enter().append("g")
       .attr("class", "node")
       .style("fill", function(d) { return color(d.group); })
-      .on("click",click)
-      .on("dblclick", dblclick)
-      .on("mouseover", fade(.001))
-      .on("mouseout", fade(1))
+      //.on("click",click)
+      //.on("dblclick", dblclick)
+       .on("mouseover", mouseOver(.001))
+      .on("mouseout", mouseOut(1))
       .call(force.drag);
 
   node.append("circle")
@@ -505,41 +542,82 @@ json.links.forEach(function(d) {
 }
 
 
+function mouseOver(opacity) {
+    return function(d) {
+    	node.style("stroke-opacity", function(o) {
+            thisOpacity = isConnected(d, o) ? 1 : opacity;
+            this.setAttribute('fill-opacity', thisOpacity);
+            return thisOpacity;
+        });
 
-function click() {
-    d3.select(this).select("text").transition()
-        .duration(750)
-        .style("fill", "black")
-        .style("stroke", "lightsteelblue")
-        .style("stroke-width", ".5px")
-        .style("font", "20px sans-serif");
-    d3.select(this).select("circle").transition()
-        .duration(750)
-        .attr("r", 25)
-        .style("fill", function(d) { return color(d.group); })
+        path.style("stroke-opacity", function(o) {
+            return o.source === d || o.target === d ? 1 : opacity;                
+        });
+
+        path.style("stroke",function(o){
+            if (o.source === d) {
+                return "blue";
+            }else if (o.target === d ) {
+                return "red";
+            };
+        });
+
+       arrow_head.style("opacity",function(o){
+            thisOpacity = isConnected(d, o) ? 1 : opacity;
+            this.setAttribute('fill-opacity', thisOpacity);
+            return thisOpacity;
+        });
+       
+       d3.select(this).select("text").transition()
+       .duration(500)
+       .style("fill", "black")
+       .style("stroke", "lightsteelblue")
+       .style("stroke-width", ".5px")
+       .style("font", "20px sans-serif");
+   d3.select(this).select("circle").transition()
+       .duration(750)
+       .attr("r", 25)
+       .style("fill", function(d) { return color(d.group); })
+        
+    };
 }
 
-function dblclick() {
-    d3.select(this).select("circle").transition()
-        .duration(750)
-        .attr("r", 6)
-        .style("fill", function(d) { return color(d.group); })
-    d3.select(this).select("text").transition()
-        .duration(750)
-        .attr("x", 12)
-        .style("stroke", "none")
-        .style("fill", "black")
-        .style("stroke", "none")
-        .style("font", "10px sans-serif");
-}
+function mouseOut(opacity) {
+    return function(d) {
+    	 node.style("stroke-opacity", function(o) {
+             thisOpacity = isConnected(d, o) ? 1 : opacity;
+             this.setAttribute('fill-opacity', thisOpacity);
+             return thisOpacity;
+         });
 
-function mouseover() {
-  d3.select(this).select("circle").transition()
-      .duration(200)
-      .attr("r", 18);
-}
+         path.style("stroke-opacity", function(o) {
+     //return o.source === d || o.target === d ? 1 : opacity;
+             return o.source === d ? 1 : opacity;
+         });
 
- function fade(opacity) {
+         path.style("stroke","#666");
+         
+         arrow_head.style("opacity",function(o){
+             thisOpacity = isConnected(d, o) ? opacity : 1;
+             this.setAttribute('fill-opacity', thisOpacity);
+             return thisOpacity;
+         });
+         
+         d3.select(this).select("circle").transition()
+         .duration(750)
+         .attr("r", 8)
+         .style("fill", function(d) { return color(d.group); })
+     d3.select(this).select("text").transition()
+         .duration(750)
+         .attr("x", 12)
+         .style("stroke", "none")
+         .style("fill", "black")
+         .style("stroke", "none")
+         .style("font", "10px sans-serif");
+        
+    };
+}
+ /* function fade(opacity) {
         return function(d) {
             node
                 .style("stroke-opacity", function(o) {
@@ -557,17 +635,17 @@ function mouseover() {
                 return o.source === d ? 1 : opacity;
             });
         };
-  }
+  } */
 function neighboring(a, b) {
   return linkedByIndex[a.index + "," + b.index];
 }
 
 function isConnected(a, b) {
 //return incoming and outgoing
-//return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
+	return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
 //return outgong
 //alert(a.index + "," + b.index);
-	return linkedByIndex[a.index + "," + b.index];
+	//return linkedByIndex[a.index + "," + b.index];
 	}
 });
 </script>                  
