@@ -59,12 +59,21 @@ text {
                     <li class="active"><a href="index.jsp"><i
                             class="fa fa-fw fa-dashboard"></i> Visualizer</a></li>
                     <li><a href="javascript:;" data-toggle="collapse"
-                        data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>
-                            GC-Analysis <i class="fa fa-fw fa-caret-down"></i></a>
+                        data-target="#demo1"><i class="fa fa-fw fa-arrows-v"></i>
+                            GC-Analysis1 <i class="fa fa-fw fa-caret-down"></i></a>
                         
-                        <ul id="demo" name="demo" class="collapse">
+                        <ul id="demo1" name="demo" class="collapse">
                             <% for(int i = 2004;i < 2014;i++) {%>
                             <li><a href="view_graph.jsp?filename=data<%=i%>.json"><%=i%></a></li>                            
+                            <%}%>
+                        </ul></li>
+                     <li><a href="javascript:;" data-toggle="collapse"
+                        data-target="#demo2"><i class="fa fa-fw fa-arrows-v"></i>
+                            GC-Analysis 2 <i class="fa fa-fw fa-caret-down"></i></a>
+                        
+                        <ul id="demo2" name="demo" class="collapse">
+                            <% for(int j = 2004;j < 2014;j++) {%>
+                            <li><a href="view_graph.jsp?filename=data<%=j%>.json"><%=j%></a></li>                            
                             <%}%>
                         </ul></li>
                     <li><a href="Overall.html"><i

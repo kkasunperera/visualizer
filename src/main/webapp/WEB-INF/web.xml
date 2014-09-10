@@ -4,9 +4,17 @@
         <servlet-name>ControlerServelet</servlet-name>
         <servlet-class>org.karsha.visualizer.ControlerServelet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>json_read</servlet-name>
+        <servlet-class>json_read</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControlerServelet</servlet-name>
         <url-pattern>/ControlerServelet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>json_read</servlet-name>
+        <url-pattern>/json_read</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
