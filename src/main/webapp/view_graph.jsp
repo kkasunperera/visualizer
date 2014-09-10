@@ -50,18 +50,27 @@
                             <li><a href="view_graph.jsp?filename=data<%=i%>.json&year=<%=i%>"><%=i%></a></li>                            
                             <%}%>
                         </ul></li>
-                    <li><a href="Overall.html"><i
+                    <!-- <li><a href="Overall.html"><i
                             class="fa fa-fw fa-bar-chart-o"></i> Overall</a></li>
                     <li><a href="RowData.html"><i class="fa fa-fw fa-table"></i>
                             Row Data</a></li>
                     <li><a href="blank-page.html"><i class="fa fa-fw fa-file"></i>
+                            More About</a></li> -->
+                            
+                    <li><a href="#"><i
+                            class="fa fa-fw fa-bar-chart-o"></i> Overall</a></li>
+                    <li><a href="#"><i class="fa fa-fw fa-table"></i>
+                            Row Data</a></li>
+                    <li><a href="#"><i class="fa fa-fw fa-file"></i>
                             More About</a></li>
+                            
                 </ul>
            </div>
         </nav>
                         
 <% 
 String year = request.getParameter("year");
+if(year==null)year="";
 %>
     
   <div id="page-wrapper">
@@ -70,7 +79,7 @@ String year = request.getParameter("year");
                 <div class="row">
                     <div class="col-lg-12">
                         <div id="gc_network" style="border:2px solid;">
-                            <h2><center><%= year%> - Granger causality Analysis</center> </h2>
+                            <h2><center> Granger causality Analysis <%= year%></center> </h2>
                             <center>
                                 <canvas id="graph_note" width="500" height="50" style="float: left">                                
                             </canvas>

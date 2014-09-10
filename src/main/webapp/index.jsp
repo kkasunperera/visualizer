@@ -60,14 +60,14 @@ text {
                             class="fa fa-fw fa-dashboard"></i> Visualizer</a></li>
                     <li><a href="javascript:;" data-toggle="collapse"
                         data-target="#demo1"><i class="fa fa-fw fa-arrows-v"></i>
-                            GC-Analysis1 <i class="fa fa-fw fa-caret-down"></i></a>
+                            GC-Analysis <i class="fa fa-fw fa-caret-down"></i></a>
                         
                         <ul id="demo1" name="demo" class="collapse">
                             <% for(int i = 2004;i < 2014;i++) {%>
                             <li><a href="view_graph.jsp?filename=data<%=i%>.json"><%=i%></a></li>                            
                             <%}%>
                         </ul></li>
-                     <li><a href="javascript:;" data-toggle="collapse"
+                    <%--  <li><a href="javascript:;" data-toggle="collapse"
                         data-target="#demo2"><i class="fa fa-fw fa-arrows-v"></i>
                             GC-Analysis 2 <i class="fa fa-fw fa-caret-down"></i></a>
                         
@@ -75,13 +75,22 @@ text {
                             <% for(int j = 2004;j < 2014;j++) {%>
                             <li><a href="view_graph.jsp?filename=data<%=j%>.json"><%=j%></a></li>                            
                             <%}%>
-                        </ul></li>
-                    <li><a href="Overall.html"><i
+                        </ul></li> --%>
+                   
+                   <!--  <li><a href="Overall.html"><i
                             class="fa fa-fw fa-bar-chart-o"></i> Overall</a></li>
                     <li><a href="RowData.html"><i class="fa fa-fw fa-table"></i>
                             Row Data</a></li>
                     <li><a href="blank-page.html"><i class="fa fa-fw fa-file"></i>
+                            More About</a></li> -->
+                            
+                    <li><a href="#"><i
+                            class="fa fa-fw fa-bar-chart-o"></i> Overall</a></li>
+                    <li><a href="#"><i class="fa fa-fw fa-table"></i>
+                            Row Data</a></li>
+                    <li><a href="#"><i class="fa fa-fw fa-file"></i>
                             More About</a></li>
+                            
                 </ul>
            </div>
         </nav>
@@ -100,6 +109,20 @@ text {
                 </div>
                 <!-- /.row -->
                 <div class="row">
+                	<center><h2>Instructions to use the system </h2></center>
+                	<ul>
+                	<ul> 1) click the drop down 'GC-Analysis" tab then you can see the new tabs for last 10 years. </ul>
+                	<ul> 2) you can click the respective year and see the gc graph </ul><br />
+                	<ul> In the graph, </ul>
+                	<ul> you can move your mouce pointer to the node, then it will indicate the corresponding node with input and output edges in different colors. </ul>
+                	
+                	<ul>  </ul>
+                	</ul>
+                	
+                </div>
+                <center><h3><b>Please Note that :</b></h3><h4> fallowing analysis graphs are on under construction.</h4></center>
+                <div class="row">
+                <div  style=" opacity: 0.2;">
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
@@ -188,15 +211,17 @@ text {
                             </a>
                         </div>
                     </div>
+                    </div>
                 </div>
                 <!-- /.row -->
 
                 <div class="row">
+                <div  style=" opacity: 0.2;">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title">
-                                    <i class="fa fa-bar-chart-o fa-fw"></i> Area Chart
+                                    <i class="fa fa-bar-chart-o fa-fw"></i>Behavior of industrial sectors in last 10 years 
                                 </h3>
                             </div>
                             <div class="panel-body">
@@ -208,6 +233,7 @@ text {
                 <!-- /.row -->
 
                 <div class="row">
+                <div  style=" opacity: 0.2;">
                     <div class="col-lg-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -257,6 +283,7 @@ text {
                             </div>
                         </div>
                     
+                    </div>
                     </div>
                 </div>
                 <!-- /.row -->
