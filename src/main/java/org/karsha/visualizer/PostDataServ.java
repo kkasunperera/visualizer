@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -16,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.jgrapht.DirectedGraph;
-import org.jgrapht.alg.cycle.JohnsonSimpleCycles;
+import org.jgrapht.alg.CycleDetector;
 import org.jgrapht.graph.DefaultEdge;
 
 
@@ -80,9 +79,9 @@ public class PostDataServ extends HttpServlet {
 			//print the graph 
 	        System.out.println("the graph is "+g.toString());
 	        
-	        //finding simple cycles
-	        JohnsonSimpleCycles<Node, DefaultEdge> gcycle=new JohnsonSimpleCycles<Node, DefaultEdge>(g);  
-	        System.out.println("sub graph is "+ gcycle.findSimpleCycles().toString());
+	        //finding cycles on the graph using cycle detector class
+	        CycleDetector<Node, DefaultEdge> gcycle=new CycleDetector<Node, DefaultEdge>(g);	        		
+	        System.out.println("sub graph is "+ gcycle.findCycles().toString());
 	        
 	        //get element 
 	       /* List<List<Node>> list=gcycle.findSimpleCycles();
