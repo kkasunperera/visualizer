@@ -47,7 +47,7 @@
                         
                         <ul id="demo" name="demo" class="collapse">
                             <% for(int i = 2004;i < 2014;i++) {%>
-                            <li><a href="view_graph.jsp?filename=data<%=i%>.json&year=<%=i%>"><%=i%></a></li>                            
+                            <li><a href="?filename=data<%=i%>.json&year=<%=i%>"><%=i%></a></li>                            
                             <%}%>
                         </ul></li>
                     <li><a href="Overall.html"><i
@@ -458,7 +458,10 @@ var width = 900,
 	$(document).ready(function(){
 
 		var filename=<%=name%>
-		var url='http://localhost:8080/visualizer/'+filename;
+		<% String baseUrl="\'"+request.getScheme() + "://" + request.getServerName() + ":" + Integer.toString(request.getServerPort()) + request.getContextPath()+"/"+"\'";%>
+		var url=<%=baseUrl%>+filename;
+		
+		//alert(url);
 		
 		var obj=new Object();
 		obj.nodes=nodes;
