@@ -10,11 +10,11 @@
   </servlet-mapping>
   
   <servlet>
-  	<servlet-name>PostDataServ</servlet-name>
+  	<servlet-name>PostData</servlet-name>
   	<servlet-class>org.karsha.visualizer.PostDataServ</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>PostDataServ</servlet-name>
+  	<servlet-name>PostData</servlet-name>
   	<url-pattern>/PostDataServ</url-pattern>
   </servlet-mapping>
   <session-config>

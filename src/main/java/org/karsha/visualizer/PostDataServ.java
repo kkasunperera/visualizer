@@ -24,7 +24,7 @@ import org.jgrapht.graph.DefaultEdge;
 /**
  * Servlet implementation class PostDataServ
  */
-@WebServlet("/PostDataServ")
+
 public class PostDataServ extends HttpServlet {
 	static Logger logger = Logger.getLogger(PostDataServ.class);
 	private static final long serialVersionUID = 1L;

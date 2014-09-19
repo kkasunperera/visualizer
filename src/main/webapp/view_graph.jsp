@@ -476,7 +476,9 @@ var width = 900,
 			}); 
 		
 		//post the json string to servlet
-		$.post("/visualizer/PostDataServ",JSON.stringify(obj));
+		$.post("PostDataServ",JSON.stringify(obj)).error(function(){
+			alert("error");
+		});
 		//alert(JSON.stringify(obj.nodes));
 		
 	});
