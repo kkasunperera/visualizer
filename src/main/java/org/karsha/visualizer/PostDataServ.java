@@ -12,14 +12,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.jgrapht.DirectedGraph;
+import org.jgrapht.alg.CycleDetector;
+import org.jgrapht.graph.DefaultEdge;
+
 
 
 /**
  * Servlet implementation class PostDataServ
  */
-@WebServlet("/PostDataServ")
+
 public class PostDataServ extends HttpServlet {
+	static Logger logger = Logger.getLogger(PostDataServ.class);
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -27,14 +34,14 @@ public class PostDataServ extends HttpServlet {
      */
     public PostDataServ() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
 	 * @see Servlet#init(ServletConfig)
 	 */
 	public void init(ServletConfig config) throws ServletException {
-		// TODO Auto-generated method stub
+		System.out.println("servlet going to initiate....");
 	}
 
 	/**
@@ -48,22 +55,35 @@ public class PostDataServ extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("starting......");
+		long startTime = System.nanoTime();
 		InputStream s=request.getInputStream();
 		BufferedReader br=new BufferedReader(new InputStreamReader(s));
 		
 		String o="";
-		System.out.println(o=br.readLine());
-		
-		/*while(br != null){
-			o=br.readLine();
-		}*/
+		o=br.readLine();
 		
 		ObjectMapper mapper=new ObjectMapper();
-		Node[] myObjects = mapper.readValue(o, Node[].class);
+		JsonNode root=mapper.readTree(o);
+		JsonNode nodes=root.get("nodes");
+		JsonNode linkObj=root.get("link");
+		JsonNode links=linkObj.get("links");
 		
-		System.out.println(myObjects[0].getSource()+" "+myObjects[0].getTarget());
-		System.out.println(myObjects[1].getSource()+" "+myObjects[1].getTarget());
-	}
+		if(nodes != null && linkObj != null ){
+			Node[] nodeSet=mapper.readValue(nodes, Node[].class);
+			Links[] linkSet=mapper.readValue(links, Links[].class);
+			
+			
+			//initiate the graph
+			DirectedGraph<Node,DefaultEdge> g = DirectedGraphDemoServ.createHrefGraph(nodeSet,linkSet);
+			//DirectedGraphDemoServ.findHighInDegree(g, nodeSet);
+			
+			
+	        long endTime = System.nanoTime();	        
+	        System.out.println("Took "+(endTime - startTime) + " ns"); 
+		}else{
+			System.out.println("nodes is null");
+		}
+		
+		}
 
 }
