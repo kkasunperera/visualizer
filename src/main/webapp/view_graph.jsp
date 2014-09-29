@@ -84,6 +84,27 @@ if(year==null)year="";
                                 <canvas id="graph_note" width="500" height="50" style="float: left">                                
                             </canvas>
                             </center>
+                            <button id="InDegreeBtn">InDegree</button>
+                            <button id="OutDegreeBtn">OutDegree</button>
+                            
+                            <script type="text/javascript">
+                            	$('#InDegreeBtn').click(function(){
+                            		$.ajax({
+                          			  type: 'GET',
+                          			  url: 'Indegree',                          			
+                          			  async: false
+                          			});
+                            	});
+                            	
+                            	$('#OutDegreeBtn').click(function(){
+                            		$.ajax({
+                            		  type: 'GET',
+                            		  url: 'Outdegree',                          			
+                            		  async: false
+                            		});
+                            	});
+                            </script>
+                            
                             <script>
 
                             var c = document.getElementById("graph_note");
