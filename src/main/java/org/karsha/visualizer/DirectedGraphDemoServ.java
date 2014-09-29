@@ -59,9 +59,9 @@ public class DirectedGraphDemoServ {
 						
 		}
 		
-		/*for (int i = 0; i < o.length; i++) {
+		for (int i = 0; i < o.length; i++) {
 			System.out.println(list.get(i).getSource() + " "+list.get(i).getTarget());
-		}*/
+		}
 		
 	}
 	
@@ -92,9 +92,33 @@ public class DirectedGraphDemoServ {
 			list.add(link);					
 		}
 		
-		/*for (int i = 0; i < o.length; i++) {
+		for (int i = 0; i < o.length; i++) {
 			System.out.println(list.get(i).getSource() + " "+list.get(i).getTarget());
-		}*/	
+		}	
 	}	
+	
+	public static void findImmidietCycles(){
+		// A <--> B cycles 
+	}
+	
+	public static void something(DirectedGraph<Node,DefaultEdge> graph,Node[] nodes){
+		// A -> B B->C --> A -> C
+		
+		Node n=nodes[0];
+		Set<DefaultEdge> set=graph.outgoingEdgesOf(n);
+		DefaultEdge[] edgeSet=set.toArray(new DefaultEdge[set.size()]);
+		
+		System.out.println(edgeSet.length);
+		
+		if(edgeSet.length > 1){
+			for (int i = 0; i < edgeSet.length; i++) {
+				for (int j = 0; j < edgeSet.length; j++) {
+					System.out.println(edgeSet[i]+" "+edgeSet[j]);
+				}
+			}
+		}
+		
+		
+	}
 	
 }
