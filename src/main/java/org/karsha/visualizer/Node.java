@@ -1,20 +1,33 @@
 package org.karsha.visualizer;
 
 public class Node {
-	String target;
-	String source;
 	
-	public String getTarget() {
-		return target;
+	String group;
+	String nodeId;
+	String name;
+	
+	public String getGroup() {
+		return group;
 	}
-	public void setTarget(String target) {
-		this.target = target;
+	public void setGroup(String group) {
+		this.group = group;
 	}
-	public String getSource() {
-		return source;
+	public String getNodeId() {
+		return nodeId;
 	}
-	public void setSource(String source) {
-		this.source = source;
+	public void setNodeId(String nodeId) {
+		this.nodeId = nodeId;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
+	@Override
+	public String toString() {
+		String node="\""+group+" "+nodeId+" "+name+"\"";
+		return node;
+	}
 }

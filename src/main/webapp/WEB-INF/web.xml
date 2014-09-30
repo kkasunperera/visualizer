@@ -8,6 +8,17 @@
     <servlet-name>ControlerServelet</servlet-name>
     <url-pattern>/ControlerServelet</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>PostData</servlet-name>
+  	<servlet-class>org.karsha.visualizer.PostDataServ</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>PostData</servlet-name>
+  	<url-pattern>/PostDataServ</url-pattern>
+  	<url-pattern>/Indegree</url-pattern>
+  	<url-pattern>/Outdegree</url-pattern>
+  </servlet-mapping>
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>
