@@ -77,8 +77,10 @@ String year = request.getParameter("year");
                             </center>
                             <button id="InDegreeBtn">InDegree</button>
                             <button id="OutDegreeBtn">OutDegree</button>
+                            <button id="DataFromServer">DataFromServer</button>
                             
                             <script type="text/javascript">
+                            	/* access to InDegree */
                             	$('#InDegreeBtn').click(function(){
                             		$.ajax({
                           			  type: 'GET',
@@ -87,12 +89,27 @@ String year = request.getParameter("year");
                           			});
                             	});
                             	
+                            	/* access to OutDegree */
                             	$('#OutDegreeBtn').click(function(){
                             		$.ajax({
                             		  type: 'GET',
                             		  url: 'Outdegree',                          			
                             		  async: false
                             		});
+                            	});
+                            	
+                            	/* dummy data retrieve form server */
+                            	$('#DataFromServer').click(function(){                            		
+                            		$.ajax({
+                      				  type: 'GET',
+                      				  url: "configXml",
+                      				  dataType: 'json',
+                      				  success: function(data,status) {
+                      					  alert("links length is "+data.Links.length+"node length is "+data.nodes.length);//this will return the Links array                      				                      				                      					  
+                      				  },
+                      				  error: function(data,error){alert(error);},
+                      				  async: false
+                      				}); 
                             	});
                             </script>
                             

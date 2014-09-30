@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +15,6 @@ import org.apache.log4j.Logger;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.jgrapht.DirectedGraph;
-import org.jgrapht.alg.CycleDetector;
 import org.jgrapht.graph.DefaultEdge;
 
 
@@ -72,7 +70,7 @@ public class PostDataServ extends HttpServlet {
 			
 			String o="";
 			o=br.readLine();
-			//System.out.println(o);
+			System.out.println(o);
 			
 			ObjectMapper mapper=new ObjectMapper();
 			JsonNode root=mapper.readTree(o);
@@ -85,9 +83,10 @@ public class PostDataServ extends HttpServlet {
 				linkSet=mapper.readValue(links, Links[].class);
 				//System.out.println(nodeSet.length+" "+linkSet.length);
 				
-				g = DirectedGraphDemoServ.createHrefGraph(nodeSet,linkSet);
-				
+				g = DirectedGraphDemoServ.createHrefGraph(nodeSet,linkSet);				
 				//System.out.println(g.toString());
+				//DirectedGraphDemoServ.findImmidietCycles(g, nodeSet);
+				//DirectedGraphDemoServ.CompleteTriad(g, nodeSet);
 			}
 			
 		}else if (userPath.equals("/Indegree")) {
@@ -95,6 +94,8 @@ public class PostDataServ extends HttpServlet {
 			
 		}else if(userPath.equals("/Outdegree")){
 			DirectedGraphDemoServ.findHighOutDegree(g, nodeSet);
+			
+		}else if(userPath.equals("/DataRetrieve")){
 			
 		}
 		
