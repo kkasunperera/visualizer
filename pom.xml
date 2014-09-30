@@ -84,5 +84,5 @@
             </plugin>
         </plugins>
     </build>
-
+    <version>1</version>
 </project>
