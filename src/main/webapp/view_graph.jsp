@@ -102,7 +102,7 @@ String year = request.getParameter("year");
                             	$('#DataFromServer').click(function(){                            		
                             		$.ajax({
                       				  type: 'GET',
-                      				  url: "configXml",
+                      				  url: "DataRetrieve",
                       				  dataType: 'json',
                       				  success: function(data,status) {
                       					  alert("links length is "+data.Links.length+"node length is "+data.nodes.length);//this will return the Links array                      				                      				                      					  
