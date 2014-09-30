@@ -97,13 +97,34 @@ public class DirectedGraphDemoServ {
 		}	
 	}	
 	
-	public static void findImmidietCycles(){
+	//input to be a array but for test two node 
+	public static void findImmidietCycles(DirectedGraph<Node,DefaultEdge> graph,Node[] nodes){
 		// A <--> B cycles 
-	}
-	
-	public static void something(DirectedGraph<Node,DefaultEdge> graph,Node[] nodes){
-		// A -> B B->C --> A -> C
+		//this list contains visited edges
+		List<DefaultEdge> listOfImEdges=new ArrayList<DefaultEdge>();
 		
+		for (int i = 0; i < nodes.length; i++) {
+			Set<DefaultEdge> edges=graph.outgoingEdgesOf(nodes[i]);
+			DefaultEdge[] edge=edges.toArray(new DefaultEdge[edges.size()]);
+			for (int j = 0; j < edge.length; j++) {
+				
+				if(listOfImEdges.contains(edge[j])){
+					//do nothing if already checked edge
+				}else{
+					if(graph.containsEdge(edge[j]) && graph.containsEdge(graph.getEdgeTarget(edge[j]), graph.getEdgeSource(edge[j]))){
+						System.out.println(edge[j].toString());
+						listOfImEdges.add(graph.getEdge(graph.getEdgeTarget(edge[j]), graph.getEdgeSource(edge[j])));
+					}
+				}
+					
+				}
+			}
+		System.out.println(listOfImEdges.size());
+		}
+	
+	public static void CompleteTriad(DirectedGraph<Node,DefaultEdge> graph,Node[] nodes){
+		// A -> B B->C --> A -> C
+		int NumberOfTriad=0;
 		Node n=nodes[0];
 		Set<DefaultEdge> set=graph.outgoingEdgesOf(n);
 		DefaultEdge[] edgeSet=set.toArray(new DefaultEdge[set.size()]);
@@ -113,12 +134,25 @@ public class DirectedGraphDemoServ {
 		if(edgeSet.length > 1){
 			for (int i = 0; i < edgeSet.length; i++) {
 				for (int j = 0; j < edgeSet.length; j++) {
-					System.out.println(edgeSet[i]+" "+edgeSet[j]);
+					//System.out.println(edgeSet[i]+" "+edgeSet[j]);
+					Node A=graph.getEdgeTarget(edgeSet[i]);
+					Node B=graph.getEdgeTarget(edgeSet[j]);
+					
+					if(graph.containsEdge(A, B)){
+						System.out.println("edges is "+edgeSet[i].toString()+" "+edgeSet[j].toString()+" "+graph.getEdge(A, B));
+						System.out.println("Triad is "+n.toString()+" "+A.toString()+" "+B.toString());
+						System.out.println("------------------------------------------------------------------------");
+						NumberOfTriad++;
+					}
+					
 				}
 			}
-		}
-		
-		
+		}	
+		System.out.println(NumberOfTriad);
+	}
+	
+	public static void InCompleteTriad(DirectedGraph<Node, DefaultEdge> graph,Node[] nodes){
+		// A -> B && B -> C but not A -> C 
 	}
 	
 }
