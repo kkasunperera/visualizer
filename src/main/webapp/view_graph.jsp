@@ -74,137 +74,7 @@ String year = request.getParameter("year");
 if(year==null)year="";
 %>
     
-  <div id="page-wrapper">
-
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div id="gc_network" style="border:2px solid;">
-                            <h2><center><%= year%> - Granger causality Analysis</center> </h2>
-                            <center>
-                                <canvas id="graph_note" width="500" height="50" style="float: left">                                
-                            </canvas>
-                            </center>
-                            <button id="InDegreeBtn">InDegree</button>
-                            <button id="OutDegreeBtn">OutDegree</button>
-                            <button id="DataFromServer">DataFromServer</button>
-                            
-                            <script type="text/javascript">
-                            	/* access to InDegree */
-                            	$('#InDegreeBtn').click(function(){
-                            		$.ajax({
-                          			  type: 'GET',
-                          			  url: 'Indegree',                          			
-                          			  async: false
-                          			});
-                            	});
-                            	
-                            	/* access to OutDegree */
-                            	$('#OutDegreeBtn').click(function(){
-                            		$.ajax({
-                            		  type: 'GET',
-                            		  url: 'Outdegree',                          			
-                            		  async: false
-                            		});
-                            	});
-                            	
-                            	/* dummy data retrieve form server */
-                            	$('#DataFromServer').click(function(){                            		
-                            		$.ajax({
-                      				  type: 'GET',
-                      				  url: "DataRetrieve",
-                      				  dataType: 'json',
-                      				  success: function(data,status) {
-                      					  alert("links length is "+data.Links.length+"node length is "+data.nodes.length);//this will return the Links array                      				                      				                      					  
-                      				  },
-                      				  error: function(data,error){alert(error);},
-                      				  async: false
-                      				}); 
-                            	});
-                            </script>
-                            
-                            <script>
-
-                            var c = document.getElementById("graph_note");
-                            var ctx = c.getContext("2d");
-                            
-                            ctx.fillStyle = "#1f77b4";
-                            ctx.beginPath();
-                            ctx.arc(200,10,8,0,2*Math.PI);
-                            ctx.closePath();
-                            ctx.fill();
-                            
-                            
-                            ctx.fillStyle = "#ff7f0d";
-                            ctx.beginPath();
-                            ctx.arc(200,35,8,0,2*Math.PI);
-                            ctx.closePath();
-                            ctx.fill();
-                            
-                            ctx.fillStyle = "#ff7f0d";
-                            ctx.beginPath();
-                            ctx.fillText("Equity", 214,40); 
-                            ctx.closePath();
-                            ctx.fill();
-                            
-                            ctx.fillStyle = "#1f77b4";
-                            ctx.beginPath();
-                            ctx.fillText("Bond", 214,14); 
-                            ctx.closePath();
-                            ctx.fill();
-                            
-                            ctx.strokeStyle="#FF0000";
-                            ctx.beginPath();
-                            ctx.moveTo(350,10);
-                            ctx.lineTo(301,10);
-                            ctx.stroke();
-                            
-                            ctx.strokeStyle="#0000FF";
-                            ctx.beginPath();
-                            ctx.moveTo(350,35);
-                            ctx.lineTo(301,35);
-                            ctx.stroke();
-                            
-                            ctx.fillStyle = "#1f77b4";
-                            ctx.beginPath();
-                            ctx.arc(300,10,8,0,2*Math.PI);
-                            ctx.closePath();
-                            ctx.fill();
-                            
-                            
-                            ctx.fillStyle = "#1f77b4";
-                            ctx.beginPath();
-                            ctx.arc(300,35,8,0,2*Math.PI);
-                            ctx.closePath();
-                            ctx.fill();
-                            
-                            ctx.fillStyle = "#0000FF";
-                            ctx.beginPath();
-                            ctx.fillText("Output Edge from the Node", 360,40); 
-                            ctx.closePath();
-                            ctx.fill();
-                            
-                            ctx.fillStyle = "#FF0000";
-                            ctx.beginPath();
-                            ctx.fillText("Input Edge to the Node", 360,14); 
-                            ctx.closePath();
-                            ctx.fill();
-
-                            </script>
-                        </div>
-                    </div>
-                </div>
-               
-
-            </div>
-           
-
-        </div> 
-                        
-       </div>                 
-                        
- 
-    <style>
+<style>
 
 .link {
   fill: none;
@@ -230,15 +100,13 @@ text {
                 <div class="row">
                     <div class="col-lg-12">
                     <h2><center> Granger causality Analysis <%= year%></center> </h2>
-                    
-                       
-                            
-                            
+       
                             <ul id="myTab" class="nav nav-tabs">
 							   <li class="active"><a href="#home" data-toggle="tab">
 							      Network</a></li>
-							   <li><a href="#indegree" data-toggle="tab">Indegree</a></li>
-							    <li><a href="#outdegree" data-toggle="tab">Outdegree</a></li>
+							   	<li><a href="#indegree" data-toggle="tab" onclick="HighestInDegree()">Indegree</a></li>
+							    <li><a href="#outdegree" data-toggle="tab" onclick="HighestOutDegree()">Outdegree</a></li>
+							    <li><a href="#completeTriad" data-toggle="tab" onclick="completeTriad()">CompleteTriad</a></li>
 							</ul>
                             
                             <div id="myTabContent" class="tab-content">
@@ -321,14 +189,45 @@ text {
 				                        
 									 </div>             
 							   </div>
-								   <div class="tab-pane fade" id="indegree">
-									   <div id="outdegree" style="border:2px solid;">
+								   <div class="tab-pane fade" id="indegree">								   								   
+								   		<script>
+								   			function HighestInDegree(){
+								   				$.ajax({
+				                          			  type: 'GET',
+				                          			  url: 'Indegree',                          			
+				                          			  async: false
+				                          		}); 
+								   			}
+									   	</script>
+									   <div id="borderIn" style="border:2px solid;">
+									   		Highest InDegree Node data will be loaded here.....
 									   </div>
 								   </div>
-						   <div class="tab-pane fade" id="outdegree">
-						      <div id="indegree" style="border:2px solid;">
-							  </div>
-						   </div>
+							   <div class="tab-pane fade" id="outdegree">							  
+							   			<script type="text/javascript">
+							   				function HighestOutDegree(){
+							   					$.ajax({
+				                            		  type: 'GET',
+				                            		  url: 'Outdegree',                          			
+				                            		  async: false
+				                            	});
+							   				}
+							   			</script>
+							      <div id="borderOut" style="border:2px solid;">
+							      		Highest OutDegree Node data will be loaded here.....
+								  </div>
+							   </div>
+							   
+							   <div class="tab-pane fade" id="completeTriad">
+							   		<script type="text/javascript">
+							   				function completeTriad(){
+							   					alert("complet triad");
+							   				}
+							   		</script>
+							   		<div id="border" style="border:2px solid;">
+							   			CompleteTriad data will be loaded here......
+							   		</div>
+							   </div>
 						</div>
                             
                               <% 
