@@ -132,20 +132,20 @@ public class PostDataServ extends HttpServlet {
 			
 			Node n1=new Node();
 			n1.setGroup("1");
-			n1.setName("node1");
-			n1.setNodeId("23");
+			n1.setName("Util");
+			n1.setNodeId("22");
 			node.add(n1);
 			
 			Node n2=new Node();
 			n2.setGroup("1");
-			n2.setName("node2");
-			n2.setNodeId("33");
+			n2.setName("ManEdible");
+			n2.setNodeId("31");
 			node.add(n2);
 			
 			Node n3=new Node();
 			n3.setGroup("2");
-			n3.setName("node3");
-			n3.setNodeId("43");
+			n3.setName("WholTr");
+			n3.setNodeId("42");
 			node.add(n3);
 			
 			

@@ -14,8 +14,24 @@ function HighestOutDegree() {
 	});
 }
 
-	function completeTriad() {
-	alert("complet triad");
+function completeTriad() {
+	//DataLoadModule();
+}
+
+function DataLoadModule(dataset){
+	$.ajax({
+		  type: 'GET',
+		  url: "DataRetrieve",
+		  dataType: 'json',
+		  success: function(data,status) {
+			  //alert("links length is "+data.Links.length);//this will return the Links array
+			  //alert("node length is "+data.nodes.length);
+			  dataset.push.apply(dataset, data.nodes);
+		  },
+		  error: function(data,error){alert(error);},
+		  async: false
+		}); 
+	return dataset;
 }
 
 function SvgLoad(ctx){
@@ -81,4 +97,8 @@ function SvgLoad(ctx){
     ctx.closePath();
     ctx.fill();
 }
+
+
+function DrawGraph(){
 	
+}

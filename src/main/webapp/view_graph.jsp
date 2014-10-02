@@ -108,7 +108,7 @@ text {
 							      Network</a></li>
 							   	<li><a href="#indegree" data-toggle="tab" onclick="HighestInDegree()">Indegree</a></li>
 							    <li><a href="#outdegree" data-toggle="tab" onclick="HighestOutDegree()">Outdegree</a></li>
-							    <li><a href="#completeTriad" data-toggle="tab" onclick="completeTriad()">CompleteTriad</a></li>
+							    <li><a id="completeTriad" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
 							</ul>
                             
                             <div id="myTabContent" class="tab-content">
@@ -139,8 +139,32 @@ text {
 							   </div>
 							   
 							   <div class="tab-pane fade" id="completeTriad">
-							   		<div id="border" style="border:2px solid;">
-							   			CompleteTriad data will be loaded here......
+							   		<div id="border" style="border:2px solid;">	
+							   			<script type="text/javascript">
+							   				$("#completeTriad").click(function(){							   					
+							   					/* var arr2=[];
+							   					DataLoadModule(arr2);
+							   					//arr2.push.apply(arr2, DataLoadModule(arr2));
+							   					if(arr2.length > 0){
+							   						alert(arr2.length);
+							   					}else{
+							   						alert("no data");
+							   					} */
+							   				/* 	$.ajax({
+							   					  type: 'GET',
+							   					  url: "DataRetrieve",
+							   					  dataType: 'json',
+							   					  success: function(data,status) {
+							   						  alert("links length is "+data.Links.length);//this will return the Links array
+							   						  alert("node length is "+data.nodes.length);	
+							   						  // pass svg function here...
+							   					  },
+							   					  error: function(data,error){alert(error);},
+							   					  async: false
+							   					});  */
+							   					
+							   				});
+							   			</script>						   			
 							   		</div>
 							   </div>
 						</div>
