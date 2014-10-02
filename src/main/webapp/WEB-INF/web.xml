@@ -18,6 +18,7 @@
   	<url-pattern>/PostDataServ</url-pattern>
   	<url-pattern>/Indegree</url-pattern>
   	<url-pattern>/Outdegree</url-pattern>
+  	<url-pattern>/DataRetrieve</url-pattern>
   </servlet-mapping>
   <session-config>
     <session-timeout>30</session-timeout>
