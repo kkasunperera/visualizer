@@ -99,7 +99,8 @@ function SvgLoad(ctx){
 }
 
 
-function DrawGraph(nodes,links,svg){
+function DrawGraph(nodes,links,svg,width,height){
+	
 	 var color = d3.scale.category10();
 
 	 var force = d3.layout.force()
@@ -107,8 +108,8 @@ function DrawGraph(nodes,links,svg){
 	     //.nodes(d3.values(nodes))
 	     .links(links)
 	     .size([width, height])
-	     .linkDistance(600)
-	     .charge(-600)
+	     .linkDistance(400)
+	     .charge(-400)
 	     .on("tick", tick)
 	     .start();
 

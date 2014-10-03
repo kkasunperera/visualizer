@@ -1,10 +1,3 @@
-
-<%-- 
-    Document   : view_graph
-    Created on : Aug 29, 2014, 2:56:48 PM
-    Author     : tharindu-lsf
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -107,8 +100,8 @@ text {
                             <ul id="myTab" class="nav nav-tabs">
 							   <li class="active"><a href="#home" data-toggle="tab">
 							      Network</a></li>
-							   	<li><a href="#indegree" data-toggle="tab" onclick="HighestInDegree()">Indegree</a></li>
-							    <li><a href="#outdegree" data-toggle="tab" onclick="HighestOutDegree()">Outdegree</a></li>
+							   	<li><a id="In" href="#indegree" data-toggle="tab" >Indegree</a></li>
+							    <li><a id="Out" href="#outdegree" data-toggle="tab" >Outdegree</a></li>
 							    <li><a id="cmp" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
 							</ul>
                             
@@ -130,7 +123,26 @@ text {
 							   </div>
 								   <div class="tab-pane fade" id="indegree">								   								   
 									   <div id="borderIn" style="border:2px solid;">
-									   		Highest InDegree Node data will be loaded here.....
+									   		<script type="text/javascript">
+											$("#In").click(function(){							   					
+							   					
+							   					$.ajax({
+							   					  type: 'GET',
+							   					  url: "Indegree",
+							   					  dataType: 'json',
+							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    
+							   												   													   					
+							   						var width = 1050,height = 900;
+							   						var svg = d3.select("#borderIn").append("svg").attr("width", width).attr("height", height);
+							   						DrawGraph(data.nodes, data.Links,svg,width,height);
+							   						
+							   					  },
+							   					  error: function(data,error){alert(error);},
+							   					  async: false
+							   					});  
+							   					
+							   				});
+									   		</script>
 									   </div>
 								   </div>
 							   <div class="tab-pane fade" id="outdegree">							  
@@ -142,42 +154,7 @@ text {
 							   <div class="tab-pane fade" id="completeTriad">
 							   		<div id="border" style="border:2px solid;">	
 							   			<script type="text/javascript">
-							   				$("#cmp").click(function(){							   					
-							   					/* var arr2=[];
-							   					DataLoadModule(arr2);
-							   					//arr2.push.apply(arr2, DataLoadModule(arr2));
-							   					if(arr2.length > 0){
-							   						alert(arr2.length);
-							   					}else{
-							   						alert("no data");
-							   					} */
-							   					$.ajax({
-							   					  type: 'GET',
-							   					  url: "DataRetrieve",
-							   					  dataType: 'json',
-							   					  success: function(data,status) {
-							   						  //alert("links length is "+data.Links.length);//this will return the Links array
-							   						  //alert("node length is "+data.nodes.length);
-							   						  //JSON.stringify which convets javascript to json
-							   						   var links = [{source:1, target:0},
-							   						               {source:2, target:1},
-							   						               {source:0, target:2},
-							   						               {source:1, target:2}
-							   						                ]; 
-							   						     
-							   						alert(JSON.stringify(data.Links)+"               "+JSON.stringify(links));
-							   						  
-							   						/* var width = 900,
-							   					    height = 900;
-
-							   						var svg = d3.select("#border").append("svg").attr("width", width).attr("height", height);
-							   						  DrawGraph(data.nodes, links, svg); */
-							   					  },
-							   					  error: function(data,error){alert(error);},
-							   					  async: false
-							   					});  
-							   					
-							   				});
+							   			
 							   			</script>						   			
 							   		</div>
 							   </div>
