@@ -116,8 +116,8 @@ public class PostDataServ extends HttpServlet {
 			List<Node> node=new ArrayList<Node>();
 			
 			Links l1=new Links();
-			l1.setSource("0");
-			l1.setTarget("2");
+			l1.setSource("1");
+			l1.setTarget("0");
 			link.add(l1);
 			
 			Links l2=new Links();
@@ -127,7 +127,7 @@ public class PostDataServ extends HttpServlet {
 			
 			Links l3=new Links();
 			l3.setSource("0");
-			l3.setTarget("1");
+			l3.setTarget("2");
 			link.add(l3);
 			
 			Node n1=new Node();

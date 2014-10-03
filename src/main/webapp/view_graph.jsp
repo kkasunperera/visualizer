@@ -109,7 +109,7 @@ text {
 							      Network</a></li>
 							   	<li><a href="#indegree" data-toggle="tab" onclick="HighestInDegree()">Indegree</a></li>
 							    <li><a href="#outdegree" data-toggle="tab" onclick="HighestOutDegree()">Outdegree</a></li>
-							    <li><a id="completeTriad" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
+							    <li><a id="cmp" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
 							</ul>
                             
                             <div id="myTabContent" class="tab-content">
@@ -142,7 +142,7 @@ text {
 							   <div class="tab-pane fade" id="completeTriad">
 							   		<div id="border" style="border:2px solid;">	
 							   			<script type="text/javascript">
-							   				$("#completeTriad").click(function(){							   					
+							   				$("#cmp").click(function(){							   					
 							   					/* var arr2=[];
 							   					DataLoadModule(arr2);
 							   					//arr2.push.apply(arr2, DataLoadModule(arr2));
@@ -151,18 +151,31 @@ text {
 							   					}else{
 							   						alert("no data");
 							   					} */
-							   				/* 	$.ajax({
+							   					$.ajax({
 							   					  type: 'GET',
 							   					  url: "DataRetrieve",
 							   					  dataType: 'json',
 							   					  success: function(data,status) {
-							   						  alert("links length is "+data.Links.length);//this will return the Links array
-							   						  alert("node length is "+data.nodes.length);	
-							   						  // pass svg function here...
+							   						  //alert("links length is "+data.Links.length);//this will return the Links array
+							   						  //alert("node length is "+data.nodes.length);
+							   						  //JSON.stringify which convets javascript to json
+							   						   var links = [{source:1, target:0},
+							   						               {source:2, target:1},
+							   						               {source:0, target:2},
+							   						               {source:1, target:2}
+							   						                ]; 
+							   						     
+							   						alert(JSON.stringify(data.Links)+"               "+JSON.stringify(links));
+							   						  
+							   						/* var width = 900,
+							   					    height = 900;
+
+							   						var svg = d3.select("#border").append("svg").attr("width", width).attr("height", height);
+							   						  DrawGraph(data.nodes, links, svg); */
 							   					  },
 							   					  error: function(data,error){alert(error);},
 							   					  async: false
-							   					});  */
+							   					});  
 							   					
 							   				});
 							   			</script>						   			
