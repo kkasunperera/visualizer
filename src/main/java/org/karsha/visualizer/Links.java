@@ -1,19 +1,20 @@
 package org.karsha.visualizer;
 
 public class Links {
-	String target;
-	String source;
+	int source;
+	int target;
 	
-	public String getTarget() {
-		return target;
-	}
-	public void setTarget(String target) {
-		this.target = target;
-	}
-	public String getSource() {
+	public int getSource() {
 		return source;
 	}
-	public void setSource(String source) {
+	public void setSource(int source) {
 		this.source = source;
 	}
+	public int getTarget() {
+		return target;
+	}
+	public void setTarget(int target) {
+		this.target = target;
+	}
+	
 }

@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
@@ -37,7 +38,7 @@ public class PostDataServ extends HttpServlet {
 	public static Node[] nodeSet = null;
 	public static Links[] linkSet = null;
 	public static DirectedGraph<Node,DefaultEdge> g = null;
-	
+	List<Node> node;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -68,7 +69,8 @@ public class PostDataServ extends HttpServlet {
 		System.out.println("methos is gointo start.....");
 		String userPath=request.getServletPath();
 		
-		
+		/*Gson library have been used*/
+		Gson gson=new Gson();
 		
 		if (userPath.equals("/PostDataServ")) {
 			
@@ -90,6 +92,9 @@ public class PostDataServ extends HttpServlet {
 				linkSet=mapper.readValue(links, Links[].class);
 				//System.out.println(nodeSet.length+" "+linkSet.length);
 				
+				//this is for send node set data with link set as json
+				node=Arrays.asList(nodeSet);
+				
 				g = DirectedGraphDemoServ.createHrefGraph(nodeSet,linkSet);				
 				//System.out.println(g.toString());
 				//DirectedGraphDemoServ.findImmidietCycles(g, nodeSet);
@@ -97,58 +102,13 @@ public class PostDataServ extends HttpServlet {
 			}
 			
 		}else if (userPath.equals("/Indegree")) {
-			DirectedGraphDemoServ.findHighInDegree(g, nodeSet);
-			
-		}else if(userPath.equals("/Outdegree")){
-			DirectedGraphDemoServ.findHighOutDegree(g, nodeSet);
-			
-		}else if(userPath.equals("/DataRetrieve")){
-			System.out.println("data retrive methos is invoke....");
+			List<Links> link=DirectedGraphDemoServ.findHighInDegree(g, nodeSet);
 			
 			response.setContentType("application/json");
 			PrintWriter out=response.getWriter();
 			
-			/*Gson library have been used*/
-			Gson gson=new Gson();
 			JsonObject Obj=new JsonObject();
-			
-			List<Links> link=new ArrayList<Links>();
-			List<Node> node=new ArrayList<Node>();
-			
-			Links l1=new Links();
-			l1.setSource("0");
-			l1.setTarget("2");
-			link.add(l1);
-			
-			Links l2=new Links();
-			l2.setSource("2");
-			l2.setTarget("1");
-			link.add(l2);
-			
-			Links l3=new Links();
-			l3.setSource("0");
-			l3.setTarget("1");
-			link.add(l3);
-			
-			Node n1=new Node();
-			n1.setGroup("1");
-			n1.setName("node1");
-			n1.setNodeId("23");
-			node.add(n1);
-			
-			Node n2=new Node();
-			n2.setGroup("1");
-			n2.setName("node2");
-			n2.setNodeId("33");
-			node.add(n2);
-			
-			Node n3=new Node();
-			n3.setGroup("2");
-			n3.setName("node3");
-			n3.setNodeId("43");
-			node.add(n3);
-			
-			
+
 			JsonElement links=gson.toJsonTree(link);
 			JsonElement nodes=gson.toJsonTree(node);
 			Obj.add("Links",links);
@@ -156,6 +116,26 @@ public class PostDataServ extends HttpServlet {
 			
 			out.println(Obj.toString());
 			out.close();
+			
+		}else if(userPath.equals("/Outdegree")){
+			List<Links> link=DirectedGraphDemoServ.findHighOutDegree(g, nodeSet);
+			
+			response.setContentType("application/json");
+			PrintWriter out=response.getWriter();
+			
+			JsonObject Obj=new JsonObject();
+
+			JsonElement links=gson.toJsonTree(link);
+			JsonElement nodes=gson.toJsonTree(node);
+			Obj.add("Links",links);
+			Obj.add("nodes", nodes);
+			
+			out.println(Obj.toString());
+			out.close();
+			
+		}else if(userPath.equals("/DataRetrieve")){
+
+			
 		}
 			
 		}
