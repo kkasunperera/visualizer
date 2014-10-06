@@ -24,14 +24,15 @@ public class DirectedGraphDemoServ {
 		}
         
 		for (int i = 0; i < links.length; i++) {
-			g.addEdge(nodes[Integer.parseInt(links[i].getSource())],nodes[Integer.parseInt(links[i].getTarget())]);
+			//g.addEdge(nodes[Integer.parseInt(links[i].getSource())],nodes[Integer.parseInt(links[i].getTarget())]);
+			g.addEdge(nodes[links[i].getSource()],nodes[links[i].getTarget()]);
 		}
 		
         return g;
     }
 	
 	/*find the highest in coming edges from node*/
-	public static void findHighInDegree(DirectedGraph<Node,DefaultEdge> graph,Node[] nodes){
+	public static List<Links> findHighInDegree(DirectedGraph<Node,DefaultEdge> graph,Node[] nodes){
 		
 		int highInDegre=0;
 		Set<DefaultEdge> s = null;
@@ -53,8 +54,8 @@ public class DirectedGraphDemoServ {
 		
 		for (int i = 0; i < o.length; i++) {	
 			Links link=new Links();
-			link.setSource(Integer.toString(Arrays.asList(nodes).indexOf(graph.getEdgeSource(o[i]))));
-			link.setTarget(Integer.toString(Arrays.asList(nodes).indexOf(graph.getEdgeTarget(o[i]))));
+			link.setSource(Arrays.asList(nodes).indexOf(graph.getEdgeSource(o[i])));
+			link.setTarget(Arrays.asList(nodes).indexOf(graph.getEdgeTarget(o[i])));
 			list.add(link);
 						
 		}
@@ -62,11 +63,12 @@ public class DirectedGraphDemoServ {
 		for (int i = 0; i < o.length; i++) {
 			System.out.println(list.get(i).getSource() + " "+list.get(i).getTarget());
 		}
+		return list;
 		
 	}
 	
 	/*find the highest out going edges from node*/
-	public static void findHighOutDegree(DirectedGraph<Node,DefaultEdge> graph,Node[] nodes){
+	public static List<Links> findHighOutDegree(DirectedGraph<Node,DefaultEdge> graph,Node[] nodes){
 		
 		int highOutDegre=0;
 		Set<DefaultEdge> s = null;
@@ -87,14 +89,15 @@ public class DirectedGraphDemoServ {
 		
 		for (int i = 0; i < o.length; i++) {	
 			Links link=new Links();
-			link.setSource(Integer.toString(Arrays.asList(nodes).indexOf(graph.getEdgeSource(o[i]))));
-			link.setTarget(Integer.toString(Arrays.asList(nodes).indexOf(graph.getEdgeTarget(o[i]))));
+			link.setSource(Arrays.asList(nodes).indexOf(graph.getEdgeSource(o[i])));
+			link.setTarget(Arrays.asList(nodes).indexOf(graph.getEdgeTarget(o[i])));
 			list.add(link);					
 		}
 		
 		for (int i = 0; i < o.length; i++) {
 			System.out.println(list.get(i).getSource() + " "+list.get(i).getTarget());
-		}	
+		}
+		return list;	
 	}	
 	
 	//input to be a array but for test two node 

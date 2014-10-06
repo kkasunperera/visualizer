@@ -1,9 +1,3 @@
-<%-- 
-    Document   : view_graph
-    Created on : Aug 29, 2014, 2:56:48 PM
-    Author     : tharindu-lsf
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +16,8 @@
     rel="stylesheet" type="text/css">
 <script src="js/jquery.1.9.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/function.js"></script>
+<script src="js/node.js"></script>
 </head>
 
 
@@ -69,10 +65,10 @@
            </div>
         </nav>
                         
-<% 
-String year = request.getParameter("year");
-if(year==null)year="";
-%>
+	<% 
+		String year = request.getParameter("year");
+		if(year==null)year="";
+	%>
     
 <style>
 
@@ -100,15 +96,13 @@ text {
                 <div class="row">
                     <div class="col-lg-12">
                     <h2><center> Granger causality Analysis <%= year%></center> </h2>
-                    
-                       
-                            
-                            
+       
                             <ul id="myTab" class="nav nav-tabs">
-							   <li class="active"><a href="#home" data-toggle="tab">
+							   <li class="active"><a href="#home" onclick="window.location.reload(true);" data-toggle="tab">
 							      Network</a></li>
-							   <li><a href="#indegree" data-toggle="tab">Indegree</a></li>
-							    <li><a href="#outdegree" data-toggle="tab">Outdegree</a></li>
+							   	<li><a id="In"  href="#indegree" data-toggle="tab" >Indegree</a></li>
+							    <li><a id="Out" href="#outdegree" data-toggle="tab" >Outdegree</a></li>
+							    <li><a id="cmp" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
 							</ul>
                             
                             <div id="myTabContent" class="tab-content">
@@ -119,393 +113,120 @@ text {
 									 <br />
                                         <canvas id="graph_note" width="500" height="50" style="float: right">                                
                                         </canvas>
-                            // script to show graph notes 
-				                            <script>
-				
-					                            var c = document.getElementById("graph_note");
-					                            var ctx = c.getContext("2d");
-					                            
-					                            ctx.fillStyle = "#1f77b4";
-					                            ctx.beginPath();
-					                            ctx.arc(200,10,8,0,2*Math.PI);
-					                            ctx.closePath();
-					                            ctx.fill();
-					                            
-					                            
-					                            ctx.fillStyle = "#ff7f0d";
-					                            ctx.beginPath();
-					                            ctx.arc(200,35,8,0,2*Math.PI);
-					                            ctx.closePath();
-					                            ctx.fill();
-					                            
-					                            ctx.fillStyle = "#ff7f0d";
-					                            ctx.beginPath();
-					                            ctx.fillText("Equity", 214,40); 
-					                            ctx.closePath();
-					                            ctx.fill();
-					                            
-					                            ctx.fillStyle = "#1f77b4";
-					                            ctx.beginPath();
-					                            ctx.fillText("Bond", 214,14); 
-					                            ctx.closePath();
-					                            ctx.fill();
-					                            
-					                            ctx.strokeStyle="#FF0000";
-					                            ctx.beginPath();
-					                            ctx.moveTo(350,10);
-					                            ctx.lineTo(301,10);
-					                            ctx.stroke();
-					                            
-					                            ctx.strokeStyle="#0000FF";
-					                            ctx.beginPath();
-					                            ctx.moveTo(350,35);
-					                            ctx.lineTo(301,35);
-					                            ctx.stroke();
-					                            
-					                            ctx.fillStyle = "#1f77b4";
-					                            ctx.beginPath();
-					                            ctx.arc(300,10,8,0,2*Math.PI);
-					                            ctx.closePath();
-					                            ctx.fill();
-					                            
-					                            
-					                            ctx.fillStyle = "#1f77b4";
-					                            ctx.beginPath();
-					                            ctx.arc(300,35,8,0,2*Math.PI);
-					                            ctx.closePath();
-					                            ctx.fill();
-					                            
-					                            ctx.fillStyle = "#0000FF";
-					                            ctx.beginPath();
-					                            ctx.fillText("Output Edge from the Node", 360,40); 
-					                            ctx.closePath();
-					                            ctx.fill();
-					                            
-					                            ctx.fillStyle = "#FF0000";
-					                            ctx.beginPath();
-					                            ctx.fillText("Input Edge to the Node", 360,14); 
-					                            ctx.closePath();
-					                            ctx.fill();
-				
+                            				<!-- load the svg using javascript function -->
+				                            <script>				
+					                            var ctx = document.getElementById("graph_note").getContext("2d");					                            
+					                            SvgLoad(ctx);					                            			
 				                            </script>
 				                        
 									 </div>             
 							   </div>
-								   <div class="tab-pane fade" id="indegree">
-									   <div id="outdegree" style="border:2px solid;">
+								   <div class="tab-pane fade" id="indegree">								   								   
+									   <div id="borderIn" style="border:2px solid;">
+									   <br />
+									   <canvas id="graph_note1" width="500" height="50" style="float: right">                                
+                                        </canvas>
+									   		<script type="text/javascript">
+									   		var ctx = document.getElementById("graph_note1").getContext("2d");					                            
+				                            SvgLoad(ctx);
+											$("#In").click(function(){							   					
+							   					
+							   					$.ajax({
+							   					  type: 'GET',
+							   					  url: "Indegree",
+							   					  dataType: 'json',
+							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    
+							   												   													   					
+							   						var width = 1000,height = 900;
+							   						
+							   						DrawGraph(data.nodes, data.Links,"#borderIn",width,height);
+							   						
+							   					  },
+							   					  error: function(data,error){alert(error);},
+							   					  async: false
+							   					}); 							   					
+							   				});
+											
+									   		</script>
 									   </div>
 								   </div>
-						   <div class="tab-pane fade" id="outdegree">
-						      <div id="indegree" style="border:2px solid;">
-							  </div>
-						   </div>
+							   <div class="tab-pane fade" id="outdegree">							  
+							      <div id="borderOut" style="border:2px solid;">
+							      	<br />
+									   <canvas id="graph_note2" width="500" height="50" style="float: right">                                
+                                        </canvas>
+									   		<script type="text/javascript">
+									   		var ctx1 = document.getElementById("graph_note2").getContext("2d");					                            
+				                            SvgLoad(ctx1);
+											$("#Out").click(function(){							   					
+							   					
+							   					$.ajax({
+							   					  type: 'GET',
+							   					  url: "Outdegree",
+							   					  dataType: 'json',
+							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    
+							   												   													   					
+							   						var width = 1000,height = 900;
+							   						
+							   						DrawGraph(data.nodes, data.Links,"#borderOut",width,height);
+							   						
+							   					  },
+							   					  error: function(data,error){alert(error);},
+							   					  async: false
+							   					}); 							   					
+							   				});
+											
+									   		</script>
+								  </div>
+							   </div>
+							   
+							   <div class="tab-pane fade" id="completeTriad">
+							   		<div id="border" style="border:2px solid;">	
+							   			<script type="text/javascript">
+							   			
+							   			</script>						   			
+							   		</div>
+							   </div>
 						</div>
-                            
-                              <% 
-								    /*get the name of the file releven to clicked year ane filename */
-								    
-								    String filename = request.getParameter("filename");
-								    String name = "\'"+"json/"+filename+"\'";
-								    System.out.println(filename);
-								%>
-								<script>
-								var linkedByIndex = {};
-								var color = d3.scale.category10();
-								var width = 900,
-								    height = 900;
-								
-								 	
-								 	var nodes=[
-								 	          {
-								 	        	    "group":1,
-								 	        	    "nodeId":"11",
-								 	        	    "name":"AgNatRes"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"21",
-								 	        	    "name":"Oil+"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"22",
-								 	        	    "name":"Util"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"23",
-								 	        	    "name":"Const"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"31",
-								 	        	    "name":"ManEdible"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"32",
-								 	        	    "name":"ManChem"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"33",
-								 	        	    "name":"ManElect"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"42",
-								 	        	    "name":"WholTr"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"44",
-								 	        	    "name":"Retail"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"45",
-								 	        	    "name":"Retail"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"48",
-								 	        	    "name":"Transport"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"49",
-								 	        	    "name":"Transport"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"51",
-								 	        	    "name":"Inf"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"52",
-								 	        	    "name":"FinIns"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"53",
-								 	        	    "name":"RealEst"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"54",
-								 	        	    "name":"ProfServ"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"55",
-								 	        	    "name":"Mgmt"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"56",
-								 	        	    "name":"Admin"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"61",
-								 	        	    "name":"Ed"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"62",
-								 	        	    "name":"HealthSoc"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"67",
-								 	        	    "name":"U"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"71",
-								 	        	    "name":"R&R"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"72",
-								 	        	    "name":"Travel"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"81",
-								 	        	    "name":"ServOther"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"92",
-								 	        	    "name":"PubAdmin"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":1,
-								 	        	    "nodeId":"NA",
-								 	        	    "name":"NA"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"11",
-								 	        	    "name":"AgNatRes"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"21",
-								 	        	    "name":"Oil+"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"22",
-								 	        	    "name":"Util"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"23",
-								 	        	    "name":"Const"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"31",
-								 	        	    "name":"ManEdible"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"32",
-								 	        	    "name":"ManChem"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"33",
-								 	        	    "name":"ManElect"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"42",
-								 	        	    "name":"WholTr"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"44",
-								 	        	    "name":"Retail"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"45",
-								 	        	    "name":"Retail"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"48",
-								 	        	    "name":"Transport"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"49",
-								 	        	    "name":"Transport"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"51",
-								 	        	    "name":"Inf"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"52",
-								 	        	    "name":"FinIns"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"53",
-								 	        	    "name":"RealEst"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"54",
-								 	        	    "name":"ProfServ"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"55",
-								 	        	    "name":"Mgmt"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"56",
-								 	        	    "name":"Admin"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"61",
-								 	        	    "name":"Ed"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"62",
-								 	        	    "name":"HealthSoc"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"67",
-								 	        	    "name":"U"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"71",
-								 	        	    "name":"R&R"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"72",
-								 	        	    "name":"Travel"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"81",
-								 	        	    "name":"ServOther"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"92",
-								 	        	    "name":"PubAdmin"
-								 	        	  },
-								 	        	  {
-								 	        	    "group":2,
-								 	        	    "nodeId":"NA",
-								 	        	    "name":"NA"
-								 	        	  }
-								 	        	];
-								 	
-								 	//load the nodes and links arrays
-									$(document).ready(function(){
-								
-										var filename=<%=name%>
-										<% String baseUrl="\'"+request.getScheme() + "://" + request.getServerName() + ":" + Integer.toString(request.getServerPort()) + request.getContextPath()+"/"+"\'";%>
-										var url=<%=baseUrl%>+filename;
+
+						<%
+							/*get the name of the file releven to clicked year ane filename */
+
+							String filename = request.getParameter("filename");
+							String name = "\'" + "json/" + filename + "\'";
+							System.out.println(filename);
+						%>
+						<script>
+						
+							var linkedByIndex = {};
+							var color = d3.scale.category10();
+							var width = 900, height = 900;
+
+							//load the nodes and links arrays
+							$(document).ready(function(){
+								var filename =<%=name%>
+								<% String baseUrl="\'"+request.getScheme() + "://" + request.getServerName() + ":" + Integer.toString(request.getServerPort()) + request.getContextPath()+"/"+"\'";%>
+								var url=<%=baseUrl%>+filename;
+
+								var obj=new Object();
+								obj.nodes=nodes;
 										
-										//alert(url);
-										
-										var obj=new Object();
-										obj.nodes=nodes;
-										
-										 $.ajax({
-											  type: 'GET',
-											  url: url,
-											  dataType: 'json',
-											  success: function(data) { obj.link = data;},
-											  error: function(data,error){alert(error);},
-											  async: false
-											}); 
+								$.ajax({
+									type: 'GET',
+									url: url,
+									dataType: 'json',
+									success: function(data) { obj.link = data;},
+									error: function(data,error){alert(error);},
+									async: false
+								}); 
 										
 										//post the json string to servlet
-										$.post("PostDataServ",JSON.stringify(obj)).error(function(){
-											alert("Have data loading problem occurserror");
-										});
+								$.post("PostDataServ",JSON.stringify(obj)).error(function(){
+										alert("There is data loading error please check data.");
+								});
 										//alert(JSON.stringify(obj.nodes));
 										
-									});
+								});
 								 
 								var svg = d3.select("#gc_network").append("svg")
 								    .attr("width", width)
@@ -517,7 +238,8 @@ text {
 								    .charge(-350)
 								    .size([width, height]);
 								    
-								    <%//input to the file name which is taken previously%>
+								 //input to the file name which is taken previously
+								 
 								d3.json(<%= name%>, function(error, json) {
 								  force
 								      .nodes(nodes)
@@ -686,23 +408,11 @@ text {
 									//return linkedByIndex[a.index + "," + b.index];
 									}
 								});
-								</script>                  
-						   
-                            
-                            
+								</script>                    
                     </div>
-                </div>
-               
-
-            </div>
-           
-
+                </div>               
+            </div>       
         </div> 
-                        
-                    
-                        
- 
- 
 
     <!-- /#wrapper -->
 
