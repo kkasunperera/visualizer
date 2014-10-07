@@ -13,7 +13,6 @@ import org.jgrapht.graph.DefaultEdge;
 
 public class DirectedGraphDemoServ {
 	
-
 	
 	public static DirectedGraph<Node,DefaultEdge> createHrefGraph(Node[] nodes,Links[] links)
     {
@@ -101,8 +100,11 @@ public class DirectedGraphDemoServ {
 	}	
 	
 	//input to be a array but for test two node 
-	public static void findImmidietCycles(DirectedGraph<Node,DefaultEdge> graph,Node[] nodes){
+	public static List<Links> findImmidietCycles(DirectedGraph<Node,DefaultEdge> graph,Node[] nodes){
 		// A <--> B cycles 
+		
+		List<Links> list=new ArrayList<Links>();
+		
 		//this list contains visited edges
 		List<DefaultEdge> listOfImEdges=new ArrayList<DefaultEdge>();
 		
@@ -117,43 +119,80 @@ public class DirectedGraphDemoServ {
 					if(graph.containsEdge(edge[j]) && graph.containsEdge(graph.getEdgeTarget(edge[j]), graph.getEdgeSource(edge[j]))){
 						System.out.println(edge[j].toString());
 						listOfImEdges.add(graph.getEdge(graph.getEdgeTarget(edge[j]), graph.getEdgeSource(edge[j])));
+						Links linkA=new Links();
+										
+						linkA.setSource(Arrays.asList(nodes).indexOf(graph.getEdgeSource(edge[j])));
+						linkA.setTarget(Arrays.asList(nodes).indexOf(graph.getEdgeTarget(edge[j])));
+						
+						list.add(linkA);
 					}
 				}
 					
 				}
 			}
 		System.out.println(listOfImEdges.size());
+		return list;
 		}
 	
-	public static void CompleteTriad(DirectedGraph<Node,DefaultEdge> graph,Node[] nodes){
+	/*find the completeTriad of the graph*/
+	public static List<Links> CompleteTriad(DirectedGraph<Node,DefaultEdge> graph,Node[] nodes){
 		// A -> B B->C --> A -> C
-		int NumberOfTriad=0;
-		Node n=nodes[0];
-		Set<DefaultEdge> set=graph.outgoingEdgesOf(n);
-		DefaultEdge[] edgeSet=set.toArray(new DefaultEdge[set.size()]);
+		int NumberOfTriad;
+		List<Links> list=new ArrayList<Links>();
 		
-		System.out.println(edgeSet.length);
-		
-		if(edgeSet.length > 1){
-			for (int i = 0; i < edgeSet.length; i++) {
-				for (int j = 0; j < edgeSet.length; j++) {
-					//System.out.println(edgeSet[i]+" "+edgeSet[j]);
-					Node A=graph.getEdgeTarget(edgeSet[i]);
-					Node B=graph.getEdgeTarget(edgeSet[j]);
-					
-					if(graph.containsEdge(A, B)){
-						System.out.println("edges is "+edgeSet[i].toString()+" "+edgeSet[j].toString()+" "+graph.getEdge(A, B));
-						System.out.println("Triad is "+n.toString()+" "+A.toString()+" "+B.toString());
-						System.out.println("------------------------------------------------------------------------");
-						NumberOfTriad++;
+		for (int k = 0; k < nodes.length; k++) {
+			Set<DefaultEdge> set=graph.outgoingEdgesOf(nodes[k]);
+			DefaultEdge[] edgeSet=set.toArray(new DefaultEdge[set.size()]);
+			
+			NumberOfTriad=0;
+			
+			if(edgeSet.length > 1){
+				for (int i = 0; i < edgeSet.length; i++) {
+					for (int j = 0; j < edgeSet.length; j++) {
+						Links linkA=new Links();
+						Links linkB=new Links();
+						Links linkC=new Links();
+						
+						//System.out.println(edgeSet[i]+" "+edgeSet[j]);
+						Node A=graph.getEdgeTarget(edgeSet[i]);
+						Node B=graph.getEdgeTarget(edgeSet[j]);
+						
+						if(graph.containsEdge(A, B)){
+							System.out.println("edges is "+edgeSet[i].toString()+" "+edgeSet[j].toString()+" "+graph.getEdge(A, B));
+							System.out.println("Triad is "+nodes[k].toString()+" "+A.toString()+" "+B.toString());
+							System.out.println("-----------------------------------------------------------------------------------");
+							NumberOfTriad++;
+							
+							//link A-->B
+							linkA.setSource(Arrays.asList(nodes).indexOf(graph.getEdgeSource(edgeSet[i])));
+							linkA.setTarget(Arrays.asList(nodes).indexOf(graph.getEdgeTarget(edgeSet[i])));											
+							
+							//link A-->c
+							linkB.setSource(Arrays.asList(nodes).indexOf(graph.getEdgeSource(edgeSet[j])));
+							linkB.setTarget(Arrays.asList(nodes).indexOf(graph.getEdgeTarget(edgeSet[j])));
+							
+							//link B-->c
+							linkC.setSource(Arrays.asList(nodes).indexOf(A));
+							linkC.setTarget(Arrays.asList(nodes).indexOf(B));
+							
+							list.add(linkA);
+							list.add(linkB);
+							list.add(linkC);
+							
+							NumberOfTriad++;
+						}
+						
 					}
-					
 				}
 			}
-		}	
-		System.out.println(NumberOfTriad);
+			
+			System.out.println(NumberOfTriad);
+		}
+
+		return list;
 	}
 	
+	/*find the IncompleteTriad of the graph*/
 	public static void InCompleteTriad(DirectedGraph<Node, DefaultEdge> graph,Node[] nodes){
 		// A -> B && B -> C but not A -> C 
 	}
