@@ -98,12 +98,12 @@ text {
                     <h2><center> Granger causality Analysis <%= year%></center> </h2>
        
                             <ul id="myTab" class="nav nav-tabs">
-							   <li class="active"><a href="#home" data-toggle="tab">
+							   <li class="active"><a href="#home" onclick="window.location.reload(true);" data-toggle="tab">
 							      Network</a></li>
-							   	<li><a id="In" href="#indegree" data-toggle="tab" >Indegree</a></li>
+							   	<li><a id="In"  href="#indegree" data-toggle="tab" >Indegree</a></li>
 							    <li><a id="Out" href="#outdegree" data-toggle="tab" >Outdegree</a></li>
 							    <li><a id="cmp" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
-							    <li><a id="ImCycle" href="#ImmediateCycles" data-toggle="tab">ImmediateCycles</a></li>
+
 							</ul>
                             
                             <div id="myTabContent" class="tab-content">
@@ -124,7 +124,13 @@ text {
 							   </div>
 								   <div class="tab-pane fade" id="indegree">								   								   
 									   <div id="borderIn" style="border:2px solid;">
+
+									   <br />
+									   <canvas id="graph_note1" width="500" height="50" style="float: right">                                
+                                        </canvas>
 									   		<script type="text/javascript">
+									   		var ctx = document.getElementById("graph_note1").getContext("2d");					                            
+				                            SvgLoad(ctx);
 											$("#In").click(function(){							   					
 							   					
 							   					$.ajax({
@@ -132,27 +138,28 @@ text {
 							   					  url: "Indegree",
 							   					  dataType: 'json',
 							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    
-							   										
-							   						var svglength=$('#borderIn').find('svg');
+							   												   													   					
+							   						var width = 1000,height = 900;
 							   						
-							   					  if(svglength.length == 0){
-							   						var width = 1050,height = 900;
-							   						var svgIn = d3.select("#borderIn").append("svg").attr("width", width).attr("height", height);
-							   						DrawGraph(data.nodes, data.Links,svgIn,width,height);
-							   					  }
+							   						DrawGraph(data.nodes, data.Links,"#borderIn",width,height);
 							   						
 							   					  },
 							   					  error: function(data,error){alert(error);},
 							   					  async: false
-							   					});  
-							   					
+							   					}); 							   					
 							   				});
+											
 									   		</script>
 									   </div>
 								   </div>
-							   <div class="tab-pane fade" id="outdegree">							  
-							      <div id="borderOut" style="border:2px solid;">
-							      		<script type="text/javascript">
+								   <div id="borderOut" style="border:2px solid;">
+							  
+							      	<br />
+									   <canvas id="graph_note2" width="500" height="50" style="float: right">                                
+                                        </canvas>
+									   		<script type="text/javascript">
+									   		var ctx1 = document.getElementById("graph_note2").getContext("2d");					                            
+				                            SvgLoad(ctx1);
 											$("#Out").click(function(){							   					
 							   					
 							   					$.ajax({
@@ -161,23 +168,28 @@ text {
 							   					  dataType: 'json',
 							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    
 							   												   													   					
-							   						var width = 1050,height = 900;
-							   						var svgOut = d3.select("#borderOut").append("svg").attr("width", width).attr("height", height);
-							   						DrawGraph(data.nodes, data.Links,svgOut,width,height);
+							   						var width = 1000,height = 900;
+							   						
+							   						DrawGraph(data.nodes, data.Links,"#borderOut",width,height);
 							   						
 							   					  },
 							   					  error: function(data,error){alert(error);},
 							   					  async: false
-							   					});  
-							   					
+							   					}); 							   					
 							   				});
+											
 									   		</script>
-								  </div>
+								
 							   </div>
-							   							  
-							  
+							   
+							   <div class="tab-pane fade" id="completeTriad">
+							   		<div id="border" style="border:2px solid;">	
+							   			
+							   			
+									</div>
+							   </div>							   							  							  
 						</div>
-
+			
 						<%
 							/*get the name of the file releven to clicked year ane filename */
 
@@ -186,6 +198,7 @@ text {
 							System.out.println(filename);
 						%>
 						<script>
+						
 							var linkedByIndex = {};
 							var color = d3.scale.category10();
 							var width = 900, height = 900;

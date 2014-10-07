@@ -132,6 +132,7 @@ public class PostDataServ extends HttpServlet {
 			out.println(Obj.toString());
 			out.close();
 			
+
 		}else if(userPath.equals("/CompleteTriad")){
 				List<Links> link=DirectedGraphDemoServ.CompleteTriad(g, nodeSet);
 				
@@ -167,6 +168,7 @@ public class PostDataServ extends HttpServlet {
 			
 			out.print(Obj.toString());
 			out.close();
+
 		}
 			
 	}
