@@ -1,9 +1,3 @@
-<%-- 
-    Document   : include
-    Created on : Aug 28, 2014, 8:49:18 AM
-    Author     : Hunter
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">

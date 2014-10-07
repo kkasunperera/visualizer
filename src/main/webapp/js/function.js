@@ -1,4 +1,4 @@
-function HighestInDegree(){
+/*function HighestInDegree(){
 		$.ajax({
 			  type: 'GET',
 			  url: 'Indegree',                          			
@@ -16,7 +16,7 @@ function HighestOutDegree() {
 
 function completeTriad() {
 	//DataLoadModule();
-}
+}*/
 
 function DataLoadModule(dataset){
 	$.ajax({
@@ -99,8 +99,10 @@ function SvgLoad(ctx){
 }
 
 
+
 function DrawGraph(nodes,links,svg1,width,height){
-	
+
+
 	d3.select("svg")
     .remove();
 	var color = d3.scale.category10();
@@ -265,6 +267,7 @@ function DrawGraph(nodes,links,svg1,width,height){
 		        
 		    };
 		}
+
 
 	 function neighboring(a, b) {
 	   return linkedByIndex[a.index + "," + b.index];

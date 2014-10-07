@@ -104,6 +104,7 @@ text {
 							    <li><a id="Out" href="#outdegree" data-toggle="tab" >Max Outdegree</a></li>
 							    <li><a id="cmp" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
 							    <li><a id="cmp" href="#immediateCycle" data-toggle="tab">Immediate Cycle</a></li>
+
 							</ul>
                             
                             <div id="myTabContent" class="tab-content">
