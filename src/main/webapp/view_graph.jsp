@@ -100,6 +100,7 @@ text {
                             <ul id="myTab" class="nav nav-tabs">
 							   <li class="active"><a href="#home" onclick="window.location.reload(true);" data-toggle="tab">
 							      Network</a></li>
+
 							   	<li><a id="In"  href="#indegree" data-toggle="tab" >Indegree</a></li>
 							    <li><a id="Out" href="#outdegree" data-toggle="tab" >Outdegree</a></li>
 							    <li><a id="Cmp" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
@@ -126,7 +127,6 @@ text {
 							   </div>
 								   <div class="tab-pane fade" id="indegree">								   								   
 									   <div id="borderIn" style="border:2px solid;">
-
 									   <br />
 									   <canvas id="graph_note1" width="500" height="50" style="float: right">                                
                                         </canvas>
@@ -151,9 +151,9 @@ text {
 									   		</script>
 									   </div>
 								   </div>
-								   <div class="tab-pane fade" id="outdegree">
-								   <div id="borderOut" style="border:2px solid;">
-							  
+
+							   <div class="tab-pane fade" id="outdegree">							  
+							      <div id="borderOut" style="border:2px solid;">
 							      	<br />
 									   <canvas id="graph_note2" width="500" height="50" style="float: right">                                
                                         </canvas>
@@ -176,7 +176,9 @@ text {
 							   				});
 											
 									   		</script>
+
 									</div>
+
 							   </div>
 							   
 							   <div class="tab-pane fade" id="completeTriad">
@@ -256,8 +258,10 @@ text {
 							   			</script>
 									</div>
 							   </div>							   							  							  
+							   		
+
 						</div>
-			
+
 						<%
 							/*get the name of the file releven to clicked year ane filename */
 

@@ -134,6 +134,7 @@ public class PostDataServ extends HttpServlet {
 			out.println(Obj.toString());
 			out.close();
 			
+		}else if(userPath.equals("/DataRetrieve")){
 
 		}else if(userPath.equals("/CompleteTriad")){				
 				
@@ -180,6 +181,7 @@ public class PostDataServ extends HttpServlet {
 			
 			Obj.add("Links", links);
 			Obj.add("nodes", nodes);
+			
 			
 			out.print(Obj.toString());
 			out.close();

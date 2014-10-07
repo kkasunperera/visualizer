@@ -102,12 +102,9 @@ public class DirectedGraphDemoServ {
 	//input to be a array but for test two node 
 	public static List<Links> findImmidietCycles(DirectedGraph<Node,DefaultEdge> graph,Node[] nodes){
 		// A <--> B cycles 
-		
-		List<Links> list=new ArrayList<Links>();
-		
 		//this list contains visited edges
 		List<DefaultEdge> listOfImEdges=new ArrayList<DefaultEdge>();
-		
+		List<Links> list=new ArrayList<Links>();
 		for (int i = 0; i < nodes.length; i++) {
 			Set<DefaultEdge> edges=graph.outgoingEdgesOf(nodes[i]);
 			DefaultEdge[] edge=edges.toArray(new DefaultEdge[edges.size()]);
@@ -135,7 +132,7 @@ public class DirectedGraphDemoServ {
 					
 				}
 			}
-		System.out.println(listOfImEdges.size());
+		System.out.println("imediate cycle ;"+listOfImEdges.size());
 		return list;
 		}
 	
