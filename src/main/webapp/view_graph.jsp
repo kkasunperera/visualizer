@@ -43,7 +43,7 @@
                             GC-Analysis <i class="fa fa-fw fa-caret-down"></i></a>
                         
                         <ul id="demo" name="demo" class="collapse">
-                            <% for(int i = 2004;i < 2014;i++) {%>
+                            <% for(int i = 2005;i < 2014;i++) {%>
                             <li><a href="?filename=data<%=i%>.json&year=<%=i%>"><%=i%></a></li>                            
                             <%}%>
                         </ul></li>
@@ -102,7 +102,9 @@ text {
 							      Network</a></li>
 							   	<li><a id="In"  href="#indegree" data-toggle="tab" >Indegree</a></li>
 							    <li><a id="Out" href="#outdegree" data-toggle="tab" >Outdegree</a></li>
-							    <li><a id="cmp" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
+							    <li><a id="Cmp" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
+							    <li><a id="Incmp" href="#IncompleteTriad" data-toggle="tab">IncompleteTriad</a></li>
+							    <li><a id="Imcycles" href="#ImmediateCycle" data-toggle="tab">ImmediateCycles</a></li>
 
 							</ul>
                             
@@ -137,12 +139,9 @@ text {
 							   					  type: 'GET',
 							   					  url: "Indegree",
 							   					  dataType: 'json',
-							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    
-							   												   													   					
-							   						var width = 1000,height = 900;
-							   						
-							   						DrawGraph(data.nodes, data.Links,"#borderIn",width,height);
-							   						
+							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
+							   						var width = 1000,height = 900;							   						
+							   						DrawGraph(data.nodes, data.Links,"#borderIn",width,height);							   						
 							   					  },
 							   					  error: function(data,error){alert(error);},
 							   					  async: false
@@ -152,6 +151,7 @@ text {
 									   		</script>
 									   </div>
 								   </div>
+								   <div class="tab-pane fade" id="outdegree">
 								   <div id="borderOut" style="border:2px solid;">
 							  
 							      	<br />
@@ -160,18 +160,15 @@ text {
 									   		<script type="text/javascript">
 									   		var ctx1 = document.getElementById("graph_note2").getContext("2d");					                            
 				                            SvgLoad(ctx1);
-											$("#Out").click(function(){							   					
-							   					
+				                            
+											$("#Out").click(function(){							   												   					
 							   					$.ajax({
 							   					  type: 'GET',
 							   					  url: "Outdegree",
 							   					  dataType: 'json',
-							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    
-							   												   													   					
-							   						var width = 1000,height = 900;
-							   						
-							   						DrawGraph(data.nodes, data.Links,"#borderOut",width,height);
-							   						
+							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
+							   						var width = 1000,height = 900;							   						
+							   						DrawGraph(data.nodes, data.Links,"#borderOut",width,height);							   						
 							   					  },
 							   					  error: function(data,error){alert(error);},
 							   					  async: false
@@ -179,13 +176,84 @@ text {
 							   				});
 											
 									   		</script>
-								
+									</div>
 							   </div>
 							   
 							   <div class="tab-pane fade" id="completeTriad">
-							   		<div id="border" style="border:2px solid;">	
-							   			
-							   			
+							   		<div id="borderCmp" style="border:2px solid;">	
+							   			<br>
+							   			<canvas id="graph_note3" width="500" height="50" style="float: right">                                
+                                        </canvas>
+							   			<script type="text/javascript">
+							   			var ctx2 = document.getElementById("graph_note3").getContext("2d");					                            
+			                            SvgLoad(ctx2);
+			                            		
+			                            $("#Cmp").click(function(){							   												   					
+						   					$.ajax({
+						   					  type: 'GET',
+						   					  url: "CompleteTriad",
+						   					  dataType: 'json',
+						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
+						   						var width = 1000,height = 900;							   						
+						   						DrawGraph(data.nodes, data.Links,"#borderCmp",width,height);							   						
+						   					  },
+						   					  error: function(data,error){alert(error);},
+						   					  async: false
+						   					}); 							   					
+						   				});
+							   			</script>
+									</div>
+							   </div>		
+							   
+							   <div class="tab-pane fade" id="IncompleteTriad">
+							   		<div id="borderIncmp" style="border:2px solid;">	
+							   			<br>
+							   			<canvas id="graph_note4" width="500" height="50" style="float: right">                                
+                                        </canvas>
+							   			<script type="text/javascript">
+							   			var ctx3 = document.getElementById("graph_note4").getContext("2d");					                            
+			                            SvgLoad(ctx3);
+			                            		
+			                            $("#Incmp").click(function(){							   												   					
+						   					$.ajax({
+						   					  type: 'GET',
+						   					  url: "IncompleteTriad",
+						   					  dataType: 'json',
+						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
+						   						var width = 1000,height = 900;							   						
+						   						DrawGraph(data.nodes, data.Links,"#borderIncmp",width,height);							   						
+						   					  },
+						   					  error: function(data,error){alert(error);},
+						   					  async: false
+						   					}); 							   					
+						   				});
+							   			</script>
+									</div>
+							   </div>		
+							   
+							   <div class="tab-pane fade" id="ImmediateCycle">
+							   		<div id="borderImcycle" style="border:2px solid;">	
+							   			<br>
+							   			<canvas id="graph_note5" width="500" height="50" style="float: right">                                
+                                        </canvas>
+							   			<script type="text/javascript">
+							   			var ctx4 = document.getElementById("graph_note5").getContext("2d");					                            
+			                            SvgLoad(ctx4);
+			                            		
+			                            $("#Imcycles").click(function(){							   												   					
+						   					$.ajax({
+						   					  type: 'GET',
+						   					  url: "ImmediateCycles",
+						   					  dataType: 'json',
+						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
+						   						var width = 1000,height = 900;							   						
+						   						DrawGraph(data.nodes, data.Links,"#borderImcycle",width,height);							   						
+						   					  },
+						   					  error: function(data,error){alert(error);},
+						   					  async: false
+						   					}); 							   					
+						   				});
+							   			</script>
 									</div>
 							   </div>							   							  							  
 						</div>

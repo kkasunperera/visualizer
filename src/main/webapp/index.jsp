@@ -57,7 +57,7 @@ text {
                             GC-Analysis <i class="fa fa-fw fa-caret-down"></i></a>
                         
                         <ul id="demo1" name="demo" class="collapse">
-                            <% for(int i = 2004;i < 2014;i++) {%>
+                            <% for(int i = 2005;i < 2014;i++) {%>
                             <li><a href="view_graph.jsp?filename=data<%=i%>.json"><%=i%></a></li>                            
                             <%}%>
                         </ul></li>

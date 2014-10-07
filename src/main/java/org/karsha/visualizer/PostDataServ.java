@@ -38,6 +38,9 @@ public class PostDataServ extends HttpServlet {
 	public static Links[] linkSet = null;
 	public static DirectedGraph<Node,DefaultEdge> g = null;
 	List<Node> node;
+	List<Links> linkCompleteTriad;
+	List<Links> linkIncomplete;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -95,9 +98,8 @@ public class PostDataServ extends HttpServlet {
 				node=Arrays.asList(nodeSet);
 				
 				g = DirectedGraphDemoServ.createHrefGraph(nodeSet,linkSet);				
-				//System.out.println(g.toString());
-				//DirectedGraphDemoServ.findImmidietCycles(g, nodeSet);
-				//DirectedGraphDemoServ.CompleteTriad(g, nodeSet);
+				linkCompleteTriad=DirectedGraphDemoServ.CompleteTriad(g, nodeSet);
+				linkIncomplete=DirectedGraphDemoServ.InCompleteTriad(g, nodeSet);
 			}
 			
 		}else if (userPath.equals("/Indegree")) {
@@ -133,15 +135,14 @@ public class PostDataServ extends HttpServlet {
 			out.close();
 			
 
-		}else if(userPath.equals("/CompleteTriad")){
-				List<Links> link=DirectedGraphDemoServ.CompleteTriad(g, nodeSet);
+		}else if(userPath.equals("/CompleteTriad")){				
 				
 				response.setContentType("application/json");
 				PrintWriter out=response.getWriter();							
 				
 				JsonObject Obj=new JsonObject();
 				
-				JsonElement links=gson.toJsonTree(link);
+				JsonElement links=gson.toJsonTree(linkCompleteTriad);
 				JsonElement nodes=gson.toJsonTree(node);
 				
 				Obj.add("Links",links);
@@ -150,7 +151,21 @@ public class PostDataServ extends HttpServlet {
 				out.println(Obj.toString());
 				out.close();
 				
-		}else if(userPath.equals("/IncompleteTriad")){
+		}else if(userPath.equals("/IncompleteTriad")){			
+			
+			response.setContentType("application/json");
+			PrintWriter out=response.getWriter();
+			
+			JsonObject Obj=new JsonObject();
+			
+			JsonElement links=gson.toJsonTree(linkIncomplete);
+			JsonElement nodes=gson.toJsonTree(node);
+			
+			Obj.add("Links",links);
+			Obj.add("nodes", nodes);
+			
+			out.println(Obj.toString());
+			out.close();
 			
 		}else if(userPath.equals("/ImmediateCycles")){
 			List<Links> link=DirectedGraphDemoServ.findImmidietCycles(g, nodeSet);
