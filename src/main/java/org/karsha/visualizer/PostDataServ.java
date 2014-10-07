@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
@@ -92,7 +93,7 @@ public class PostDataServ extends HttpServlet {
 			if (nodes != null && linkObj != null ) {
 				nodeSet=mapper.readValue(nodes, Node[].class);
 				linkSet=mapper.readValue(links, Links[].class);
-				//System.out.println(nodeSet.length+" "+linkSet.length);
+				System.out.println("orignial data lengthis "+linkSet.length);
 				
 				//this is for send node set data with link set as json
 				node=Arrays.asList(nodeSet);
@@ -100,6 +101,7 @@ public class PostDataServ extends HttpServlet {
 				g = DirectedGraphDemoServ.createHrefGraph(nodeSet,linkSet);				
 				linkCompleteTriad=DirectedGraphDemoServ.CompleteTriad(g, nodeSet);
 				linkIncomplete=DirectedGraphDemoServ.InCompleteTriad(g, nodeSet);
+					
 			}
 			
 		}else if (userPath.equals("/Indegree")) {
@@ -134,10 +136,8 @@ public class PostDataServ extends HttpServlet {
 			out.println(Obj.toString());
 			out.close();
 			
-		}else if(userPath.equals("/DataRetrieve")){
+		}else if(userPath.equals("/CompleteTriad")){										
 
-		}else if(userPath.equals("/CompleteTriad")){				
-				
 				response.setContentType("application/json");
 				PrintWriter out=response.getWriter();							
 				
