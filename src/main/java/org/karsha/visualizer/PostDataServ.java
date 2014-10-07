@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.jgrapht.DirectedGraph;
@@ -32,7 +31,7 @@ import com.google.gson.JsonObject;
  */
 
 public class PostDataServ extends HttpServlet {
-	static Logger logger = Logger.getLogger(PostDataServ.class);
+	
 	private static final long serialVersionUID = 1L;
        
 	public static Node[] nodeSet = null;
@@ -133,11 +132,43 @@ public class PostDataServ extends HttpServlet {
 			out.println(Obj.toString());
 			out.close();
 			
-		}else if(userPath.equals("/DataRetrieve")){
-
+		}else if(userPath.equals("/CompleteTriad")){
+				List<Links> link=DirectedGraphDemoServ.CompleteTriad(g, nodeSet);
+				
+				response.setContentType("application/json");
+				PrintWriter out=response.getWriter();							
+				
+				JsonObject Obj=new JsonObject();
+				
+				JsonElement links=gson.toJsonTree(link);
+				JsonElement nodes=gson.toJsonTree(node);
+				
+				Obj.add("Links",links);
+				Obj.add("nodes", nodes);
+				
+				out.println(Obj.toString());
+				out.close();
+				
+		}else if(userPath.equals("/IncompleteTriad")){
 			
+		}else if(userPath.equals("/ImmediateCycles")){
+			List<Links> link=DirectedGraphDemoServ.findImmidietCycles(g, nodeSet);
+			
+			response.setContentType("application/json");
+			PrintWriter out=response.getWriter();
+			
+			JsonObject Obj=new JsonObject();
+			
+			JsonElement links=gson.toJsonTree(link);
+			JsonElement nodes=gson.toJsonTree(node);
+			
+			Obj.add("Links", links);
+			Obj.add("nodes", nodes);
+			
+			out.print(Obj.toString());
+			out.close();
 		}
 			
-		}
+	}
 
 }

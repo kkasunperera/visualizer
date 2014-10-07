@@ -1,4 +1,4 @@
-function HighestInDegree(){
+/*function HighestInDegree(){
 		$.ajax({
 			  type: 'GET',
 			  url: 'Indegree',                          			
@@ -16,7 +16,7 @@ function HighestOutDegree() {
 
 function completeTriad() {
 	//DataLoadModule();
-}
+}*/
 
 function DataLoadModule(dataset){
 	$.ajax({

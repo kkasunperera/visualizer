@@ -103,6 +103,7 @@ text {
 							   	<li><a id="In" href="#indegree" data-toggle="tab" >Indegree</a></li>
 							    <li><a id="Out" href="#outdegree" data-toggle="tab" >Outdegree</a></li>
 							    <li><a id="cmp" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
+							    <li><a id="ImCycle" href="#ImmediateCycles" data-toggle="tab">ImmediateCycles</a></li>
 							</ul>
                             
                             <div id="myTabContent" class="tab-content">
@@ -131,10 +132,14 @@ text {
 							   					  url: "Indegree",
 							   					  dataType: 'json',
 							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    
-							   												   													   					
+							   										
+							   						var svglength=$('#borderIn').find('svg');
+							   						
+							   					  if(svglength.length == 0){
 							   						var width = 1050,height = 900;
-							   						var svg = d3.select("#borderIn").append("svg").attr("width", width).attr("height", height);
-							   						DrawGraph(data.nodes, data.Links,svg,width,height);
+							   						var svgIn = d3.select("#borderIn").append("svg").attr("width", width).attr("height", height);
+							   						DrawGraph(data.nodes, data.Links,svgIn,width,height);
+							   					  }
 							   						
 							   					  },
 							   					  error: function(data,error){alert(error);},
@@ -147,17 +152,30 @@ text {
 								   </div>
 							   <div class="tab-pane fade" id="outdegree">							  
 							      <div id="borderOut" style="border:2px solid;">
-							      		Highest OutDegree Node data will be loaded here.....
+							      		<script type="text/javascript">
+											$("#Out").click(function(){							   					
+							   					
+							   					$.ajax({
+							   					  type: 'GET',
+							   					  url: "Outdegree",
+							   					  dataType: 'json',
+							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    
+							   												   													   					
+							   						var width = 1050,height = 900;
+							   						var svgOut = d3.select("#borderOut").append("svg").attr("width", width).attr("height", height);
+							   						DrawGraph(data.nodes, data.Links,svgOut,width,height);
+							   						
+							   					  },
+							   					  error: function(data,error){alert(error);},
+							   					  async: false
+							   					});  
+							   					
+							   				});
+									   		</script>
 								  </div>
 							   </div>
-							   
-							   <div class="tab-pane fade" id="completeTriad">
-							   		<div id="border" style="border:2px solid;">	
-							   			<script type="text/javascript">
-							   			
-							   			</script>						   			
-							   		</div>
-							   </div>
+							   							  
+							  
 						</div>
 
 						<%
