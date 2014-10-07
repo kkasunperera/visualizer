@@ -2,8 +2,12 @@ package org.karsha.visualizer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
+
 
 
 import org.jgrapht.DirectedGraph;
@@ -160,10 +164,12 @@ public class DirectedGraphDemoServ {
 						Node B=graph.getEdgeTarget(edgeSet[j]);
 						
 						if(graph.containsEdge(A, B)){
-							System.out.println("edges is "+edgeSet[i].toString()+" "+edgeSet[j].toString()+" "+graph.getEdge(A, B));
+							/*System.out.println("edges is "+edgeSet[i].toString()+" "+edgeSet[j].toString()+" "+graph.getEdge(A, B));
 							System.out.println("Triad is "+nodes[k].toString()+" "+A.toString()+" "+B.toString());
-							System.out.println("-----------------------------------------------------------------------------------");
+							System.out.println("-----------------------------------------------------------------------------------");*/
 							NumberOfTriad++;
+									
+							
 							
 							//link A-->B
 							linkA.setSource(Arrays.asList(nodes).indexOf(graph.getEdgeSource(edgeSet[i])));
@@ -176,21 +182,29 @@ public class DirectedGraphDemoServ {
 							//link B-->c
 							linkC.setSource(Arrays.asList(nodes).indexOf(A));
 							linkC.setTarget(Arrays.asList(nodes).indexOf(B));
-							
-							list.add(linkA);
-							list.add(linkB);
-							list.add(linkC);
-							
+		
+							if(!isAdded(linkA, list)){
+								list.add(linkA);
+							}
+							if(!isAdded(linkB, list)){
+								list.add(linkB);
+							}
+							if(!isAdded(linkC, list)){
+								list.add(linkC);
+							}							
+
 							NumberOfTriad++;
 						}
 						
 					}
 				}
-			}
-			
-			System.out.println(NumberOfTriad);
+			}			
 		}
-
+		
+		
+		
+		System.out.println("number of completed triad length  "+list.size());
+		
 		return list;
 	}
 	
@@ -217,9 +231,9 @@ public class DirectedGraphDemoServ {
 						Node B=graph.getEdgeTarget(edgeSet[j]);
 						
 						if(!graph.containsEdge(A, B)){
-							System.out.println("edges is "+edgeSet[i].toString()+" "+edgeSet[j].toString()+" ");
+							/*System.out.println("edges is "+edgeSet[i].toString()+" "+edgeSet[j].toString()+" ");
 							System.out.println("Triad is "+nodes[k].toString()+" "+A.toString()+" "+B.toString());
-							System.out.println("-----------------------------------------------------------------------------------");
+							System.out.println("-----------------------------------------------------------------------------------");*/
 							NumberOfTriad++;
 							
 							//link A-->B
@@ -232,9 +246,14 @@ public class DirectedGraphDemoServ {
 							
 							//link B-->c
 							//due to incomplete there is no b->c edges
-							list.add(linkA);
-							list.add(linkB);							
 							
+							if(!isAdded(linkA, list)){
+								list.add(linkA);
+							}
+							if(!isAdded(linkB, list)){
+								list.add(linkB);
+							}
+
 							NumberOfTriad++;
 						}
 						
@@ -242,12 +261,29 @@ public class DirectedGraphDemoServ {
 				}
 			}
 			
-			System.out.println(NumberOfTriad);
+			
 		}
-
+		
+		System.out.println("number of incompleted triad length "+list.size());
 		return list;
 
 		
 	}
 	
+
+
+private static boolean isAdded(Links link,List<Links> list){
+		
+	boolean state=false;
+	
+		if(list.size() > 0){
+			for (int i = 0; i < list.size(); i++) {
+				if(list.get(i).getSource() == link.getSource() && list.get(i).getTarget() == link.getTarget()){
+					state=true;
+				}
+			}
+		}
+		return state;
+	}
 }
+
