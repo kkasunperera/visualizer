@@ -122,7 +122,7 @@ public class DirectedGraphDemoServ {
 					
 				}
 			}
-		System.out.println(listOfImEdges.size());
+		System.out.println("imediate cycle ;"+listOfImEdges.size());
 		}
 	
 	public static void CompleteTriad(DirectedGraph<Node,DefaultEdge> graph,Node[] nodes){

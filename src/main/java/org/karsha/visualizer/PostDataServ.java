@@ -134,7 +134,7 @@ public class PostDataServ extends HttpServlet {
 			out.close();
 			
 		}else if(userPath.equals("/DataRetrieve")){
-
+			
 			
 		}
 			

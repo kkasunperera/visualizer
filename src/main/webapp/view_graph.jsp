@@ -100,9 +100,10 @@ text {
                             <ul id="myTab" class="nav nav-tabs">
 							   <li class="active"><a href="#home" onclick="window.location.reload(true);" data-toggle="tab">
 							      Network</a></li>
-							   	<li><a id="In"  href="#indegree" data-toggle="tab" >Indegree</a></li>
-							    <li><a id="Out" href="#outdegree" data-toggle="tab" >Outdegree</a></li>
+							   	<li><a id="In"  href="#indegree" data-toggle="tab" >Max Indegree</a></li>
+							    <li><a id="Out" href="#outdegree" data-toggle="tab" >Max Outdegree</a></li>
 							    <li><a id="cmp" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
+							    <li><a id="cmp" href="#immediateCycle" data-toggle="tab">Immediate Cycle</a></li>
 							</ul>
                             
                             <div id="myTabContent" class="tab-content">
