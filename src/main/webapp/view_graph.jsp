@@ -188,7 +188,7 @@ text {
                                         </canvas>
 							   			<script type="text/javascript">
 							   			var ctx2 = document.getElementById("graph_note3").getContext("2d");					                            
-			                            SvgLoad(ctx2);
+			                            SvgLoadCompTriad(ctx2);
 			                            		
 			                            $("#Cmp").click(function(){							   												   					
 						   					$.ajax({
@@ -214,8 +214,8 @@ text {
 							   			<canvas id="graph_note4" width="500" height="50" style="float: right">                                
                                         </canvas>
 							   			<script type="text/javascript">
-							   			var ctx3 = document.getElementById("graph_note4").getContext("2d");					                            
-			                            SvgLoad(ctx3);
+							   			var ctx3 = document.getElementById("graph_note4").getContext("2d");	
+                                        SvgLoadIncTriad(ctx3);
 			                            		
 			                            $("#Incmp").click(function(){							   												   					
 						   					$.ajax({
@@ -242,7 +242,7 @@ text {
                                         </canvas>
 							   			<script type="text/javascript">
 							   			var ctx4 = document.getElementById("graph_note5").getContext("2d");					                            
-			                            SvgLoad(ctx4);
+			                            SvgLoadImmCycle(ctx4);
 			                            		
 			                            $("#Imcycles").click(function(){							   												   					
 						   					$.ajax({
