@@ -2,8 +2,12 @@ package org.karsha.visualizer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
+
 
 
 import org.jgrapht.DirectedGraph;
@@ -114,14 +118,19 @@ public class DirectedGraphDemoServ {
 					//do nothing if already checked edge
 				}else{
 					if(graph.containsEdge(edge[j]) && graph.containsEdge(graph.getEdgeTarget(edge[j]), graph.getEdgeSource(edge[j]))){
-						System.out.println(edge[j].toString());
+						System.out.println(edge[j].toString()+graph.getEdge(graph.getEdgeTarget(edge[j]), graph.getEdgeSource(edge[j])));
 						listOfImEdges.add(graph.getEdge(graph.getEdgeTarget(edge[j]), graph.getEdgeSource(edge[j])));
 						Links linkA=new Links();
-										
+						Links linkB=new Links();
+						
 						linkA.setSource(Arrays.asList(nodes).indexOf(graph.getEdgeSource(edge[j])));
 						linkA.setTarget(Arrays.asList(nodes).indexOf(graph.getEdgeTarget(edge[j])));
 						
+						linkB.setSource(Arrays.asList(nodes).indexOf(graph.getEdgeTarget(edge[j])));
+						linkB.setTarget(Arrays.asList(nodes).indexOf(graph.getEdgeSource(edge[j])));
+						
 						list.add(linkA);
+						list.add(linkB);
 					}
 				}
 					
@@ -155,10 +164,12 @@ public class DirectedGraphDemoServ {
 						Node B=graph.getEdgeTarget(edgeSet[j]);
 						
 						if(graph.containsEdge(A, B)){
-							System.out.println("edges is "+edgeSet[i].toString()+" "+edgeSet[j].toString()+" "+graph.getEdge(A, B));
+							/*System.out.println("edges is "+edgeSet[i].toString()+" "+edgeSet[j].toString()+" "+graph.getEdge(A, B));
 							System.out.println("Triad is "+nodes[k].toString()+" "+A.toString()+" "+B.toString());
-							System.out.println("-----------------------------------------------------------------------------------");
+							System.out.println("-----------------------------------------------------------------------------------");*/
 							NumberOfTriad++;
+									
+							
 							
 							//link A-->B
 							linkA.setSource(Arrays.asList(nodes).indexOf(graph.getEdgeSource(edgeSet[i])));
@@ -171,11 +182,78 @@ public class DirectedGraphDemoServ {
 							//link B-->c
 							linkC.setSource(Arrays.asList(nodes).indexOf(A));
 							linkC.setTarget(Arrays.asList(nodes).indexOf(B));
+		
+							if(!isAdded(linkA, list)){
+								list.add(linkA);
+							}
+							if(!isAdded(linkB, list)){
+								list.add(linkB);
+							}
+							if(!isAdded(linkC, list)){
+								list.add(linkC);
+							}							
+
+							NumberOfTriad++;
+						}
+						
+					}
+				}
+			}			
+		}
+		
+		
+		
+		System.out.println("number of completed triad length  "+list.size());
+		
+		return list;
+	}
+	
+	/*find the IncompleteTriad of the graph*/
+	public static List<Links> InCompleteTriad(DirectedGraph<Node, DefaultEdge> graph,Node[] nodes){		
+		// A -> B && B -> C but not A -> C 
+		int NumberOfTriad;
+		List<Links> list=new ArrayList<Links>();
+		
+		for (int k = 0; k < nodes.length; k++) {
+			Set<DefaultEdge> set=graph.outgoingEdgesOf(nodes[k]);
+			DefaultEdge[] edgeSet=set.toArray(new DefaultEdge[set.size()]);
+			
+			NumberOfTriad=0;
+			
+			if(edgeSet.length > 1){
+				for (int i = 0; i < edgeSet.length; i++) {
+					for (int j = 0; j < edgeSet.length; j++) {
+						Links linkA=new Links();
+						Links linkB=new Links();						
+						
+						//System.out.println(edgeSet[i]+" "+edgeSet[j]);
+						Node A=graph.getEdgeTarget(edgeSet[i]);
+						Node B=graph.getEdgeTarget(edgeSet[j]);
+						
+						if(!graph.containsEdge(A, B)){
+							/*System.out.println("edges is "+edgeSet[i].toString()+" "+edgeSet[j].toString()+" ");
+							System.out.println("Triad is "+nodes[k].toString()+" "+A.toString()+" "+B.toString());
+							System.out.println("-----------------------------------------------------------------------------------");*/
+							NumberOfTriad++;
 							
-							list.add(linkA);
-							list.add(linkB);
-							list.add(linkC);
+							//link A-->B
+							linkA.setSource(Arrays.asList(nodes).indexOf(graph.getEdgeSource(edgeSet[i])));
+							linkA.setTarget(Arrays.asList(nodes).indexOf(graph.getEdgeTarget(edgeSet[i])));											
 							
+							//link A-->c
+							linkB.setSource(Arrays.asList(nodes).indexOf(graph.getEdgeSource(edgeSet[j])));
+							linkB.setTarget(Arrays.asList(nodes).indexOf(graph.getEdgeTarget(edgeSet[j])));
+							
+							//link B-->c
+							//due to incomplete there is no b->c edges
+							
+							if(!isAdded(linkA, list)){
+								list.add(linkA);
+							}
+							if(!isAdded(linkB, list)){
+								list.add(linkB);
+							}
+
 							NumberOfTriad++;
 						}
 						
@@ -183,15 +261,28 @@ public class DirectedGraphDemoServ {
 				}
 			}
 			
-			System.out.println(NumberOfTriad);
+			
 		}
-
+		
+		System.out.println("number of incompleted triad length "+list.size());
 		return list;
+
+		
 	}
 	
-	/*find the IncompleteTriad of the graph*/
-	public static void InCompleteTriad(DirectedGraph<Node, DefaultEdge> graph,Node[] nodes){
-		// A -> B && B -> C but not A -> C 
-	}
+
+
+private static boolean isAdded(Links link,List<Links> list){
+		
+	boolean state=false;
 	
+		if(list.size() > 0){
+			for (int i = 0; i < list.size(); i++) {
+				if(list.get(i).getSource() == link.getSource() && list.get(i).getTarget() == link.getTarget()){
+					state=true;
+				}
+			}
+		}
+		return state;
+	}
 }
