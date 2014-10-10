@@ -44,7 +44,7 @@
                         
                         <ul id="demo" name="demo" class="collapse">
                             <% for(int i = 2005;i < 2014;i++) {%>
-                            <li><a href="?filename=data<%=i%>.json&year=<%=i%>"><%=i%></a></li>                            
+                            <li><a onClick="history.go(0)" VALUE="Refresh" href="?filename=data<%=i%>.json&year=<%=i%>"><%=i%></a></li>                            
                             <%}%>
                         </ul></li>
                     <!-- <li><a href="Overall.html"><i
@@ -95,24 +95,17 @@ text {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                    <h2><center> Granger causality Analysis <%= year%></center> </h2>
+                    <h2><center> Granger causality Row Volume Data Analysis <%= year%></center> </h2>
        
                             <ul id="myTab" class="nav nav-tabs">
 							   <li class="active"><a href="#home" onclick="window.location.reload(true);" data-toggle="tab">
 							      Network</a></li>
-<<<<<<< HEAD
+
 							   	<li><a id="In"  href="#indegree" data-toggle="tab" >Max Indegree</a></li>
 							    <li><a id="Out" href="#outdegree" data-toggle="tab" >Max Outdegree</a></li>
-							    <li><a id="cmp" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
-							    <li><a id="cmp" href="#immediateCycle" data-toggle="tab">Immediate Cycle</a></li>
-=======
-
-							   	<li><a id="In"  href="#indegree" data-toggle="tab" >Indegree</a></li>
-							    <li><a id="Out" href="#outdegree" data-toggle="tab" >Outdegree</a></li>
 							    <li><a id="Cmp" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
 							    <li><a id="Incmp" href="#IncompleteTriad" data-toggle="tab">IncompleteTriad</a></li>
 							    <li><a id="Imcycles" href="#ImmediateCycle" data-toggle="tab">ImmediateCycles</a></li>
->>>>>>> upstream/master
 
 							</ul>
                             
@@ -158,10 +151,7 @@ text {
 									   		</script>
 									   </div>
 								   </div>
-<<<<<<< HEAD
-=======
 
->>>>>>> upstream/master
 							   <div class="tab-pane fade" id="outdegree">							  
 							      <div id="borderOut" style="border:2px solid;">
 							      	<br />
@@ -186,18 +176,6 @@ text {
 							   				});
 											
 									   		</script>
-<<<<<<< HEAD
-								  </div>
-							   </div>
-							   
-							   <div class="tab-pane fade" id="completeTriad">
-							   		<div id="border" style="border:2px solid;">	
-							   			<script type="text/javascript">
-							   			
-							   			</script>						   			
-							   		</div>
-							   </div>
-=======
 
 									</div>
 
@@ -283,7 +261,6 @@ text {
 							   </div>							   							  							  
 							   		
 
->>>>>>> upstream/master
 						</div>
 
 						<%
