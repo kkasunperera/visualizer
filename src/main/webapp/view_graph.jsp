@@ -1,3 +1,4 @@
+<%@page import="org.karsha.visualizer.DirectedGraphDemoServ"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -128,6 +129,8 @@ text {
 								   <div class="tab-pane fade" id="indegree">								   								   
 									   <div id="borderIn" style="border:2px solid;">
 									   <br />
+									   
+									   
 									   <canvas id="graph_note1" width="500" height="50" style="float: right">                                
                                         </canvas>
 									   		<script type="text/javascript">
@@ -141,7 +144,7 @@ text {
 							   					  dataType: 'json',
 							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 							   						var width = 1000,height = 900;							   						
-							   						DrawGraph(data.nodes, data.Links,"#borderIn",width,height);							   						
+							   						DrawGraph(data.nodes, data.Links,"#borderIn",width,height);		
 							   					  },
 							   					  error: function(data,error){alert(error);},
 							   					  async: false
@@ -149,12 +152,18 @@ text {
 							   				});
 											
 									   		</script>
+									   		<% DirectedGraphDemoServ DerGraSev0 = new DirectedGraphDemoServ(); %>
+									   		<div class="col-lg-4">Max Indegree :<%=DerGraSev0.indegree_count %>
+										   
+									   </div>
 									   </div>
 								   </div>
 
 							   <div class="tab-pane fade" id="outdegree">							  
 							      <div id="borderOut" style="border:2px solid;">
 							      	<br />
+							      	<% DirectedGraphDemoServ DerGraSev1 = new DirectedGraphDemoServ(); %>
+							      	<div class="col-lg-4">Max Outdegree :<%=DerGraSev1.outdegree_count %></div>
 									   <canvas id="graph_note2" width="500" height="50" style="float: right">                                
                                         </canvas>
 									   		<script type="text/javascript">
@@ -183,7 +192,7 @@ text {
 							   
 							   <div class="tab-pane fade" id="completeTriad">
 							   		<div id="borderCmp" style="border:2px solid;">	
-							   			<br>
+							   			<br>	
 							   			<canvas id="graph_note3" width="500" height="50" style="float: right">                                
                                         </canvas>
 							   			<script type="text/javascript">
