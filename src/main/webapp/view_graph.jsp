@@ -44,7 +44,7 @@
                         
                         <ul id="demo" name="demo" class="collapse">
                             <% for(int i = 2005;i < 2014;i++) {%>
-                            <li><a onClick="history.go(0)" VALUE="Refresh" href="?filename=data<%=i%>.json&year=<%=i%>"><%=i%></a></li>                            
+                            <li><a  href="?filename=data<%=i%>.json&year=<%=i%>"><%=i%></a></li>                            
                             <%}%>
                         </ul></li>
                     <!-- <li><a href="Overall.html"><i
