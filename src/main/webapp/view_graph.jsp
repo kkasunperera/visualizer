@@ -1,4 +1,3 @@
-<%@page import="org.karsha.visualizer.DirectedGraphDemoServ"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +44,7 @@
                         
                         <ul id="demo" name="demo" class="collapse">
                             <% for(int i = 2005;i < 2014;i++) {%>
-                            <li><a  href="?filename=data<%=i%>.json&year=<%=i%>"><%=i%></a></li>                            
+                            <li><a href="?filename=data<%=i%>.json&year=<%=i%>"><%=i%></a></li>                            
                             <%}%>
                         </ul></li>
                     <!-- <li><a href="Overall.html"><i
@@ -90,20 +89,20 @@ text {
   pointer-events: none;
 }
 </style>
-    <%DirectedGraphDemoServ DirGrpDem = new DirectedGraphDemoServ();%>
+    
   <div id="page-wrapper">
 
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                    <h2><center> Granger causality Row Volume Data Analysis <%= year%></center> </h2>
+                    <h2><center> Granger causality Analysis <%= year%></center> </h2>
        
                             <ul id="myTab" class="nav nav-tabs">
 							   <li class="active"><a href="#home" onclick="window.location.reload(true);" data-toggle="tab">
 							      Network</a></li>
 
-							   	<li><a id="In"  href="#indegree" data-toggle="tab" >Max Indegree</a></li>
-							    <li><a id="Out" href="#outdegree" data-toggle="tab" >Max Outdegree</a></li>
+							   	<li><a id="In"  href="#indegree" data-toggle="tab" >Indegree</a></li>
+							    <li><a id="Out" href="#outdegree" data-toggle="tab" >Outdegree</a></li>
 							    <li><a id="Cmp" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
 							    <li><a id="Incmp" href="#IncompleteTriad" data-toggle="tab">IncompleteTriad</a></li>
 							    <li><a id="Imcycles" href="#ImmediateCycle" data-toggle="tab">ImmediateCycles</a></li>
@@ -129,13 +128,11 @@ text {
 								   <div class="tab-pane fade" id="indegree">								   								   
 									   <div id="borderIn" style="border:2px solid;">
 									   <br />
-									   
 									   <canvas id="graph_note1" width="500" height="50" style="float: right">                                
                                         </canvas>
 									   		<script type="text/javascript">
 									   		var ctx = document.getElementById("graph_note1").getContext("2d");					                            
 				                            SvgLoad(ctx);
-				                            var indgr;
 											$("#In").click(function(){							   					
 							   					
 							   					$.ajax({
@@ -144,8 +141,7 @@ text {
 							   					  dataType: 'json',
 							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 							   						var width = 1000,height = 900;							   						
-							   						DrawGraph(data.nodes, data.Links,"#borderIn",width,height);	
-							   						indgr = data.Links.length;
+							   						DrawGraph(data.nodes, data.Links,"#borderIn",width,height);							   						
 							   					  },
 							   					  error: function(data,error){alert(error);},
 							   					  async: false
@@ -153,18 +149,12 @@ text {
 							   				});
 											
 									   		</script>
-									   		
-									   		<div class="col-lg-4">Counted Max Indegree : 
-									   <script >var x;
-									   x =60;
-									   document.write (indgr); </script></div>
 									   </div>
 								   </div>
 
 							   <div class="tab-pane fade" id="outdegree">							  
 							      <div id="borderOut" style="border:2px solid;">
 							      	<br />
-							      	<div class="col-lg-4">Counted Max Outdegree : <%=DirGrpDem.outdegree_count %></div>
 									   <canvas id="graph_note2" width="500" height="50" style="float: right">                                
                                         </canvas>
 									   		<script type="text/javascript">
@@ -234,7 +224,8 @@ text {
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 						   						var width = 1000,height = 900;							   						
-						   						DrawGraph(data.nodes, data.Links,"#borderIncmp",width,height);							   						
+						   						//DrawGraph(data.nodes, data.Links,"#borderIncmp",width,height);
+                                                DrawIncompleteTriad(data.nodes, data.Links,"#borderIncmp",width,height);
 						   					  },
 						   					  error: function(data,error){alert(error);},
 						   					  async: false
