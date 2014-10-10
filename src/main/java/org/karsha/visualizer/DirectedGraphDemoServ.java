@@ -286,4 +286,3 @@ private static boolean isAdded(Links link,List<Links> list){
 		return state;
 	}
 }
-
