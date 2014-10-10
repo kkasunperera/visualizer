@@ -1,3 +1,4 @@
+<%@page import="org.karsha.visualizer.DirectedGraphDemoServ"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -89,7 +90,7 @@ text {
   pointer-events: none;
 }
 </style>
-    
+    <%DirectedGraphDemoServ DirGrpDem = new DirectedGraphDemoServ();%>
   <div id="page-wrapper">
 
             <div class="container-fluid">
@@ -128,11 +129,13 @@ text {
 								   <div class="tab-pane fade" id="indegree">								   								   
 									   <div id="borderIn" style="border:2px solid;">
 									   <br />
+									   
 									   <canvas id="graph_note1" width="500" height="50" style="float: right">                                
                                         </canvas>
 									   		<script type="text/javascript">
 									   		var ctx = document.getElementById("graph_note1").getContext("2d");					                            
 				                            SvgLoad(ctx);
+				                            var indgr;
 											$("#In").click(function(){							   					
 							   					
 							   					$.ajax({
@@ -141,7 +144,8 @@ text {
 							   					  dataType: 'json',
 							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 							   						var width = 1000,height = 900;							   						
-							   						DrawGraph(data.nodes, data.Links,"#borderIn",width,height);							   						
+							   						DrawGraph(data.nodes, data.Links,"#borderIn",width,height);	
+							   						indgr = data.Links.length;
 							   					  },
 							   					  error: function(data,error){alert(error);},
 							   					  async: false
@@ -149,12 +153,18 @@ text {
 							   				});
 											
 									   		</script>
+									   		
+									   		<div class="col-lg-4">Counted Max Indegree : 
+									   <script >var x;
+									   x =60;
+									   document.write (indgr); </script></div>
 									   </div>
 								   </div>
 
 							   <div class="tab-pane fade" id="outdegree">							  
 							      <div id="borderOut" style="border:2px solid;">
 							      	<br />
+							      	<div class="col-lg-4">Counted Max Outdegree : <%=DirGrpDem.outdegree_count %></div>
 									   <canvas id="graph_note2" width="500" height="50" style="float: right">                                
                                         </canvas>
 									   		<script type="text/javascript">

@@ -17,6 +17,8 @@ import org.jgrapht.graph.DefaultEdge;
 
 public class DirectedGraphDemoServ {
 	
+	public static int indegree_count ;
+	public static int outdegree_count ;
 	
 	public static DirectedGraph<Node,DefaultEdge> createHrefGraph(Node[] nodes,Links[] links)
     {
@@ -66,6 +68,7 @@ public class DirectedGraphDemoServ {
 		for (int i = 0; i < o.length; i++) {
 			System.out.println(list.get(i).getSource() + " "+list.get(i).getTarget());
 		}
+		indegree_count = list.size();
 		return list;
 		
 	}
@@ -100,6 +103,8 @@ public class DirectedGraphDemoServ {
 		for (int i = 0; i < o.length; i++) {
 			System.out.println(list.get(i).getSource() + " "+list.get(i).getTarget());
 		}
+		outdegree_count = list.size();
+		
 		return list;	
 	}	
 	
