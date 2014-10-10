@@ -1,23 +1,3 @@
-/*function HighestInDegree(){
-		$.ajax({
-			  type: 'GET',
-			  url: 'Indegree',                          			
-			  async: false
-		}); 
-	}
-
-function HighestOutDegree() {
-	$.ajax({
-		type : 'GET',
-		url : 'Outdegree',
-		async : false
-	});
-}
-
-function completeTriad() {
-	//DataLoadModule();
-}*/
-
 function DataLoadModule(dataset){
     $.ajax({
         type: 'GET',
@@ -100,7 +80,198 @@ function SvgLoad(ctx){
     ctx.fill();
 }
 
+function SvgLoadIncTriad(ctx){
+    ctx.fillStyle = "#1f77b4";
+    ctx.beginPath();
+    ctx.arc(200,10,8,0,2*Math.PI);
+    ctx.closePath();
+    ctx.fill();
+    
+    
+    ctx.fillStyle = "#ff7f0d";
+    ctx.beginPath();
+    ctx.arc(200,35,8,0,2*Math.PI);
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.fillStyle = "#ff7f0d";
+    ctx.beginPath();
+    ctx.fillText("Equity", 214,40); 
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.fillStyle = "#1f77b4";
+    ctx.beginPath();
+    ctx.fillText("Bond", 214,14); 
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.strokeStyle="#FF0000";
+    ctx.beginPath();
+    ctx.moveTo(350,10);
+    ctx.lineTo(301,10);
+    ctx.stroke();
+    
+    ctx.strokeStyle="#0000FF";
+    ctx.beginPath();
+    ctx.moveTo(350,35);
+    ctx.lineTo(301,35);
+    ctx.stroke();
+    
+    ctx.fillStyle = "#1f77b4";
+    ctx.beginPath();
+    ctx.arc(300,10,8,0,2*Math.PI);
+    ctx.closePath();
+    ctx.fill();
+  
+    
+    ctx.fillStyle = "#1f77b4";
+    ctx.beginPath();
+    ctx.arc(300,35,8,0,2*Math.PI);
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.fillStyle = "#0000FF";
+    ctx.beginPath();
+    ctx.fillText("A To B edge", 360,40); 
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.fillStyle = "#FF0000";
+    ctx.beginPath();
+    ctx.fillText("B to C edge", 360,14); 
+    ctx.closePath();
+    ctx.fill();
+}
 
+function SvgLoadCompTriad(ctx){
+    ctx.fillStyle = "#1f77b4";
+    ctx.beginPath();
+    ctx.arc(200,10,8,0,2*Math.PI);
+    ctx.closePath();
+    ctx.fill();
+    
+    
+    ctx.fillStyle = "#ff7f0d";
+    ctx.beginPath();
+    ctx.arc(200,35,8,0,2*Math.PI);
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.fillStyle = "#ff7f0d";
+    ctx.beginPath();
+    ctx.fillText("Equity", 214,40); 
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.fillStyle = "#1f77b4";
+    ctx.beginPath();
+    ctx.fillText("Bond", 214,14); 
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.strokeStyle="#FF0000";
+    ctx.beginPath();
+    ctx.moveTo(350,10);
+    ctx.lineTo(301,10);
+    ctx.stroke();
+    
+    ctx.strokeStyle="#0000FF";
+    ctx.beginPath();
+    ctx.moveTo(350,35);
+    ctx.lineTo(301,35);
+    ctx.stroke();
+    
+    ctx.fillStyle = "#1f77b4";
+    ctx.beginPath();
+    ctx.arc(300,10,8,0,2*Math.PI);
+    ctx.closePath();
+    ctx.fill();
+  
+    
+    ctx.fillStyle = "#1f77b4";
+    ctx.beginPath();
+    ctx.arc(300,35,8,0,2*Math.PI);
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.fillStyle = "#0000FF";
+    ctx.beginPath();
+    ctx.fillText("A to B OR A to C  edge", 360,40); 
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.fillStyle = "#FF0000";
+    ctx.beginPath();
+    ctx.fillText("B to C edge", 360,14); 
+    ctx.closePath();
+    ctx.fill();
+}
+
+
+function SvgLoadImmCycle(ctx){
+    ctx.fillStyle = "#1f77b4";
+    ctx.beginPath();
+    ctx.arc(200,10,8,0,2*Math.PI);
+    ctx.closePath();
+    ctx.fill();
+    
+    
+    ctx.fillStyle = "#ff7f0d";
+    ctx.beginPath();
+    ctx.arc(200,35,8,0,2*Math.PI);
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.fillStyle = "#ff7f0d";
+    ctx.beginPath();
+    ctx.fillText("Equity", 214,40); 
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.fillStyle = "#1f77b4";
+    ctx.beginPath();
+    ctx.fillText("Bond", 214,14); 
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.strokeStyle="#FF0000";
+    ctx.beginPath();
+    ctx.moveTo(350,10);
+    ctx.lineTo(301,10);
+    ctx.stroke();
+    
+    ctx.strokeStyle="#0000FF";
+    ctx.beginPath();
+    ctx.moveTo(350,35);
+    ctx.lineTo(301,35);
+    ctx.stroke();
+    
+    ctx.fillStyle = "#1f77b4";
+    ctx.beginPath();
+    ctx.arc(300,10,8,0,2*Math.PI);
+    ctx.closePath();
+    ctx.fill();
+  
+    
+    ctx.fillStyle = "#1f77b4";
+    ctx.beginPath();
+    ctx.arc(300,35,8,0,2*Math.PI);
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.fillStyle = "#0000FF";
+    ctx.beginPath();
+    ctx.fillText("A to B edge", 360,40); 
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.fillStyle = "#FF0000";
+    ctx.beginPath();
+    ctx.fillText("B to A edge", 360,14); 
+    ctx.closePath();
+    ctx.fill();
+}
 
 function DrawGraph(nodes,links,svg1,width,height){
 
@@ -217,8 +388,8 @@ function DrawGraph(nodes,links,svg1,width,height){
                 if (o.source === d) {
                     return "blue";
                 }else if (o.target === d ) {
-                    return "red";
-                };                 
+	                return "red";
+	            };                
             });
 		
             arrow_head.style("opacity",function(o){
@@ -238,7 +409,7 @@ function DrawGraph(nodes,links,svg1,width,height){
             .attr("r", 25)
             .style("fill", function(d) {
                 return color(d.group);
-            })
+            });
 		        
         };
     }
@@ -269,7 +440,7 @@ function DrawGraph(nodes,links,svg1,width,height){
             .attr("r", 8)
             .style("fill", function(d) {
                 return color(d.group);
-            })
+            });
             d3.select(this).select("text").transition()
             .duration(750)
             .attr("x", 12)
@@ -434,8 +605,10 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
                  if(i!=j && isConnectedIndex(connectedEdges[i], connectedEdges[j])){
                      
                  
-                linksForSelectedNode[connectedEdges[i] + "," + connectedEdges[j]] = 1;
+                linksForSelectedNode[connectedEdges[i] + "," + connectedEdges[j]] = 2;
                  }
+                 
+                 //fixing bug for false trid detection
                  if(i!=j && (isConnectedIndex(connectedEdges[i], connectedEdges[j])||isConnectedIndex(connectedEdges[j], connectedEdges[i]))){
                     status= true;
                  }
@@ -451,23 +624,22 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
             path.style("stroke-opacity", function(o) {
                 // return o.source === d || o.target === d ? 1 : opacity; 
                // return o.source === d ? 1 : opacity;
-                return getConnectedNodes(o.source, o.target) ? 1 : opacity; 
+               var value= getConnectedNodes(o.source, o.target);
+                return (value>=1) ? 1 : opacity; 
             });
 		
             path.style("stroke",function(o){
                 // if (isConnected(d, o.target)) {
                    
                 //if (o.source === d) {
-                if (getConnectedNodes(o.source, o.target)) { 
-                         
-                    /*    
-                   if(connectedEdges.indexOf(o.target.index) == -1){
-                       connectedEdges.push(o.target.index);
-                   }
-                    */     
+                if (getConnectedNodes(o.source, o.target)==1) { 
+    
                     // alert(connectedEdges.length);
                     return "blue";
-                };
+                }
+                else if (getConnectedNodes(o.source, o.target)==2 ) {
+		                return "red";
+		            };
             /*
                    if (o.source === d) {
 		                return "blue";
@@ -486,6 +658,7 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
                 return thisOpacity;
             });
 		       
+
             d3.select(this).select("text").transition()
             .duration(500)
             .style("fill", "black")
@@ -497,7 +670,7 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
             .attr("r", 25)
             .style("fill", function(d) {
                 return color(d.group);
-            })
+            });
 		        
         };
     }
@@ -530,7 +703,7 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
             .attr("r", 8)
             .style("fill", function(d) {
                 return color(d.group);
-            })
+            });
             d3.select(this).select("text").transition()
             .duration(750)
             .attr("x", 12)
@@ -538,6 +711,7 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
             .style("fill", "black")
             .style("stroke", "none")
             .style("font", "10px sans-serif");
+
 		        
         };
     }
@@ -762,12 +936,7 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
                    
                 //if (o.source === d) {
                 if (getConnectedNodes(o.source, o.target)==1) { 
-                         
-                    /*    
-                   if(connectedEdges.indexOf(o.target.index) == -1){
-                       connectedEdges.push(o.target.index);
-                   }
-                    */     
+    
                     // alert(connectedEdges.length);
                     return "blue";
                 }
