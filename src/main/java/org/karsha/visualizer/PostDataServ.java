@@ -136,7 +136,9 @@ public class PostDataServ extends HttpServlet {
 			out.println(Obj.toString());
 			out.close();
 			
+
 		}else if(userPath.equals("/CompleteTriad")){										
+
 
 				response.setContentType("application/json");
 				PrintWriter out=response.getWriter();							
@@ -152,6 +154,7 @@ public class PostDataServ extends HttpServlet {
 				out.println(Obj.toString());
 				out.close();
 				
+
 		}else if(userPath.equals("/IncompleteTriad")){			
 			
 			response.setContentType("application/json");
@@ -167,7 +170,7 @@ public class PostDataServ extends HttpServlet {
 			
 			out.println(Obj.toString());
 			out.close();
-			
+
 		}else if(userPath.equals("/ImmediateCycles")){
 			List<Links> link=DirectedGraphDemoServ.findImmidietCycles(g, nodeSet);
 			
