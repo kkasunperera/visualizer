@@ -1,23 +1,3 @@
-/*function HighestInDegree(){
-		$.ajax({
-			  type: 'GET',
-			  url: 'Indegree',                          			
-			  async: false
-		}); 
-	}
-
-function HighestOutDegree() {
-	$.ajax({
-		type : 'GET',
-		url : 'Outdegree',
-		async : false
-	});
-}
-
-function completeTriad() {
-	//DataLoadModule();
-}*/
-
 function DataLoadModule(dataset){
 	$.ajax({
 		  type: 'GET',
@@ -227,7 +207,7 @@ function DrawGraph(nodes,links,svg1,width,height){
 		   d3.select(this).select("circle").transition()
 		       .duration(750)
 		       .attr("r", 25)
-		       .style("fill", function(d) { return color(d.group); })
+		       .style("fill", function(d) { return color(d.group); });
 		        
 		    };
 		}
@@ -256,7 +236,7 @@ function DrawGraph(nodes,links,svg1,width,height){
 		         d3.select(this).select("circle").transition()
 		         .duration(750)
 		         .attr("r", 8)
-		         .style("fill", function(d) { return color(d.group); })
+		         .style("fill", function(d) { return color(d.group); });
 		     d3.select(this).select("text").transition()
 		         .duration(750)
 		         .attr("x", 12)
