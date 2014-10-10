@@ -197,7 +197,7 @@ text {
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 						   						var width = 1000,height = 900;							   						
-						   						DrawGraph(data.nodes, data.Links,"#borderCmp",width,height);							   						
+						   						DrawTriad(data.nodes, data.Links,"#borderCmp",width,height);							   						
 						   					  },
 						   					  error: function(data,error){alert(error);},
 						   					  async: false

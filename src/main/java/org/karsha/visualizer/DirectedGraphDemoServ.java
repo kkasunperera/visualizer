@@ -2,8 +2,10 @@ package org.karsha.visualizer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 
 
 import org.jgrapht.DirectedGraph;
@@ -188,9 +190,21 @@ public class DirectedGraphDemoServ {
 				}
 			}
 			
-			System.out.println(NumberOfTriad);
+			//System.out.println(NumberOfTriad);
+			
+			for (int i = 0; i < list.size(); i++) {
+				for (int j = 0; j < list.size(); j++) {
+					if(i!=j && list.get(i).source == list.get(j).source && list.get(i).target == list.get(j).target){
+						list.remove(i);
+					}
+				}
+			}
 		}
 
+		
+		System.out.println("completed .. :"+list.size());
+		
+		
 		return list;
 	}
 	
@@ -242,12 +256,22 @@ public class DirectedGraphDemoServ {
 				}
 			}
 			
-			System.out.println(NumberOfTriad);
+			for (int i = 0; i < list.size(); i++) {
+				for (int j = 0; j < list.size(); j++) {
+					if(i!=j && list.get(i).source == list.get(j).source && list.get(i).target == list.get(j).target){
+						list.remove(i);
+					}
+				}
+			}
+			
+			System.out.println("ddddddddddd" +list.size());
 		}
 
 		return list;
 
 		
 	}
+	
+	
 	
 }
