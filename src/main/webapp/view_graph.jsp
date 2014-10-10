@@ -224,7 +224,8 @@ text {
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 						   						var width = 1000,height = 900;							   						
-						   						DrawGraph(data.nodes, data.Links,"#borderIncmp",width,height);							   						
+						   						//DrawGraph(data.nodes, data.Links,"#borderIncmp",width,height);
+                                                DrawIncompleteTriad(data.nodes, data.Links,"#borderIncmp",width,height);
 						   					  },
 						   					  error: function(data,error){alert(error);},
 						   					  async: false

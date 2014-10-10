@@ -145,9 +145,10 @@ public class PostDataServ extends HttpServlet {
 			out.println(Obj.toString());
 			out.close();
 			
+
 		}else if(userPath.equals("/CompleteTriad")){										
 				logger.info("userPath is "+userPath);
-				
+
 				response.setContentType("application/json");
 				PrintWriter out=response.getWriter();							
 				
@@ -162,6 +163,7 @@ public class PostDataServ extends HttpServlet {
 				out.println(Obj.toString());
 				out.close();
 				
+
 		}else if(userPath.equals("/IncompleteTriad")){			
 			logger.info("userPath is "+userPath);
 			
@@ -178,7 +180,7 @@ public class PostDataServ extends HttpServlet {
 			
 			out.println(Obj.toString());
 			out.close();
-			
+
 		}else if(userPath.equals("/ImmediateCycles")){
 			logger.info("userPath is "+userPath);
 			
