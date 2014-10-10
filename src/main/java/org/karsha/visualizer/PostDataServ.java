@@ -5,9 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
@@ -25,6 +23,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import java.util.logging.*;
 
 
 /**
@@ -32,6 +31,9 @@ import com.google.gson.JsonObject;
  */
 
 public class PostDataServ extends HttpServlet {
+	
+	private static Logger logger=Logger.getLogger(PostDataServ.class.getName());
+	
 	
 	private static final long serialVersionUID = 1L;
        
@@ -53,8 +55,8 @@ public class PostDataServ extends HttpServlet {
 	/**
 	 * @see Servlet#init(ServletConfig)
 	 */
-	public void init(ServletConfig config) throws ServletException {
-		System.out.println("servlet going to initiate....");
+	public void init(ServletConfig config) throws ServletException {		
+		logger.info("servlet initiating.....");
 	}
 
 	/**
@@ -69,13 +71,16 @@ public class PostDataServ extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("methos is gointo start.....");
+		logger.log(Level.SEVERE, "doPost  Data:{0},{1}", new Object[]{"request","response"});
+			
+		//get the user path
 		String userPath=request.getServletPath();
 		
 		/*Gson library have been used*/
 		Gson gson=new Gson();
 		
 		if (userPath.equals("/PostDataServ")) {
+			logger.info("userPath is "+userPath);
 			
 			InputStream s=request.getInputStream();
 			BufferedReader br=new BufferedReader(new InputStreamReader(s));
@@ -93,7 +98,7 @@ public class PostDataServ extends HttpServlet {
 			if (nodes != null && linkObj != null ) {
 				nodeSet=mapper.readValue(nodes, Node[].class);
 				linkSet=mapper.readValue(links, Links[].class);
-				System.out.println("orignial data lengthis "+linkSet.length);
+				//System.out.println("orignial data lengthis "+linkSet.length);
 				
 				//this is for send node set data with link set as json
 				node=Arrays.asList(nodeSet);
@@ -105,6 +110,8 @@ public class PostDataServ extends HttpServlet {
 			}
 			
 		}else if (userPath.equals("/Indegree")) {
+			logger.info("userPath is "+userPath);
+			
 			List<Links> link=DirectedGraphDemoServ.findHighInDegree(g, nodeSet);
 			
 			response.setContentType("application/json");
@@ -121,6 +128,8 @@ public class PostDataServ extends HttpServlet {
 			out.close();
 			
 		}else if(userPath.equals("/Outdegree")){
+			logger.info("userPath is "+userPath);
+			
 			List<Links> link=DirectedGraphDemoServ.findHighOutDegree(g, nodeSet);
 			
 			response.setContentType("application/json");
@@ -137,7 +146,8 @@ public class PostDataServ extends HttpServlet {
 			out.close();
 			
 		}else if(userPath.equals("/CompleteTriad")){										
-
+				logger.info("userPath is "+userPath);
+				
 				response.setContentType("application/json");
 				PrintWriter out=response.getWriter();							
 				
@@ -153,6 +163,7 @@ public class PostDataServ extends HttpServlet {
 				out.close();
 				
 		}else if(userPath.equals("/IncompleteTriad")){			
+			logger.info("userPath is "+userPath);
 			
 			response.setContentType("application/json");
 			PrintWriter out=response.getWriter();
@@ -169,6 +180,8 @@ public class PostDataServ extends HttpServlet {
 			out.close();
 			
 		}else if(userPath.equals("/ImmediateCycles")){
+			logger.info("userPath is "+userPath);
+			
 			List<Links> link=DirectedGraphDemoServ.findImmidietCycles(g, nodeSet);
 			
 			response.setContentType("application/json");
