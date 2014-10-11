@@ -95,7 +95,7 @@ text {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                    <h2><center> Granger causality Row Volume Data Analysis <%= year%></center> </h2>
+                    <h2><center> Granger causality Raw Volume Data Analysis <%= year%></center> </h2>
        
                             <ul id="myTab" class="nav nav-tabs">
 							   <li class="active"><a href="#home" onclick="window.location.reload(true);" data-toggle="tab">
