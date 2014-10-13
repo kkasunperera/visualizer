@@ -192,8 +192,8 @@ public class DirectedGraphDemoServ {
 							}
 							NumberOfCompleteTriad++;
 							//displya to console
-							System.out.println(edgeSet[i]+" "+edgeSet[j]+" "+graph.getEdge(A, B).toString());
-							System.out.println("------------------------------------------------------------------");
+						//System.out.println(edgeSet[i]+" "+edgeSet[j]+" "+graph.getEdge(A, B).toString());
+						//	System.out.println("------------------------------------------------------------------");
 						}
 						
 					}
@@ -266,8 +266,8 @@ public class DirectedGraphDemoServ {
 			
 		}
 		
-		System.out.println("Number of IncompleteTriad are "+NumberOfIncompleteTriad);
-		System.out.println("Number of Edges Containing in the list is "+list.size());
+	//	System.out.println("Number of IncompleteTriad are "+NumberOfIncompleteTriad);
+		//System.out.println("Number of Edges Containing in the list is "+list.size());
 		
 		return list;		
 	}

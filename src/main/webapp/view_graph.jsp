@@ -44,7 +44,7 @@
                         
                         <ul id="demo" name="demo" class="collapse">
                             <% for(int i = 2005;i < 2014;i++) {%>
-                            <li><a href="?filename=data<%=i%>.json&year=<%=i%>"><%=i%></a></li>                            
+                            <li><a  href="?filename=data<%=i%>.json&year=<%=i%>"><%=i%></a></li>                            
                             <%}%>
                         </ul></li>
                     <!-- <li><a href="Overall.html"><i
@@ -152,7 +152,7 @@ text {
                                         </canvas>
 									   		<script type="text/javascript">
 									   		var ctx = document.getElementById("graph_note1").getContext("2d");					                            
-				                            SvgLoad(ctx);
+				                            SvgLoadDegree(ctx);
 											$("#In").click(function(){							   					
 							   					
 							   					$.ajax({
@@ -179,7 +179,7 @@ text {
                                         </canvas>
 									   		<script type="text/javascript">
 									   		var ctx1 = document.getElementById("graph_note2").getContext("2d");					                            
-				                            SvgLoad(ctx1);
+				                            SvgLoadDegree(ctx1);
 				                            
 											$("#Out").click(function(){							   												   					
 							   					$.ajax({
@@ -208,7 +208,7 @@ text {
                                         </canvas>
 							   			<script type="text/javascript">
 							   			var ctx2 = document.getElementById("graph_note3").getContext("2d");					                            
-			                            SvgLoad(ctx2);
+			                            SvgLoadCompTriad(ctx2);
 			                            		
 			                            $("#Cmp").click(function(){							   												   					
 						   					$.ajax({
@@ -235,7 +235,7 @@ text {
                                         </canvas>
 							   			<script type="text/javascript">
 							   			var ctx3 = document.getElementById("graph_note4").getContext("2d");					                            
-			                            SvgLoad(ctx3);
+			                            SvgLoadIncTriad(ctx3);
 			                            		
 			                            $("#Incmp").click(function(){							   												   					
 						   					$.ajax({
@@ -401,6 +401,7 @@ text {
 													var color = d3.scale.category10();
 													var width = 900, height = 950;		 
 													
+													d3.select("svg").remove();
 													var svg = d3.select("#borderQgraph").append("svg")
 												    .attr("width", width)
 												    .attr("height", height);
@@ -472,7 +473,7 @@ text {
 												  node.append("text")
 												      .attr("dx", 12)
 												      .attr("dy", ".35em")
-												      .text(function(d) { return d.name});
+												      .text(function(d) { return d.name;});
 												
 												json.links.forEach(function(d) {
 												//alert(d.source.index + "," + d.target.index);
@@ -536,8 +537,7 @@ text {
 												   d3.select(this).select("circle").transition()
 												       .duration(750)
 												       .attr("r", 25)
-												       .style("fill", function(d) { return color(d.group); })
-												        
+												       .style("fill", function(d) { return color(d.group); });										        
 												    };
 												}
 												
@@ -575,7 +575,7 @@ text {
 												         d3.select(this).select("circle").transition()
 												         .duration(750)
 												         .attr("r", 8)
-												         .style("fill", function(d) { return color(d.group); })
+												         .style("fill", function(d) { return color(d.group); });
 												     d3.select(this).select("text").transition()
 												         .duration(750)
 												         .attr("x", 12)
@@ -603,10 +603,7 @@ text {
 							   				</script>
 							   		</div>
 							   </div>						   							  							  
-							   		
-
 						</div>
-						
 						<script>
 						
 							var linkedByIndex = {};
@@ -702,7 +699,7 @@ text {
 								  node.append("text")
 								      .attr("dx", 12)
 								      .attr("dy", ".35em")
-								      .text(function(d) { return d.name});
+								      .text(function(d) { return d.name;});
 								
 								json.links.forEach(function(d) {
 								//alert(d.source.index + "," + d.target.index);
@@ -766,7 +763,7 @@ text {
 								   d3.select(this).select("circle").transition()
 								       .duration(750)
 								       .attr("r", 25)
-								       .style("fill", function(d) { return color(d.group); })
+								       .style("fill", function(d) { return color(d.group); });
 								        
 								    };
 								}
@@ -795,7 +792,7 @@ text {
 								         d3.select(this).select("circle").transition()
 								         .duration(750)
 								         .attr("r", 8)
-								         .style("fill", function(d) { return color(d.group); })
+								         .style("fill", function(d) { return color(d.group); });
 								     d3.select(this).select("text").transition()
 								         .duration(750)
 								         .attr("x", 12)
