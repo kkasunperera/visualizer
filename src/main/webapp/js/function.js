@@ -972,7 +972,7 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
             .attr("r", 25)
             .style("fill", function(d) {
                 return color(d.group);
-            })
+            });
 		        
         };
     }
@@ -1005,7 +1005,7 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
             .attr("r", 8)
             .style("fill", function(d) {
                 return color(d.group);
-            })
+            });
             d3.select(this).select("text").transition()
             .duration(750)
             .attr("x", 12)
@@ -1047,5 +1047,3 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
     }
 
 }
-
-
