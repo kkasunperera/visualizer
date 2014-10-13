@@ -72,10 +72,29 @@
     
 <style>
 
+
 .link {
   fill: none;
   stroke: #666;
   stroke-width: 1.5px;
+}
+
+.linkSustain {
+  fill: none;
+  stroke:#0066FF;
+  stroke-width:1.5 px;
+}
+
+.linkEpisodic{
+	fill: none;
+	stroke:#FF0000;
+	stroke-width:1.5px;
+}
+
+.linkWeak{
+	fill: none;
+	stroke:#33CC33;
+	stroke-with:1.5px;
 }
 
 .node circle {
@@ -304,8 +323,8 @@ text {
 												  
 												  var link = svg.selectAll(".link")
 												      .data(json.links)
-												    .enter().append("line")
-												      .attr("class", "link");
+												    .enter().append("line");
+												      //.attr("class", "link");
 												      
 												 var arrow_head = svg.append("svg:defs").selectAll("marker")
 												    .data(["end"])      // Different link/path types can be defined here
@@ -324,8 +343,16 @@ text {
 												  var path = svg.append("svg:g").selectAll("path")
 												    .data(force.links())
 												  .enter().append("svg:path")
-													.attr("class", function(d) { return "link " + d.type; })
-													.attr("class", "link")
+													//.attr("class", function(d) { return "link " + d.type; })
+													.attr("class", function(d){
+														if(d.type == "weak"){
+															return "linkWeak";
+														}else if(d.type == "sustained"){
+															return "linkSustain";
+														}else if(d.type == "episodic"){
+															return "linkEpisodic";
+														}
+													}) 
 													.attr("marker-end", "url(#end)");
 												
 												  var node = svg.selectAll(".node")
@@ -374,6 +401,8 @@ text {
 												}
 												
 												
+												 
+												    
 												function mouseOver(opacity) {
 												    return function(d) {
 												    	node.style("stroke-opacity", function(o) {
@@ -386,13 +415,11 @@ text {
 												            return o.source === d || o.target === d ? 1 : opacity;                
 												        });
 												
-												        path.style("stroke",function(o){
-												            if (o.source === d) {
-												                return "blue";
-												            }else if (o.target === d ) {
-												                return "red";
-												            };
-												        });
+												       path.style("stroke-dasharray",function(o){
+												    	   if(o.source === d){
+												    		   return "5, 5";
+												    	   }
+												       });
 												
 												       arrow_head.style("opacity",function(o){
 												            thisOpacity = isConnected(d, o) ? 1 : opacity;
@@ -425,9 +452,17 @@ text {
 												         path.style("stroke-opacity", function(o) {
 												     //return o.source === d || o.target === d ? 1 : opacity;
 												             return o.source === d ? 1 : opacity;
-												         });
+												         }); 
 												
-												         path.style("stroke","#666");
+												         path.style("stroke",function(d){
+												        		if(d.type == "weak"){
+																	return "#33CC33";
+																}else if(d.type == "sustained"){
+																	return "#0066FF";
+																}else if(d.type == "episodic"){
+																	return "#FF0000";
+																}
+												         });
 												         
 												         arrow_head.style("opacity",function(o){
 												             thisOpacity = isConnected(d, o) ? opacity : 1;
