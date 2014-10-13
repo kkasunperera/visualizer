@@ -291,11 +291,111 @@ text {
 							<div class="tab-pane fade" id="QuarterGraph">							   	
 							   		<div id="borderQgraph" style="border:2px solid;">
 							   			<br>
-							   			<canvas id="graph_note6" width="500" height="50" style="float: right"></canvas>
+							   			<canvas id="graph_note6" width="800" height="80" style="float: left"></canvas>
 							   				<script type="text/javascript">
-							   					var ctx5=document.getElementById("graph_note6").getContext("2d");
-							   					SvgLoad(ctx5);
-							   					
+							   					var ctx=document.getElementById("graph_note6").getContext("2d");
+							   				 ctx.fillStyle = "#1f77b4";
+							   			    ctx.beginPath();
+							   			    ctx.arc(200,10,8,0,2*Math.PI);
+							   			    ctx.closePath();
+							   			    ctx.fill();
+							   			    
+							   			    
+							   			    ctx.fillStyle = "#ff7f0d";
+							   			    ctx.beginPath();
+							   			    ctx.arc(200,35,8,0,2*Math.PI);
+							   			    ctx.closePath();
+							   			    ctx.fill();
+							   			    
+							   			    ctx.fillStyle = "#ff7f0d";
+							   			    ctx.beginPath();
+							   			    ctx.fillText("Equity", 214,40); 
+							   			    ctx.closePath();
+							   			    ctx.fill();
+							   			    
+							   			    ctx.fillStyle = "#1f77b4";
+							   			    ctx.beginPath();
+							   			    ctx.fillText("Bond", 214,14); 
+							   			    ctx.closePath();
+							   			    ctx.fill();
+							   			    
+							   			    //should be dashed
+							   			    ctx.fillStyle = "#666";
+							   			    ctx.beginPath();
+							   			    ctx.fillText("--------------", 300,14); 
+							   			    ctx.closePath();
+							   			    ctx.fill();
+							   			    
+							   			    ctx.strokeStyle="#666";
+							   			    ctx.beginPath();
+							   			    ctx.moveTo(350,35);
+							   			    ctx.lineTo(301,35);
+							   			    ctx.stroke();
+							   			    
+							   			    ctx.fillStyle = "#666";
+							   			    ctx.beginPath();
+							   			    ctx.arc(300,10,8,0,2*Math.PI);
+							   			    ctx.closePath();
+							   			    ctx.fill();
+							   			  
+							   			    
+							   			    ctx.fillStyle = "#666";
+							   			    ctx.beginPath();
+							   			    ctx.arc(300,35,8,0,2*Math.PI);
+							   			    ctx.closePath();
+							   			    ctx.fill();
+							   			    
+							   			    ctx.fillStyle = "#666";
+							   			    ctx.beginPath();
+							   			    ctx.fillText("Input Edge to the Node", 360,40); 
+							   			    ctx.closePath();
+							   			    ctx.fill();
+							   			    
+							   			    ctx.fillStyle = "#666";
+							   			    ctx.beginPath();
+							   			    ctx.fillText("Output Edge from the Node", 360,14); 
+							   			    ctx.closePath();
+							   			    ctx.fill();
+							   			    
+							   			    //#0066FF sustain
+							   			    ctx.strokeStyle ="#33CC33";
+							   			    ctx.beginPath();
+							   			 	ctx.moveTo(550,10);
+							   			    ctx.lineTo(500,10);
+							   			    ctx.stroke();
+							   			    
+							   			    //#FF0000 episodic 
+							   			 	ctx.strokeStyle ="#0066FF";
+							   			    ctx.beginPath();
+							   			 	ctx.moveTo(550,35);
+							   			    ctx.lineTo(500,35);
+							   			    ctx.stroke();
+							   			    
+							   			    //#33CC33 weak
+							   			 	ctx.strokeStyle ="#FF0000";
+							   			    ctx.beginPath();
+							   			 	ctx.moveTo(550,60);
+							   			    ctx.lineTo(500,60);
+							   			    ctx.stroke();
+							   			    
+							   			 	ctx.fillStyle = "#33CC33";
+							   			    ctx.beginPath();
+							   			    ctx.fillText("weak", 580,10); 
+							   			    ctx.closePath();
+							   			    ctx.fill();
+							   			    
+							   			 	ctx.fillStyle = "#0066FF";
+							   			    ctx.beginPath();
+							   			    ctx.fillText("Sustained", 580,38); 
+							   			    ctx.closePath();
+							   			    ctx.fill();
+							   			    
+							   			 	ctx.fillStyle = "#FF0000";
+							   			    ctx.beginPath();
+							   			    ctx.fillText("Episodic", 580,65); 
+							   			    ctx.closePath();
+							   			    ctx.fill(); 
+							   					 
 							   					$("#Quarters").click(function(){	
 							   						var linkedByIndex = {};
 													var color = d3.scale.category10();
@@ -453,6 +553,8 @@ text {
 												     //return o.source === d || o.target === d ? 1 : opacity;
 												             return o.source === d ? 1 : opacity;
 												         }); 
+												         
+												         path.style();//stroke line 
 												
 												         path.style("stroke",function(d){
 												        		if(d.type == "weak"){
