@@ -132,7 +132,7 @@ text {
                                         </canvas>
 									   		<script type="text/javascript">
 									   		var ctx = document.getElementById("graph_note1").getContext("2d");					                            
-				                            SvgLoad(ctx);
+				                            SvgLoadDegree(ctx);
 											$("#In").click(function(){							   					
 							   					
 							   					$.ajax({
@@ -159,7 +159,7 @@ text {
                                         </canvas>
 									   		<script type="text/javascript">
 									   		var ctx1 = document.getElementById("graph_note2").getContext("2d");					                            
-				                            SvgLoad(ctx1);
+				                            SvgLoadDegree(ctx1);
 				                            
 											$("#Out").click(function(){							   												   					
 							   					$.ajax({
@@ -188,7 +188,7 @@ text {
                                         </canvas>
 							   			<script type="text/javascript">
 							   			var ctx2 = document.getElementById("graph_note3").getContext("2d");					                            
-			                            SvgLoad(ctx2);
+			                            SvgLoadCompTriad(ctx2);
 			                            		
 			                            $("#Cmp").click(function(){							   												   					
 						   					$.ajax({
@@ -215,7 +215,7 @@ text {
                                         </canvas>
 							   			<script type="text/javascript">
 							   			var ctx3 = document.getElementById("graph_note4").getContext("2d");					                            
-			                            SvgLoad(ctx3);
+			                            SvgLoadIncTriad(ctx3);
 			                            		
 			                            $("#Incmp").click(function(){							   												   					
 						   					$.ajax({
@@ -224,7 +224,7 @@ text {
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 						   						var width = 1000,height = 900;							   						
-						   						DrawGraph(data.nodes, data.Links,"#borderIncmp",width,height);							   						
+						   						DrawIncompleteTriad(data.nodes, data.Links,"#borderIncmp",width,height);							   						
 						   					  },
 						   					  error: function(data,error){alert(error);},
 						   					  async: false
