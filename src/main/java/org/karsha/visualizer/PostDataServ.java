@@ -98,14 +98,14 @@ public class PostDataServ extends HttpServlet {
 			if (nodes != null && linkObj != null ) {
 				nodeSet=mapper.readValue(nodes, Node[].class);
 				linkSet=mapper.readValue(links, Links[].class);
-				//System.out.println("orignial data lengthis "+linkSet.length);
+				System.out.println("orignial data lengthis "+nodeSet.length);
 				
 				//this is for send node set data with link set as json
 				node=Arrays.asList(nodeSet);
 				
 				g = DirectedGraphDemoServ.createHrefGraph(nodeSet,linkSet);				
-				linkCompleteTriad=DirectedGraphDemoServ.CompleteTriad(g, nodeSet);
-				linkIncomplete=DirectedGraphDemoServ.InCompleteTriad(g, nodeSet);
+				//linkCompleteTriad=DirectedGraphDemoServ.CompleteTriad(g, nodeSet);
+				//linkIncomplete=DirectedGraphDemoServ.InCompleteTriad(g, nodeSet);
 					
 			}
 			

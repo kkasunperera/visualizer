@@ -268,7 +268,7 @@ text {
 							/*get the name of the file releven to clicked year ane filename */
 
 							String filename = request.getParameter("filename");
-							String name = "\'" + "json/" + filename + "\'";
+							String name = "\'" + "NewJson/" + filename + "\'";
 							System.out.println(filename);
 						%>
 						<script>
