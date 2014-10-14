@@ -63,10 +63,11 @@ public class DirectedGraphDemoServ {
 			list.add(link);
 						
 		}
-		
+		/*
 		for (int i = 0; i < o.length; i++) {
 			System.out.println(list.get(i).getSource() + " "+list.get(i).getTarget());
 		}
+        */
 		indegree_count = list.size();
 		return list;
 		
@@ -98,10 +99,12 @@ public class DirectedGraphDemoServ {
 			link.setTarget(Arrays.asList(nodes).indexOf(graph.getEdgeTarget(o[i])));
 			list.add(link);					
 		}
-		
+		/*
 		for (int i = 0; i < o.length; i++) {
 			System.out.println(list.get(i).getSource() + " "+list.get(i).getTarget());
 		}
+        * 
+        */
 		outdegree_count = list.size();
 		
 		return list;	
@@ -124,7 +127,7 @@ public class DirectedGraphDemoServ {
 					//do nothing if already checked edge
 				}else{
 					if(graph.containsEdge(edge[j]) && graph.containsEdge(graph.getEdgeTarget(edge[j]), graph.getEdgeSource(edge[j]))){
-						System.out.println(edge[j].toString()+graph.getEdge(graph.getEdgeTarget(edge[j]), graph.getEdgeSource(edge[j])));
+						//System.out.println(edge[j].toString()+graph.getEdge(graph.getEdgeTarget(edge[j]), graph.getEdgeSource(edge[j])));
 						listOfImEdges.add(graph.getEdge(graph.getEdgeTarget(edge[j]), graph.getEdgeSource(edge[j])));
 						Links linkA=new Links();
 						Links linkB=new Links();
@@ -142,7 +145,7 @@ public class DirectedGraphDemoServ {
 					
 				}
 			}
-		System.out.println("imediate cycle ;"+listOfImEdges.size());
+		//System.out.println("imediate cycle ;"+listOfImEdges.size());
 		return list;
 		}
 	
@@ -200,8 +203,8 @@ public class DirectedGraphDemoServ {
 				}
 			}			
 		}
-		System.out.println("Number of CompletedTriad are "+NumberOfCompleteTriad);
-		System.out.println("Number of Edges contain in the List are "+list.size());
+		//System.out.println("Number of CompletedTriad are "+NumberOfCompleteTriad);
+		//System.out.println("Number of Edges contain in the List are "+list.size());
 		
 		return list;
 	}
@@ -255,8 +258,8 @@ public class DirectedGraphDemoServ {
 							}
 							NumberOfIncompleteTriad++;
 							//display to console
-							System.out.println(edgeSet[i]+ " " + edgeSetOfB[j] );
-							System.out.println("---------------------------------------------------------------");
+							//System.out.println(edgeSet[i]+ " " + edgeSetOfB[j] );
+							//System.out.println("---------------------------------------------------------------");
 						}
 						
 					}

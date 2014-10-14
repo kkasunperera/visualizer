@@ -172,6 +172,11 @@ function SvgLoadCompTriad(ctx){
     ctx.fillText("Bond", 214,14); 
     ctx.closePath();
     ctx.fill();
+    
+    //ctx.strokeStyle="#0000FF";
+    //ctx.beginPath();
+    //ctx.dashedLine(350,10, 301, 10,[4, 4])
+   // ctx.stroke();
     /*
     ctx.strokeStyle="#FF0000";
     ctx.beginPath();
@@ -184,13 +189,13 @@ function SvgLoadCompTriad(ctx){
     ctx.moveTo(350,35);
     ctx.lineTo(301,35);
     ctx.stroke();
-    /*
+    
     ctx.fillStyle = "#1f77b4";
     ctx.beginPath();
     ctx.arc(300,10,8,0,2*Math.PI);
     ctx.closePath();
     ctx.fill();
-  */
+  
     
     ctx.fillStyle = "#1f77b4";
     ctx.beginPath();
@@ -200,16 +205,16 @@ function SvgLoadCompTriad(ctx){
     
     ctx.fillStyle = "#0000FF";
     ctx.beginPath();
-    ctx.fillText("Triad Edge", 360,40); 
+    ctx.fillText("A to B OR B to C edge", 360,40); 
     ctx.closePath();
     ctx.fill();
-/*
-    ctx.fillStyle = "#FF0000";
+
+    ctx.fillStyle = "#0000FF";
     ctx.beginPath();
-    ctx.fillText("B to C edge", 360,14); 
+    ctx.fillText("= = = = = =   A to C edge", 302,14); 
     ctx.closePath();
     ctx.fill();
-    */
+    
 }
 
 

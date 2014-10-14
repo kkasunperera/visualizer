@@ -414,7 +414,7 @@ function SvgQuarter(ctx){
 	    //should be dashed
 	    ctx.fillStyle = "#666";
 	    ctx.beginPath();
-	    ctx.fillText("--------------", 300,14); 
+	    ctx.fillText("= = = = = = =", 300,14); 
 	    ctx.closePath();
 	    ctx.fill();
 	    
