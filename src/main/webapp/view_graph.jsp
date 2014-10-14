@@ -42,7 +42,8 @@
                         data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>
                             GC-Analysis <i class="fa fa-fw fa-caret-down"></i></a>
                         
-                        <ul id="demo" name="demo" class="collapse">
+<!--                        <ul id="demo" name="demo" class="collapse">-->
+                            <ul id="demo" name="demo">
                             <% for(int i = 2005;i < 2014;i++) {%>
                             <li><a  href="?filename=data<%=i%>.json&year=<%=i%>"><%=i%></a></li>                            
                             <%}%>
