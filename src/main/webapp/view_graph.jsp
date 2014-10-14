@@ -67,8 +67,7 @@
         </nav>
                         
 	<% 
-		String year = request.getParameter("year");
-		if(year==null)year="";
+		String year = request.getParameter("year");		
 	%>
     
 <style>

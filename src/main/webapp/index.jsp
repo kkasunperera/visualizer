@@ -58,7 +58,7 @@ text {
                         
                         <ul id="demo1" name="demo" class="collapse">
                             <% for(int i = 2005;i < 2014;i++) {%>
-                            <li><a href="view_graph.jsp?filename=data<%=i%>.json"><%=i%></a></li>                            
+                            <li><a href="view_graph.jsp?filename=data<%=i%>.json&year=<%=i%>"><%=i%></a></li>                            
                             <%}%>
                         </ul></li>
                     <%--  <li><a href="javascript:;" data-toggle="collapse"
