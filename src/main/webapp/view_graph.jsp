@@ -122,8 +122,8 @@ text {
 							   <li class="active"><a href="#home" onclick="window.location.reload(true);" data-toggle="tab">
 							      Network</a></li>
 
-							   	<li><a id="In"  href="#indegree" data-toggle="tab" >Indegree</a></li>
-							    <li><a id="Out" href="#outdegree" data-toggle="tab" >Outdegree</a></li>
+							   	<li><a id="In"  href="#indegree" data-toggle="tab" >MAXIndegree</a></li>
+							    <li><a id="Out" href="#outdegree" data-toggle="tab" >MAXOutdegree</a></li>
 							    <li><a id="Cmp" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
 							    <li><a id="Incmp" href="#IncompleteTriad" data-toggle="tab">IncompleteTriad</a></li>
 							    <li><a id="Imcycles" href="#ImmediateCycle" data-toggle="tab">ImmediateCycles</a></li>
