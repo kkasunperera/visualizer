@@ -54,10 +54,10 @@
                     <li><a href="blank-page.html"><i class="fa fa-fw fa-file"></i>
                             More About</a></li> -->
                             
-                    <li><a href="#"><i
+<!--                    <li><a href="#"><i
                             class="fa fa-fw fa-bar-chart-o"></i> Overall</a></li>
                     <li><a href="#"><i class="fa fa-fw fa-table"></i>
-                            Row Data</a></li>
+                            Row Data</a></li>-->
                     <li><a href="#"><i class="fa fa-fw fa-file"></i>
                             More About</a></li>
                             
@@ -114,7 +114,7 @@ text {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                    <h2><center> Granger causality Analysis <%= year%></center> </h2>
+                    <h2><center> Granger causality Log Volume Data Analysis <%= year%></center> </h2>
        
                             <ul id="myTab" class="nav nav-tabs">
 							   <li class="active"><a href="#home" onclick="window.location.reload(true);" data-toggle="tab">
@@ -125,7 +125,7 @@ text {
 							    <li><a id="Cmp" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
 							    <li><a id="Incmp" href="#IncompleteTriad" data-toggle="tab">IncompleteTriad</a></li>
 							    <li><a id="Imcycles" href="#ImmediateCycle" data-toggle="tab">ImmediateCycles</a></li>
-							    <li><a id="Quarters" href="#QuarterGraph" data-toggle="tab">QuarterGraph</a></li>
+							    <li><a id="Quarters" href="#QuarterlyTemporalPatterns" data-toggle="tab">QuarterlyTemporalPatterns</a></li>
 			
 							</ul>
                             
@@ -288,7 +288,7 @@ text {
 								System.out.println(filename);
 							%>
 
-							<div class="tab-pane fade" id="QuarterGraph">							   	
+							<div class="tab-pane fade" id="QuarterlyTemporalPatterns">							   	
 							   		<div id="borderQgraph" style="border:2px solid;">
 							   			<br>
 							   			<canvas id="graph_note6" width="800" height="80" style="float: left"></canvas>
@@ -322,7 +322,7 @@ text {
 							   			    //should be dashed
 							   			    ctx.fillStyle = "#666";
 							   			    ctx.beginPath();
-							   			    ctx.fillText("--------------", 300,14); 
+							   			    ctx.fillText("= = = = = = =", 300,14); 
 							   			    ctx.closePath();
 							   			    ctx.fill();
 							   			    
