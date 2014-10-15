@@ -106,25 +106,26 @@ function SvgLoadIncTriad(ctx){
     ctx.closePath();
     ctx.fill();
     
+    /*
     ctx.strokeStyle="#FF0000";
     ctx.beginPath();
     ctx.moveTo(350,10);
     ctx.lineTo(301,10);
     ctx.stroke();
-    
+    */
     ctx.strokeStyle="#0000FF";
     ctx.beginPath();
     ctx.moveTo(350,35);
     ctx.lineTo(301,35);
     ctx.stroke();
-    
+    /*
     ctx.fillStyle = "#1f77b4";
     ctx.beginPath();
     ctx.arc(300,10,8,0,2*Math.PI);
     ctx.closePath();
     ctx.fill();
   
-    
+    */
     ctx.fillStyle = "#1f77b4";
     ctx.beginPath();
     ctx.arc(300,35,8,0,2*Math.PI);
@@ -133,15 +134,17 @@ function SvgLoadIncTriad(ctx){
     
     ctx.fillStyle = "#0000FF";
     ctx.beginPath();
-    ctx.fillText("A To B edge", 360,40); 
+    ctx.fillText("Triad Edge", 360,40); 
     ctx.closePath();
     ctx.fill();
     
+/*
     ctx.fillStyle = "#FF0000";
     ctx.beginPath();
     ctx.fillText("B to C edge", 360,14); 
     ctx.closePath();
     ctx.fill();
+    */
 }
 
 function SvgLoadCompTriad(ctx){
@@ -170,6 +173,78 @@ function SvgLoadCompTriad(ctx){
     ctx.closePath();
     ctx.fill();
     
+    //ctx.strokeStyle="#0000FF";
+    //ctx.beginPath();
+    //ctx.dashedLine(350,10, 301, 10,[4, 4])
+   // ctx.stroke();
+    /*
+    ctx.strokeStyle="#FF0000";
+    ctx.beginPath();
+    ctx.moveTo(350,10);
+    ctx.lineTo(301,10);
+    ctx.stroke();
+    */
+    ctx.strokeStyle="#0000FF";
+    ctx.beginPath();
+    ctx.moveTo(350,35);
+    ctx.lineTo(301,35);
+    ctx.stroke();
+    
+    ctx.fillStyle = "#1f77b4";
+    ctx.beginPath();
+    ctx.arc(300,10,8,0,2*Math.PI);
+    ctx.closePath();
+    ctx.fill();
+  
+    
+    ctx.fillStyle = "#1f77b4";
+    ctx.beginPath();
+    ctx.arc(300,35,8,0,2*Math.PI);
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.fillStyle = "#0000FF";
+    ctx.beginPath();
+    ctx.fillText("A to B OR B to C edge", 360,40); 
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.fillStyle = "#0000FF";
+    ctx.beginPath();
+    ctx.fillText("= = = = = =   A to C edge", 302,14); 
+    ctx.closePath();
+    ctx.fill();
+    
+}
+
+
+
+function SvgLoadDegree(ctx){
+    ctx.fillStyle = "#1f77b4";
+    ctx.beginPath();
+    ctx.arc(200,10,8,0,2*Math.PI);
+    ctx.closePath();
+    ctx.fill();
+    
+    
+    ctx.fillStyle = "#ff7f0d";
+    ctx.beginPath();
+    ctx.arc(200,35,8,0,2*Math.PI);
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.fillStyle = "#ff7f0d";
+    ctx.beginPath();
+    ctx.fillText("Equity", 214,40); 
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.fillStyle = "#1f77b4";
+    ctx.beginPath();
+    ctx.fillText("Bond", 214,14); 
+    ctx.closePath();
+    ctx.fill();
+/*
     ctx.strokeStyle="#FF0000";
     ctx.beginPath();
     ctx.moveTo(350,10);
@@ -206,8 +281,8 @@ function SvgLoadCompTriad(ctx){
     ctx.fillText("B to C edge", 360,14); 
     ctx.closePath();
     ctx.fill();
+    */
 }
-
 
 function SvgLoadImmCycle(ctx){
     ctx.fillStyle = "#1f77b4";
@@ -388,8 +463,8 @@ function DrawGraph(nodes,links,svg1,width,height){
                 if (o.source === d) {
                     return "blue";
                 }else if (o.target === d ) {
-	                return "red";
-	            };                
+                    return "red";
+                };                
             });
 		
             arrow_head.style("opacity",function(o){
@@ -567,6 +642,7 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
 
     function mouseOver(opacity) {
         var connectedEdges = [];
+        var triadCompletingEdges = [];
         return function(d) {
             /*
 		    	node.style("stroke-opacity", function(o) {
@@ -600,31 +676,41 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
                 // links.push({source: connectedEdges[i], target: connectedEdges[i+1]});
                 // force.start();
                 // linksForSelectedNode[d.index + "," + connectedEdges[i]] = 1;
-                 for(var j=0; j<connectedEdges.length; j++){
+                for(var j=0; j<connectedEdges.length; j++){
                      
-                 if(i!=j && isConnectedIndex(connectedEdges[i], connectedEdges[j])){
+                    if(i!=j && isConnectedIndex(connectedEdges[i], connectedEdges[j])){
                      
                  
-                linksForSelectedNode[connectedEdges[i] + "," + connectedEdges[j]] = 2;
-                 }
+                        linksForSelectedNode[connectedEdges[i] + "," + connectedEdges[j]] = 2;
+                        //identify tried completing edges
+                        if(triadCompletingEdges.indexOf(connectedEdges[j]) == -1){
+                            triadCompletingEdges.push(connectedEdges[j]);
+                        }
+                    }
                  
-                 //fixing bug for false trid detection
-                 if(i!=j && (isConnectedIndex(connectedEdges[i], connectedEdges[j])||isConnectedIndex(connectedEdges[j], connectedEdges[i]))){
-                    status= true;
-                 }
+                    //fixing bug for false trid detection
+                    // if(i!=j && (isConnectedIndex(connectedEdges[i], connectedEdges[j]))){
+                   
+                    if(i!=j && (isConnectedIndex(connectedEdges[i], connectedEdges[j])||isConnectedIndex(connectedEdges[j], connectedEdges[i]))){
+                        status= true;
+                    }
                  
-                 }
-                 if(status){
-                     linksForSelectedNode[d.index + "," + connectedEdges[i]] = 1; 
-                 }
+                }
+                if(status){
+                    linksForSelectedNode[d.index + "," + connectedEdges[i]] = 1; 
+                }
             //alert(connectedEdges[i]);
             }
-                    
+              
+            //Overwite triad completing edges
+            for(var kk=0; kk<triadCompletingEdges.length; kk++){
+                linksForSelectedNode[d.index + "," + triadCompletingEdges[kk]] = 3;
+            }
                     
             path.style("stroke-opacity", function(o) {
                 // return o.source === d || o.target === d ? 1 : opacity; 
-               // return o.source === d ? 1 : opacity;
-               var value= getConnectedNodes(o.source, o.target);
+                // return o.source === d ? 1 : opacity;
+                var value= getConnectedNodes(o.source, o.target);
                 return (value>=1) ? 1 : opacity; 
             });
 		
@@ -632,6 +718,12 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
                 // if (isConnected(d, o.target)) {
                    
                 //if (o.source === d) {
+                if (getConnectedNodes(o.source, o.target)==1 || getConnectedNodes(o.source, o.target)==2 || getConnectedNodes(o.source, o.target)==3) { 
+    
+                    // alert(connectedEdges.length);
+                    return "blue";
+                }
+            /*
                 if (getConnectedNodes(o.source, o.target)==1) { 
     
                     // alert(connectedEdges.length);
@@ -640,7 +732,7 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
                 else if (getConnectedNodes(o.source, o.target)==2 ) {
 		                return "red";
 		            };
-            /*
+            
                    if (o.source === d) {
 		                return "blue";
 		            }else if (o.target === d ) {
@@ -648,9 +740,20 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
 		            };
                     */
             });
+            
+            path.style("stroke-dasharray",function(o){
+                if (getConnectedNodes(o.source, o.target)==3) { 
+    
+                    // alert(connectedEdges.length);
+                    return "5,5";
+                }
+ 
+       
+            });
                 
 
             connectedEdges=[];
+            triadCompletingEdges = [];
 		
             arrow_head.style("opacity",function(o){
                 thisOpacity = isConnected(d, o) ? 1 : opacity;
@@ -729,8 +832,8 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
         return linkedByIndex[a.index + "," + b.index];
     }
     //send the index direcly
-     function isConnectedIndex(a,b){
-         return linkedByIndex[a + "," + b];
+    function isConnectedIndex(a,b){
+        return linkedByIndex[a + "," + b];
     }
         
     function getConnectedNodes(a, b) {
@@ -848,6 +951,8 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
 
     function mouseOver(opacity) {
         var connectedEdges = [];
+        var triadCompletingEdges = [];
+       
         return function(d) {
             /*
 		    	node.style("stroke-opacity", function(o) {
@@ -877,27 +982,38 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
                 
             for(var i=0;i< connectedEdges.length;i++)
             {
+                var status= false;
+               
                 // links.push({source: connectedEdges[i], target: connectedEdges[i+1]});
                 // force.start();
-                 linksForSelectedNode[d.index + "," + connectedEdges[i]] = 1;
+                // linksForSelectedNode[d.index + "," + connectedEdges[i]] = 1;
                  
-                    links.forEach(function(f){
-                // if (isConnected(d, o.target)) {
-                //if (f.source.index == connectedEdges[i] && f.target != d) { 
-                     if (isConnectedIndex(connectedEdges[i], f.target.index ) && f.target != d && !isSecondLayerEdge(f.target.index)) {
-                   // alert(f.source.index + "," + connectedEdges[i]);
-                   
-                  if(linksForSelectedNode.indexOf(connectedEdges[i]+ "," + f.target.index) == -1){
-                       linksForSelectedNode[connectedEdges[i]+ "," + f.target.index] = 2;
-                       // alert(connectedEdges[i]+ "," + f.target.index);
-                      //connectedEdges.push(o.target.index);
-                    }
+                links.forEach(function(f){
+                    // if (isConnected(d, o.target)) {
+                    //if (f.source.index == connectedEdges[i] && f.target != d) { 
+                    if (isConnectedIndex(connectedEdges[i], f.target.index ) && f.target != d && !isSecondLayerEdge(f.target.index)) {
+                        // alert(f.source.index + "," + connectedEdges[i]);
+                        //identify tried completing edges
+                        if(triadCompletingEdges.indexOf(f.target.index) == -1){
+                            triadCompletingEdges.push(f.target.index);
+                        }
+                        status=true;
+                        if(linksForSelectedNode.indexOf(connectedEdges[i]+ "," + f.target.index) == -1){
+                            linksForSelectedNode[connectedEdges[i]+ "," + f.target.index] = 2;
+                        // alert(connectedEdges[i]+ "," + f.target.index);
+                        //connectedEdges.push(o.target.index);
+                        }
  
-                };
+                    };
  
-            });
+                });
                 
-                 /*
+                if(status){
+                    linksForSelectedNode[d.index + "," + connectedEdges[i]] = 1;
+                }
+                
+
+            /*
                  for(var j=0; j<connectedEdges.length; j++){
                      
                  if(i!=j && isConnectedIndex(connectedEdges[i], connectedEdges[j])){
@@ -910,24 +1026,28 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
                  */
             //alert(connectedEdges[i]);
             }
-                //   alert( "lenght of list "+linksForSelectedNode.length)  
-             
-             
-             function isSecondLayerEdge(h){
-                 var status= false;
-                 for(var k=0;k< connectedEdges.length;k++)
-            {
-                if(connectedEdges[k]==h){
-                    status=true;
-                    break;
-                }
+            //   alert( "lenght of list "+linksForSelectedNode.length)  
+             /*TO-DO there is a problem when Identifying triad completing edges for the incomplete triads
+            for(var kk=0; kk<triadCompletingEdges.length; kk++){
+                linksForSelectedNode[triadCompletingEdges[kk]+ "," + d.index ] = 3;
             }
-                 return status;
-             }
+            */
+            
+            function isSecondLayerEdge(h){
+                var status= false;
+                for(var k=0;k< connectedEdges.length;k++)
+                {
+                    if(connectedEdges[k]==h){
+                        status=true;
+                        break;
+                    }
+                }
+                return status;
+            }
             path.style("stroke-opacity", function(o) {
                 // return o.source === d || o.target === d ? 1 : opacity; 
-               // return o.source === d ? 1 : opacity;
-               var value= getConnectedNodes(o.source, o.target);
+                // return o.source === d ? 1 : opacity;
+                var value= getConnectedNodes(o.source, o.target);
                 return (value>=1) ? 1 : opacity; 
             });
 		
@@ -935,15 +1055,16 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
                 // if (isConnected(d, o.target)) {
                    
                 //if (o.source === d) {
-                if (getConnectedNodes(o.source, o.target)==1) { 
+                if (getConnectedNodes(o.source, o.target)==1||getConnectedNodes(o.source, o.target)==2||getConnectedNodes(o.source, o.target)==3) { 
     
                     // alert(connectedEdges.length);
                     return "blue";
                 }
-                else if (getConnectedNodes(o.source, o.target)==2 ) {
-		                return "red";
-		            };
             /*
+                else if (getConnectedNodes(o.source, o.target)==2 ) {
+                    return "red";
+                };
+           
                    if (o.source === d) {
 		                return "blue";
 		            }else if (o.target === d ) {
@@ -951,9 +1072,24 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
 		            };
                     */
             });
-                
+            
+            path.style("stroke-dasharray",function(o){
+                // if (isConnected(d, o.target)) {
+                   
+                //if (o.source === d) {
+                if (getConnectedNodes(o.source, o.target)==3) { 
+    
+                    // alert(connectedEdges.length);
+                    return "5,5";
+                }
+ 
+       
+            });
+               
+ 
 
             connectedEdges=[];
+            triadCompletingEdges = [];
 		
             arrow_head.style("opacity",function(o){
                 thisOpacity = isConnected(d, o) ? 1 : opacity;
@@ -972,7 +1108,7 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
             .attr("r", 25)
             .style("fill", function(d) {
                 return color(d.group);
-            })
+            });
 		        
         };
     }
@@ -1005,7 +1141,7 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
             .attr("r", 8)
             .style("fill", function(d) {
                 return color(d.group);
-            })
+            });
             d3.select(this).select("text").transition()
             .duration(750)
             .attr("x", 12)
@@ -1029,8 +1165,8 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
         //alert(a.index + "," + b.index);
         return linkedByIndex[a.index + "," + b.index];
     }
-     function isConnectedIndex(a,b){
-         return linkedByIndex[a + "," + b];
+    function isConnectedIndex(a,b){
+        return linkedByIndex[a + "," + b];
     }
         
     function getConnectedNodes(a, b) {
@@ -1041,7 +1177,7 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
         //if(linkedByIndex[a.index + "," + b.index]==1){
         //  connectedEdges.push(b.index);
         //	return true ;
-      //  alert( "lenght of list "+linksForSelectedNode.length) 
+        //  alert( "lenght of list "+linksForSelectedNode.length) 
         return linksForSelectedNode[a.index + "," + b.index];
     // }
     }

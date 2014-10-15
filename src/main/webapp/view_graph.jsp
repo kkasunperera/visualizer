@@ -1,4 +1,3 @@
-<%@page import="org.karsha.visualizer.DirectedGraphDemoServ"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +18,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/function.js"></script>
 <script src="js/node.js"></script>
+<script src="js/app.js"></script>
 </head>
 
 
@@ -43,7 +43,7 @@
                         data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>
                             GC-Analysis <i class="fa fa-fw fa-caret-down"></i></a>
                         
-                        <ul id="demo" name="demo" >
+                        <ul id="demo" name="demo" class="collapse">
                             <% for(int i = 2005;i < 2014;i++) {%>
                             <li><a  href="?filename=data<%=i%>.json&year=<%=i%>"><%=i%></a></li>                            
                             <%}%>
@@ -55,10 +55,10 @@
                     <li><a href="blank-page.html"><i class="fa fa-fw fa-file"></i>
                             More About</a></li> -->
                             
-                    <li><a href="#"><i
+<!--                    <li><a href="#"><i
                             class="fa fa-fw fa-bar-chart-o"></i> Overall</a></li>
                     <li><a href="#"><i class="fa fa-fw fa-table"></i>
-                            Row Data</a></li>
+                            Row Data</a></li>-->
                     <li><a href="#"><i class="fa fa-fw fa-file"></i>
                             More About</a></li>
                             
@@ -73,10 +73,29 @@
     
 <style>
 
+
 .link {
   fill: none;
   stroke: #666;
   stroke-width: 1.5px;
+}
+
+.linkSustain {
+  fill: none;
+  stroke:#0066FF;
+  stroke-width:1.5 px;
+}
+
+.linkEpisodic{
+	fill: none;
+	stroke:#FF0000;
+	stroke-width:1.5px;
+}
+
+.linkWeak{
+	fill: none;
+	stroke:#33CC33;
+	stroke-with:1.5px;
 }
 
 .node circle {
@@ -96,18 +115,19 @@ text {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                    <h2><center> Granger causality Raw Volume Data Analysis <%= year%></center> </h2>
+                    <h2><center> Granger causality Log Volume Data Analysis <%= year%></center> </h2>
        
                             <ul id="myTab" class="nav nav-tabs">
-							   <li class="active"><a id ="home" href="#home" onclick="window.location.reload(true);" data-toggle="tab">
+							   <li class="active"><a href="#home" onclick="window.location.reload(true);" data-toggle="tab">
 							      Network</a></li>
 
-							   	<li><a id="In"  href="#indegree" data-toggle="tab" >Max Indegree</a></li>
-							    <li><a id="Out" href="#outdegree" data-toggle="tab" >Max Outdegree</a></li>
+							   	<li><a id="In"  href="#indegree" data-toggle="tab" >Indegree</a></li>
+							    <li><a id="Out" href="#outdegree" data-toggle="tab" >Outdegree</a></li>
 							    <li><a id="Cmp" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
 							    <li><a id="Incmp" href="#IncompleteTriad" data-toggle="tab">IncompleteTriad</a></li>
 							    <li><a id="Imcycles" href="#ImmediateCycle" data-toggle="tab">ImmediateCycles</a></li>
-
+							    <li><a id="Quarters" href="#QuarterlyTemporalPatterns" data-toggle="tab">QuarterlyTemporalPatterns</a></li>
+			
 							</ul>
                             
                             <div id="myTabContent" class="tab-content">
@@ -123,24 +143,17 @@ text {
 					                            var ctx = document.getElementById("graph_note").getContext("2d");					                            
 					                            SvgLoad(ctx);					                            			
 				                            </script>
-				                        <div> &nbsp; Global clustering coefficient :<l id="cc_show"></l>
-					                        <script type="text/javascript">
-						                        
-						                        
-					                        </script>
-				                        </div>
+				                        
 									 </div>             
 							   </div>
 								   <div class="tab-pane fade" id="indegree">								   								   
 									   <div id="borderIn" style="border:2px solid;">
 									   <br />
-									   
-									   
 									   <canvas id="graph_note1" width="500" height="50" style="float: right">                                
                                         </canvas>
 									   		<script type="text/javascript">
 									   		var ctx = document.getElementById("graph_note1").getContext("2d");					                            
-				                            SvgLoad(ctx);
+				                            SvgLoadDegree(ctx);
 											$("#In").click(function(){							   					
 							   					
 							   					$.ajax({
@@ -149,8 +162,7 @@ text {
 							   					  dataType: 'json',
 							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 							   						var width = 1000,height = 900;							   						
-							   						DrawGraph(data.nodes, data.Links,"#borderIn",width,height);	
-							   						var xx = document.getElementById("max_degree").innerHTML=data.Links.length;
+							   						DrawGraph(data.nodes, data.Links,"#borderIn",width,height);							   						
 							   					  },
 							   					  error: function(data,error){alert(error);},
 							   					  async: false
@@ -158,23 +170,17 @@ text {
 							   				});
 											
 									   		</script>
-									   		
-									   		<div class="col-lg-4">Max Indegree :<l id="max_degree"></l>
-										   
-									   </div>
 									   </div>
 								   </div>
 
 							   <div class="tab-pane fade" id="outdegree">							  
 							      <div id="borderOut" style="border:2px solid;">
 							      	<br />
-							      	<% DirectedGraphDemoServ DerGraSev1 = new DirectedGraphDemoServ(); %>
-							      	<div class="col-lg-4">Max Outdegree :<%=DerGraSev1.outdegree_count %></div>
 									   <canvas id="graph_note2" width="500" height="50" style="float: right">                                
                                         </canvas>
 									   		<script type="text/javascript">
 									   		var ctx1 = document.getElementById("graph_note2").getContext("2d");					                            
-				                            SvgLoad(ctx1);
+				                            SvgLoadDegree(ctx1);
 				                            
 											$("#Out").click(function(){							   												   					
 							   					$.ajax({
@@ -198,12 +204,12 @@ text {
 							   
 							   <div class="tab-pane fade" id="completeTriad">
 							   		<div id="borderCmp" style="border:2px solid;">	
-							   			<br>	
+							   			<br>
 							   			<canvas id="graph_note3" width="500" height="50" style="float: right">                                
                                         </canvas>
 							   			<script type="text/javascript">
 							   			var ctx2 = document.getElementById("graph_note3").getContext("2d");					                            
-			                            SvgLoad(ctx2);
+			                            SvgLoadCompTriad(ctx2);
 			                            		
 			                            $("#Cmp").click(function(){							   												   					
 						   					$.ajax({
@@ -230,7 +236,7 @@ text {
                                         </canvas>
 							   			<script type="text/javascript">
 							   			var ctx3 = document.getElementById("graph_note4").getContext("2d");					                            
-			                            SvgLoad(ctx3);
+			                            SvgLoadIncTriad(ctx3);
 			                            		
 			                            $("#Incmp").click(function(){							   												   					
 						   					$.ajax({
@@ -239,7 +245,8 @@ text {
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 						   						var width = 1000,height = 900;							   						
-						   						DrawGraph(data.nodes, data.Links,"#borderIncmp",width,height);							   						
+						   						//DrawGraph(data.nodes, data.Links,"#borderIncmp",width,height);
+                                                DrawIncompleteTriad(data.nodes, data.Links,"#borderIncmp",width,height);
 						   					  },
 						   					  error: function(data,error){alert(error);},
 						   					  async: false
@@ -273,23 +280,36 @@ text {
 						   				});
 							   			</script>
 									</div>
-							   </div>							   							  							  
-							   		
+							   </div>
 
+							<%
+								/*get the name of the file releven to clicked year ane filename */
+								String filename = request.getParameter("filename");
+								String name = "\'" + "NewJson/" + filename + "\'";
+								System.out.println(filename);
+							%>
+
+							<div class="tab-pane fade" id="QuarterlyTemporalPatterns">							   	
+							   		<div id="borderQgraph" style="border:2px solid;">
+							   			<br>
+							   			<canvas id="graph_note6" width="800" height="80" style="float: left"></canvas>
+							   				<script type="text/javascript">
+							   					
+							   					var file=<%= name%>;
+							   				
+							   					var ctx=document.getElementById("graph_note6").getContext("2d");
+							   					SvgQuarter(ctx);							   				
+
+							   					 
+							   					$("#Quarters").click(function(){
+							   						var width = 900, height = 950;
+							   						QuarterGraph(nodes, file, "#borderQgraph", width, height);							   													   			
+								   				});
+							   				</script>
+							   		</div>
+							   </div>						   							  							  
 						</div>
-
-						<%
-							/*get the name of the file releven to clicked year ane filename */
-
-							String filename = request.getParameter("filename");
-							String name = "\'" + "json/" + filename + "\'";
-							System.out.println(filename);
-						%>
-						<script>
-						
-							var linkedByIndex = {};
-							var color = d3.scale.category10();
-							var width = 900, height = 900;
+						<script>							
 
 							//load the nodes and links arrays
 							$(document).ready(function(){
@@ -300,20 +320,6 @@ text {
 								var obj=new Object();
 								obj.nodes=nodes;
 										
-								$.ajax({
-				   					  type: 'GET',
-				   					  url: "cc",
-				   					  dataType: 'json',
-				   					  success: function(data,status) {
-				   						  //$('#cc_show').html(data.Clustering_C);
-				   						  var xx = document.getElementById("cc_show").innerHTML=data.Clustering_C;
-				   						
-				   						//clustering_cof("#cc_show",data.Clustering_C);
-				   					  },
-				   					  error: function(data,error){alert(error);},
-				   					  async: false
-				   					}); 		
-								
 								$.ajax({
 									type: 'GET',
 									url: url,
@@ -330,187 +336,9 @@ text {
 										//alert(JSON.stringify(obj.nodes));
 										
 								});
-								 
-								var svg = d3.select("#gc_network").append("svg")
-								    .attr("width", width)
-								    .attr("height", height);
-								
-								var force = d3.layout.force()
-								    .gravity(.15)
-								    .distance(350)
-								    .charge(-350)
-								    .size([width, height]);
-								    
-								 //input to the file name which is taken previously
-								 
-								d3.json(<%= name%>, function(error, json) {
-								  force
-								      .nodes(nodes)
-								      .links(json.links)
-								      .on("tick", tick)
-								      .start();
-								 
-								  
-								  var link = svg.selectAll(".link")
-								      .data(json.links)
-								    .enter().append("line")
-								      .attr("class", "link");
-								      
-								 var arrow_head = svg.append("svg:defs").selectAll("marker")
-								    .data(["end"])      // Different link/path types can be defined here
-								  .enter().append("svg:marker")    // This section adds in the arrows
-								    .attr("id", String)
-								    .attr("viewBox", "0 -5 10 10")
-								    .attr("refX", 15)
-								    .attr("refY", -1.5)
-								    .attr("markerWidth", 6)
-								    .attr("markerHeight", 6)
-								    .attr("orient", "auto")
-								  .append("svg:path")
-								    .attr("d", "M0,-5L10,0L0,5");
-								      
-								      
-								  var path = svg.append("svg:g").selectAll("path")
-								    .data(force.links())
-								  .enter().append("svg:path")
-									.attr("class", function(d) { return "link " + d.type; })
-									.attr("class", "link")
-									.attr("marker-end", "url(#end)");
-								
-								  var node = svg.selectAll(".node")
-								      .data(force.nodes())
-								    .enter().append("g")
-								      .attr("class", "node")
-								      .style("fill", function(d) { return color(d.group); })
-								      //.on("click",click)
-								      //.on("dblclick", dblclick)
-								       .on("mouseover", mouseOver(.001))
-								      .on("mouseout", mouseOut(1))
-								      .call(force.drag);
-								
-								  node.append("circle")
-								      .attr("r",8);
-								
-								  node.append("text")
-								      .attr("dx", 12)
-								      .attr("dy", ".35em")
-								      .text(function(d) { return d.name});
-								
-								json.links.forEach(function(d) {
-								//alert(d.source.index + "," + d.target.index);
-								  linkedByIndex[d.source.index + "," + d.target.index] = 1;
-								});
-								 
-								    function tick() {
-								    path.attr("d", function(d) {
-								
-									
-								        var dx = d.target.x - d.source.x,
-								            dy = d.target.y - d.source.y,
-								            dr = Math.sqrt(dx * dx + dy * dy);
-								        return "M" + 
-								            d.source.x + "," + 
-								            d.source.y + "A" + 
-								            dr + "," + dr + " 0 0,1 " + 
-								            d.target.x + "," + 
-								            d.target.y;
-										
-								   });
-								
-								    node
-								        .attr("transform", function(d) { 
-								  	    return "translate(" + d.x + "," + d.y + ")"; });
-								}
-								
-								
-								function mouseOver(opacity) {
-								    return function(d) {
-								    	node.style("stroke-opacity", function(o) {
-								            thisOpacity = isConnected(d, o) ? 1 : opacity;
-								            this.setAttribute('fill-opacity', thisOpacity);
-								            return thisOpacity;
-								        });
-								
-								        path.style("stroke-opacity", function(o) {
-								            return o.source === d || o.target === d ? 1 : opacity;                
-								        });
-								
-								        path.style("stroke",function(o){
-								            if (o.source === d) {
-								                return "blue";
-								            }else if (o.target === d ) {
-								                return "red";
-								            };
-								        });
-								
-								       arrow_head.style("opacity",function(o){
-								            thisOpacity = isConnected(d, o) ? 1 : opacity;
-								            this.setAttribute('fill-opacity', thisOpacity);
-								            return thisOpacity;
-								        });
-								       
-								       d3.select(this).select("text").transition()
-								       .duration(500)
-								       .style("fill", "black")
-								       .style("stroke", "lightsteelblue")
-								       .style("stroke-width", ".5px")
-								       .style("font", "20px sans-serif");
-								   d3.select(this).select("circle").transition()
-								       .duration(750)
-								       .attr("r", 25)
-								       .style("fill", function(d) { return color(d.group); })
-								        
-								    };
-								}
-								
-								function mouseOut(opacity) {
-								    return function(d) {
-								    	 node.style("stroke-opacity", function(o) {
-								             thisOpacity = isConnected(d, o) ? 1 : opacity;
-								             this.setAttribute('fill-opacity', thisOpacity);
-								             return thisOpacity;
-								         });
-								
-								         path.style("stroke-opacity", function(o) {
-								     //return o.source === d || o.target === d ? 1 : opacity;
-								             return o.source === d ? 1 : opacity;
-								         });
-								
-								         path.style("stroke","#666");
-								         
-								         arrow_head.style("opacity",function(o){
-								             thisOpacity = isConnected(d, o) ? opacity : 1;
-								             this.setAttribute('fill-opacity', thisOpacity);
-								             return thisOpacity;
-								         });
-								         
-								         d3.select(this).select("circle").transition()
-								         .duration(750)
-								         .attr("r", 8)
-								         .style("fill", function(d) { return color(d.group); })
-								     d3.select(this).select("text").transition()
-								         .duration(750)
-								         .attr("x", 12)
-								         .style("stroke", "none")
-								         .style("fill", "black")
-								         .style("stroke", "none")
-								         .style("font", "10px sans-serif");
-								        
-								    };
-								}
-								
-								function neighboring(a, b) {
-								  return linkedByIndex[a.index + "," + b.index];
-								}
-								
-								function isConnected(a, b) {
-								//return incoming and outgoing
-									return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
-								//return outgong
-								//alert(a.index + "," + b.index);
-									//return linkedByIndex[a.index + "," + b.index];
-									}
-								});
+								//graphload 
+								var width = 900, height = 950;
+								OriginalNetworkGraph(nodes, file, "#gc_network", width, height);
 								</script>                    
                     </div>
                 </div>               

@@ -99,7 +99,8 @@ public class PostDataServ extends HttpServlet {
 			if (nodes != null && linkObj != null ) {
 				nodeSet=mapper.readValue(nodes, Node[].class);
 				linkSet=mapper.readValue(links, Links[].class);
-				//System.out.println("orignial data lengthis "+linkSet.length);
+				System.out.println("nodeset length "+nodeSet.length);
+				System.out.println("linkset length "+linkSet.length);
 				
 				//this is for send node set data with link set as json
 				node=Arrays.asList(nodeSet);
