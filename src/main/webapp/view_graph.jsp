@@ -43,7 +43,7 @@
                         data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>
                             GC-Analysis <i class="fa fa-fw fa-caret-down"></i></a>
                         
-                        <ul id="demo" name="demo" class="collapse">
+                        <ul id="demo" name="demo" >
                             <% for(int i = 2005;i < 2014;i++) {%>
                             <li><a  href="?filename=data<%=i%>.json&year=<%=i%>"><%=i%></a></li>                            
                             <%}%>
@@ -99,7 +99,7 @@ text {
                     <h2><center> Granger causality Raw Volume Data Analysis <%= year%></center> </h2>
        
                             <ul id="myTab" class="nav nav-tabs">
-							   <li class="active"><a href="#home" onclick="window.location.reload(true);" data-toggle="tab">
+							   <li class="active"><a id ="home" href="#home" onclick="window.location.reload(true);" data-toggle="tab">
 							      Network</a></li>
 
 							   	<li><a id="In"  href="#indegree" data-toggle="tab" >Max Indegree</a></li>
@@ -123,7 +123,12 @@ text {
 					                            var ctx = document.getElementById("graph_note").getContext("2d");					                            
 					                            SvgLoad(ctx);					                            			
 				                            </script>
-				                        
+				                        <div> &nbsp; Global clustering coefficient :<l id="cc_show"></l>
+					                        <script type="text/javascript">
+						                        
+						                        
+					                        </script>
+				                        </div>
 									 </div>             
 							   </div>
 								   <div class="tab-pane fade" id="indegree">								   								   
@@ -144,7 +149,8 @@ text {
 							   					  dataType: 'json',
 							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 							   						var width = 1000,height = 900;							   						
-							   						DrawGraph(data.nodes, data.Links,"#borderIn",width,height);		
+							   						DrawGraph(data.nodes, data.Links,"#borderIn",width,height);	
+							   						var xx = document.getElementById("max_degree").innerHTML=data.Links.length;
 							   					  },
 							   					  error: function(data,error){alert(error);},
 							   					  async: false
@@ -152,8 +158,8 @@ text {
 							   				});
 											
 									   		</script>
-									   		<% DirectedGraphDemoServ DerGraSev0 = new DirectedGraphDemoServ(); %>
-									   		<div class="col-lg-4">Max Indegree :<%=DerGraSev0.indegree_count %>
+									   		
+									   		<div class="col-lg-4">Max Indegree :<l id="max_degree"></l>
 										   
 									   </div>
 									   </div>
@@ -294,6 +300,20 @@ text {
 								var obj=new Object();
 								obj.nodes=nodes;
 										
+								$.ajax({
+				   					  type: 'GET',
+				   					  url: "cc",
+				   					  dataType: 'json',
+				   					  success: function(data,status) {
+				   						  //$('#cc_show').html(data.Clustering_C);
+				   						  var xx = document.getElementById("cc_show").innerHTML=data.Clustering_C;
+				   						
+				   						//clustering_cof("#cc_show",data.Clustering_C);
+				   					  },
+				   					  error: function(data,error){alert(error);},
+				   					  async: false
+				   					}); 		
+								
 								$.ajax({
 									type: 'GET',
 									url: url,

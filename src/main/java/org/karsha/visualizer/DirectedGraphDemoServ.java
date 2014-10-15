@@ -2,10 +2,16 @@ package org.karsha.visualizer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.management.ImmutableDescriptor;
+import javax.xml.crypto.NodeSetData;
 
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.DefaultDirectedGraph;
@@ -272,9 +278,57 @@ public class DirectedGraphDemoServ {
 		return list;		
 	}
 	
+	public static double clusteringCoefficient(DirectedGraph<Node,DefaultEdge> graph,Node[] nodes) {
+		log.log(Level.SEVERE,"clusteringCoefficient() Data:{0},{1}", new Object[]{"graph","nodes[]"});
+		
+		List<Links> imediatCycl1=new ArrayList<Links>();
+		List<Links> imediatCycl2=new ArrayList<Links>();
+		imediatCycl1 = findImmidietCycles(graph, nodes);
+		imediatCycl2 = findImmidietCycles(graph, nodes);
+		
+		
+		//count open traingles
+		List<Links> Temp1= imediatCycl1;
+		List<Links> Temp2= imediatCycl2;
+		
+		ArrayList<Integer> node_count = new ArrayList<Integer>();
+		ArrayList<Integer> node_count_noDups = new ArrayList<Integer>();
+		
+		
+		int count_open_trangle = 0;
+		int count_close_trangle = 0;
+		for (int j = 0; j <Temp1.size(); j++) {
+			for (int j2 = 0; j2 < Temp1.size(); j2++) {
+				if (Temp1.get(j).source == Temp1.get(j2).source & j!=j2) {
+					count_open_trangle++;
+					node_count.add(j);
+					node_count.add(j2);
+					if (graph.containsEdge(nodes[Temp1.get(j).target],nodes[Temp1.get(j2).target]) && graph.containsEdge(nodes[Temp1.get(j2).target],nodes[Temp1.get(j).target])) {
+						count_close_trangle++;
+					}
+					}
+				}
+			}
+			
+		
+		/*node_count.sort(null);
+		boolean node_status = false;
+		for (int i = 0; i <node_count.size(); i++) {
+			for (int j = 0; j < node_count_noDups.size(); j++) {
+				if(node_count.get(i)==node_count_noDups.get(j))node_status = true;
+			}
+			if(node_status)node_count_noDups.add(node_count.get(i));
+			node_status = false;
+		}
+		
+		List newList = new ArrayList(new HashSet(node_count));*/
+		double rslt = 3*count_close_trangle /(double)count_open_trangle;
+		return rslt;
+		
+		
+	}
 
-
-private static boolean isAdded(Links link,List<Links> list){
+	private static boolean isAdded(Links link,List<Links> list){
 		
 	boolean state=false;
 	

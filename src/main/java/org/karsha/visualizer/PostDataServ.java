@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -201,6 +202,18 @@ public class PostDataServ extends HttpServlet {
 			out.print(Obj.toString());
 			out.close();
 
+		}else if(userPath.equals("/cc")){
+			logger.info("userPath is "+userPath);
+			PrintWriter out=response.getWriter();
+			
+				double cc_value =DirectedGraphDemoServ.clusteringCoefficient(g, nodeSet);
+				JsonElement Clustering_C = gson.toJsonTree(cc_value);
+				JsonObject obj = new JsonObject();
+				obj.add("Clustering_C",Clustering_C);
+				out.print(obj.toString());
+			
+			
+			out.close();
 		}
 			
 	}

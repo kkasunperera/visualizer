@@ -1045,7 +1045,11 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
         return linksForSelectedNode[a.index + "," + b.index];
     // }
     }
+    
+    fun
 
 }
 
-
+function clustering_cof(tag,cc) {
+	$(tag).html(cc);
+}
