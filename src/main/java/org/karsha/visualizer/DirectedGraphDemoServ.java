@@ -313,19 +313,8 @@ public class DirectedGraphDemoServ {
 				}
 			}
 			
-		
-		/*node_count.sort(null);
-		boolean node_status = false;
-		for (int i = 0; i <node_count.size(); i++) {
-			for (int j = 0; j < node_count_noDups.size(); j++) {
-				if(node_count.get(i)==node_count_noDups.get(j))node_status = true;
-			}
-			if(node_status)node_count_noDups.add(node_count.get(i));
-			node_status = false;
-		}
-		
-		List newList = new ArrayList(new HashSet(node_count));*/
-		double rslt = 3*count_close_trangle /(double)count_open_trangle;
+		double original_rslt = 3*count_close_trangle /(double)count_open_trangle;
+		double rslt = Math.round(original_rslt*100000.0)/100000.0;
 		return rslt;
 		
 		
