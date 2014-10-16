@@ -21,6 +21,7 @@
   	<url-pattern>/CompleteTriad</url-pattern>
   	<url-pattern>/IncompleteTriad</url-pattern>
   	<url-pattern>/ImmediateCycles</url-pattern>
+  	<url-pattern>/cc</url-pattern>
   </servlet-mapping>
   <session-config>
     <session-timeout>30</session-timeout>

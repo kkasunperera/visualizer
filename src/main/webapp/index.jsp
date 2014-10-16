@@ -56,9 +56,9 @@ text {
                         data-target="#demo1"><i class="fa fa-fw fa-arrows-v"></i>
                             GC-Analysis <i class="fa fa-fw fa-caret-down"></i></a>
                         
-                        <ul id="demo1" name="demo" class="collapse">
+                        <ul id="demo1" name="demo" >
                             <% for(int i = 2005;i < 2014;i++) {%>
-                            <li><a href="view_graph.jsp?filename=data<%=i%>.json"><%=i%></a></li>                            
+                            <li><a href="view_graph.jsp?filename=data<%=i%>.json&year=<%=i%>"><%=i%></a></li>                            
                             <%}%>
                         </ul></li>
                     <%--  <li><a href="javascript:;" data-toggle="collapse"
@@ -77,11 +77,6 @@ text {
                             Row Data</a></li>
                     <li><a href="blank-page.html"><i class="fa fa-fw fa-file"></i>
                             More About</a></li> -->
-                            
-                    <li><a href="#"><i
-                            class="fa fa-fw fa-bar-chart-o"></i> Overall</a></li>
-                    <li><a href="#"><i class="fa fa-fw fa-table"></i>
-                            Row Data</a></li>
                     <li><a href="#"><i class="fa fa-fw fa-file"></i>
                             More About</a></li>
                             
