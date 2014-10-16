@@ -147,21 +147,25 @@ text {
 							   </div>
 								   <div class="tab-pane fade" id="indegree">								   								   
 									   <div id="borderIn" style="border:2px solid;">
+									   <div>Max Indegree<div id="maxIn"></div></div>
 									   <br />
 									   <canvas id="graph_note1" width="500" height="50" style="float: right">                                
                                         </canvas>
 									   		<script type="text/javascript">
 									   		var ctx = document.getElementById("graph_note1").getContext("2d");					                            
 				                            SvgLoadDegree(ctx);
-											$("#In").click(function(){							   					
-							   					
+											$("#In").click(function(){							   												   					
 							   					$.ajax({
 							   					  type: 'GET',
 							   					  url: "Indegree",
 							   					  dataType: 'json',
-							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
+							   					  success: function(data,status) {//data.Links,data.nodes	
+							   						
+							   					  	document.getElementById("maxIn").innerHTML=data.Links.length;
 							   						var width = 1000,height = 900;							   						
-							   						DrawGraph(data.nodes, data.Links,"#borderIn",width,height);							   						
+							   						DrawGraph(data.nodes, data.Links,"#borderIn",width,height);	
+							   						
+							   						
 							   					  },
 							   					  error: function(data,error){alert(error);},
 							   					  async: false
@@ -284,7 +288,7 @@ text {
 							<%
 								/*get the name of the file releven to clicked year ane filename */
 								String filename = request.getParameter("filename");
-								String name = "\'" + "NewJson/" + filename + "\'";
+								String name = "\'" + "json/" + filename + "\'";
 								System.out.println(filename);
 							%>
 
@@ -328,11 +332,12 @@ text {
 									async: false
 								}); 
 										
+								//alert(JSON.stringify(obj.link));
 										//post the json string to servlet
 								$.post("PostDataServ",JSON.stringify(obj)).error(function(){
-										alert("There is data loading error please check data.");
-								});
-										//alert(JSON.stringify(obj.nodes));
+									alert("there is error while sending data to server");
+								});;  
+										//alert(JSON.stringify(obj.link));
 										
 								});
 								//graphload 
