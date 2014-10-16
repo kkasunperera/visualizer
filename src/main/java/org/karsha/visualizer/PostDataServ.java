@@ -84,35 +84,38 @@ public class PostDataServ extends HttpServlet {
 		Gson gson = new Gson();
 
 		if (userPath.equals("/PostDataServ")) {
-			logger.info("userPath is " + userPath);
 
-			InputStream s = request.getInputStream();
-			BufferedReader br = new BufferedReader(new InputStreamReader(s));
+			logger.info("userPath is "+userPath);
+			
+			InputStream s=request.getInputStream();
+			BufferedReader br=new BufferedReader(new InputStreamReader(s));
+			
+			String o="";
+			o=br.readLine();
+			//System.out.println(o);
 
-			String o = "";
-			o = br.readLine();
-
-			ObjectMapper mapper = new ObjectMapper();
-			JsonNode root = mapper.readTree(o);
-			JsonNode nodes = root.get("nodes");
-			JsonNode linkObj = root.get("link");
-			JsonNode links = linkObj.get("links");
-
-			if (nodes != null && linkObj != null) {
-				nodeSet = mapper.readValue(nodes, Node[].class);
-				linkSet = mapper.readValue(links, Links[].class);
-				System.out.println("nodeset length " + nodeSet.length);
-				System.out.println("linkset length " + linkSet.length);
-
-				// this is for send node set data with link set as json
-				node = Arrays.asList(nodeSet);
-
-				g = DirectedGraphDemoServ.createHrefGraph(nodeSet, linkSet);
-				linkCompleteTriad = DirectedGraphDemoServ.CompleteTriad(g,
-						nodeSet);
-				linkIncomplete = DirectedGraphDemoServ.InCompleteTriad(g,
-						nodeSet);
-
+			
+			ObjectMapper mapper=new ObjectMapper();
+			JsonNode root=mapper.readTree(o);
+			JsonNode nodes=root.get("nodes");
+			JsonNode linkObj=root.get("link");
+			JsonNode links=linkObj.get("links");
+			
+			if (nodes != null && linkObj != null ) {
+				nodeSet=mapper.readValue(nodes, Node[].class);
+				linkSet=mapper.readValue(links, Links[].class);
+				System.out.println("nodeset length "+nodeSet.length);
+				System.out.println("linkset length "+linkSet.length);
+				
+				//System.out.println(linkSet[0].getQ3());
+				
+				//this is for send node set data with link set as json
+				node=Arrays.asList(nodeSet);
+				
+				g = DirectedGraphDemoServ.createHrefGraph(nodeSet,linkSet);				
+				linkCompleteTriad=DirectedGraphDemoServ.CompleteTriad(g, nodeSet);
+				linkIncomplete=DirectedGraphDemoServ.InCompleteTriad(g, nodeSet);
+					
 			}
 
 		} else if (userPath.equals("/Indegree")) {

@@ -43,7 +43,7 @@
                         data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>
                             GC-Analysis <i class="fa fa-fw fa-caret-down"></i></a>
                         
-                        <ul id="demo" name="demo" >
+                        <ul id="demo" name="demo" class="collapse">
                             <% for(int i = 2005;i < 2014;i++) {%>
                             <li><a  href="?filename=data<%=i%>.json&year=<%=i%>"><%=i%></a></li>                            
                             <%}%>
@@ -67,8 +67,7 @@
         </nav>
                         
 	<% 
-		String year = request.getParameter("year");
-		if(year==null)year="";
+		String year = request.getParameter("year");		
 	%>
     
 <style>
@@ -148,6 +147,7 @@ text {
 							   </div>
 								   <div class="tab-pane fade" id="indegree">								   								   
 									   <div id="borderIn" style="border:2px solid;">
+									   
 									   <br />
 									   <canvas id="graph_note1" width="500" height="50" style="float: right">                                
                                         </canvas>
@@ -155,16 +155,18 @@ text {
 									   		<script type="text/javascript">
 									   		var ctx = document.getElementById("graph_note1").getContext("2d");					                            
 				                            SvgLoadDegree(ctx);
-											$("#In").click(function(){							   					
-							   					
+											$("#In").click(function(){							   												   					
 							   					$.ajax({
 							   					  type: 'GET',
 							   					  url: "Indegree",
 							   					  dataType: 'json',
-							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
+							   					  success: function(data,status) {//data.Links,data.nodes	
+							   						
+							   					  	document.getElementById("max_indegree").innerHTML = data.Links.length;
 							   						var width = 1000,height = 900;							   						
 							   						DrawGraph(data.nodes, data.Links,"#borderIn",width,height);	
-							   						var max_indgr = document.getElementById("max_indegree").innerHTML = data.Links.length;
+							   						
+							   						
 							   					  },
 							   					  error: function(data,error){alert(error);},
 							   					  async: false
@@ -192,8 +194,8 @@ text {
 							   					  dataType: 'json',
 							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 							   						var width = 1000,height = 900;							   						
-							   						DrawGraph(data.nodes, data.Links,"#borderOut",width,height);	
-							   						var max_outdgr = document.getElementById("max_outdegree").innerHTML = data.Links.length;
+							   						DrawGraph(data.nodes, data.Links,"#borderOut",width,height);
+							   						document.getElementById("max_outdegree").innerHTML = data.Links.length;							   						
 							   					  },
 							   					  error: function(data,error){alert(error);},
 							   					  async: false
@@ -289,26 +291,27 @@ text {
 							<%
 								/*get the name of the file releven to clicked year ane filename */
 								String filename = request.getParameter("filename");
-								String name = "\'" + "NewJson/" + filename + "\'";
+								String name = "\'" + "json/" + filename + "\'";
 								System.out.println(filename);
 							%>
 
 							<div class="tab-pane fade" id="QuarterlyTemporalPatterns">							   	
 							   		<div id="borderQgraph" style="border:2px solid;">
 							   			<br>
-							   			<canvas id="graph_note6" width="700" height="80" style="float: right"></canvas>
+							   			<canvas id="graph_note6" width="800" height="80" style="float: left"></canvas>
 							   			&nbsp; Clustering Coefficient : <l id="cc_show"></l>
+							   			<button id="Sustained">Sustained</button>
+							   			<button id="Episodic">Episodic</button>
+							   			<button id="Weak">Weak</button>
 							   				<script type="text/javascript">
 							   					
-							   					var file=<%= name%>;
-							   				
+							   					var file=<%= name%>;							   				
 							   					var ctx=document.getElementById("graph_note6").getContext("2d");
 							   					SvgQuarter(ctx);							   				
-
 							   					 
 							   					$("#Quarters").click(function(){
 							   						var width = 900, height = 950;
-							   						QuarterGraph(nodes, file, "#borderQgraph", width, height);	
+							   						QuarterGraph(nodes, file, "#borderQgraph", width, height);
 							   						$.ajax({
 									   					  type: 'GET',
 									   					  url: "cc",
@@ -318,8 +321,18 @@ text {
 									   					  },
 									   					  error: function(data,error){alert(error);},
 									   					  async: false
-									   					}); 	
+									   					}); 								   													   			
 								   				});
+							   					
+							   					$("#Sustained").click(function(){
+							   						alert("sustained");
+							   					});
+							   					$("#Episodic").click(function(){
+							   						alert("episodic");
+							   					});
+							   					$("#Weak").click(function(){
+							   						alert("weak");
+							   					});
 							   				</script>
 							   		</div>
 							   </div>						   							  							  
@@ -344,11 +357,12 @@ text {
 									async: false
 								}); 
 										
+								//alert(JSON.stringify(obj.link));
 										//post the json string to servlet
 								$.post("PostDataServ",JSON.stringify(obj)).error(function(){
-										alert("There is data loading error please check data.");
-								});
-										//alert(JSON.stringify(obj.nodes));
+									alert("there is error while sending data to server");
+								});;  
+										//alert(JSON.stringify(obj.link));
 										
 								});
 								//graphload 
