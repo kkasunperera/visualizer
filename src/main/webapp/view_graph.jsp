@@ -296,18 +296,29 @@ text {
 							   		<div id="borderQgraph" style="border:2px solid;">
 							   			<br>
 							   			<canvas id="graph_note6" width="800" height="80" style="float: left"></canvas>
+							   			<button id="Sustained">Sustained</button>
+							   			<button id="Episodic">Episodic</button>
+							   			<button id="Weak">Weak</button>
 							   				<script type="text/javascript">
 							   					
-							   					var file=<%= name%>;
-							   				
+							   					var file=<%= name%>;							   				
 							   					var ctx=document.getElementById("graph_note6").getContext("2d");
 							   					SvgQuarter(ctx);							   				
-
 							   					 
 							   					$("#Quarters").click(function(){
 							   						var width = 900, height = 950;
 							   						QuarterGraph(nodes, file, "#borderQgraph", width, height);							   													   			
 								   				});
+							   					
+							   					$("#Sustained").click(function(){
+							   						alert("sustained");
+							   					});
+							   					$("#Episodic").click(function(){
+							   						alert("episodic");
+							   					});
+							   					$("#Weak").click(function(){
+							   						alert("weak");
+							   					});
 							   				</script>
 							   		</div>
 							   </div>						   							  							  
