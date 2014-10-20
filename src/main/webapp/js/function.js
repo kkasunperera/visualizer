@@ -176,7 +176,7 @@ function SvgLoadCompTriad(ctx){
     //ctx.strokeStyle="#0000FF";
     //ctx.beginPath();
     //ctx.dashedLine(350,10, 301, 10,[4, 4])
-   // ctx.stroke();
+    // ctx.stroke();
     /*
     ctx.strokeStyle="#FF0000";
     ctx.beginPath();
@@ -979,7 +979,7 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
                 };
  
             });
-                
+                  //alert(links.length);
             for(var i=0;i< connectedEdges.length;i++)
             {
                 var status= false;
@@ -987,7 +987,7 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
                 // links.push({source: connectedEdges[i], target: connectedEdges[i+1]});
                 // force.start();
                 // linksForSelectedNode[d.index + "," + connectedEdges[i]] = 1;
-                 
+               
                 links.forEach(function(f){
                     // if (isConnected(d, o.target)) {
                     //if (f.source.index == connectedEdges[i] && f.target != d) { 
@@ -1027,12 +1027,28 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
             //alert(connectedEdges[i]);
             }
             //   alert( "lenght of list "+linksForSelectedNode.length)  
-             /*TO-DO there is a problem when Identifying triad completing edges for the incomplete triads
+            //TO-DO there is a problem when Identifying triad completing edges for the incomplete triads
             for(var kk=0; kk<triadCompletingEdges.length; kk++){
-                linksForSelectedNode[triadCompletingEdges[kk]+ "," + d.index ] = 3;
+                linksForSelectedNode[d.index + "," + triadCompletingEdges[kk] ] = 3;
+                links.push({
+                    source: d.index, 
+                    target: triadCompletingEdges[kk]
+                    });
+                
             }
-            */
             
+         //   alert(links[439].target);
+            /*
+            path = {};
+            path = svg.append("svg:g").selectAll("path")
+            .data(force.links())
+            .enter().append("svg:path")
+            .attr("class", function(d) {
+                return "link " + d.type;
+            })
+            .attr("class", "link")
+            .attr("marker-end", "url(#end)");
+            */
             function isSecondLayerEdge(h){
                 var status= false;
                 for(var k=0;k< connectedEdges.length;k++)

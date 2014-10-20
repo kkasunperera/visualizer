@@ -43,7 +43,8 @@
                         data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>
                             GC-Analysis <i class="fa fa-fw fa-caret-down"></i></a>
                         
-                        <ul id="demo" name="demo" class="collapse">
+<!--                        <ul id="demo" name="demo" class="collapse">-->
+                            <ul id="demo" name="demo">
                             <% for(int i = 2005;i < 2014;i++) {%>
                             <li><a  href="?filename=data<%=i%>.json&year=<%=i%>"><%=i%></a></li>                            
                             <%}%>
@@ -120,8 +121,8 @@ text {
 							   <li class="active"><a href="#home" onclick="window.location.reload(true);" data-toggle="tab">
 							      Network</a></li>
 
-							   	<li><a id="In"  href="#indegree" data-toggle="tab" >Indegree</a></li>
-							    <li><a id="Out" href="#outdegree" data-toggle="tab" >Outdegree</a></li>
+							   	<li><a id="In"  href="#indegree" data-toggle="tab" >MAXIndegree</a></li>
+							    <li><a id="Out" href="#outdegree" data-toggle="tab" >MAXOutdegree</a></li>
 							    <li><a id="Cmp" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
 							    <li><a id="Incmp" href="#IncompleteTriad" data-toggle="tab">IncompleteTriad</a></li>
 							    <li><a id="Imcycles" href="#ImmediateCycle" data-toggle="tab">ImmediateCycles</a></li>
@@ -304,10 +305,12 @@ text {
 							   			<button id="Episodic">Episodic</button>
 							   			<button id="Weak">Weak</button>
 							   				<script type="text/javascript">
-							   					
+
 							   					var file=<%= name%>;							   				
+							   				
 							   					var ctx=document.getElementById("graph_note6").getContext("2d");
 							   					SvgQuarter(ctx);							   				
+
 							   					 
 							   					$("#Quarters").click(function(){
 							   						var width = 900, height = 950;
@@ -334,10 +337,12 @@ text {
 							   						alert("weak");
 							   					});
 							   				</script>
+
 							   		</div>
 							   </div>						   							  							  
 						</div>
 						<script>							
+
 
 							//load the nodes and links arrays
 							$(document).ready(function(){
