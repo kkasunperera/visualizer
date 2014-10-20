@@ -14,11 +14,59 @@
 <link href="css/plugins/morris.css" rel="stylesheet">
 <link href="font-awesome-4.1.0/css/font-awesome.min.css"
     rel="stylesheet" type="text/css">
+<link href="css/jquery-ui.css" rel="stylesheet">
 <script src="js/jquery.1.9.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/function.js"></script>
 <script src="js/node.js"></script>
 <script src="js/app.js"></script>
+
+<style type="text/css">
+		.demoHeaders {
+			margin-top: 2em;
+		}
+		
+		#dialog-link {
+			padding: .4em 1em .4em 20px;
+			text-decoration: none;
+			position: relative;
+		}
+		
+		#dialog-link span.ui-icon {
+			margin: 0 5px 0 0;
+			position: absolute;
+			left: .2em;
+			top: 50%;
+			margin-top: -8px;
+		}
+		
+		#icons {
+			margin: 0;
+			padding: 0;
+		}
+		
+		#icons li {
+			margin: 2px;
+			position: relative;
+			padding: 4px 0;
+			cursor: pointer;
+			float: left;
+			list-style: none;
+		}
+		
+		#icons span.ui-icon {
+			float: left;
+			margin: 0 4px;
+		}
+		
+		.fakewindowcontain .ui-widget-overlay {
+			position: absolute;
+		}
+		
+		select {
+			width: 300px;
+	}
+</style>
 </head>
 
 
@@ -36,38 +84,31 @@
                     project</a>
             </div>
            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li class="active"><a href="index.jsp"><i
-                            class="fa fa-fw fa-dashboard"></i> Visualizer</a></li>
-                    <li><a href="javascript:;" data-toggle="collapse"
-                        data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>
-                            GC-Analysis <i class="fa fa-fw fa-caret-down"></i></a>
-                        
-                        <ul id="demo" name="demo" >
-                            <% for(int i = 2005;i < 2014;i++) {%>
-                            <li >
-	                            <a href="?filename=data<%=i%>.json&year=<%=i%>"><%=i%>
-	                            	
-	                            </a>
-	                            
-                            </li>                                                       
-                            <%}%>
-                        </ul></li>
-                    <!-- <li><a href="Overall.html"><i
-                            class="fa fa-fw fa-bar-chart-o"></i> Overall</a></li>
-                    <li><a href="RowData.html"><i class="fa fa-fw fa-table"></i>
-                            Row Data</a></li>
-                    <li><a href="blank-page.html"><i class="fa fa-fw fa-file"></i>
-                            More About</a></li> -->
-                            
-<!--                    <li><a href="#"><i
-                            class="fa fa-fw fa-bar-chart-o"></i> Overall</a></li>
-                    <li><a href="#"><i class="fa fa-fw fa-table"></i>
-                            Row Data</a></li>-->
-                    <li><a href="#"><i class="fa fa-fw fa-file"></i>
+               <ul class="nav navbar-nav side-nav">
+					<li class="active"><a href="index.jsp"><i
+							class="fa fa-fw fa-dashboard"></i> Visualizer</a></li>
+					<li><a ><i class="fa fa-fw fa-arrows-v"></i>
+							GC-Analysis </a>
+						<ul id="accordion">
+						<% for(int i = 2005;i < 2014;i++) {%>
+							<li>
+								<h3><a href="?filename=data<%=i%>.json&year=data<%=i%>.json&year=<%=i%>"><%=i%></a></h3>
+								<ul>
+									<li><a href="view_graph.jsp?filename=data<%=i%>.json&year=<%=i%>"><i class="fa fa-fw fa-table"></i> Overall </a></li>
+									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>"><i class="fa fa-fw fa-table"></i> Quarter 1</a></li>
+									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>"><i class="fa fa-fw fa-table"></i> Quarter 2</a></li>
+									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>"><i class="fa fa-fw fa-table"></i> Quarter 3</a></li>
+									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>"><i class="fa fa-fw fa-table"></i> Quarter 4</a></li>
+								</ul>
+							</li>
+							<%} %>
+						</ul>               
+                
+                       </li>
+                       <li><a href="#"><i class="fa fa-fw fa-file"></i>
                             More About</a></li>
                             
-                </ul>
+               		   </ul>
            </div>
         </nav>
                         
@@ -173,7 +214,9 @@ text {
 							   						
 							   						
 							   					  },
-							   					  error: function(data,error){alert(error);},
+							   					  error: function(data,error){
+							   						  //alert(error);
+							   						  },
 							   					  async: false
 							   					}); 							   					
 							   				});
@@ -365,7 +408,7 @@ text {
 								//alert(JSON.stringify(obj.link));
 										//post the json string to servlet
 								$.post("PostDataServ",JSON.stringify(obj)).error(function(){
-									alert("there is error while sending data to server");
+									//alert("there is error while sending data to server");
 								});;  
 										//alert(JSON.stringify(obj.link));
 										
@@ -391,6 +434,13 @@ text {
     <script src="js/plugins/morris/raphael.min.js"></script>
     <script src="js/plugins/morris/morris.min.js"></script>
     <script src="js/plugins/morris/morris-data.js"></script>
+    <script src="js/jquery.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		<script>
+		<% int a = Integer.parseInt(year)%2005;%>
+	$( "#accordion" ).accordion();
+	$( "#accordion" ).accordion({ active: <%=a%>});
+	</script>
 </div>    
 </body>
 

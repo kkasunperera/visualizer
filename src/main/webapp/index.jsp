@@ -104,10 +104,10 @@ select {
 								<h3><a href="view_graph.jsp?filename=data<%=i%>.json&year=data<%=i%>.json&year=<%=i%>"><%=i%></a></h3>
 								<ul>
 									<li><a href="view_graph.jsp?filename=data<%=i%>.json&year=<%=i%>"><i class="fa fa-fw fa-table"></i> Overall </a></li>
-									<li><a href="#"><i class="fa fa-fw fa-table"></i> Quarter 1</a></li>
-									<li><a href="#"><i class="fa fa-fw fa-table"></i> Quarter 2</a></li>
-									<li><a href="#"><i class="fa fa-fw fa-table"></i> Quarter 3</a></li>
-									<li><a href="#"><i class="fa fa-fw fa-table"></i> Quarter 4</a></li>
+									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>"><i class="fa fa-fw fa-table"></i> Quarter 1</a></li>
+									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>"><i class="fa fa-fw fa-table"></i> Quarter 2</a></li>
+									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>"><i class="fa fa-fw fa-table"></i> Quarter 3</a></li>
+									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>"><i class="fa fa-fw fa-table"></i> Quarter 4</a></li>
 								</ul>
 							</li>
 							<%} %>
