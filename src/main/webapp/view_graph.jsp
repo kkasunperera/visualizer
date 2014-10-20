@@ -307,6 +307,7 @@ text {
 							   				<script type="text/javascript">
 
 							   					var file=<%= name%>;							   				
+							   				
 							   					var ctx=document.getElementById("graph_note6").getContext("2d");
 							   					SvgQuarter(ctx);							   				
 
