@@ -204,13 +204,13 @@ text {
 											$("#In").click(function(){							   												   					
 							   					$.ajax({
 							   					  type: 'GET',
-							   					  url: "Indegree",
+							   					  url: "Indegree?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
 							   					  dataType: 'json',
 							   					  success: function(data,status) {//data.Links,data.nodes	
 							   						
-							   					  	document.getElementById("max_indegree").innerHTML = data.Links.length;
+							   					  	document.getElementById("max_indegree").innerHTML = data.links.length;
 							   						var width = 1000,height = 900;							   						
-							   						DrawGraph(data.nodes, data.Links,"#borderIn",width,height);	
+							   						DrawGraph(data.nodes, data.links,"#borderIn",width,height);	
 							   						
 							   						
 							   					  },
@@ -238,12 +238,12 @@ text {
 											$("#Out").click(function(){							   												   					
 							   					$.ajax({
 							   					  type: 'GET',
-							   					  url: "Outdegree",
+							   					  url: "Outdegree?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
 							   					  dataType: 'json',
 							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 							   						var width = 1000,height = 900;							   						
-							   						DrawGraph(data.nodes, data.Links,"#borderOut",width,height);
-							   						document.getElementById("max_outdegree").innerHTML = data.Links.length;							   						
+							   						DrawGraph(data.nodes, data.links,"#borderOut",width,height);
+							   						document.getElementById("max_outdegree").innerHTML = data.links.length;							   						
 							   					  },
 							   					  error: function(data,error){alert(error);},
 							   					  async: false
@@ -268,12 +268,12 @@ text {
 			                            $("#Cmp").click(function(){							   												   					
 						   					$.ajax({
 						   					  type: 'GET',
-						   					  url: "CompleteTriad",
+						   					  url: "CompleteTriad?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 						   						var width = 1000,height = 900;							   						
 						   						//DrawGraph(data.nodes, data.Links,"#borderCmp",width,height);							   						
-						   				DrawTrangleGraph(data.nodes, data.Links,"#borderCmp",width,height);	 
+						   				DrawTrangleGraph(data.nodes, data.links,"#borderCmp",width,height);	 
                                          },
 						   					  error: function(data,error){
 						   						 // alert(error);
@@ -297,12 +297,12 @@ text {
 			                            $("#Incmp").click(function(){							   												   					
 						   					$.ajax({
 						   					  type: 'GET',
-						   					  url: "IncompleteTriad",
+						   					  url: "IncompleteTriad?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 						   						var width = 1000,height = 900;							   						
 						   						//DrawGraph(data.nodes, data.Links,"#borderIncmp",width,height);
-                                                DrawIncompleteTriad(data.nodes, data.Links,"#borderIncmp",width,height);
+                                                DrawIncompleteTriad(data.nodes, data.links,"#borderIncmp",width,height);
 						   					  },
 						   					  error: function(data,error){
 						   						  alert(error);},
@@ -325,11 +325,11 @@ text {
 			                            $("#Imcycles").click(function(){							   												   					
 						   					$.ajax({
 						   					  type: 'GET',
-						   					  url: "ImmediateCycles",
+						   					  url: "ImmediateCycles?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 						   						var width = 1000,height = 900;							   						
-						   						DrawGraph(data.nodes, data.Links,"#borderImcycle",width,height);							   						
+						   						DrawGraph(data.nodes, data.links,"#borderImcycle",width,height);							   						
 						   					  },
 						   					  error: function(data,error){alert(error);},
 						   					  async: false
@@ -365,7 +365,7 @@ text {
 							   						QuarterGraph(nodes, file, "#borderQgraph", width, height);
 							   						$.ajax({
 									   					  type: 'GET',
-									   					  url: "cc",
+									   					  url: "cc?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
 									   					  dataType: 'json',
 									   					  success: function(data,status) {
 									   						var cc = document.getElementById("cc_show").innerHTML = data.Clustering_C;

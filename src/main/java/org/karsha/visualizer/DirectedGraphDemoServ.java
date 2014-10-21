@@ -376,6 +376,12 @@ public class DirectedGraphDemoServ {
 	public static Links[] link_filter(int quater , Links[] linkset) {
 		ArrayList<Links> temp = new ArrayList<Links>();
 		switch (quater) {
+		case 0:
+			for (int j = linkset.length-1; j >= 0; j--) {
+				temp.add(linkset[j]);
+			}
+	    	
+			break;
 		case 1:
 			for (int j = linkset.length-1; j >= 0; j--) {
 				if(linkset[j].Q1.equals("1") & linkset[j].Q2.equals("0") & linkset[j].Q3.equals("0") & linkset[j].Q4.equals("0"))temp.add(linkset[j]);
