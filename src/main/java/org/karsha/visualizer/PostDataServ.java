@@ -133,7 +133,7 @@ public class PostDataServ extends HttpServlet {
 
 			JsonElement links = gson.toJsonTree(link);
 			JsonElement nodes = gson.toJsonTree(node);
-			Obj.add("Links", links);
+			Obj.add("links", links);
 			Obj.add("nodes", nodes);
 
 			out.println(Obj.toString());
@@ -152,7 +152,7 @@ public class PostDataServ extends HttpServlet {
 
 			JsonElement links = gson.toJsonTree(link);
 			JsonElement nodes = gson.toJsonTree(node);
-			Obj.add("Links", links);
+			Obj.add("links", links);
 			Obj.add("nodes", nodes);
 
 			out.println(Obj.toString());
@@ -169,7 +169,7 @@ public class PostDataServ extends HttpServlet {
 			JsonElement links = gson.toJsonTree(linkCompleteTriad);
 			JsonElement nodes = gson.toJsonTree(node);
 
-			Obj.add("Links", links);
+			Obj.add("links", links);
 			Obj.add("nodes", nodes);
 
 			out.println(Obj.toString());
@@ -186,7 +186,7 @@ public class PostDataServ extends HttpServlet {
 			JsonElement links = gson.toJsonTree(linkIncomplete);
 			JsonElement nodes = gson.toJsonTree(node);
 
-			Obj.add("Links", links);
+			Obj.add("links", links);
 			Obj.add("nodes", nodes);
 
 			out.println(Obj.toString());
@@ -206,7 +206,7 @@ public class PostDataServ extends HttpServlet {
 			JsonElement links = gson.toJsonTree(link);
 			JsonElement nodes = gson.toJsonTree(node);
 
-			Obj.add("Links", links);
+			Obj.add("links", links);
 			Obj.add("nodes", nodes);
 
 			out.print(Obj.toString());
