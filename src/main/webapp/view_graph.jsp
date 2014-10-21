@@ -275,7 +275,9 @@ text {
 						   						//DrawGraph(data.nodes, data.Links,"#borderCmp",width,height);							   						
 						   				DrawTrangleGraph(data.nodes, data.Links,"#borderCmp",width,height);	 
                                          },
-						   					  error: function(data,error){alert(error);},
+						   					  error: function(data,error){
+						   						 // alert(error);
+						   						  },
 						   					  async: false
 						   					}); 							   					
 						   				});
@@ -302,7 +304,8 @@ text {
 						   						//DrawGraph(data.nodes, data.Links,"#borderIncmp",width,height);
                                                 DrawIncompleteTriad(data.nodes, data.Links,"#borderIncmp",width,height);
 						   					  },
-						   					  error: function(data,error){alert(error);},
+						   					  error: function(data,error){
+						   						  alert(error);},
 						   					  async: false
 						   					}); 							   					
 						   				});

@@ -18,6 +18,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.util.ArrayUnenforcedSet;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -106,6 +107,7 @@ public class PostDataServ extends HttpServlet {
 				linkSet=mapper.readValue(links, Links[].class);
 				System.out.println("nodeset length "+nodeSet.length);
 				System.out.println("linkset length "+linkSet.length);
+				
 				
 				//System.out.println(linkSet[0].getQ3());
 				
@@ -220,7 +222,9 @@ public class PostDataServ extends HttpServlet {
 			JsonObject obj = new JsonObject();
 			obj.add("Clustering_C", Clustering_C);
 			out.print(obj.toString());
+			
 			out.close();
+			
 		}
 
 	}

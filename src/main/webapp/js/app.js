@@ -1,4 +1,4 @@
-function OriginalNetworkGraph(nodes,file,svg1,width,height){
+function OriginalNetworkGraph(nodes,file,svg1,width,height,quart){
 	
 	var linkedByIndex = {};
 	var color = d3.scale.category10();		 	
@@ -14,11 +14,30 @@ function OriginalNetworkGraph(nodes,file,svg1,width,height){
  //input to the file name which is taken previously
  
 d3.json(file, function(error, json) {
-  force
+  
+	switch (quart) {
+	case 0:
+		break;
+    case 1:
+    	for(var i = json.links.length-1; i--;){
+    		if(json.links[i].Q1!=1 | json.links[i].Q2!=0 | json.links[i].Q3!=0 | json.links[i].Q4!=0)json.links.splice(i,1);
+    	}
+        break;
+	}
+	
+	
+	
+	
+	
+	
+  alert(json.links.length);
+	force
       .nodes(nodes)
       .links(json.links)
       .on("tick", tick)
       .start();
+  
+ 
  
   
   svg.selectAll(".link")
