@@ -23,7 +23,7 @@ function data_set(quart,json) {
     	}
         break;
 	}
-	alert(json.links.length);
+	//alert(json.links.length);
 	return json.links;
 }
 

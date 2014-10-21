@@ -115,15 +115,18 @@ public class PostDataServ extends HttpServlet {
 				node=Arrays.asList(nodeSet);
 				
 				g = DirectedGraphDemoServ.createHrefGraph(nodeSet,linkSet);				
-				linkCompleteTriad=DirectedGraphDemoServ.CompleteTriad(g, nodeSet);
-				linkIncomplete=DirectedGraphDemoServ.InCompleteTriad(g, nodeSet);
+				//linkCompleteTriad=DirectedGraphDemoServ.CompleteTriad(g, nodeSet);
+				//linkIncomplete=DirectedGraphDemoServ.InCompleteTriad(g, nodeSet);
 					
 			}
 
 		} else if (userPath.equals("/Indegree")) {
 			logger.info("userPath is " + userPath);
-
-			List<Links> link = DirectedGraphDemoServ.findHighInDegree(g,
+			
+			int quater = Integer.parseInt(request.getParameter("Quater"));
+			
+			DirectedGraph<Node,DefaultEdge> gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, DirectedGraphDemoServ.link_filter(quater, linkSet));
+			List<Links> link = DirectedGraphDemoServ.findHighInDegree(gg,
 					nodeSet);
 
 			response.setContentType("application/json");
@@ -141,8 +144,12 @@ public class PostDataServ extends HttpServlet {
 
 		} else if (userPath.equals("/Outdegree")) {
 			logger.info("userPath is " + userPath);
-
-			List<Links> link = DirectedGraphDemoServ.findHighOutDegree(g,
+			
+			int quater = Integer.parseInt(request.getParameter("Quater"));
+			
+			DirectedGraph<Node,DefaultEdge> gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, DirectedGraphDemoServ.link_filter(quater, linkSet));
+			
+			List<Links> link = DirectedGraphDemoServ.findHighOutDegree(gg,
 					nodeSet);
 
 			response.setContentType("application/json");
@@ -161,6 +168,13 @@ public class PostDataServ extends HttpServlet {
 		} else if (userPath.equals("/CompleteTriad")) {
 			logger.info("userPath is " + userPath);
 
+			int quater = Integer.parseInt(request.getParameter("Quater"));
+			
+			DirectedGraph<Node,DefaultEdge> gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, DirectedGraphDemoServ.link_filter(quater, linkSet));
+			
+			
+			linkCompleteTriad=DirectedGraphDemoServ.CompleteTriad(gg, nodeSet);
+			
 			response.setContentType("application/json");
 			PrintWriter out = response.getWriter();
 
@@ -177,7 +191,10 @@ public class PostDataServ extends HttpServlet {
 
 		} else if (userPath.equals("/IncompleteTriad")) {
 			logger.info("userPath is " + userPath);
-
+			int quater = Integer.parseInt(request.getParameter("Quater"));
+			DirectedGraph<Node,DefaultEdge> gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, DirectedGraphDemoServ.link_filter(quater, linkSet));
+			
+			linkIncomplete=DirectedGraphDemoServ.InCompleteTriad(gg, nodeSet);
 			response.setContentType("application/json");
 			PrintWriter out = response.getWriter();
 
@@ -195,7 +212,11 @@ public class PostDataServ extends HttpServlet {
 		} else if (userPath.equals("/ImmediateCycles")) {
 			logger.info("userPath is " + userPath);
 
-			List<Links> link = DirectedGraphDemoServ.findImmidietCycles(g,
+			int quater = Integer.parseInt(request.getParameter("Quater"));
+			DirectedGraph<Node,DefaultEdge> gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, DirectedGraphDemoServ.link_filter(quater, linkSet));
+			
+			
+			List<Links> link = DirectedGraphDemoServ.findImmidietCycles(gg,
 					nodeSet);
 
 			response.setContentType("application/json");
@@ -215,8 +236,11 @@ public class PostDataServ extends HttpServlet {
 		} else if (userPath.equals("/cc")) {
 			logger.info("userPath is " + userPath);
 			PrintWriter out = response.getWriter();
+			int quater = Integer.parseInt(request.getParameter("Quater"));
+			DirectedGraph<Node,DefaultEdge> gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, DirectedGraphDemoServ.link_filter(quater, linkSet));
+			
 
-			double cc_value = DirectedGraphDemoServ.clusteringCoefficient(g,
+			double cc_value = DirectedGraphDemoServ.clusteringCoefficient(gg,
 					nodeSet, linkSet);
 			JsonElement Clustering_C = gson.toJsonTree(cc_value);
 			JsonObject obj = new JsonObject();
