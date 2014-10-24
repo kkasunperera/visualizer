@@ -815,7 +815,6 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
             .style("stroke", "none")
             .style("font", "10px sans-serif");
 
-		        
         };
     }
 
@@ -1182,7 +1181,6 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
     // }
     }
     
-    fun
 
 }
 

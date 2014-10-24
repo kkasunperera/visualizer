@@ -97,6 +97,12 @@
 	stroke-with:1.5px;
 }
 
+.linkWhite{
+	fill: none;
+	stroke:#FFFFFF;
+	stroke-with:-10 px;
+}
+
 .node circle {
  
   stroke: #fff;
@@ -126,7 +132,7 @@ text {
 							    <li><a id="Incmp" href="#IncompleteTriad" data-toggle="tab">IncompleteTriad</a></li>
 							    <li><a id="Imcycles" href="#ImmediateCycle" data-toggle="tab">ImmediateCycles</a></li>
 							    <li><a id="Quarters" href="#QuarterlyTemporalPatterns" data-toggle="tab">QuarterlyTemporalPatterns</a></li>
-			
+								<li><a id="Chain"  href="#longerchain" data-toggle="tab" >Chain</a></li>
 							</ul>
                             
                             <div id="myTabContent" class="tab-content">
@@ -300,9 +306,12 @@ text {
 							   			<br>
 							   			<canvas id="graph_note6" width="800" height="80" style="float: left"></canvas>
 							   			&nbsp; Clustering Coefficient : <l id="cc_show"></l>
-							   			<button id="Sustained">Sustained</button>
-							   			<button id="Episodic">Episodic</button>
-							   			<button id="Weak">Weak</button>
+							   			<div style="float: right">
+							   			<button class="btn btn-default" id="main">Main</button>
+							   			<button class="btn btn-primary" id="Sustained">Sustained</button>
+							   			<button class="btn btn-danger" id="Episodic">Episodic</button>
+							   			<button class="btn btn-success" id="Weak">Weak</button>
+							   			</div>
 							   				<script type="text/javascript">
 							   					
 							   					var file=<%= name%>;							   				
@@ -312,12 +321,13 @@ text {
 							   					$("#Quarters").click(function(){
 							   						var width = 900, height = 950;
 							   						QuarterGraph(nodes, file, "#borderQgraph", width, height);
+							   						
 							   						$.ajax({
 									   					  type: 'GET',
 									   					  url: "cc",
 									   					  dataType: 'json',
 									   					  success: function(data,status) {
-									   						var cc = document.getElementById("cc_show").innerHTML = data.Clustering_C;
+									   						document.getElementById("cc_show").innerHTML = data.Clustering_C;
 									   					  },
 									   					  error: function(data,error){alert(error);},
 									   					  async: false
@@ -325,17 +335,50 @@ text {
 								   				});
 							   					
 							   					$("#Sustained").click(function(){
-							   						alert("sustained");
+							   						//alert("sustained");
+							   						var ctx=document.getElementById("graph_note6").getContext("2d");
+							   						ctx.clearRect(0, 0, 800, 80);
+							   						SvgQuaterSustained(ctx);
+							   						var width = 900, height = 950;
+							   						QuarterGraphSustained(nodes, file, "#borderQgraph", width, height);
 							   					});
 							   					$("#Episodic").click(function(){
-							   						alert("episodic");
+							   						//alert("episodic");
+							   						var ctx=document.getElementById("graph_note6").getContext("2d");
+							   						ctx.clearRect(0, 0, 800, 80);							   						
+							   						SvgQuarterEpisodic(ctx);
+							   						var width = 900, height = 950;
+							   						QuaterGraphEpisodic(nodes, file, "#borderQgraph", width, height);
 							   					});
 							   					$("#Weak").click(function(){
-							   						alert("weak");
+							   						//alert("weak");
+							   						var ctx=document.getElementById("graph_note6").getContext("2d");
+							   						ctx.clearRect(0, 0, 800, 80);
+							   						SvgQuarterWeak(ctx);
+							   						var width = 900, height = 950;
+							   						QuatergraphWeak(nodes, file, "#borderQgraph", width, height);
 							   					});
+							   					$("#main").click(function(){
+							   						var ctx=document.getElementById("graph_note6").getContext("2d");
+							   						ctx.clearRect(0, 0, 800, 80);
+							   						SvgQuarter(ctx);
+							   						var width = 900, height = 950;
+							   						QuarterGraph(nodes, file, "#borderQgraph", width, height);
+							   					});							   					
 							   				</script>
 							   		</div>
-							   </div>						   							  							  
+							   </div>
+							   
+							   <div class="tab-pane fade" id="longerchain">							   	
+							   		<div id="Lchain" style="border:2px solid;">
+							   			<script type="text/javascript">							   				
+							   			$("#Chain").click(function(){
+							   				var width = 1000,height = 900;	
+							   				Longchain(nodes, file, "#Lchain", width, height) 
+							   			});
+							   			</script>							   		
+							   		</div>
+							   	</div>						   							  							  
 						</div>
 						<script>							
 

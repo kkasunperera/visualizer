@@ -42,6 +42,7 @@ public class PostDataServ extends HttpServlet {
 	List<Node> node;
 	List<Links> linkCompleteTriad;
 	List<Links> linkIncomplete;
+	List<Links> linkChain;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -112,7 +113,8 @@ public class PostDataServ extends HttpServlet {
 				//this is for send node set data with link set as json
 				node=Arrays.asList(nodeSet);
 				
-				g = DirectedGraphDemoServ.createHrefGraph(nodeSet,linkSet);				
+				g = DirectedGraphDemoServ.createHrefGraph(nodeSet,linkSet);	
+				//linkChain = DirectedGraphDemoServ.LongerChain(g, nodeSet);
 				linkCompleteTriad=DirectedGraphDemoServ.CompleteTriad(g, nodeSet);
 				linkIncomplete=DirectedGraphDemoServ.InCompleteTriad(g, nodeSet);
 					
@@ -220,6 +222,22 @@ public class PostDataServ extends HttpServlet {
 			JsonObject obj = new JsonObject();
 			obj.add("Clustering_C", Clustering_C);
 			out.print(obj.toString());
+			out.close();
+		} else if(userPath.equals("/LongerChain")){
+						
+
+			response.setContentType("application/json");
+			PrintWriter out = response.getWriter();
+
+			JsonObject Obj = new JsonObject();
+
+			JsonElement links = gson.toJsonTree(linkChain);
+			JsonElement nodes = gson.toJsonTree(node);
+
+			Obj.add("Links", links);
+			Obj.add("nodes", nodes);
+
+			out.print(Obj.toString());
 			out.close();
 		}
 
