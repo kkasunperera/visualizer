@@ -179,6 +179,7 @@ text {
 							<li><a id="Cmp" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
 							<li><a id="Incmp" href="#IncompleteTriad" data-toggle="tab">IncompleteTriad</a></li>
 							<li><a id="Imcycles" href="#ImmediateCycle" data-toggle="tab">ImmediateCycles</a></li>
+							<li><a id="Chain" href="#Chain_show" data-toggle="tab">Chain</a></li>
 							
 
 						</ul>
@@ -414,6 +415,37 @@ text {
 
 								</div>
 							</div>
+							<div class="tab-pane fade" id="Chain_show">
+								<div id="borderChain" style="border: 2px solid;">
+									<br />
+
+
+									<canvas id="graph_note9" width="500" height="50"
+										style="float: right"> </canvas>
+									<script type="text/javascript">
+							   			var ctx3 = document.getElementById("graph_note9").getContext("2d");					                            
+			                            SvgLoadIncTriad(ctx3);
+			                            		
+			                            $("#Chain").click(function(){							   												   					
+						   					$.ajax({
+						   					  type: 'GET',
+						   					  url: "IncompleteTriad?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
+						   					  dataType: 'json',
+						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
+						   						var width = 1000,height = 900;							   						
+						   						//DrawGraph(data.nodes, data.Links,"#borderIncmp",width,height);
+                                                DrawChain(data.nodes, data.links,"#borderChain",width,height);
+						   					  },
+						   					  error: function(data,error){alert(error);},
+						   					  async: false
+						   					}); 							   					
+						   				});
+							   			</script>
+
+								</div>
+							</div>
+							
+							
 						</div>
 						<script>							
 
