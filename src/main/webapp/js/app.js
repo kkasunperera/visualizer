@@ -593,7 +593,6 @@ function isConnected(a, b) {
 	}
 });
 
-
 }
 
 function QuatergraphWeak(nodes,file,svg1,width,height){
@@ -809,7 +808,6 @@ function isConnected(a, b) {
 	//return linkedByIndex[a.index + "," + b.index];
 	}
 });
-
 
 }
 

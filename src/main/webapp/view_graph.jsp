@@ -143,6 +143,12 @@
 	stroke-with:1.5px;
 }
 
+.linkWhite{
+	fill: none;
+	stroke:#FFFFFF;
+	stroke-with:-10 px;
+}
+
 .node circle {
  
   stroke: #fff;
