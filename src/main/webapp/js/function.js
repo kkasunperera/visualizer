@@ -815,7 +815,6 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
             .style("stroke", "none")
             .style("font", "10px sans-serif");
 
-		        
         };
     }
 
@@ -1198,7 +1197,6 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
     // }
     }
     
-    
 
 }
 
@@ -1553,8 +1551,11 @@ function DrawChain(nodes,links,svg1,width,height){
         return linksForSelectedNode[a.index + "," + b.index];
     // }
     }
-    
-   
 
 }
+
+function clustering_cof(tag,cc) {
+	$(tag).html(cc);
+}
+
 

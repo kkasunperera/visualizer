@@ -373,7 +373,63 @@ public class DirectedGraphDemoServ {
 		return state;
 	}
 
-	public static Links[] link_filter(int quater , Links[] linkset) {
+	/**
+	 * @param graph
+	 * @param nodes
+	 */ //alt+shift+x+j
+	public static List<Links> LongerChain(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes){
+		System.out.println("method is gointo start......");
+		
+		List<Links> list=new ArrayList<Links>();
+		Node A=nodes[1];
+		Set<DefaultEdge> setA=graph.outgoingEdgesOf(A);
+		DefaultEdge[] edgeSetA=setA.toArray(new DefaultEdge[setA.size()]);
+		
+		for (int i = 0; i < setA.size(); i++) {
+			Node B=graph.getEdgeTarget(edgeSetA[i]);
+				if(graph.containsEdge(A, B)){
+					
+					Set<DefaultEdge> setB=graph.outgoingEdgesOf(B);
+					DefaultEdge[] edgeSetB=setB.toArray(new DefaultEdge[setB.size()]);
+					
+					for (int j = 0; j < edgeSetB.length; j++) {
+						Node C=graph.getEdgeTarget(edgeSetB[j]);
+						
+						if(graph.containsEdge(B, C)){
+							Set<DefaultEdge> setC=graph.outgoingEdgesOf(C);
+							DefaultEdge[] edgeSetC=setC.toArray(new DefaultEdge[setC.size()]);
+							
+							for (int k = 0; k < edgeSetC.length; k++) {
+								Node D=graph.getEdgeTarget(edgeSetC[k]);
+									if(graph.containsEdge(C,D)){
+										Links AB=new Links();
+										AB.setSource(Arrays.asList(nodes).indexOf(A));
+										AB.setTarget(Arrays.asList(nodes).indexOf(B));
+										
+										Links BC=new Links();
+										BC.setSource(Arrays.asList(nodes).indexOf(B));
+										BC.setTarget(Arrays.asList(nodes).indexOf(C));
+										
+										Links CD=new Links();
+										CD.setSource(Arrays.asList(nodes).indexOf(C));
+										CD.setTarget(Arrays.asList(nodes).indexOf(D));
+										
+										list.add(AB);
+										list.add(BC);
+										list.add(CD);
+										
+										System.out.println("A-> "+A.toString()+" B-> "+B.toString()+" C-> "+C.toString()+" D-> "+D.toString());
+									}
+							}
+						}
+					}
+				}
+		}
+		System.out.println("end");
+		return list;
+	}
+	
+ public static Links[] link_filter(int quater , Links[] linkset) {
 		ArrayList<Links> temp = new ArrayList<Links>();
 		switch (quater) {
 		case 0:
@@ -412,3 +468,4 @@ public class DirectedGraphDemoServ {
 		return temp.toArray(new Links[temp.size()]);
 	}
 }
+
