@@ -18,6 +18,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.util.ArrayUnenforcedSet;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -108,11 +109,13 @@ public class PostDataServ extends HttpServlet {
 				System.out.println("nodeset length "+nodeSet.length);
 				System.out.println("linkset length "+linkSet.length);
 				
+				
 				//System.out.println(linkSet[0].getQ3());
 				
 				//this is for send node set data with link set as json
 				node=Arrays.asList(nodeSet);
 				
+
 				g = DirectedGraphDemoServ.createHrefGraph(nodeSet,linkSet);	
 				//linkChain = DirectedGraphDemoServ.LongerChain(g, nodeSet);
 				linkCompleteTriad=DirectedGraphDemoServ.CompleteTriad(g, nodeSet);
@@ -122,8 +125,11 @@ public class PostDataServ extends HttpServlet {
 
 		} else if (userPath.equals("/Indegree")) {
 			logger.info("userPath is " + userPath);
-
-			List<Links> link = DirectedGraphDemoServ.findHighInDegree(g,
+			
+			int quater = Integer.parseInt(request.getParameter("Quater"));
+			
+			DirectedGraph<Node,DefaultEdge> gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, DirectedGraphDemoServ.link_filter(quater, linkSet));
+			List<Links> link = DirectedGraphDemoServ.findHighInDegree(gg,
 					nodeSet);
 
 			response.setContentType("application/json");
@@ -133,7 +139,7 @@ public class PostDataServ extends HttpServlet {
 
 			JsonElement links = gson.toJsonTree(link);
 			JsonElement nodes = gson.toJsonTree(node);
-			Obj.add("Links", links);
+			Obj.add("links", links);
 			Obj.add("nodes", nodes);
 
 			out.println(Obj.toString());
@@ -141,8 +147,12 @@ public class PostDataServ extends HttpServlet {
 
 		} else if (userPath.equals("/Outdegree")) {
 			logger.info("userPath is " + userPath);
-
-			List<Links> link = DirectedGraphDemoServ.findHighOutDegree(g,
+			
+			int quater = Integer.parseInt(request.getParameter("Quater"));
+			
+			DirectedGraph<Node,DefaultEdge> gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, DirectedGraphDemoServ.link_filter(quater, linkSet));
+			
+			List<Links> link = DirectedGraphDemoServ.findHighOutDegree(gg,
 					nodeSet);
 
 			response.setContentType("application/json");
@@ -152,7 +162,7 @@ public class PostDataServ extends HttpServlet {
 
 			JsonElement links = gson.toJsonTree(link);
 			JsonElement nodes = gson.toJsonTree(node);
-			Obj.add("Links", links);
+			Obj.add("links", links);
 			Obj.add("nodes", nodes);
 
 			out.println(Obj.toString());
@@ -161,6 +171,13 @@ public class PostDataServ extends HttpServlet {
 		} else if (userPath.equals("/CompleteTriad")) {
 			logger.info("userPath is " + userPath);
 
+			int quater = Integer.parseInt(request.getParameter("Quater"));
+			
+			DirectedGraph<Node,DefaultEdge> gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, DirectedGraphDemoServ.link_filter(quater, linkSet));
+			
+			
+			linkCompleteTriad=DirectedGraphDemoServ.CompleteTriad(gg, nodeSet);
+			
 			response.setContentType("application/json");
 			PrintWriter out = response.getWriter();
 
@@ -169,7 +186,7 @@ public class PostDataServ extends HttpServlet {
 			JsonElement links = gson.toJsonTree(linkCompleteTriad);
 			JsonElement nodes = gson.toJsonTree(node);
 
-			Obj.add("Links", links);
+			Obj.add("links", links);
 			Obj.add("nodes", nodes);
 
 			out.println(Obj.toString());
@@ -177,7 +194,10 @@ public class PostDataServ extends HttpServlet {
 
 		} else if (userPath.equals("/IncompleteTriad")) {
 			logger.info("userPath is " + userPath);
-
+			int quater = Integer.parseInt(request.getParameter("Quater"));
+			DirectedGraph<Node,DefaultEdge> gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, DirectedGraphDemoServ.link_filter(quater, linkSet));
+			
+			linkIncomplete=DirectedGraphDemoServ.InCompleteTriad(gg, nodeSet);
 			response.setContentType("application/json");
 			PrintWriter out = response.getWriter();
 
@@ -186,7 +206,7 @@ public class PostDataServ extends HttpServlet {
 			JsonElement links = gson.toJsonTree(linkIncomplete);
 			JsonElement nodes = gson.toJsonTree(node);
 
-			Obj.add("Links", links);
+			Obj.add("links", links);
 			Obj.add("nodes", nodes);
 
 			out.println(Obj.toString());
@@ -195,7 +215,11 @@ public class PostDataServ extends HttpServlet {
 		} else if (userPath.equals("/ImmediateCycles")) {
 			logger.info("userPath is " + userPath);
 
-			List<Links> link = DirectedGraphDemoServ.findImmidietCycles(g,
+			int quater = Integer.parseInt(request.getParameter("Quater"));
+			DirectedGraph<Node,DefaultEdge> gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, DirectedGraphDemoServ.link_filter(quater, linkSet));
+			
+			
+			List<Links> link = DirectedGraphDemoServ.findImmidietCycles(gg,
 					nodeSet);
 
 			response.setContentType("application/json");
@@ -206,7 +230,7 @@ public class PostDataServ extends HttpServlet {
 			JsonElement links = gson.toJsonTree(link);
 			JsonElement nodes = gson.toJsonTree(node);
 
-			Obj.add("Links", links);
+			Obj.add("links", links);
 			Obj.add("nodes", nodes);
 
 			out.print(Obj.toString());
@@ -215,30 +239,17 @@ public class PostDataServ extends HttpServlet {
 		} else if (userPath.equals("/cc")) {
 			logger.info("userPath is " + userPath);
 			PrintWriter out = response.getWriter();
-
-			double cc_value = DirectedGraphDemoServ.clusteringCoefficient(g,
+			int quater = Integer.parseInt(request.getParameter("Quater"));
+			DirectedGraph<Node,DefaultEdge> gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, DirectedGraphDemoServ.link_filter(quater, linkSet));
+			
+			double cc_value = DirectedGraphDemoServ.clusteringCoefficient(gg,
 					nodeSet, linkSet);
 			JsonElement Clustering_C = gson.toJsonTree(cc_value);
 			JsonObject obj = new JsonObject();
 			obj.add("Clustering_C", Clustering_C);
-			out.print(obj.toString());
+			out.print(obj.toString());			
 			out.close();
-		} else if(userPath.equals("/LongerChain")){
-						
 
-			response.setContentType("application/json");
-			PrintWriter out = response.getWriter();
-
-			JsonObject Obj = new JsonObject();
-
-			JsonElement links = gson.toJsonTree(linkChain);
-			JsonElement nodes = gson.toJsonTree(node);
-
-			Obj.add("Links", links);
-			Obj.add("nodes", nodes);
-
-			out.print(Obj.toString());
-			out.close();
 		}
 
 	}

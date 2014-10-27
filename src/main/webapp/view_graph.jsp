@@ -14,11 +14,59 @@
 <link href="css/plugins/morris.css" rel="stylesheet">
 <link href="font-awesome-4.1.0/css/font-awesome.min.css"
     rel="stylesheet" type="text/css">
+<link href="css/jquery-ui.css" rel="stylesheet">
 <script src="js/jquery.1.9.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/function.js"></script>
 <script src="js/node.js"></script>
 <script src="js/app.js"></script>
+
+<style type="text/css">
+		.demoHeaders {
+			margin-top: 2em;
+		}
+		
+		#dialog-link {
+			padding: .4em 1em .4em 20px;
+			text-decoration: none;
+			position: relative;
+		}
+		
+		#dialog-link span.ui-icon {
+			margin: 0 5px 0 0;
+			position: absolute;
+			left: .2em;
+			top: 50%;
+			margin-top: -8px;
+		}
+		
+		#icons {
+			margin: 0;
+			padding: 0;
+		}
+		
+		#icons li {
+			margin: 2px;
+			position: relative;
+			padding: 4px 0;
+			cursor: pointer;
+			float: left;
+			list-style: none;
+		}
+		
+		#icons span.ui-icon {
+			float: left;
+			margin: 0 4px;
+		}
+		
+		.fakewindowcontain .ui-widget-overlay {
+			position: absolute;
+		}
+		
+		select {
+			width: 300px;
+	}
+</style>
 </head>
 
 
@@ -36,33 +84,31 @@
                     project</a>
             </div>
            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li class="active"><a href="index.jsp"><i
-                            class="fa fa-fw fa-dashboard"></i> Visualizer</a></li>
-                    <li><a href="javascript:;" data-toggle="collapse"
-                        data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>
-                            GC-Analysis <i class="fa fa-fw fa-caret-down"></i></a>
-                        
-                        <ul id="demo" name="demo" class="collapse">
-                            <% for(int i = 2005;i < 2014;i++) {%>
-                            <li><a  href="?filename=data<%=i%>.json&year=<%=i%>"><%=i%></a></li>                            
-                            <%}%>
-                        </ul></li>
-                    <!-- <li><a href="Overall.html"><i
-                            class="fa fa-fw fa-bar-chart-o"></i> Overall</a></li>
-                    <li><a href="RowData.html"><i class="fa fa-fw fa-table"></i>
-                            Row Data</a></li>
-                    <li><a href="blank-page.html"><i class="fa fa-fw fa-file"></i>
-                            More About</a></li> -->
-                            
-<!--                    <li><a href="#"><i
-                            class="fa fa-fw fa-bar-chart-o"></i> Overall</a></li>
-                    <li><a href="#"><i class="fa fa-fw fa-table"></i>
-                            Row Data</a></li>-->
-                    <li><a href="#"><i class="fa fa-fw fa-file"></i>
+               <ul class="nav navbar-nav side-nav">
+					<li class="active"><a href="index.jsp"><i
+							class="fa fa-fw fa-dashboard"></i> Visualizer</a></li>
+					<li><a ><i class="fa fa-fw fa-arrows-v"></i>
+							GC-Analysis </a>
+						<ul id="accordion">
+						<% for(int i = 2005;i < 2014;i++) {%>
+							<li>
+								<h3><a href="?filename=data<%=i%>.json&year=data<%=i%>.json&year=<%=i%>"><%=i%></a></h3>
+								<ul>
+									<li><a href="view_graph.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=0"><i class="fa fa-fw fa-table"></i> Overall </a></li>
+									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=1"><i class="fa fa-fw fa-table"></i> Quarter 1</a></li>
+									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=2"><i class="fa fa-fw fa-table"></i> Quarter 2</a></li>
+									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=3"><i class="fa fa-fw fa-table"></i> Quarter 3</a></li>
+									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=4"><i class="fa fa-fw fa-table"></i> Quarter 4</a></li>
+								</ul>
+							</li>
+							<%} %>
+						</ul>               
+                
+                       </li>
+                       <li><a href="#"><i class="fa fa-fw fa-file"></i>
                             More About</a></li>
                             
-                </ul>
+               		   </ul>
            </div>
         </nav>
                         
@@ -97,12 +143,6 @@
 	stroke-with:1.5px;
 }
 
-.linkWhite{
-	fill: none;
-	stroke:#FFFFFF;
-	stroke-with:-10 px;
-}
-
 .node circle {
  
   stroke: #fff;
@@ -132,7 +172,8 @@ text {
 							    <li><a id="Incmp" href="#IncompleteTriad" data-toggle="tab">IncompleteTriad</a></li>
 							    <li><a id="Imcycles" href="#ImmediateCycle" data-toggle="tab">ImmediateCycles</a></li>
 							    <li><a id="Quarters" href="#QuarterlyTemporalPatterns" data-toggle="tab">QuarterlyTemporalPatterns</a></li>
-								<li><a id="Chain"  href="#longerchain" data-toggle="tab" >Chain</a></li>
+							    <li><a id="Chain"  href="#longerchain" data-toggle="tab" >Chain</a></li>
+			
 							</ul>
                             
                             <div id="myTabContent" class="tab-content">
@@ -142,6 +183,7 @@ text {
 									 <div id="gc_network" style="border:2px solid;">
 									 <br />
                                         <canvas id="graph_note" width="500" height="50" style="float: right">                                
+
                                         </canvas>
                             				<!-- load the svg using javascript function -->
 				                            <script>				
@@ -164,17 +206,19 @@ text {
 											$("#In").click(function(){							   												   					
 							   					$.ajax({
 							   					  type: 'GET',
-							   					  url: "Indegree",
+							   					  url: "Indegree?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
 							   					  dataType: 'json',
 							   					  success: function(data,status) {//data.Links,data.nodes	
 							   						
-							   					  	document.getElementById("max_indegree").innerHTML = data.Links.length;
+							   					  	document.getElementById("max_indegree").innerHTML = data.links.length;
 							   						var width = 1000,height = 900;							   						
-							   						DrawGraph(data.nodes, data.Links,"#borderIn",width,height);	
+							   						DrawGraph(data.nodes, data.links,"#borderIn",width,height);	
 							   						
 							   						
 							   					  },
-							   					  error: function(data,error){alert(error);},
+							   					  error: function(data,error){
+							   						  //alert(error);
+							   						  },
 							   					  async: false
 							   					}); 							   					
 							   				});
@@ -196,12 +240,12 @@ text {
 											$("#Out").click(function(){							   												   					
 							   					$.ajax({
 							   					  type: 'GET',
-							   					  url: "Outdegree",
+							   					  url: "Outdegree?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
 							   					  dataType: 'json',
 							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 							   						var width = 1000,height = 900;							   						
-							   						DrawGraph(data.nodes, data.Links,"#borderOut",width,height);
-							   						document.getElementById("max_outdegree").innerHTML = data.Links.length;							   						
+							   						DrawGraph(data.nodes, data.links,"#borderOut",width,height);
+							   						document.getElementById("max_outdegree").innerHTML = data.links.length;							   						
 							   					  },
 							   					  error: function(data,error){alert(error);},
 							   					  async: false
@@ -226,14 +270,16 @@ text {
 			                            $("#Cmp").click(function(){							   												   					
 						   					$.ajax({
 						   					  type: 'GET',
-						   					  url: "CompleteTriad",
+						   					  url: "CompleteTriad?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 						   						var width = 1000,height = 900;							   						
 						   						//DrawGraph(data.nodes, data.Links,"#borderCmp",width,height);							   						
-						   				DrawTrangleGraph(data.nodes, data.Links,"#borderCmp",width,height);	 
+						   				DrawTrangleGraph(data.nodes, data.links,"#borderCmp",width,height);	 
                                          },
-						   					  error: function(data,error){alert(error);},
+						   					  error: function(data,error){
+						   						 // alert(error);
+						   						  },
 						   					  async: false
 						   					}); 							   					
 						   				});
@@ -253,14 +299,15 @@ text {
 			                            $("#Incmp").click(function(){							   												   					
 						   					$.ajax({
 						   					  type: 'GET',
-						   					  url: "IncompleteTriad",
+						   					  url: "IncompleteTriad?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 						   						var width = 1000,height = 900;							   						
 						   						//DrawGraph(data.nodes, data.Links,"#borderIncmp",width,height);
-                                                DrawIncompleteTriad(data.nodes, data.Links,"#borderIncmp",width,height);
+                                                DrawIncompleteTriad(data.nodes, data.links,"#borderIncmp",width,height);
 						   					  },
-						   					  error: function(data,error){alert(error);},
+						   					  error: function(data,error){
+						   						  alert(error);},
 						   					  async: false
 						   					}); 							   					
 						   				});
@@ -280,11 +327,11 @@ text {
 			                            $("#Imcycles").click(function(){							   												   					
 						   					$.ajax({
 						   					  type: 'GET',
-						   					  url: "ImmediateCycles",
+						   					  url: "ImmediateCycles?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 						   						var width = 1000,height = 900;							   						
-						   						DrawGraph(data.nodes, data.Links,"#borderImcycle",width,height);							   						
+						   						DrawGraph(data.nodes, data.links,"#borderImcycle",width,height);							   						
 						   					  },
 						   					  error: function(data,error){alert(error);},
 						   					  async: false
@@ -316,6 +363,7 @@ text {
 							   					
 							   					var file=<%= name%>;							   				
 							   					var ctx=document.getElementById("graph_note6").getContext("2d");
+							   						
 							   					SvgQuarter(ctx);							   				
 							   					 
 							   					$("#Quarters").click(function(){
@@ -324,13 +372,14 @@ text {
 							   						
 							   						$.ajax({
 									   					  type: 'GET',
-									   					  url: "cc",
+									   					  url: "cc?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
 									   					  dataType: 'json',
 									   					  success: function(data,status) {
 									   						document.getElementById("cc_show").innerHTML = data.Clustering_C;
 									   					  },
 									   					  error: function(data,error){alert(error);},
 									   					  async: false
+
 									   					}); 								   													   			
 								   				});
 							   					
@@ -366,6 +415,7 @@ text {
 							   						QuarterGraph(nodes, file, "#borderQgraph", width, height);
 							   					});							   					
 							   				</script>
+
 							   		</div>
 							   </div>
 							   
@@ -403,7 +453,7 @@ text {
 								//alert(JSON.stringify(obj.link));
 										//post the json string to servlet
 								$.post("PostDataServ",JSON.stringify(obj)).error(function(){
-									alert("there is error while sending data to server");
+									//alert("there is error while sending data to server");
 								});;  
 										//alert(JSON.stringify(obj.link));
 										
@@ -429,6 +479,13 @@ text {
     <script src="js/plugins/morris/raphael.min.js"></script>
     <script src="js/plugins/morris/morris.min.js"></script>
     <script src="js/plugins/morris/morris-data.js"></script>
+    <script src="js/jquery.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		<script>
+		<% int a = Integer.parseInt(year)%2005;%>
+	$( "#accordion" ).accordion();
+	$( "#accordion" ).accordion({ active: <%=a%>});
+	</script>
 </div>    
 </body>
 

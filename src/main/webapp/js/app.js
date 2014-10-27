@@ -813,7 +813,36 @@ function isConnected(a, b) {
 
 }
 
-function OriginalNetworkGraph(nodes,file,svg1,width,height){
+function data_set(quart,json) {
+	switch (quart) {
+	case 0:
+		break;
+    case 1:
+    	for(var i = json.links.length-1; i--;){
+    		if(json.links[i].Q1!=0 | json.links[i].Q2!=0 | json.links[i].Q3!=0 | json.links[i].Q4!=0)json.links.splice(i,1);
+    	}
+        break;
+    case 2:
+    	for(var i = json.links.length-1; i--;){
+    		if(json.links[i].Q1!=0 | json.links[i].Q2!=1 | json.links[i].Q3!=0 | json.links[i].Q4!=0)json.links.splice(i,1);
+    	}
+        break;
+    case 3:
+    	for(var i = json.links.length-1; i--;){
+    		if(json.links[i].Q1!=0 | json.links[i].Q2!=0 | json.links[i].Q3!=1 | json.links[i].Q4!=0)json.links.splice(i,1);
+    	}
+        break;
+    case 4:
+    	for(var i = json.links.length-1; i--;){
+    		if(json.links[i].Q1!=0 | json.links[i].Q2!=0 | json.links[i].Q3!=0 | json.links[i].Q4!=1)json.links.splice(i,1);
+    	}
+        break;
+	}
+	//alert(json.links.length);
+	return json.links;
+}
+
+function OriginalNetworkGraph(nodes,file,svg1,width,height,quart){
 	
 	var linkedByIndex = {};
 	var color = d3.scale.category10();		 	
@@ -828,12 +857,14 @@ function OriginalNetworkGraph(nodes,file,svg1,width,height){
     
  //input to the file name which is taken previously
  
-d3.json(file, function(error, json) {
-  force
+d3.json(file, function(error, json) {  
+	force
       .nodes(nodes)
-      .links(json.links)
+      .links(data_set(quart, json))
       .on("tick", tick)
       .start();
+  
+ 
  
   
   svg.selectAll(".link")
@@ -998,7 +1029,7 @@ function isConnected(a, b) {
 });
 }
 
-function QuarterGraph(nodes,file,svg1,width,height){
+function QuarterGraph(nodes,file,svg1,width,height,quart){
 	
 	var linkedByIndex = {};
 	var color = d3.scale.category10();		 
@@ -1017,7 +1048,7 @@ var force = d3.layout.force()
 d3.json(file, function(error, json) {
   force
       .nodes(nodes)
-      .links(json.links)
+      .links(data_set(quart, json))
       .on("tick", tick)
       .start();
  
@@ -1028,7 +1059,7 @@ d3.json(file, function(error, json) {
       //.attr("class", "link");
       
  var arrow_head = svg.append("svg:defs").selectAll("marker")
-    .data(["end"])      // "sustained","episodic","weak" Different link/path types can be defined here
+    .data(["end"])      // Different link/path types can be defined here
   .enter().append("svg:marker")    // This section adds in the arrows
     .attr("id", String)
     .attr("viewBox", "0 -5 10 10")
@@ -1053,25 +1084,8 @@ d3.json(file, function(error, json) {
 		}else if(d.type == "episodic"){
 			return "linkEpisodic";
 		}
-	})
-	.attr("marker-end","url(#end)");
-	//.attr("id",function(d,i) { return "linkId_" + i; }); // assign id for each link/path    
-  
-  /*var linktext = svg.append("svg:g").selectAll("g.linklabelholder").data(force.links());
-	
-  linktext.enter().append("g").attr("class", "linklabelholder")
-   .append("text")
-   .attr("class", "linklabel")
-	 .style("font-size", "13px")
-   .attr("x", "50")
-	 .attr("y", "-20")
-   .attr("text-anchor", "start")
-	   .style("fill","#000")
-	 .append("textPath")
-  .attr("xlink:href",function(d,i) { return "#linkId_" + i;})
-   .text(function(d) { 
-	 return d.type; 
-	 });*/
+	}) 
+	.attr("marker-end", "url(#end)");
 
   var node = svg.selectAll(".node")
       .data(force.nodes())
@@ -1217,109 +1231,109 @@ function isConnected(a, b) {
 	}
 });
 }
-
 function SvgQuarter(ctx){
 	ctx.fillStyle = "#1f77b4";
-    ctx.beginPath();
-    ctx.arc(200,10,8,0,2*Math.PI);
-    ctx.closePath();
-    ctx.fill();
-    
-    
-    ctx.fillStyle = "#ff7f0d";
-    ctx.beginPath();
-    ctx.arc(200,35,8,0,2*Math.PI);
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.fillStyle = "#ff7f0d";
-    ctx.beginPath();
-    ctx.fillText("Equity", 214,40); 
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.fillStyle = "#1f77b4";
-    ctx.beginPath();
-    ctx.fillText("Bond", 214,14); 
-    ctx.closePath();
-    ctx.fill();
-    
-    //should be dashed
-    ctx.fillStyle = "#666";
-    ctx.beginPath();
-    ctx.fillText("= = = = = = =", 300,14); 
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.strokeStyle="#666";
-    ctx.beginPath();
-    ctx.moveTo(350,35);
-    ctx.lineTo(301,35);
-    ctx.stroke();
-    
-    ctx.fillStyle = "#666";
-    ctx.beginPath();
-    ctx.arc(300,10,8,0,2*Math.PI);
-    ctx.closePath();
-    ctx.fill();
-  
-    
-    ctx.fillStyle = "#666";
-    ctx.beginPath();
-    ctx.arc(300,35,8,0,2*Math.PI);
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.fillStyle = "#666";
-    ctx.beginPath();
-    ctx.fillText("Input Edge to the Node", 360,40); 
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.fillStyle = "#666";
-    ctx.beginPath();
-    ctx.fillText("Output Edge from the Node", 360,14); 
-    ctx.closePath();
-    ctx.fill();
-    
-    //#0066FF sustain
-    ctx.strokeStyle ="#33CC33";
-    ctx.beginPath();
- 	ctx.moveTo(550,10);
-    ctx.lineTo(500,10);
-    ctx.stroke();
-    
-    //#FF0000 episodic 
- 	ctx.strokeStyle ="#0066FF";
-    ctx.beginPath();
- 	ctx.moveTo(550,35);
-    ctx.lineTo(500,35);
-    ctx.stroke();
-    
-    //#33CC33 weak
- 	ctx.strokeStyle ="#FF0000";
-    ctx.beginPath();
- 	ctx.moveTo(550,60);
-    ctx.lineTo(500,60);
-    ctx.stroke();
-    
- 	ctx.fillStyle = "#33CC33";
-    ctx.beginPath();
-    ctx.fillText("weak", 580,10); 
-    ctx.closePath();
-    ctx.fill();
-    
- 	ctx.fillStyle = "#0066FF";
-    ctx.beginPath();
-    ctx.fillText("Sustained", 580,38); 
-    ctx.closePath();
-    ctx.fill();
-    
- 	ctx.fillStyle = "#FF0000";
-    ctx.beginPath();
-    ctx.fillText("Episodic", 580,65); 
-    ctx.closePath();
-    ctx.fill();
+	    ctx.beginPath();
+	    ctx.arc(200,10,8,0,2*Math.PI);
+	    ctx.closePath();
+	    ctx.fill();
+	    
+	    
+	    ctx.fillStyle = "#ff7f0d";
+	    ctx.beginPath();
+	    ctx.arc(200,35,8,0,2*Math.PI);
+	    ctx.closePath();
+	    ctx.fill();
+	    
+	    ctx.fillStyle = "#ff7f0d";
+	    ctx.beginPath();
+	    ctx.fillText("Equity", 214,40); 
+	    ctx.closePath();
+	    ctx.fill();
+	    
+	    ctx.fillStyle = "#1f77b4";
+	    ctx.beginPath();
+	    ctx.fillText("Bond", 214,14); 
+	    ctx.closePath();
+	    ctx.fill();
+	    
+	    //should be dashed
+	    ctx.fillStyle = "#666";
+	    ctx.beginPath();
+	    ctx.fillText("= = = = = = =", 300,14); 
+	    ctx.closePath();
+	    ctx.fill();
+	    
+	    ctx.strokeStyle="#666";
+	    ctx.beginPath();
+	    ctx.moveTo(350,35);
+	    ctx.lineTo(301,35);
+	    ctx.stroke();
+	    
+	    ctx.fillStyle = "#666";
+	    ctx.beginPath();
+	    ctx.arc(300,10,8,0,2*Math.PI);
+	    ctx.closePath();
+	    ctx.fill();
+	  
+	    
+	    ctx.fillStyle = "#666";
+	    ctx.beginPath();
+	    ctx.arc(300,35,8,0,2*Math.PI);
+	    ctx.closePath();
+	    ctx.fill();
+	    
+	    ctx.fillStyle = "#666";
+	    ctx.beginPath();
+	    ctx.fillText("Input Edge to the Node", 360,40); 
+	    ctx.closePath();
+	    ctx.fill();
+	    
+	    ctx.fillStyle = "#666";
+	    ctx.beginPath();
+	    ctx.fillText("Output Edge from the Node", 360,14); 
+	    ctx.closePath();
+	    ctx.fill();
+	    
+	    //#0066FF sustain
+	    ctx.strokeStyle ="#33CC33";
+	    ctx.beginPath();
+	 	ctx.moveTo(550,10);
+	    ctx.lineTo(500,10);
+	    ctx.stroke();
+	    
+	    //#FF0000 episodic 
+	 	ctx.strokeStyle ="#0066FF";
+	    ctx.beginPath();
+	 	ctx.moveTo(550,35);
+	    ctx.lineTo(500,35);
+	    ctx.stroke();
+	    
+	    //#33CC33 weak
+	 	ctx.strokeStyle ="#FF0000";
+	    ctx.beginPath();
+	 	ctx.moveTo(550,60);
+	    ctx.lineTo(500,60);
+	    ctx.stroke();
+	    
+	 	ctx.fillStyle = "#33CC33";
+	    ctx.beginPath();
+	    ctx.fillText("weak", 580,10); 
+	    ctx.closePath();
+	    ctx.fill();
+	    
+	 	ctx.fillStyle = "#0066FF";
+	    ctx.beginPath();
+	    ctx.fillText("Sustained", 580,38); 
+	    ctx.closePath();
+	    ctx.fill();
+	    
+	 	ctx.fillStyle = "#FF0000";
+	    ctx.beginPath();
+	    ctx.fillText("Episodic", 580,65); 
+	    ctx.closePath();
+	    ctx.fill();
+
 }
 
 
