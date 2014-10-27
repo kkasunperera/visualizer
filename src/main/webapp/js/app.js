@@ -817,22 +817,22 @@ function data_set(quart,json) {
 		break;
     case 1:
     	for(var i = json.links.length-1; i--;){
-    		if(json.links[i].Q1!=0 | json.links[i].Q2!=0 | json.links[i].Q3!=0 | json.links[i].Q4!=0)json.links.splice(i,1);
+    		if(json.links[i].Q1==0)json.links.splice(i,1);
     	}
         break;
     case 2:
     	for(var i = json.links.length-1; i--;){
-    		if(json.links[i].Q1!=0 | json.links[i].Q2!=1 | json.links[i].Q3!=0 | json.links[i].Q4!=0)json.links.splice(i,1);
+    		if(json.links[i].Q2==0)json.links.splice(i,1);
     	}
         break;
     case 3:
     	for(var i = json.links.length-1; i--;){
-    		if(json.links[i].Q1!=0 | json.links[i].Q2!=0 | json.links[i].Q3!=1 | json.links[i].Q4!=0)json.links.splice(i,1);
+    		if(json.links[i].Q3==0)json.links.splice(i,1);
     	}
         break;
     case 4:
     	for(var i = json.links.length-1; i--;){
-    		if(json.links[i].Q1!=0 | json.links[i].Q2!=0 | json.links[i].Q3!=0 | json.links[i].Q4!=1)json.links.splice(i,1);
+    		if(json.links[i].Q4==0)json.links.splice(i,1);
     	}
         break;
 	}
@@ -938,6 +938,7 @@ json.links.forEach(function(d) {
 
 
 function mouseOver(opacity) {
+	//alert("links"+json.links.length);
     return function(d) {
     	node.style("stroke-opacity", function(o) {
             thisOpacity = isConnected(d, o) ? 1 : opacity;
