@@ -417,6 +417,10 @@ text {
 							</div>
 							<div class="tab-pane fade" id="Chain_show">
 								<div id="borderChain" style="border: 2px solid;">
+									<div><b>Note:</b>
+										longer chain will find the path only for 3 edges that means 
+										depth is 3. The node which is mouse over, may have more than one chain 
+									</div>
 									<br />
 
 
@@ -432,9 +436,9 @@ text {
 						   					  url: "IncompleteTriad?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
-						   						var width = 1000,height = 900;							   						
-						   						//DrawGraph(data.nodes, data.Links,"#borderIncmp",width,height);
-                                                DrawChain(data.nodes, data.links,"#borderChain",width,height);
+						   						var width = 1000,height = 900;							   												   						
+                                                //DrawChain(data.nodes, data.links,"#borderChain",width,height);
+                                                LongerChainInQuarterData(data.nodes, data.links, "#borderChain", width, height);
 						   					  },
 						   					  error: function(data,error){alert(error);},
 						   					  async: false
