@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>GCVisualizer - Karsha project</title>
+<title>Visualizer - Karsha project</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/sb-admin.css" rel="stylesheet">
 <link href="css/plugins/morris.css" rel="stylesheet">
@@ -81,13 +81,13 @@ select {
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.jsp"> GC Visualizer - Karsha
+			<a class="navbar-brand" href="index.jsp">Visualizer - Karsha
 				project</a>
 		</div>
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav side-nav">
 				<li class="active"><a href="index.jsp"><i
-						class="fa fa-fw fa-dashboard"></i> GCVisualizer</a></li>
+						class="fa fa-fw fa-dashboard"></i> Visualizer</a></li>
 				<li><a><i class="fa fa-fw fa-arrows-v"></i> GC-Analysis </a>
 					<ul id="accordion">
 						<% for(int i = 2005;i < 2014;i++) {%>
@@ -418,18 +418,12 @@ text {
 							<div class="tab-pane fade" id="Chain_show">
 								<div id="borderChain" style="border: 2px solid;">
 									<div><b>Note:</b>
-										longer chain will find the path only for 3 edges that means 
-										depth is 3. The node which is mouse over, may have more than one chain 
+										longer chain will find the depth upto 3.due to computation complexity 
 									</div>
 									<br />
 
-
-									<canvas id="graph_note9" width="500" height="50"
-										style="float: right"> </canvas>
 									<script type="text/javascript">
-							   			var ctx3 = document.getElementById("graph_note9").getContext("2d");					                            
-			                            SvgLoadIncTriad(ctx3);
-			                            		
+				
 			                            $("#Chain").click(function(){							   												   					
 						   					$.ajax({
 						   					  type: 'GET',
