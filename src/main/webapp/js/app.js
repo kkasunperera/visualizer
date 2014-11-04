@@ -1110,7 +1110,7 @@ json.links.forEach(function(d) {
 //alert(d.source.index + "," + d.target.index);
   linkedByIndex[d.source.index + "," + d.target.index] = 1;
 });
- 
+
     function tick() {
     path.attr("d", function(d) {
 

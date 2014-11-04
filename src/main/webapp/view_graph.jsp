@@ -8,7 +8,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Visualizer - Karsha project</title>
+<title>GCVisualizer - Karsha project</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/sb-admin.css" rel="stylesheet">
 <link href="css/plugins/morris.css" rel="stylesheet">
@@ -80,13 +80,13 @@
                         class="icon-bar"></span> <span class="icon-bar"></span> 
                         <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.jsp">Visualizer - Karsha
+                <a class="navbar-brand" href="index.jsp">GC Visualizer - Karsha
                     project</a>
             </div>
            <div class="collapse navbar-collapse navbar-ex1-collapse">
                <ul class="nav navbar-nav side-nav">
 					<li class="active"><a href="index.jsp"><i
-							class="fa fa-fw fa-dashboard"></i> Visualizer</a></li>
+							class="fa fa-fw fa-dashboard"></i> GC Visualizer</a></li>
 					<li><a ><i class="fa fa-fw fa-arrows-v"></i>
 							GC-Analysis </a>
 						<ul id="accordion">
