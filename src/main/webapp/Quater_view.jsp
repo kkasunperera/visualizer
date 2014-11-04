@@ -418,18 +418,12 @@ text {
 							<div class="tab-pane fade" id="Chain_show">
 								<div id="borderChain" style="border: 2px solid;">
 									<div><b>Note:</b>
-										longer chain will find the path only for 3 edges that means 
-										depth is 3. The node which is mouse over, may have more than one chain 
+										longer chain will find the depth upto 3.due to computation complexity 
 									</div>
 									<br />
 
-
-									<canvas id="graph_note9" width="500" height="50"
-										style="float: right"> </canvas>
 									<script type="text/javascript">
-							   			var ctx3 = document.getElementById("graph_note9").getContext("2d");					                            
-			                            SvgLoadIncTriad(ctx3);
-			                            		
+				
 			                            $("#Chain").click(function(){							   												   					
 						   					$.ajax({
 						   					  type: 'GET',
