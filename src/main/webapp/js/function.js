@@ -745,7 +745,7 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
                 if (getConnectedNodes(o.source, o.target)==3) { 
     
                     // alert(connectedEdges.length);
-                    return "5,5";
+                    return "10, 25,5,15";
                 }
  
        
