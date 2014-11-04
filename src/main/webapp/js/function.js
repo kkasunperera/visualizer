@@ -949,7 +949,7 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
             triadCompletingEdges = [];
 		
             path.attr("marker-end",function(o){
-            	if (o.source === d || o.target === d ) {
+            	if (getConnectedNodes(o.source, o.target)==1 || getConnectedNodes(o.source, o.target)==2 || getConnectedNodes(o.source, o.target)==3 ) {
     				return "url(#end)";
     			}else{
     				return "url(#)";
@@ -1299,7 +1299,7 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
             triadCompletingEdges = [];
 		
             path.attr("marker-end",function(o){
-            	if (o.source === d || o.target === d ) {
+            	if (getConnectedNodes(o.source, o.target)==1||getConnectedNodes(o.source, o.target)==2||getConnectedNodes(o.source, o.target)==3 ) {
     				return "url(#end)";
     			}else{
     				return "url(#)";
