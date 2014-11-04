@@ -221,7 +221,7 @@ text {
 							   					  	document.getElementById("max_indegree").innerHTML = data.links.length;
 							   						var width = 1000,height = 900;	
 							   						
-							   						DrawGraph(data.nodes, data.links,"#borderIn",width,height);	
+							   						DrawDegree(data.nodes, data.links,"#borderIn",width,height);	
 							   						
 							   			
 							   					  },
@@ -259,7 +259,7 @@ text {
 							   					  dataType: 'json',
 							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 							   						var width = 1000,height = 900;							   						
-							   						DrawGraph(data.nodes, data.links,"#borderOut",width,height);
+							   						DrawDegree(data.nodes, data.links,"#borderOut",width,height);
 							   						document.getElementById("max_outdegree").innerHTML = data.links.length;							   						
 							   					  },
 							   					  error: function(data,error){alert(error);},

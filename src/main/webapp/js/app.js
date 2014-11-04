@@ -75,8 +75,8 @@ d3.json(file, function(error, json) {
     .data(force.links())
   .enter().append("svg:path")
 	.attr("class", function(d) { return "link " + d.type; })
-	.attr("class", "link")
-	.attr("marker-end", "url(#end)");
+	.attr("class", "link");
+	//.attr("marker-end", "url(#end)");
 
   var node = svg.selectAll(".node")
       .data(force.nodes())
@@ -135,6 +135,7 @@ function mouseOver(opacity) {
         path.style("stroke-opacity", function(o) {
             return o.source === d || o.target === d ? 1 : opacity;                
         });
+        //path.style("marker-end","url(#end););
 
         path.style("stroke",function(o){
             if (o.source === d) {
@@ -143,12 +144,15 @@ function mouseOver(opacity) {
                 return "red";
             };
         });
-
-       arrow_head.style("opacity",function(o){
-            thisOpacity = isConnected(d, o) ? 1 : opacity;
-            this.setAttribute('fill-opacity', thisOpacity);
-            return thisOpacity;
+        path.attr("marker-end",function(o){
+        	if (o.source === d || o.target === d ) {
+				return "url(#end)";
+			}else{
+				return "url(#)";
+			}
         });
+        
+       //arrow_head.style("opacity",0);
        
        d3.select(this).select("text").transition()
        .duration(500)
@@ -179,11 +183,8 @@ function mouseOut(opacity) {
 
          path.style("stroke","#666");
          
-         arrow_head.style("opacity",function(o){
-             thisOpacity = isConnected(d, o) ? opacity : 1;
-             this.setAttribute('fill-opacity', thisOpacity);
-             return thisOpacity;
-         });
+         path.attr("marker-end","url(#)");
+         
          
          d3.select(this).select("circle").transition()
          .duration(750)
@@ -270,7 +271,7 @@ d3.json(file, function(error, json) {
 			return "linkEpisodic";
 		}
 	}) 
-	.attr("marker-end", "url(#end)");
+	//.attr("marker-end", "url(#end)");
 
   var node = svg.selectAll(".node")
       .data(force.nodes())
@@ -338,11 +339,13 @@ function mouseOver(opacity) {
     	   }
        });
 
-       arrow_head.style("opacity",function(o){
-            thisOpacity = isConnected(d, o) ? 1 : opacity;
-            this.setAttribute('fill-opacity', thisOpacity);
-            return thisOpacity;
-        });
+       path.attr("marker-end",function(o){
+       	if (o.source === d || o.target === d ) {
+				return "url(#end)";
+			}else{
+				return "url(#)";
+			}
+       });
        
        d3.select(this).select("text").transition()
        .duration(500)
@@ -382,11 +385,7 @@ function mouseOut(opacity) {
 				}
          });
          
-         arrow_head.style("opacity",function(o){
-             thisOpacity = isConnected(d, o) ? opacity : 1;
-             this.setAttribute('fill-opacity', thisOpacity);
-             return thisOpacity;
-         });
+         path.attr("marker-end","url(#)");
          
          d3.select(this).select("circle").transition()
          .duration(750)
