@@ -778,7 +778,7 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
         return "link " + d.type;
     })
     .attr("class", "link")
-    .attr("marker-end", "url(#end)");
+   // .attr("marker-end", "url(#end)");
 
 
     var node = svg.selectAll(".node")
@@ -948,10 +948,12 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
             connectedEdges=[];
             triadCompletingEdges = [];
 		
-            arrow_head.style("opacity",function(o){
-                thisOpacity = isConnected(d, o) ? 1 : opacity;
-                this.setAttribute('fill-opacity', thisOpacity);
-                return thisOpacity;
+            path.attr("marker-end",function(o){
+            	if (o.source === d || o.target === d ) {
+    				return "url(#end)";
+    			}else{
+    				return "url(#)";
+    			}
             });
 		       
 
@@ -988,11 +990,7 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
 		
             path.style("stroke","#666");
 		         
-            arrow_head.style("opacity",function(o){
-                thisOpacity = isConnected(d, o) ? opacity : 1;
-                this.setAttribute('fill-opacity', thisOpacity);
-                return thisOpacity;
-            });
+            path.attr("marker-end","url(#)");
 		         
             d3.select(this).select("circle").transition()
             .duration(750)
@@ -1087,7 +1085,7 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
         return "link " + d.type;
     })
     .attr("class", "link")
-    .attr("marker-end", "url(#end)");
+   // .attr("marker-end", "url(#end)");
 
 
     var node = svg.selectAll(".node")
@@ -1300,11 +1298,14 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
             connectedEdges=[];
             triadCompletingEdges = [];
 		
-            arrow_head.style("opacity",function(o){
-                thisOpacity = isConnected(d, o) ? 1 : opacity;
-                this.setAttribute('fill-opacity', thisOpacity);
-                return thisOpacity;
+            path.attr("marker-end",function(o){
+            	if (o.source === d || o.target === d ) {
+    				return "url(#end)";
+    			}else{
+    				return "url(#)";
+    			}
             });
+
 		       
             d3.select(this).select("text").transition()
             .duration(500)
@@ -1339,11 +1340,7 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
 		
             path.style("stroke","#666");
 		         
-            arrow_head.style("opacity",function(o){
-                thisOpacity = isConnected(d, o) ? opacity : 1;
-                this.setAttribute('fill-opacity', thisOpacity);
-                return thisOpacity;
-            });
+            path.attr("marker-end","url(#)");
 		         
             d3.select(this).select("circle").transition()
             .duration(750)
@@ -1443,7 +1440,7 @@ function DrawChain(nodes,links,svg1,width,height){
         return "link " + d.type;
     })
     .attr("class", "link")
-    .attr("marker-end", "url(#end)");
+    //.attr("marker-end", "url(#end)");
 
 
     var node = svg.selectAll(".node")
@@ -1656,10 +1653,12 @@ function DrawChain(nodes,links,svg1,width,height){
             connectedEdges=[];
             triadCompletingEdges = [];
 		
-            arrow_head.style("opacity",function(o){
-                thisOpacity = isConnected(d, o) ? 1 : opacity;
-                this.setAttribute('fill-opacity', thisOpacity);
-                return thisOpacity;
+            path.attr("marker-end",function(o){
+            	if (o.source === d || o.target === d ) {
+    				return "url(#end)";
+    			}else{
+    				return "url(#)";
+    			}
             });
 		       
             d3.select(this).select("text").transition()
@@ -1695,11 +1694,7 @@ function DrawChain(nodes,links,svg1,width,height){
 		
             path.style("stroke","#666");
 		         
-            arrow_head.style("opacity",function(o){
-                thisOpacity = isConnected(d, o) ? opacity : 1;
-                this.setAttribute('fill-opacity', thisOpacity);
-                return thisOpacity;
-            });
+            path.attr("marker-end","url(#)");
 		         
             d3.select(this).select("circle").transition()
             .duration(750)
