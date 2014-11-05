@@ -186,17 +186,9 @@ function SvgLoadCompTriad(ctx){
     */
     ctx.strokeStyle="#0000FF";
     ctx.beginPath();
-    ctx.moveTo(360,35);
-    ctx.lineTo(311,35);
+    ctx.moveTo(350,35);
+    ctx.lineTo(301,35);
     ctx.stroke();
-    
-    ctx.strokeStyle="#0000FF";
-    ctx.beginPath();
-    ctx.setLineDash([20,10,5,5,5,10]);
-    ctx.moveTo(360,10);
-    ctx.lineTo(311,10);
-    ctx.stroke();
-
     
     ctx.fillStyle = "#1f77b4";
     ctx.beginPath();
@@ -213,13 +205,13 @@ function SvgLoadCompTriad(ctx){
     
     ctx.fillStyle = "#0000FF";
     ctx.beginPath();
-    ctx.fillText("A to B OR B to C edge", 370,40); 
+    ctx.fillText("A to B OR B to C edge", 360,40); 
     ctx.closePath();
     ctx.fill();
 
     ctx.fillStyle = "#0000FF";
     ctx.beginPath();
-    ctx.fillText("A to C edge", 370,14); 
+    ctx.fillText("= = = = = =   A to C edge", 302,14); 
     ctx.closePath();
     ctx.fill();
     
@@ -400,6 +392,197 @@ function DrawGraph(nodes,links,svg1,width,height){
         return "link " + d.type;
     })
     .attr("class", "link")
+    //.attr("marker-end", "url(#end)");
+
+
+    var node = svg.selectAll(".node")
+    .data(force.nodes())
+    .enter().append("g")
+    .attr("class", "node")
+    .style("fill", function(d) {
+        return color(d.group);
+    })
+    .on("mouseover", mouseOver(.001))
+    .on("mouseout", mouseOut(1))
+    .call(force.drag);
+
+    node.append("circle")
+    .attr("r", 8);
+
+    node.append("text")
+    .attr("dx", 12)
+    .attr("dy", ".35em")
+    .style("fill", "black")
+    .text(function(d) {
+        return d.name;
+    });
+
+    var linkedByIndex = {};
+    links.forEach(function(d) {
+        //alert(d.source.index + "," + d.target.index);
+        linkedByIndex[d.source.index + "," + d.target.index] = 1;
+    });
+
+    // add the curvy lines
+    function tick() {
+        path.attr("d", function(d) {
+
+	 	
+            var dx = d.target.x - d.source.x,
+            dy = d.target.y - d.source.y,
+            dr = Math.sqrt(dx * dx + dy * dy);
+            return "M" + 
+            d.source.x + "," + 
+            d.source.y + "A" + 
+            dr + "," + dr + " 0 0,1 " + 
+            d.target.x + "," + 
+            d.target.y;
+	 		
+        });
+
+        node.attr("transform", function(d) { 
+            return "translate(" + d.x + "," + d.y + ")";
+        });
+    }
+
+
+    function mouseOver(opacity) {
+        return function(d) {
+            /*
+		    	node.style("stroke-opacity", function(o) {
+		            thisOpacity = isConnected(d, o) ? 1 : opacity;
+		            this.setAttribute('fill-opacity', thisOpacity);
+		            return thisOpacity;
+		        });*/
+		
+            path.style("stroke-opacity", function(o) {
+                return o.source === d || o.target === d ? 1 : opacity;      
+            });
+		
+            path.style("stroke",function(o){
+                if (o.source === d) {
+                    return "blue";
+                }else if (o.target === d ) {
+                    return "red";
+                };                
+            });
+		
+            path.attr("marker-end",function(o){
+            	if (o.source === d || o.target === d ) {
+    				return "url(#end)";
+    			}else{
+    				return "url(#)";
+    			}
+            });
+		       
+            d3.select(this).select("text").transition()
+            .duration(500)
+            .style("fill", "black")
+            .style("stroke", "lightsteelblue")
+            .style("stroke-width", ".5px")
+            .style("font", "20px sans-serif");
+            d3.select(this).select("circle").transition()
+            .duration(750)
+            .attr("r", 25)
+            .style("fill", function(d) {
+                return color(d.group);
+            });
+		        
+        };
+    }
+		
+    function mouseOut(opacity) {
+        return function(d) {
+            node.style("stroke-opacity", function(o) {
+                thisOpacity = isConnected(d, o) ? 1 : opacity;
+                this.setAttribute('fill-opacity', thisOpacity);
+                return thisOpacity;
+            });
+		
+            path.style("stroke-opacity", function(o) {
+                //return o.source === d || o.target === d ? 1 : opacity;
+                return o.source === d ? 1 : opacity;
+            });
+		
+            path.style("stroke","#666");
+            path.attr("marker-end","url(#)");    
+            
+		         
+            d3.select(this).select("circle").transition()
+            .duration(750)
+            .attr("r", 8)
+            .style("fill", function(d) {
+                return color(d.group);
+            });
+            d3.select(this).select("text").transition()
+            .duration(750)
+            .attr("x", 12)
+            .style("stroke", "none")
+            .style("fill", "black")
+            .style("stroke", "none")
+            .style("font", "10px sans-serif");
+		        
+        };
+    }
+
+
+    function neighboring(a, b) {
+        return linkedByIndex[a.index + "," + b.index];
+    }
+
+    function isConnected(a, b) {
+        //return incoming and outgoing
+        //return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
+        //return outgong
+        //alert(a.index + "," + b.index);
+        return linkedByIndex[a.index + "," + b.index];
+    }
+}
+
+function DrawDegree(nodes,links,svg1,width,height){
+
+
+    d3.select("svg")
+    .remove();
+    var color = d3.scale.category10();
+	 
+    var svg = d3.select(svg1).append("svg").attr("width", width).attr("height", height);
+    var force = d3.layout.force()
+    .nodes(nodes)
+    .gravity(.15)
+    .distance(350)
+    .links(links)
+    .size([width, height])
+    .linkDistance(400)
+    .charge(-350)
+    .on("tick", tick)
+    .start();
+
+
+	 	
+	 	
+    // build the arrow.
+    var arrow_head = svg.append("svg:defs").selectAll("marker")
+    .data(["end"])      // Different link/path types can be defined here
+    .enter().append("svg:marker")    // This section adds in the arrows
+    .attr("id", String)
+    .attr("viewBox", "0 -5 10 10")
+    .attr("refX", 15)
+    .attr("refY", -1.5)
+    .attr("markerWidth", 6)
+    .attr("markerHeight", 6)
+    .attr("orient", "auto")
+    .append("svg:path")
+    .attr("d", "M0,-5L10,0L0,5");
+
+    // add the links and the arrows
+    var path = svg.append("svg:g").selectAll("path")
+    .data(force.links())
+    .enter().append("svg:path")
+    .attr("class", function(d) {
+        return "link " + d.type;
+    })
+    .attr("class", "link")
     .attr("marker-end", "url(#end)");
 
 
@@ -475,10 +658,12 @@ function DrawGraph(nodes,links,svg1,width,height){
                 };                
             });
 		
-            arrow_head.style("opacity",function(o){
-                thisOpacity = isConnected(d, o) ? 1 : opacity;
-                this.setAttribute('fill-opacity', thisOpacity);
-                return thisOpacity;
+            path.attr("marker-end",function(o){
+            	if (o.source === d || o.target === d ) {
+    				return "url(#end)";
+    			}else{
+    				return "url(#)";
+    			}
             });
 		       
             d3.select(this).select("text").transition()
@@ -511,7 +696,7 @@ function DrawGraph(nodes,links,svg1,width,height){
             });
 		
             path.style("stroke","#666");
-		         
+            path.attr("marker-end","url(#end)");    
             arrow_head.style("opacity",function(o){
                 thisOpacity = isConnected(d, o) ? opacity : 1;
                 this.setAttribute('fill-opacity', thisOpacity);
@@ -593,7 +778,7 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
         return "link " + d.type;
     })
     .attr("class", "link")
-    .attr("marker-end", "url(#end)");
+   // .attr("marker-end", "url(#end)");
 
 
     var node = svg.selectAll(".node")
@@ -753,7 +938,7 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
                 if (getConnectedNodes(o.source, o.target)==3) { 
     
                     // alert(connectedEdges.length);
-                    return "20,10,5,5,5,10";
+                    return "5,5";
                 }
  
        
@@ -763,10 +948,12 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
             connectedEdges=[];
             triadCompletingEdges = [];
 		
-            arrow_head.style("opacity",function(o){
-                thisOpacity = isConnected(d, o) ? 1 : opacity;
-                this.setAttribute('fill-opacity', thisOpacity);
-                return thisOpacity;
+            path.attr("marker-end",function(o){
+            	if (getConnectedNodes(o.source, o.target)==1 || getConnectedNodes(o.source, o.target)==2 || getConnectedNodes(o.source, o.target)==3 ) {
+    				return "url(#end)";
+    			}else{
+    				return "url(#)";
+    			}
             });
 		       
 
@@ -803,11 +990,7 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
 		
             path.style("stroke","#666");
 		         
-            arrow_head.style("opacity",function(o){
-                thisOpacity = isConnected(d, o) ? opacity : 1;
-                this.setAttribute('fill-opacity', thisOpacity);
-                return thisOpacity;
-            });
+            path.attr("marker-end","url(#)");
 		         
             d3.select(this).select("circle").transition()
             .duration(750)
@@ -823,6 +1006,7 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
             .style("stroke", "none")
             .style("font", "10px sans-serif");
 
+		        
         };
     }
 
@@ -901,7 +1085,7 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
         return "link " + d.type;
     })
     .attr("class", "link")
-    .attr("marker-end", "url(#end)");
+   // .attr("marker-end", "url(#end)");
 
 
     var node = svg.selectAll(".node")
@@ -1114,11 +1298,14 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
             connectedEdges=[];
             triadCompletingEdges = [];
 		
-            arrow_head.style("opacity",function(o){
-                thisOpacity = isConnected(d, o) ? 1 : opacity;
-                this.setAttribute('fill-opacity', thisOpacity);
-                return thisOpacity;
+            path.attr("marker-end",function(o){
+            	if (getConnectedNodes(o.source, o.target)==1||getConnectedNodes(o.source, o.target)==2||getConnectedNodes(o.source, o.target)==3 ) {
+    				return "url(#end)";
+    			}else{
+    				return "url(#)";
+    			}
             });
+
 		       
             d3.select(this).select("text").transition()
             .duration(500)
@@ -1153,11 +1340,7 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
 		
             path.style("stroke","#666");
 		         
-            arrow_head.style("opacity",function(o){
-                thisOpacity = isConnected(d, o) ? opacity : 1;
-                this.setAttribute('fill-opacity', thisOpacity);
-                return thisOpacity;
-            });
+            path.attr("marker-end","url(#)");
 		         
             d3.select(this).select("circle").transition()
             .duration(750)
@@ -1204,6 +1387,7 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
         return linksForSelectedNode[a.index + "," + b.index];
     // }
     }
+    
     
 
 }
@@ -1256,7 +1440,7 @@ function DrawChain(nodes,links,svg1,width,height){
         return "link " + d.type;
     })
     .attr("class", "link")
-    .attr("marker-end", "url(#end)");
+    //.attr("marker-end", "url(#end)");
 
 
     var node = svg.selectAll(".node")
@@ -1469,10 +1653,12 @@ function DrawChain(nodes,links,svg1,width,height){
             connectedEdges=[];
             triadCompletingEdges = [];
 		
-            arrow_head.style("opacity",function(o){
-                thisOpacity = isConnected(d, o) ? 1 : opacity;
-                this.setAttribute('fill-opacity', thisOpacity);
-                return thisOpacity;
+            path.attr("marker-end",function(o){
+            	if (o.source === d || o.target === d ) {
+    				return "url(#end)";
+    			}else{
+    				return "url(#)";
+    			}
             });
 		       
             d3.select(this).select("text").transition()
@@ -1508,11 +1694,7 @@ function DrawChain(nodes,links,svg1,width,height){
 		
             path.style("stroke","#666");
 		         
-            arrow_head.style("opacity",function(o){
-                thisOpacity = isConnected(d, o) ? opacity : 1;
-                this.setAttribute('fill-opacity', thisOpacity);
-                return thisOpacity;
-            });
+            path.attr("marker-end","url(#)");
 		         
             d3.select(this).select("circle").transition()
             .duration(750)
@@ -1559,11 +1741,8 @@ function DrawChain(nodes,links,svg1,width,height){
         return linksForSelectedNode[a.index + "," + b.index];
     // }
     }
+    
+   
 
 }
-
-function clustering_cof(tag,cc) {
-	$(tag).html(cc);
-}
-
 

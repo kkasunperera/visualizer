@@ -8,7 +8,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>GCVisualizer - Karsha project</title>
+<title>Visualizer - Karsha project</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/sb-admin.css" rel="stylesheet">
 <link href="css/plugins/morris.css" rel="stylesheet">
@@ -89,13 +89,13 @@ select {
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.jsp"><font color="white">GCVisualizer - Karsha
+				<a class="navbar-brand" href="index.jsp"><font color="white">Visualizer - Karsha
 					project</font></a>
 			</div>
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav side-nav">
 					<li class="active"><a href="index.jsp"><i
-							class="fa fa-fw fa-dashboard"></i> GCVisualizer</a></li>
+							class="fa fa-fw fa-dashboard"></i> Visualizer</a></li>
 					<li><a ><i class="fa fa-fw fa-arrows-v"></i>
 							GC-Analysis </a>
 						<ul id="accordion">
@@ -114,6 +114,8 @@ select {
 						</ul>               
                 
                        </li>
+                       <li><a href="RowData.jsp"><i class="fa fa-fw fa-table"></i>
+                            Data-Analysis</a></li>
                        <li><a href="#"><i class="fa fa-fw fa-file"></i>
                             More About</a></li>
                             
@@ -142,7 +144,7 @@ select {
 				<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header">
-							Granger Causality Visualizer<small></small>
+							Visualizer<small>statistical Overview</small>
 						</h1>
 						<ol class="breadcrumb">
 							<li class="active"><i class="fa fa-dashboard"></i>

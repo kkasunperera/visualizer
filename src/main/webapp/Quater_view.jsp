@@ -112,6 +112,7 @@ select {
 						</li>
 						<%} %>
 					</ul></li>
+				<li><a href="RowData.jsp"><i class="fa fa-fw fa-table"></i>Data-Analysis</a></li>
 				<li><a href="#"><i class="fa fa-fw fa-file"></i> More About</a></li>
 
 			</ul>
@@ -179,7 +180,8 @@ text {
 							<li><a id="Cmp" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
 							<li><a id="Incmp" href="#IncompleteTriad" data-toggle="tab">IncompleteTriad</a></li>
 							<li><a id="Imcycles" href="#ImmediateCycle" data-toggle="tab">ImmediateCycles</a></li>
-							<li><a id="Chain" href="#Chain_show" data-toggle="tab">Chain</a></li>
+							<li><a id="Quarters" href="#QuarterlyTemporalPatterns" data-toggle="tab">QuarterlyTemporalPatterns</a></li>
+							
 							
 
 						</ul>
@@ -221,7 +223,7 @@ text {
 							   					  	document.getElementById("max_indegree").innerHTML = data.links.length;
 							   						var width = 1000,height = 900;	
 							   						
-							   						DrawGraph(data.nodes, data.links,"#borderIn",width,height);	
+							   						DrawDegree(data.nodes, data.links,"#borderIn",width,height);	
 							   						
 							   			
 							   					  },
@@ -259,7 +261,7 @@ text {
 							   					  dataType: 'json',
 							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 							   						var width = 1000,height = 900;							   						
-							   						DrawGraph(data.nodes, data.links,"#borderOut",width,height);
+							   						DrawDegree(data.nodes, data.links,"#borderOut",width,height);
 							   						document.getElementById("max_outdegree").innerHTML = data.links.length;							   						
 							   					  },
 							   					  error: function(data,error){alert(error);},
@@ -417,22 +419,24 @@ text {
 							</div>
 							<div class="tab-pane fade" id="Chain_show">
 								<div id="borderChain" style="border: 2px solid;">
-									<div><b>Note:</b>
-										longer chain will find path only upto depth 3, due to computational complexity 
-									</div>
 									<br />
 
+
+									<canvas id="graph_note9" width="500" height="50"
+										style="float: right"> </canvas>
 									<script type="text/javascript">
-				
+							   			var ctx3 = document.getElementById("graph_note9").getContext("2d");					                            
+			                            SvgLoadIncTriad(ctx3);
+			                            		
 			                            $("#Chain").click(function(){							   												   					
 						   					$.ajax({
 						   					  type: 'GET',
 						   					  url: "IncompleteTriad?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
-						   						var width = 1000,height = 900;							   												   						
-                                                //DrawChain(data.nodes, data.links,"#borderChain",width,height);
-                                                LongerChainInQuarterData(data.nodes, data.links, "#borderChain", width, height);
+						   						var width = 1000,height = 900;							   						
+						   						//DrawGraph(data.nodes, data.Links,"#borderIncmp",width,height);
+                                                DrawChain(data.nodes, data.links,"#borderChain",width,height);
 						   					  },
 						   					  error: function(data,error){alert(error);},
 						   					  async: false
@@ -477,7 +481,6 @@ text {
 								//graphload 
 								var width = 900, height = 950;
 								var quart = <%=Integer.parseInt(request.getParameter("Q"))%>;
-								
 								OriginalNetworkGraph(nodes, file, "#gc_network", width, height,quart);
 								</script>
 					</div>
