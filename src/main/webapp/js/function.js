@@ -186,9 +186,17 @@ function SvgLoadCompTriad(ctx){
     */
     ctx.strokeStyle="#0000FF";
     ctx.beginPath();
-    ctx.moveTo(350,35);
-    ctx.lineTo(301,35);
+    ctx.moveTo(360,35);
+    ctx.lineTo(311,35);
     ctx.stroke();
+    
+    ctx.strokeStyle="#0000FF";
+    ctx.beginPath();
+    ctx.setLineDash([20,10,5,5,5,10]);
+    ctx.moveTo(360,10);
+    ctx.lineTo(311,10);
+    ctx.stroke();
+
     
     ctx.fillStyle = "#1f77b4";
     ctx.beginPath();
@@ -205,13 +213,13 @@ function SvgLoadCompTriad(ctx){
     
     ctx.fillStyle = "#0000FF";
     ctx.beginPath();
-    ctx.fillText("A to B OR B to C edge", 360,40); 
+    ctx.fillText("A to B OR B to C edge", 370,40); 
     ctx.closePath();
     ctx.fill();
 
     ctx.fillStyle = "#0000FF";
     ctx.beginPath();
-    ctx.fillText("= = = = = =   A to C edge", 302,14); 
+    ctx.fillText("A to C edge", 370,14); 
     ctx.closePath();
     ctx.fill();
     
@@ -745,7 +753,7 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
                 if (getConnectedNodes(o.source, o.target)==3) { 
     
                     // alert(connectedEdges.length);
-                    return "10, 25,5,15";
+                    return "20,10,5,5,5,10";
                 }
  
        
