@@ -180,10 +180,9 @@ text {
 							<li><a id="Cmp" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
 							<li><a id="Incmp" href="#IncompleteTriad" data-toggle="tab">IncompleteTriad</a></li>
 							<li><a id="Imcycles" href="#ImmediateCycle" data-toggle="tab">ImmediateCycles</a></li>
-							<li><a id="Quarters" href="#QuarterlyTemporalPatterns" data-toggle="tab">QuarterlyTemporalPatterns</a></li>
+							<li><a id="Chain" href="#Chain_show" data-toggle="tab">Chain</a></li>
 							
 							
-
 						</ul>
 
 						<div id="myTabContent" class="tab-content">
@@ -419,6 +418,9 @@ text {
 							</div>
 							<div class="tab-pane fade" id="Chain_show">
 								<div id="borderChain" style="border: 2px solid;">
+									<div><b>Note:</b>
+										longer chain will find path only upto depth 3, due to computational complexity 
+									</div>
 									<br />
 
 
@@ -481,6 +483,7 @@ text {
 								//graphload 
 								var width = 900, height = 950;
 								var quart = <%=Integer.parseInt(request.getParameter("Q"))%>;
+								
 								OriginalNetworkGraph(nodes, file, "#gc_network", width, height,quart);
 								</script>
 					</div>
