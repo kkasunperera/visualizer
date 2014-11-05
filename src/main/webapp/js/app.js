@@ -1263,18 +1263,13 @@ function SvgQuarter(ctx){
 	    ctx.fill();
 	    
 	    //should be dashed
-	    ctx.fillStyle = "#666";
-	    ctx.beginPath();
-	    ctx.fillText("= = = = = = =", 300,14); 
-	    ctx.closePath();
-	    ctx.fill();
 	    
 	    ctx.strokeStyle="#666";
 	    ctx.beginPath();
 	    ctx.moveTo(350,35);
 	    ctx.lineTo(301,35);
 	    ctx.stroke();
-	    
+        	    
 	    ctx.fillStyle = "#666";
 	    ctx.beginPath();
 	    ctx.arc(300,10,8,0,2*Math.PI);
@@ -1319,6 +1314,13 @@ function SvgQuarter(ctx){
 	    ctx.beginPath();
 	 	ctx.moveTo(550,60);
 	    ctx.lineTo(500,60);
+	    ctx.stroke();
+        
+        ctx.strokeStyle="#666";
+	    ctx.beginPath();
+        ctx.setLineDash([5,5]);
+        ctx.moveTo(350,10);
+	    ctx.lineTo(301,10);
 	    ctx.stroke();
 	    
 	 	ctx.fillStyle = "#33CC33";
