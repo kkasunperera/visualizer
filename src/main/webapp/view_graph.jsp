@@ -427,6 +427,9 @@ text {
 							   
 							   <div class="tab-pane fade" id="longerchain">							   	
 							   		<div id="Lchain" style="border:2px solid;">
+							   		<div><b>Note:</b>
+										longer chain will find the depth upto 3.due to computation complexity 
+									</div>
 							   			<script type="text/javascript">							   				
 							   			$("#Chain").click(function(){
 							   				var width = 1000,height = 900;	
