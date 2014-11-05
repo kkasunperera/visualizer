@@ -249,6 +249,10 @@ public class PostDataServ extends HttpServlet {
 			
 			out.close();
 			
+			
+			//overall_manipulate a = new overall_manipulate();
+			//a.write_to_json();
+			
 		}
 
 	}

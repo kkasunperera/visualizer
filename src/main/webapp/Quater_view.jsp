@@ -112,6 +112,7 @@ select {
 						</li>
 						<%} %>
 					</ul></li>
+				<li><a href="RowData.jsp"><i class="fa fa-fw fa-table"></i>Data-Analysis</a></li>
 				<li><a href="#"><i class="fa fa-fw fa-file"></i> More About</a></li>
 
 			</ul>
@@ -179,7 +180,8 @@ text {
 							<li><a id="Cmp" href="#completeTriad" data-toggle="tab">CompleteTriad</a></li>
 							<li><a id="Incmp" href="#IncompleteTriad" data-toggle="tab">IncompleteTriad</a></li>
 							<li><a id="Imcycles" href="#ImmediateCycle" data-toggle="tab">ImmediateCycles</a></li>
-							<li><a id="Chain" href="#Chain_show" data-toggle="tab">Chain</a></li>
+							<li><a id="Quarters" href="#QuarterlyTemporalPatterns" data-toggle="tab">QuarterlyTemporalPatterns</a></li>
+							
 							
 
 						</ul>
