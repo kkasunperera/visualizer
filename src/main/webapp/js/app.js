@@ -1267,6 +1267,7 @@ function SvgQuarter(ctx){
 	    ctx.beginPath();
 	    ctx.moveTo(350,35);
 	    ctx.lineTo(301,35);
+        ctx.closePath();
 	    ctx.stroke();
         	    
 	    ctx.fillStyle = "#666";
@@ -1299,6 +1300,7 @@ function SvgQuarter(ctx){
 	    ctx.beginPath();
 	 	ctx.moveTo(550,10);
 	    ctx.lineTo(500,10);
+        ctx.closePath();
 	    ctx.stroke();
 	    
 	    //#FF0000 episodic 
@@ -1306,6 +1308,7 @@ function SvgQuarter(ctx){
 	    ctx.beginPath();
 	 	ctx.moveTo(550,35);
 	    ctx.lineTo(500,35);
+        ctx.closePath();
 	    ctx.stroke();
 	    
 	    //#33CC33 weak
@@ -1313,6 +1316,7 @@ function SvgQuarter(ctx){
 	    ctx.beginPath();
 	 	ctx.moveTo(550,60);
 	    ctx.lineTo(500,60);
+        ctx.closePath();
 	    ctx.stroke();
         
         ctx.strokeStyle="#666";
@@ -1320,6 +1324,7 @@ function SvgQuarter(ctx){
         ctx.setLineDash([5,5]);
         ctx.moveTo(350,10);
 	    ctx.lineTo(301,10);
+        ctx.closePath();
 	    ctx.stroke();
 	    
 	 	ctx.fillStyle = "#33CC33";
