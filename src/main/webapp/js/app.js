@@ -25,18 +25,13 @@ function Svgbase(){
     ctx.fill();
     
     //should be dashed
-    ctx.fillStyle = "#666";
-    ctx.beginPath();
-    ctx.fillText("= = = = = = =", 300,14); 
-    ctx.closePath();
-    ctx.fill();
     
     ctx.strokeStyle="#666";
     ctx.beginPath();
     ctx.moveTo(350,35);
     ctx.lineTo(301,35);
     ctx.stroke();
-    
+    	    
     ctx.fillStyle = "#666";
     ctx.beginPath();
     ctx.arc(300,10,8,0,2*Math.PI);
@@ -62,11 +57,15 @@ function Svgbase(){
     ctx.closePath();
     ctx.fill();
     
+    ctx.strokeStyle="#666";
+    ctx.beginPath();
+    ctx.setLineDash([5,5]);
+    ctx.moveTo(350,10);
+    ctx.lineTo(301,10);
+    ctx.stroke();
 }
 
 function SvgQuarterWeak(ctx){
-	
-	Svgbase();
 	
     //#0066FF sustain
     ctx.strokeStyle ="#33CC33";
@@ -81,10 +80,10 @@ function SvgQuarterWeak(ctx){
     ctx.closePath();
     ctx.fill();
 
+    Svgbase();
 }
 
 function SvgQuarterEpisodic(ctx){
-	Svgbase();
 	
     //#0066FF sustain
     ctx.strokeStyle ="#FF0000";
@@ -99,12 +98,11 @@ function SvgQuarterEpisodic(ctx){
     ctx.closePath();
     ctx.fill();
 
-
+    Svgbase();
 
 }
 
 function SvgQuaterSustained(ctx){
-	Svgbase();
     
     //#0066FF sustain
     ctx.strokeStyle ="#0066FF";
@@ -118,6 +116,8 @@ function SvgQuaterSustained(ctx){
     ctx.fillText("Sustained", 580,10); 
     ctx.closePath();
     ctx.fill();
+    
+    Svgbase();
 }
 
 function QuarterGraphSustained(nodes,file,svg1,width,height){
@@ -1235,64 +1235,7 @@ function isConnected(a, b) {
 	}
 });
 }
-function SvgQuarter(ctx){
-	ctx.fillStyle = "#1f77b4";
-	    ctx.beginPath();
-	    ctx.arc(200,10,8,0,2*Math.PI);
-	    ctx.closePath();
-	    ctx.fill();
-	    
-	    
-	    ctx.fillStyle = "#ff7f0d";
-	    ctx.beginPath();
-	    ctx.arc(200,35,8,0,2*Math.PI);
-	    ctx.closePath();
-	    ctx.fill();
-	    
-	    ctx.fillStyle = "#ff7f0d";
-	    ctx.beginPath();
-	    ctx.fillText("Equity", 214,40); 
-	    ctx.closePath();
-	    ctx.fill();
-	    
-	    ctx.fillStyle = "#1f77b4";
-	    ctx.beginPath();
-	    ctx.fillText("Bond", 214,14); 
-	    ctx.closePath();
-	    ctx.fill();
-	    
-	    //should be dashed
-	    
-	    ctx.strokeStyle="#666";
-	    ctx.beginPath();
-	    ctx.moveTo(350,35);
-	    ctx.lineTo(301,35);
-	    ctx.stroke();
-        	    
-	    ctx.fillStyle = "#666";
-	    ctx.beginPath();
-	    ctx.arc(300,10,8,0,2*Math.PI);
-	    ctx.closePath();
-	    ctx.fill();
-	  
-	    
-	    ctx.fillStyle = "#666";
-	    ctx.beginPath();
-	    ctx.arc(300,35,8,0,2*Math.PI);
-	    ctx.closePath();
-	    ctx.fill();
-	    
-	    ctx.fillStyle = "#666";
-	    ctx.beginPath();
-	    ctx.fillText("Input Edge to the Node", 360,40); 
-	    ctx.closePath();
-	    ctx.fill();
-	    
-	    ctx.fillStyle = "#666";
-	    ctx.beginPath();
-	    ctx.fillText("Output Edge from the Node", 360,14); 
-	    ctx.closePath();
-	    ctx.fill();
+function SvgQuarter(ctx){		
 	    
 	    //#0066FF sustain
 	    ctx.strokeStyle ="#33CC33";
@@ -1315,12 +1258,6 @@ function SvgQuarter(ctx){
 	    ctx.lineTo(500,60);
 	    ctx.stroke();
         
-        ctx.strokeStyle="#666";
-	    ctx.beginPath();
-        ctx.setLineDash([5,5]);
-        ctx.moveTo(350,10);
-	    ctx.lineTo(301,10);
-	    ctx.stroke();
 	    
 	 	ctx.fillStyle = "#33CC33";
 	    ctx.beginPath();
@@ -1339,7 +1276,7 @@ function SvgQuarter(ctx){
 	    ctx.fillText("Episodic", 580,65); 
 	    ctx.closePath();
 	    ctx.fill();
-
+	    Svgbase();
 }
 
 
