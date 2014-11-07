@@ -329,7 +329,7 @@ text {
 							   			<canvas id="graph_note5" width="500" height="50" style="float: right">                                
                                         </canvas>
 							   			<script type="text/javascript">
-							   			var ctx4 = document.getElementById("graph_note5").getContext("2d");					                            
+							   			var ctx4 = document.getElementById("graph_note5").getContext("2d");							   			
 			                            SvgLoad(ctx4);
 			                            		
 			                            $("#Imcycles").click(function(){							   												   					
@@ -371,7 +371,7 @@ text {
 							   					
 							   					var file=<%= name%>;							   				
 							   					var ctx=document.getElementById("graph_note6").getContext("2d");
-							   						
+							   					ctx.clearRect(0, 0, 800, 80);
 							   					SvgQuarter(ctx);							   				
 							   					 
 							   					$("#Quarters").click(function(){
@@ -393,32 +393,36 @@ text {
 							   					
 							   					$("#Sustained").click(function(){
 							   						//alert("sustained");
-							   						var ctx=document.getElementById("graph_note6").getContext("2d");
-							   						ctx.clearRect(0, 0, 800, 80);
-							   						SvgQuaterSustained(ctx);
+							   						var can=document.getElementById("graph_note6");
+								   					var ctx = can.getContext("2d");
+								   					can.width=800;
+							   						SvgQuaterSustained(ctx); 
 							   						var width = 900, height = 950;
 							   						QuarterGraphSustained(nodes, file, "#borderQgraph", width, height);
 							   					});
 							   					$("#Episodic").click(function(){
 							   						//alert("episodic");
-							   						var ctx=document.getElementById("graph_note6").getContext("2d");
-							   						ctx.clearRect(0, 0, 800, 80);							   						
+							   						var can=document.getElementById("graph_note6");
+								   					var ctx = can.getContext("2d");
+								   					can.width=800;							   						
 							   						SvgQuarterEpisodic(ctx);
 							   						var width = 900, height = 950;
 							   						QuaterGraphEpisodic(nodes, file, "#borderQgraph", width, height);
 							   					});
 							   					$("#Weak").click(function(){
 							   						//alert("weak");
-							   						var ctx=document.getElementById("graph_note6").getContext("2d");
-							   						ctx.clearRect(0, 0, 800, 80);
+							   						var can=document.getElementById("graph_note6");
+								   					var ctx = can.getContext("2d");
+								   					can.width=800;
 							   						SvgQuarterWeak(ctx);
 							   						var width = 900, height = 950;
 							   						QuatergraphWeak(nodes, file, "#borderQgraph", width, height);
 							   					});
 							   					$("#main").click(function(){
-							   						var ctx=document.getElementById("graph_note6").getContext("2d");
-							   						ctx.clearRect(0, 0, 800, 80);
-							   						SvgQuarter(ctx);
+								   					var can=document.getElementById("graph_note6");
+								   					var ctx = can.getContext("2d");
+								   					can.width=800;
+								   					SvgQuarter(ctx);
 							   						var width = 900, height = 950;
 							   						QuarterGraph(nodes, file, "#borderQgraph", width, height);
 							   					});							   					
