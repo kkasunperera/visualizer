@@ -122,7 +122,7 @@ select {
 								<ul>
 									<li><a
 										href="view_graph.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=0"><i
-											class="fa fa-fw fa-table"></i> Overall </a></li>
+											class="fa fa-fw fa-table"></i> Yearly </a></li>
 									<li><a
 										href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=1"><i
 											class="fa fa-fw fa-table"></i> Quarter 1</a></li>

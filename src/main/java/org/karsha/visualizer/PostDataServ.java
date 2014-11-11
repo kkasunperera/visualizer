@@ -43,6 +43,7 @@ public class PostDataServ extends HttpServlet {
 	List<Node> node;
 	List<Links> linkCompleteTriad;
 	List<Links> linkIncomplete;
+	List<Links> linkChain;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -114,9 +115,11 @@ public class PostDataServ extends HttpServlet {
 				//this is for send node set data with link set as json
 				node=Arrays.asList(nodeSet);
 				
-				g = DirectedGraphDemoServ.createHrefGraph(nodeSet,linkSet);				
-				//linkCompleteTriad=DirectedGraphDemoServ.CompleteTriad(g, nodeSet);
-				//linkIncomplete=DirectedGraphDemoServ.InCompleteTriad(g, nodeSet);
+
+				g = DirectedGraphDemoServ.createHrefGraph(nodeSet,linkSet);	
+				//linkChain = DirectedGraphDemoServ.LongerChain(g, nodeSet);
+				linkCompleteTriad=DirectedGraphDemoServ.CompleteTriad(g, nodeSet);
+				linkIncomplete=DirectedGraphDemoServ.InCompleteTriad(g, nodeSet);
 					
 			}
 
@@ -239,20 +242,14 @@ public class PostDataServ extends HttpServlet {
 			int quater = Integer.parseInt(request.getParameter("Quater"));
 			DirectedGraph<Node,DefaultEdge> gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, DirectedGraphDemoServ.link_filter(quater, linkSet));
 			
-
 			double cc_value = DirectedGraphDemoServ.clusteringCoefficient(gg,
 					nodeSet, linkSet);
 			JsonElement Clustering_C = gson.toJsonTree(cc_value);
 			JsonObject obj = new JsonObject();
 			obj.add("Clustering_C", Clustering_C);
-			out.print(obj.toString());
-			
+			out.print(obj.toString());			
 			out.close();
-			
-			
-			//overall_manipulate a = new overall_manipulate();
-			//a.write_to_json();
-			
+
 		}
 
 	}

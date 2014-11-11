@@ -172,7 +172,13 @@ public class DirectedGraphDemoServ {
 	}
 
 	/* find the completeTriad of the graph */
-	public static List<Links> CompleteTriad(
+	
+ /**
+ * @param graph
+ * @param nodes
+ * @return list
+ */
+public static List<Links> CompleteTriad(
 			DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
 		log.log(Level.SEVERE,
 				"CompleteTriad() A -> B && B->C --> A -> C Triad Data:{0},{1}",
@@ -182,7 +188,8 @@ public class DirectedGraphDemoServ {
 		List<Links> list = new ArrayList<Links>();
 
 		for (int k = 0; k < nodes.length; k++) {
-			Set<DefaultEdge> set = graph.outgoingEdgesOf(nodes[k]);
+			Node A=nodes[k];
+			Set<DefaultEdge> set = graph.outgoingEdgesOf(A);
 			DefaultEdge[] edgeSet = set.toArray(new DefaultEdge[set.size()]);
 
 			if (edgeSet.length > 1) {
@@ -193,25 +200,22 @@ public class DirectedGraphDemoServ {
 						Links linkC = new Links();
 
 						// System.out.println(edgeSet[i]+" "+edgeSet[j]);
-						Node A = graph.getEdgeTarget(edgeSet[i]);
-						Node B = graph.getEdgeTarget(edgeSet[j]);
+						Node B = graph.getEdgeTarget(edgeSet[i]);
+						Node C = graph.getEdgeTarget(edgeSet[j]);
 
-						if (graph.containsEdge(A, B)) {
+						if ((graph.containsEdge(B, C) && !graph.containsEdge(C, B)) && (graph.containsEdge(A, B) && !graph.containsEdge(B, A)) && (graph.containsEdge(A, C) && !graph.containsEdge(C, A))) {
+							
 							// link A-->B
-							linkA.setSource(Arrays.asList(nodes).indexOf(
-									graph.getEdgeSource(edgeSet[i])));
-							linkA.setTarget(Arrays.asList(nodes).indexOf(
-									graph.getEdgeTarget(edgeSet[i])));
+							linkA.setSource(Arrays.asList(nodes).indexOf(A));
+							linkA.setTarget(Arrays.asList(nodes).indexOf(B));
 
 							// link A-->c
-							linkB.setSource(Arrays.asList(nodes).indexOf(
-									graph.getEdgeSource(edgeSet[j])));
-							linkB.setTarget(Arrays.asList(nodes).indexOf(
-									graph.getEdgeTarget(edgeSet[j])));
+							linkB.setSource(Arrays.asList(nodes).indexOf(A));
+							linkB.setTarget(Arrays.asList(nodes).indexOf(C));
 
 							// link B-->c
-							linkC.setSource(Arrays.asList(nodes).indexOf(A));
-							linkC.setTarget(Arrays.asList(nodes).indexOf(B));
+							linkC.setSource(Arrays.asList(nodes).indexOf(B));
+							linkC.setTarget(Arrays.asList(nodes).indexOf(C));
 
 							if (!isAdded(linkA, list)) {
 								list.add(linkA);
@@ -233,8 +237,8 @@ public class DirectedGraphDemoServ {
 				}
 			}
 		}
-		// System.out.println("Number of CompletedTriad are "+NumberOfCompleteTriad);
-		// System.out.println("Number of Edges contain in the List are "+list.size());
+		System.out.println("Number of CompletedTriad are "+NumberOfCompleteTriad);
+		System.out.println("Number of Edges contain in the List are "+list.size());
 
 		return list;
 	}
@@ -262,14 +266,13 @@ public class DirectedGraphDemoServ {
 					Node B = graph.getEdgeTarget(edgeSet[i]);
 
 					Set<DefaultEdge> setOfB = graph.outgoingEdgesOf(B);
-					DefaultEdge[] edgeSetOfB = setOfB
-							.toArray(new DefaultEdge[setOfB.size()]);
+					DefaultEdge[] edgeSetOfB = setOfB.toArray(new DefaultEdge[setOfB.size()]);
 
 					for (int j = 0; j < edgeSetOfB.length; j++) {
 
 						Node C = graph.getEdgeTarget(edgeSetOfB[j]);
 
-						if (!graph.containsEdge(A, C)) {
+						if (!graph.containsEdge(A, C) && (graph.containsEdge(A, B) && !graph.containsEdge(B, A)) && (graph.containsEdge(B, C) && !graph.containsEdge(C, B))) {
 							Links linkA = new Links();
 							Links linkB = new Links();
 
@@ -373,7 +376,63 @@ public class DirectedGraphDemoServ {
 		return state;
 	}
 
-	public static Links[] link_filter(int quater , Links[] linkset) {
+	/**
+	 * @param graph
+	 * @param nodes
+	 */ //alt+shift+x+j
+	public static List<Links> LongerChain(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes){
+		System.out.println("method is gointo start......");
+		
+		List<Links> list=new ArrayList<Links>();
+		Node A=nodes[1];
+		Set<DefaultEdge> setA=graph.outgoingEdgesOf(A);
+		DefaultEdge[] edgeSetA=setA.toArray(new DefaultEdge[setA.size()]);
+		
+		for (int i = 0; i < setA.size(); i++) {
+			Node B=graph.getEdgeTarget(edgeSetA[i]);
+				if(graph.containsEdge(A, B)){
+					
+					Set<DefaultEdge> setB=graph.outgoingEdgesOf(B);
+					DefaultEdge[] edgeSetB=setB.toArray(new DefaultEdge[setB.size()]);
+					
+					for (int j = 0; j < edgeSetB.length; j++) {
+						Node C=graph.getEdgeTarget(edgeSetB[j]);
+						
+						if(graph.containsEdge(B, C)){
+							Set<DefaultEdge> setC=graph.outgoingEdgesOf(C);
+							DefaultEdge[] edgeSetC=setC.toArray(new DefaultEdge[setC.size()]);
+							
+							for (int k = 0; k < edgeSetC.length; k++) {
+								Node D=graph.getEdgeTarget(edgeSetC[k]);
+									if(graph.containsEdge(C,D)){
+										Links AB=new Links();
+										AB.setSource(Arrays.asList(nodes).indexOf(A));
+										AB.setTarget(Arrays.asList(nodes).indexOf(B));
+										
+										Links BC=new Links();
+										BC.setSource(Arrays.asList(nodes).indexOf(B));
+										BC.setTarget(Arrays.asList(nodes).indexOf(C));
+										
+										Links CD=new Links();
+										CD.setSource(Arrays.asList(nodes).indexOf(C));
+										CD.setTarget(Arrays.asList(nodes).indexOf(D));
+										
+										list.add(AB);
+										list.add(BC);
+										list.add(CD);
+										
+										System.out.println("A-> "+A.toString()+" B-> "+B.toString()+" C-> "+C.toString()+" D-> "+D.toString());
+									}
+							}
+						}
+					}
+				}
+		}
+		System.out.println("end");
+		return list;
+	}
+	
+ public static Links[] link_filter(int quater , Links[] linkset) {
 		ArrayList<Links> temp = new ArrayList<Links>();
 		switch (quater) {
 		case 0:
@@ -384,25 +443,25 @@ public class DirectedGraphDemoServ {
 			break;
 		case 1:
 			for (int j = linkset.length-1; j >= 0; j--) {
-				if(linkset[j].Q1.equals("1") & linkset[j].Q2.equals("0") & linkset[j].Q3.equals("0") & linkset[j].Q4.equals("0"))temp.add(linkset[j]);
+				if(linkset[j].Q1.equals("1"))temp.add(linkset[j]);
 			}
 	    	
 			break;
 		case 2:
 			for (int j = linkset.length-1; j >= 0; j--) {
-				if(linkset[j].Q1.equals("0") & linkset[j].Q2.equals("1") & linkset[j].Q3.equals("0") & linkset[j].Q4.equals("0"))temp.add(linkset[j]);
+				if(linkset[j].Q2.equals("1"))temp.add(linkset[j]);
 			}
 	    	
 			break;
 		case 3:
 			for (int j = linkset.length-1; j >= 0; j--) {
-				if(linkset[j].Q1.equals("0") & linkset[j].Q2.equals("0") & linkset[j].Q3.equals("1") & linkset[j].Q4.equals("0"))temp.add(linkset[j]);
+				if(linkset[j].Q3.equals("1"))temp.add(linkset[j]);
 			}
 	    	
 			break;
 		case 4:
 			for (int j = linkset.length-1; j >= 0; j--) {
-				if(linkset[j].Q1.equals("0") & linkset[j].Q2.equals("0") & linkset[j].Q3.equals("0") & linkset[j].Q4.equals("1"))temp.add(linkset[j]);
+				if(linkset[j].Q4.equals("1"))temp.add(linkset[j]);
 			}
 	    	
 			break;
@@ -412,3 +471,4 @@ public class DirectedGraphDemoServ {
 		return temp.toArray(new Links[temp.size()]);
 	}
 }
+
