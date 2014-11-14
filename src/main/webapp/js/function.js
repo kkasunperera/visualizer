@@ -1258,6 +1258,8 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
             });
 		
             path.style("stroke","#666");
+            
+            path.style("stroke-dasharray",0); 
 		         
             path.attr("marker-end","url(#)");
 		         
