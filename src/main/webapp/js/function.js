@@ -999,6 +999,8 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
             path.style("stroke","#666");
 		         
             path.attr("marker-end","url(#)");
+            
+            path.style("stroke-dasharray",0); 
 		         
             d3.select(this).select("circle").transition()
             .duration(750)
