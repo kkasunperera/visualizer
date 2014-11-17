@@ -25,18 +25,13 @@ function Svgbase(){
     ctx.fill();
     
     //should be dashed
-    ctx.fillStyle = "#666";
-    ctx.beginPath();
-    ctx.fillText("= = = = = = =", 300,14); 
-    ctx.closePath();
-    ctx.fill();
     
     ctx.strokeStyle="#666";
     ctx.beginPath();
     ctx.moveTo(350,35);
     ctx.lineTo(301,35);
     ctx.stroke();
-    
+    	    
     ctx.fillStyle = "#666";
     ctx.beginPath();
     ctx.arc(300,10,8,0,2*Math.PI);
@@ -62,11 +57,15 @@ function Svgbase(){
     ctx.closePath();
     ctx.fill();
     
+    ctx.strokeStyle="#666";
+    ctx.beginPath();
+    ctx.setLineDash([5,5]);
+    ctx.moveTo(350,10);
+    ctx.lineTo(301,10);
+    ctx.stroke();
 }
 
 function SvgQuarterWeak(ctx){
-	
-	Svgbase();
 	
     //#0066FF sustain
     ctx.strokeStyle ="#33CC33";
@@ -81,10 +80,10 @@ function SvgQuarterWeak(ctx){
     ctx.closePath();
     ctx.fill();
 
+    Svgbase();
 }
 
 function SvgQuarterEpisodic(ctx){
-	Svgbase();
 	
     //#0066FF sustain
     ctx.strokeStyle ="#FF0000";
@@ -99,12 +98,11 @@ function SvgQuarterEpisodic(ctx){
     ctx.closePath();
     ctx.fill();
 
-
+    Svgbase();
 
 }
 
 function SvgQuaterSustained(ctx){
-	Svgbase();
     
     //#0066FF sustain
     ctx.strokeStyle ="#0066FF";
@@ -118,6 +116,8 @@ function SvgQuaterSustained(ctx){
     ctx.fillText("Sustained", 580,10); 
     ctx.closePath();
     ctx.fill();
+    
+    Svgbase();
 }
 
 function QuarterGraphSustained(nodes,file,svg1,width,height){
@@ -300,6 +300,8 @@ function mouseOut(opacity) {
      			return 0.001;
      		}
          });
+         
+         path.style("stroke-dasharray",0); 
          
          arrow_head.style("opacity",function(o){
              thisOpacity = isConnected(d, o) ? opacity : 1;
@@ -554,6 +556,8 @@ function mouseOut(opacity) {
      			return 0.001;
      		}
          });
+         
+         path.style("stroke-dasharray",0); 
          
          linktext.style("opacity",function(o){
       	   return o.source === d || o.target === d ? opacity : 1;
@@ -1205,6 +1209,8 @@ function mouseOut(opacity) {
 				}
          });
          
+         path.style("stroke-dasharray",0); 
+         
          path.attr("marker-end","url(#)");
          
          d3.select(this).select("circle").transition()
@@ -1344,7 +1350,7 @@ function SvgQuarter(ctx){
 	    ctx.fillText("Episodic", 580,65); 
 	    ctx.closePath();
 	    ctx.fill();
-
+	    Svgbase();
 }
 
 
