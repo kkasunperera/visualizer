@@ -1332,8 +1332,8 @@ d3.json(file, function(error, json) {
     .data(force.links())
   .enter().append("svg:path")
 	.attr("class", function(d) { return "link " + d.type; })
-	.attr("class", "link")
-	.attr("marker-end", "url(#end)");
+	.attr("class", "link");
+	//.attr("marker-end", "url(#end)");
 
   var node = svg.selectAll(".node")
       .data(force.nodes())
@@ -1459,10 +1459,12 @@ function mouseOver(opacity) {
         //triadCompletingEdges = [];
         depthEdges = [];
         
-        arrow_head.style("opacity",function(o){
-            thisOpacity = isConnected(d, o) ? 1 : opacity;
-            this.setAttribute('fill-opacity', thisOpacity);
-            return thisOpacity;
+        path.attr("marker-end",function(o){
+        	if (o.source === d || o.target === d ) {
+				return "url(#end)";
+			}else{
+				return "url(#)";
+			}
         });
 	       
         d3.select(this).select("text").transition()
@@ -1493,11 +1495,7 @@ function mouseOut(opacity) {
 
          path.style("stroke","#666");
          
-         arrow_head.style("opacity",function(o){
-             thisOpacity = isConnected(d, o) ? opacity : 1;
-             this.setAttribute('fill-opacity', thisOpacity);
-             return thisOpacity;
-         });
+         path.attr("marker-end","url(#)");
          
          linksForSelectedNode = [];
          d3.select(this).select("circle").transition()
@@ -1586,8 +1584,8 @@ function LongerChainInQuarterData(nodes,links,svg1,width,height){
     .attr("class", function(d) {
         return "link " + d.type;
     })
-    .attr("class", "link")
-    .attr("marker-end", "url(#end)");
+    .attr("class", "link");
+    //.attr("marker-end", "url(#end)");
 
 
     var node = svg.selectAll(".node")
@@ -1719,10 +1717,13 @@ function LongerChainInQuarterData(nodes,links,svg1,width,height){
             //triadCompletingEdges = [];
             depthEdges = [];
             
-            arrow_head.style("opacity",function(o){
-                thisOpacity = isConnected(d, o) ? 1 : opacity;
-                this.setAttribute('fill-opacity', thisOpacity);
-                return thisOpacity;
+            path.attr("marker-end",function(o){
+            	var value= getConnectedNodes(o.source, o.target);
+            	if (value > 0) {
+    				return "url(#end)";
+    			}else{
+    				return "url(#)";
+    			}
             });
     	       
             d3.select(this).select("text").transition()
@@ -1758,11 +1759,7 @@ function LongerChainInQuarterData(nodes,links,svg1,width,height){
 		
             path.style("stroke","#666");
 		         
-            arrow_head.style("opacity",function(o){
-                thisOpacity = isConnected(d, o) ? opacity : 1;
-                this.setAttribute('fill-opacity', thisOpacity);
-                return thisOpacity;
-            });
+            path.attr("marker-end","url(#)");
 		         
             d3.select(this).select("circle").transition()
             .duration(750)
