@@ -433,7 +433,7 @@ text {
 			                            $("#Chain").click(function(){							   												   					
 						   					$.ajax({
 						   					  type: 'GET',
-						   					  url: "IncompleteTriad?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
+						   					  url: "chain?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 						   						var width = 1000,height = 900;							   						

@@ -1205,8 +1205,11 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
             });
 		
             path.style("stroke",function(o){
-                if (getConnectedNodes(o.source, o.target)==1||getConnectedNodes(o.source, o.target)==2 || getConnectedNodes(o.source, o.target)==3) { 
+                if (getConnectedNodes(o.source, o.target)==1||getConnectedNodes(o.source, o.target)==2) { 
                     return "blue";
+                }
+                if (getConnectedNodes(o.source, o.target)==3) { 
+                    return "red";
                 }
             });
             path.style("stroke-dasharray",function(o){
