@@ -271,6 +271,24 @@ public class PostDataServ extends HttpServlet {
 			out.close();
 
 		}
+                 else if (userPath.equals("/chain")) {
+			logger.info("userPath is " + userPath);
+			PrintWriter out = response.getWriter();
+			int quater = Integer.parseInt(request.getParameter("Quater"));
+			Links[] link=DirectedGraphDemoServ.link_filter(quater, linkSet);
+			
+                        JsonObject Obj = new JsonObject();
+
+			JsonElement links = gson.toJsonTree(link);
+			JsonElement nodes = gson.toJsonTree(node);
+
+			Obj.add("links", links);
+			Obj.add("nodes", nodes);
+
+			out.print(Obj.toString());
+			out.close();
+
+		}
 
 	}
 

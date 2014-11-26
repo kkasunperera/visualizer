@@ -104,13 +104,13 @@ select {
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.jsp"><font color="white">Visualizer
+				<a class="navbar-brand" href="index.jsp"><font color="white">GC Visualizer
 						- Karsha project</font></a>
 			</div>
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav side-nav">
 					<li class="active"><a href="index.jsp"><i
-							class="fa fa-fw fa-dashboard"></i> Visualizer</a></li>
+							class="fa fa-fw fa-dashboard"></i>GC Visualizer</a></li>
 					<li><a><i class="fa fa-fw fa-arrows-v"></i> GC-Analysis </a>
 						<ul id="accordion">
 							<% for(int i = 2005;i < 2014;i++) {%>
@@ -122,7 +122,7 @@ select {
 								<ul>
 									<li><a
 										href="view_graph.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=0"><i
-											class="fa fa-fw fa-table"></i> Yearly </a></li>
+											class="fa fa-fw fa-table"></i> Annual </a></li>
 									<li><a
 										href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=1"><i
 											class="fa fa-fw fa-table"></i> Quarter 1</a></li>

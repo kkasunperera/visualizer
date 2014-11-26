@@ -105,27 +105,27 @@ function SvgLoadIncTriad(ctx){
     ctx.fillText("Bond", 214,14); 
     ctx.closePath();
     ctx.fill();
-    
-    /*
-    ctx.strokeStyle="#FF0000";
-    ctx.beginPath();
-    ctx.moveTo(350,10);
-    ctx.lineTo(301,10);
-    ctx.stroke();
-    */
+        
     ctx.strokeStyle="#0000FF";
     ctx.beginPath();
     ctx.moveTo(350,35);
     ctx.lineTo(301,35);
+    ctx.stroke();    
+        
+    ctx.strokeStyle="#FF0000";
+    ctx.beginPath();
+    ctx.setLineDash([20,10,5,5,5,10]);
+    ctx.moveTo(350,10);
+    ctx.lineTo(301,10);
     ctx.stroke();
-    /*
+    
     ctx.fillStyle = "#1f77b4";
     ctx.beginPath();
     ctx.arc(300,10,8,0,2*Math.PI);
     ctx.closePath();
     ctx.fill();
   
-    */
+    
     ctx.fillStyle = "#1f77b4";
     ctx.beginPath();
     ctx.arc(300,35,8,0,2*Math.PI);
@@ -134,17 +134,17 @@ function SvgLoadIncTriad(ctx){
     
     ctx.fillStyle = "#0000FF";
     ctx.beginPath();
-    ctx.fillText("Triad Edge", 360,40); 
+    ctx.fillText("A to B OR B to C edge", 360,40); 
     ctx.closePath();
     ctx.fill();
     
-/*
+
     ctx.fillStyle = "#FF0000";
     ctx.beginPath();
-    ctx.fillText("B to C edge", 360,14); 
+    ctx.fillText("Triad Completing edge", 360,14); 
     ctx.closePath();
     ctx.fill();
-    */
+    
 }
 
 function SvgLoadCompTriad(ctx){
@@ -1205,8 +1205,11 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
             });
 		
             path.style("stroke",function(o){
-                if (getConnectedNodes(o.source, o.target)==1||getConnectedNodes(o.source, o.target)==2 || getConnectedNodes(o.source, o.target)==3) { 
+                if (getConnectedNodes(o.source, o.target)==1||getConnectedNodes(o.source, o.target)==2) { 
                     return "blue";
+                }
+                if (getConnectedNodes(o.source, o.target)==3) { 
+                    return "red";
                 }
             });
             path.style("stroke-dasharray",function(o){
