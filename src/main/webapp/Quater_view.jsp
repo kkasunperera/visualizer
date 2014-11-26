@@ -90,7 +90,7 @@ select {
 						class="fa fa-fw fa-dashboard"></i> Visualizer</a></li>
 				<li><a><i class="fa fa-fw fa-arrows-v"></i> GC-Analysis </a>
 					<ul id="accordion">
-						<% for(int i = 2005;i < 2014;i++) {%>
+						<% for(int i = 2005;i < 2013;i++) {%>
 						<li>
 							<h3>
 								<a
