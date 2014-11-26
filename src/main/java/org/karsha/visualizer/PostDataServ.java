@@ -250,6 +250,26 @@ public class PostDataServ extends HttpServlet {
 			out.print(obj.toString());			
 			out.close();
 
+		} else if (userPath.equals("/chain")) {
+			logger.info("userPath is " + userPath);
+
+			int quater = Integer.parseInt(request.getParameter("Quater"));
+
+			Links[] link = DirectedGraphDemoServ.link_filter(quater, linkSet);
+
+			PrintWriter out = response.getWriter();
+
+			JsonObject Obj = new JsonObject();
+
+			JsonElement links = gson.toJsonTree(link);
+			JsonElement nodes = gson.toJsonTree(node);
+
+			Obj.add("links", links);
+			Obj.add("nodes", nodes);
+
+			out.print(Obj.toString());
+			out.close();
+
 		}
                  else if (userPath.equals("/chain")) {
 			logger.info("userPath is " + userPath);
