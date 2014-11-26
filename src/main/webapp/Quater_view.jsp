@@ -433,12 +433,13 @@ text {
 			                            $("#Chain").click(function(){							   												   					
 						   					$.ajax({
 						   					  type: 'GET',
-						   					  url: "IncompleteTriad?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
+						   					  url: "chain?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 						   						var width = 1000,height = 900;							   						
 						   						//DrawGraph(data.nodes, data.Links,"#borderIncmp",width,height);
-                                                DrawChain(data.nodes, data.links,"#borderChain",width,height);
+                                                                                                //DrawChain(data.nodes, data.links,"#borderChain",width,height);
+                                                                                                LongerChainInQuarterData(data.nodes, data.links,"#borderChain",width,height);
 						   					  },
 						   					  error: function(data,error){alert(error);},
 						   					  async: false
