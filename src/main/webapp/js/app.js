@@ -301,6 +301,8 @@ function mouseOut(opacity) {
      		}
          });
          
+         path.style("stroke-dasharray",0); 
+         
          arrow_head.style("opacity",function(o){
              thisOpacity = isConnected(d, o) ? opacity : 1;
              this.setAttribute('fill-opacity', thisOpacity);
@@ -554,6 +556,8 @@ function mouseOut(opacity) {
      			return 0.001;
      		}
          });
+         
+         path.style("stroke-dasharray",0); 
          
          linktext.style("opacity",function(o){
       	   return o.source === d || o.target === d ? opacity : 1;
@@ -1204,6 +1208,8 @@ function mouseOut(opacity) {
 					return "#FF0000";
 				}
          });
+         
+         path.style("stroke-dasharray",0); 
          
          path.attr("marker-end","url(#)");
          

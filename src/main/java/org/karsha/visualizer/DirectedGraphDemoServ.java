@@ -251,6 +251,7 @@ public static List<Links> CompleteTriad(
 				new Object[] { "graph", "nodes[]" });
 
 		int NumberOfIncompleteTriad = 0;
+		int linkscount = 0;
 
 		List<Links> list = new ArrayList<Links>();
 
@@ -260,7 +261,6 @@ public static List<Links> CompleteTriad(
 			Set<DefaultEdge> set = graph.outgoingEdgesOf(A);
 			DefaultEdge[] edgeSet = set.toArray(new DefaultEdge[set.size()]);
 
-			if (edgeSet.length > 1) {
 				for (int i = 0; i < edgeSet.length; i++) {
 
 					Node B = graph.getEdgeTarget(edgeSet[i]);
@@ -272,43 +272,53 @@ public static List<Links> CompleteTriad(
 
 						Node C = graph.getEdgeTarget(edgeSetOfB[j]);
 
-						if (!graph.containsEdge(A, C) && (graph.containsEdge(A, B) && !graph.containsEdge(B, A)) && (graph.containsEdge(B, C) && !graph.containsEdge(C, B))) {
+						if ((!graph.containsEdge(A, C) && !graph.containsEdge(C, A)) && (graph.containsEdge(A, B) && !graph.containsEdge(B, A)) && (graph.containsEdge(B, C) && !graph.containsEdge(C, B))) {
 							Links linkA = new Links();
 							Links linkB = new Links();
+							Links linkC = new Links();// for the incomplete edge :D 
 
 							// link A-->B
 							linkA.setSource(Arrays.asList(nodes).indexOf(A));
 							linkA.setTarget(Arrays.asList(nodes).indexOf(B));
-
+							linkA.status = false;
+							
 							// link A-->c
 							linkB.setSource(Arrays.asList(nodes).indexOf(B));
 							linkB.setTarget(Arrays.asList(nodes).indexOf(C));
+							linkB.status = false;
+							
+							//link B -->c
+							linkC.setSource(Arrays.asList(nodes).indexOf(A));
+							linkC.setTarget(Arrays.asList(nodes).indexOf(C));
+							linkC.status = true;
 
-							// link B-->c
-							// due to incomplete there is no b->c edges
+							System.out.println(A.toString()+ " " + B.toString()+ " " + C.toString());
 
 							if (!isAdded(linkA, list)) {
 								list.add(linkA);
+								linkscount++;
 							}
 							if (!isAdded(linkB, list)) {
 								list.add(linkB);
+								linkscount++;
+							}
+							if(!isAdded(linkC, list)){
+								list.add(linkC);
+								linkscount++;
 							}
 							NumberOfIncompleteTriad++;
-							// display to console
-							// System.out.println(edgeSet[i]+ " " +
-							// edgeSetOfB[j] );
-							// System.out.println("---------------------------------------------------------------");
+							
 						}
 
 					}
 				}
-			}
+			//}
 
 		}
 
 		// System.out.println("Number of IncompleteTriad are "+NumberOfIncompleteTriad);
 		// System.out.println("Number of Edges Containing in the list is "+list.size());
-
+			System.out.println("links"+linkscount);
 		return list;
 	}
 
