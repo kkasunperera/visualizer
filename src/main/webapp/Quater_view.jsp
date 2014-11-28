@@ -112,7 +112,7 @@ select {
 						</li>
 						<%} %>
 					</ul></li>
-				<li><a href="RowData.jsp"><i class="fa fa-fw fa-table"></i>Data-Analysis</a></li>
+				<li><a href="DataAnalysis.jsp"><i class="fa fa-fw fa-table"></i>Data-Analysis</a></li>
 				<li><a href="#"><i class="fa fa-fw fa-file"></i> More About</a></li>
 
 			</ul>
