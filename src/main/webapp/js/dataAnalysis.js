@@ -26,7 +26,7 @@ function cc_histogram(pos) {
 				height + margin.top + margin.bottom).append("g").attr("transform",
 				"translate(" + margin.left + "," + margin.top + ")");
 
-		d3.csv("csv/data.csv", function(error, data) {
+		d3.csv("csv/cc_overall_data.csv", function(error, data) {
 			var ageNames = d3.keys(data[0]).filter(function(key) {
 				return key !== "year";
 			});
