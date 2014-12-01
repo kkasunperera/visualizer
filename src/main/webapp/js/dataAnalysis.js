@@ -109,7 +109,7 @@ function year_edge_histogrm(pos,file){
 	var y = d3.scale.linear().range([ height, 0 ]);
 
 	var color = d3.scale.ordinal().range(
-			[ "#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56" ]);
+			[ "#ffffff", "#8a89a6", "#7b6888", "#6b486b", "#a05d56" ]);
 
 	var xAxis = d3.svg.axis().scale(x0).orient("bottom");
 
