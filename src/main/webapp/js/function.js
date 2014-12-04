@@ -1173,9 +1173,10 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
  
             });
 
+
             for(var i=0;i< connectedEdges.length;i++)
             {
-                
+                var countChild = 0;
                 links.forEach(function(f){
                     if (isConnectedIndex(connectedEdges[i], f.target.index ) == 1 && f.target != d) {
                     	//alert(f.target.index);
@@ -1186,6 +1187,8 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
                     				
                     				if(linksForSelectedNode.indexOf(connectedEdges[i]+ "," + f.target.index) == -1){
                                         linksForSelectedNode[connectedEdges[i]+ "," + f.target.index] = 2;
+                                       /*need to count the children of second level parent*/
+                                        countChild = countChild + 1;
                                     } 
                                                                                      
                                     if(linksForSelectedNode.indexOf(d.index + "," + connectedEdges[i]) == -1){
@@ -1198,6 +1201,18 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
                     			}                                
                             }                        	                                                	                    	                        
                     }; 
+                    
+                    /*conflict*/
+                    /*there can be second level nodes which doen't have children*/
+        				links.forEach(function(m){
+        					if(m.target.index === connectedEdges[i] && isIncominEdgesIndex(m.source.index, connectedEdges[i]) == 1){						
+        						if(TempIncomingEdges.indexOf(m.source.index + "," + connectedEdges[i]) == -1){
+        							if (countChild > 0) {
+										TempIncomingEdges[m.source.index + "," + connectedEdges[i]] = 1;
+									}							
+        						}
+        					}
+        				});
                 });
             }
             
@@ -1332,6 +1347,10 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
    
     function isIncomingEdges(a,b){
     	return linksForInEdges[a.index + "," + b.index];
+    }
+    
+    function isIncominEdgesIndex(a,b){
+    	return linksForInEdges[a + "," + b];
     }
     
     function getIncomingEdges(a,b){
