@@ -173,17 +173,6 @@ function SvgLoadCompTriad(ctx){
     ctx.closePath();
     ctx.fill();
     
-    //ctx.strokeStyle="#0000FF";
-    //ctx.beginPath();
-    //ctx.dashedLine(350,10, 301, 10,[4, 4])
-    // ctx.stroke();
-    /*
-    ctx.strokeStyle="#FF0000";
-    ctx.beginPath();
-    ctx.moveTo(350,10);
-    ctx.lineTo(301,10);
-    ctx.stroke();
-    */
     ctx.strokeStyle="#0000FF";
     ctx.beginPath();
     ctx.moveTo(360,35);
@@ -224,8 +213,6 @@ function SvgLoadCompTriad(ctx){
     ctx.fill();
     
 }
-
-
 
 function SvgLoadDegree(ctx){
     ctx.fillStyle = "#1f77b4";
@@ -1120,11 +1107,19 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
 
     var linkedByIndex = [];
     var linksForSelectedNode = [];
+    var linksForInEdges=[];
+    var TempIncomingEdges = [];
+    
     links.forEach(function(d) {
         //alert(d.source.index + "," + d.target.index);
     	if(d.status == true ){
+    		/*fake edges*/
     		linkedByIndex[d.source.index + "," + d.target.index] = 2;
+    	}else if(d.inedge == true){
+    		/*incoming edges*/
+    		linksForInEdges[d.source.index + "," + d.target.index] = 1;
     	}else{
+    		/*incomplete triad edges*/
     		linkedByIndex[d.source.index + "," + d.target.index] = 1;
     	}
         
@@ -1155,21 +1150,29 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
     
     function mouseOver(opacity) {
         var connectedEdges = [];
-        var triadCompletingEdges = [];        
+        var triadCompletingEdges = [];            
        
-        return function(d) {      
+        return function(d) { 
+
             links.forEach(function(o){
                 // if (isConnected(d, o.target)) {
                 if (o.source === d && isConnected(d, o.target) == 1) {    
                     if(connectedEdges.indexOf(o.target.index) == -1){
                         connectedEdges.push(o.target.index);
-                        	//alert(o.target.index);
-                    }
- 
+                        	//                         
+                    } 
                 };
  
+                /*put the incoming edges of d into array*/
+                if(o.target === d && isIncomingEdges(o.source, d) == 1){
+                	if(TempIncomingEdges.indexOf(o.source.index + "," + d.index) == -1){
+                		TempIncomingEdges[o.source.index + "," + d.index] = 1;
+                	}
+                	
+                }
+ 
             });
-                  //alert(links.length);
+
             for(var i=0;i< connectedEdges.length;i++)
             {
                 
@@ -1188,31 +1191,43 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
                                     if(linksForSelectedNode.indexOf(d.index + "," + connectedEdges[i]) == -1){
                                     	linksForSelectedNode[d.index + "," + connectedEdges[i]] = 1;
                                     }
-                    			}
-                                
-                            }
-                        	
-                            
-                    	                    	                        
+                                   /*counting the triad in d nodes*/
+                                    if(triadCompletingEdges.indexOf(f.target.index) == -1){
+                                    	triadCompletingEdges.push(f.target.index);
+                                    }
+                    			}                                
+                            }                        	                                                	                    	                        
                     }; 
                 });
-
             }
-                        
-            path.style("stroke-opacity", function(o) {
-                var value= getConnectedNodes(o.source, o.target);
-                return (value>=1) ? 1 : opacity; 
-            });
-		
-            path.style("stroke",function(o){
-                if (getConnectedNodes(o.source, o.target)==1||getConnectedNodes(o.source, o.target)==2) { 
-                    return "blue";
-                }
-                if (getConnectedNodes(o.source, o.target)==3) { 
-                    return "red";
-                }
-            });
-            path.style("stroke-dasharray",function(o){
+            
+           /*check whether d node has triad */
+            if (triadCompletingEdges.length > 0) {
+				path.style("stroke-opacity", function(o) {					
+					if (getConnectedNodes(o.source, o.target) >= 1 || getIncomingEdges(o.source, o.target) == 1) {
+						return 1;
+					} else {
+						return opacity;
+					}
+
+				});
+			}
+            
+            /*check whether d node has triad */
+			if (triadCompletingEdges.length > 0) {
+				path.style("stroke", function(o) {
+					if (getIncomingEdges(o.source, o.target) == 1) {
+						return "green";
+					}
+					if (getConnectedNodes(o.source, o.target) == 1 || getConnectedNodes(o.source, o.target) == 2) {
+						return "blue";
+					}
+					if (getConnectedNodes(o.source, o.target) == 3) {
+						return "red";
+					}
+				});
+			}
+			path.style("stroke-dasharray",function(o){
                 if (getConnectedNodes(o.source, o.target)==3) { 
                     return "20,10,5,5,5,10";
                 }       
@@ -1250,6 +1265,7 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
         return function(d) {
             
             linksForSelectedNode = [];
+            TempIncomingEdges = [];
             
             node.style("stroke-opacity", function(o) {
                 thisOpacity = isConnected(d, o) ? 1 : opacity;
@@ -1313,8 +1329,14 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
         return linksForSelectedNode[a.index + "," + b.index];
     // }
     }
+   
+    function isIncomingEdges(a,b){
+    	return linksForInEdges[a.index + "," + b.index];
+    }
     
-    
+    function getIncomingEdges(a,b){
+    	return TempIncomingEdges[a.index + "," + b.index];
+    }
 }
 
 function clustering_cof(tag,cc) {
