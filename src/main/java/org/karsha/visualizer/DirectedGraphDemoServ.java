@@ -17,7 +17,8 @@ public class DirectedGraphDemoServ {
 
 	public static int indegree_count;
 	public static int outdegree_count;
-
+	
+	
 	public static DirectedGraph<Node, DefaultEdge> createHrefGraph(
 			Node[] nodes, Links[] links) {
 		log.log(Level.SEVERE, "createHrefGraph()  Data:{0},{1}", new Object[] {
@@ -243,6 +244,71 @@ public static List<Links> CompleteTriad(
 		return list;
 	}
 
+public static int CompleteTriad_count(
+		DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
+	log.log(Level.SEVERE,
+			"CompleteTriad() A -> B && B->C --> A -> C Triad Data:{0},{1}",
+			new Object[] { "graph", "nodes[]" });
+
+	int NumberOfCompleteTriad = 0;
+	List<Links> list = new ArrayList<Links>();
+
+	for (int k = 0; k < nodes.length; k++) {
+		Node A=nodes[k];
+		Set<DefaultEdge> set = graph.outgoingEdgesOf(A);
+		DefaultEdge[] edgeSet = set.toArray(new DefaultEdge[set.size()]);
+
+		if (edgeSet.length > 1) {
+			for (int i = 0; i < edgeSet.length; i++) {
+				for (int j = 0; j < edgeSet.length; j++) {
+					Links linkA = new Links();
+					Links linkB = new Links();
+					Links linkC = new Links();
+
+					// System.out.println(edgeSet[i]+" "+edgeSet[j]);
+					Node B = graph.getEdgeTarget(edgeSet[i]);
+					Node C = graph.getEdgeTarget(edgeSet[j]);
+
+					if ((graph.containsEdge(B, C) && !graph.containsEdge(C, B)) && (graph.containsEdge(A, B) && !graph.containsEdge(B, A)) && (graph.containsEdge(A, C) && !graph.containsEdge(C, A))) {
+						
+						// link A-->B
+						linkA.setSource(Arrays.asList(nodes).indexOf(A));
+						linkA.setTarget(Arrays.asList(nodes).indexOf(B));
+
+						// link A-->c
+						linkB.setSource(Arrays.asList(nodes).indexOf(A));
+						linkB.setTarget(Arrays.asList(nodes).indexOf(C));
+
+						// link B-->c
+						linkC.setSource(Arrays.asList(nodes).indexOf(B));
+						linkC.setTarget(Arrays.asList(nodes).indexOf(C));
+
+						if (!isAdded(linkA, list)) {
+							list.add(linkA);
+						}
+						if (!isAdded(linkB, list)) {
+							list.add(linkB);
+						}
+						if (!isAdded(linkC, list)) {
+							list.add(linkC);
+						}
+						NumberOfCompleteTriad++;
+						// displya to console
+						// System.out.println(edgeSet[i]+" "+edgeSet[j]+" "+graph.getEdge(A,
+						// B).toString());
+						// System.out.println("------------------------------------------------------------------");
+					}
+
+				}
+			}
+		}
+	}
+	System.out.println("Number of CompletedTriad are "+NumberOfCompleteTriad);
+	System.out.println("Number of Edges contain in the List are "+list.size());
+
+	return NumberOfCompleteTriad;
+}
+
 	/* find the IncompleteTriad of the graph */
 	public static List<Links> InCompleteTriad(
 			DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
@@ -321,6 +387,85 @@ public static List<Links> CompleteTriad(
 			System.out.println("links"+linkscount);
 		return list;
 	}
+	
+	public static int InCompleteTriad_count(
+			DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
+		log.log(Level.SEVERE,
+				"InCompleteTriad() A -> B && B->C --> A no C Triad Data:{0},{1}",
+				new Object[] { "graph", "nodes[]" });
+
+		int NumberOfIncompleteTriad = 0;
+		int linkscount = 0;
+
+		List<Links> list = new ArrayList<Links>();
+
+		for (int k = 0; k < nodes.length; k++) {
+			Node A = nodes[k];
+
+			Set<DefaultEdge> set = graph.outgoingEdgesOf(A);
+			DefaultEdge[] edgeSet = set.toArray(new DefaultEdge[set.size()]);
+
+				for (int i = 0; i < edgeSet.length; i++) {
+
+					Node B = graph.getEdgeTarget(edgeSet[i]);
+
+					Set<DefaultEdge> setOfB = graph.outgoingEdgesOf(B);
+					DefaultEdge[] edgeSetOfB = setOfB.toArray(new DefaultEdge[setOfB.size()]);
+
+					for (int j = 0; j < edgeSetOfB.length; j++) {
+
+						Node C = graph.getEdgeTarget(edgeSetOfB[j]);
+
+						if ((!graph.containsEdge(A, C) && !graph.containsEdge(C, A)) && (graph.containsEdge(A, B) && !graph.containsEdge(B, A)) && (graph.containsEdge(B, C) && !graph.containsEdge(C, B))) {
+							Links linkA = new Links();
+							Links linkB = new Links();
+							Links linkC = new Links();// for the incomplete edge :D 
+
+							// link A-->B
+							linkA.setSource(Arrays.asList(nodes).indexOf(A));
+							linkA.setTarget(Arrays.asList(nodes).indexOf(B));
+							linkA.status = false;
+							
+							// link A-->c
+							linkB.setSource(Arrays.asList(nodes).indexOf(B));
+							linkB.setTarget(Arrays.asList(nodes).indexOf(C));
+							linkB.status = false;
+							
+							//link B -->c
+							linkC.setSource(Arrays.asList(nodes).indexOf(A));
+							linkC.setTarget(Arrays.asList(nodes).indexOf(C));
+							linkC.status = true;
+
+							System.out.println(A.toString()+ " " + B.toString()+ " " + C.toString());
+
+							if (!isAdded(linkA, list)) {
+								list.add(linkA);
+								linkscount++;
+							}
+							if (!isAdded(linkB, list)) {
+								list.add(linkB);
+								linkscount++;
+							}
+							if(!isAdded(linkC, list)){
+								list.add(linkC);
+								linkscount++;
+							}
+							NumberOfIncompleteTriad++;
+							
+						}
+
+					}
+				}
+			//}
+
+		}
+
+		// System.out.println("Number of IncompleteTriad are "+NumberOfIncompleteTriad);
+		// System.out.println("Number of Edges Containing in the list is "+list.size());
+			System.out.println("links"+linkscount);
+		return NumberOfIncompleteTriad;
+	}
+
 
 	public static double clusteringCoefficient(
 			DirectedGraph<Node, DefaultEdge> graph, Node[] nodes, Links[] links) {
