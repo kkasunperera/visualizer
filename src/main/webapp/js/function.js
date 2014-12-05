@@ -1243,16 +1243,20 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
             }
             
            /*check whether d node has triad */
-            if (triadCompletingEdges.length > 0) {
+            //if (triadCompletingEdges.length > 0) {
 				path.style("stroke-opacity", function(o) {					
-					if (getConnectedNodes(o.source, o.target) >= 1 || getIncomingEdges(o.source, o.target) == 1) {
-						return 1;
-					} else {
+					if(triadCompletingEdges.length > 0){
+						if (getConnectedNodes(o.source, o.target) >= 1 || getIncomingEdges(o.source, o.target) > 0) {
+							return 1;
+						} else {
+							return opacity;
+						}
+					}else{
 						return opacity;
 					}
 
 				});
-			}
+			//}
             
             /*check whether d node has triad */
 			if (triadCompletingEdges.length > 0) {

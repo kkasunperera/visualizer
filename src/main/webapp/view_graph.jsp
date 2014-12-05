@@ -18,6 +18,7 @@
 <script src="js/jquery.1.9.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/function.js"></script>
+<script src="js/tracepaths.js"></script>
 <script src="js/node.js"></script>
 <script src="js/app.js"></script>
 
@@ -181,7 +182,7 @@ text {
 							    <li><a id="Imcycles" href="#ImmediateCycle" data-toggle="tab">ImmediateCycles</a></li>
 							    <li><a id="Quarters" href="#QuarterlyTemporalPatterns" data-toggle="tab">QuarterlyTemporalPatterns</a></li>
 							    <li><a id="Chain"  href="#longerchain" data-toggle="tab" >Chain</a></li>
-			
+							    <li><a id="traces"  href="#tracepath" data-toggle="tab" >Trace Path</a></li>			
 							</ul>
                             
                             <div id="myTabContent" class="tab-content">
@@ -442,6 +443,19 @@ text {
 							   				Longchain(nodes, file, "#Lchain", width, height) 
 							   			});
 							   			</script>							   		
+							   		</div>
+							   	</div>
+							   	
+							   	<!-- Trace paths -->
+							   	<div class="tab-pane fade" id="tracepath">							   	
+							   		<div id="tpath" style="border:2px solid;">
+							   			<script>
+							   			$("#traces").click(function(){
+							   				var width = 900, height = 950;											
+											TracePaths(nodes, file, "#tpath", width, height);
+							   			});
+							   			
+							   			</script>						   		
 							   		</div>
 							   	</div>						   							  							  
 						</div>
