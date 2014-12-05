@@ -196,7 +196,8 @@ select {
 								<h2>Clustering Coefficient Analysis - Log Volume Data</h2>
 							</center>
 							<script type="text/javascript">
-								cc_histogram("#cc_data");
+								allData_histogram("#cc_data",
+										"csv/cc_overall_data.csv","Clustering Coefficient");
 							</script>
 						</div>
 					</div>
@@ -209,7 +210,8 @@ select {
 								<h4>GC edges occurrence count annually</h4>
 							</center>
 							<script type="text/javascript">
-								year_edge_histogrm("#year_edge_data","csv/year_edge_analysis.csv");
+								year_edge_histogrm("#year_edge_data",
+										"csv/year_edge_analysis.csv");
 							</script>
 						</div>
 					</div>
@@ -219,7 +221,45 @@ select {
 								<h4>GC edges occurrence count in quarterly</h4>
 							</center>
 							<script type="text/javascript">
-								year_edge_histogrm("#quater_edge_data","csv/quater_edge_analysis.csv");
+								year_edge_histogrm("#quater_edge_data",
+										"csv/quater_edge_analysis.csv");
+							</script>
+						</div>
+					</div>
+				</div>
+				<br></br>
+				<div class="row">
+					<div class="col-lg-12">
+						<div id="edge_data" style="border: 2px solid;">
+							<center>
+								<h2>Edges Analysis - Log Volume Data</h2>
+							</center>
+							<script type="text/javascript">
+								allData_histogram("#edge_data","csv/edges_overall_data.csv","Number of edges");
+							</script>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div id="com_triad_data" style="border: 2px solid;">
+							<center>
+								<h2>Complete triad Analysis - Log Volume Data</h2>
+							</center>
+							<script type="text/javascript">
+								allData_histogram("#com_triad_data","csv/comTraid_overall_data.csv","Number of Complete triads");
+							</script>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div id="Incom_triad_data" style="border: 2px solid;">
+							<center>
+								<h2>Incomplete triad Analysis - Log Volume Data</h2>
+							</center>
+							<script type="text/javascript">
+								allData_histogram("#Incom_triad_data","csv/IncomTraid_overall_data.csv","Number of Incomplete triads");
 							</script>
 						</div>
 					</div>
