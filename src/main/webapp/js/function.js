@@ -92,7 +92,7 @@ function SvgLoadIncTriad(ctx){
     ctx.beginPath();
     ctx.arc(200,35,8,0,2*Math.PI);
     ctx.closePath();
-    ctx.fill();
+    ctx.fill();    
     
     ctx.fillStyle = "#ff7f0d";
     ctx.beginPath();
@@ -104,7 +104,7 @@ function SvgLoadIncTriad(ctx){
     ctx.beginPath();
     ctx.fillText("Bond", 214,14); 
     ctx.closePath();
-    ctx.fill();
+    ctx.fill();    
         
     ctx.strokeStyle="#0000FF";
     ctx.beginPath();
@@ -119,13 +119,18 @@ function SvgLoadIncTriad(ctx){
     ctx.lineTo(301,10);
     ctx.stroke();
     
+    ctx.strokeStyle="#0000FF";
+    ctx.beginPath();
+    ctx.moveTo(350,55);
+    ctx.lineTo(301,55);
+    ctx.stroke();
+    
     ctx.fillStyle = "#1f77b4";
     ctx.beginPath();
     ctx.arc(300,10,8,0,2*Math.PI);
     ctx.closePath();
     ctx.fill();
-  
-    
+      
     ctx.fillStyle = "#1f77b4";
     ctx.beginPath();
     ctx.arc(300,35,8,0,2*Math.PI);
@@ -136,8 +141,7 @@ function SvgLoadIncTriad(ctx){
     ctx.beginPath();
     ctx.fillText("A to B OR B to C edge", 360,40); 
     ctx.closePath();
-    ctx.fill();
-    
+    ctx.fill();    
 
     ctx.fillStyle = "#FF0000";
     ctx.beginPath();
@@ -1203,7 +1207,8 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
                     }; 
                     
                     /*conflict*/
-                    /*there can be second level nodes which doen't have children*/
+                    /*there can be second level nodes which doen't have children*/ 
+                    /*put the incoming edges of B into array*/
         				links.forEach(function(m){
         					if(m.target.index === connectedEdges[i] && isIncominEdgesIndex(m.source.index, connectedEdges[i]) == 1){						
         						if(TempIncomingEdges.indexOf(m.source.index + "," + connectedEdges[i]) == -1){
@@ -1211,9 +1216,18 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
 										TempIncomingEdges[m.source.index + "," + connectedEdges[i]] = 1;
 									}							
         						}
-        					}
+        					}        					        				
         				});
                 });
+            }
+            
+            /*put the incoming edges of C into array*/
+            for( var i=0; i < triadCompletingEdges.length; i++){
+            	links.forEach(function(n){
+            		if(n.target.index === triadCompletingEdges[i] && isIncominEdgesIndex(n.source.index, triadCompletingEdges[i]) == 1){
+            			TempIncomingEdges[n.source.index + "," + triadCompletingEdges[i]] = 1;
+            		}
+            	});
             }
             
            /*check whether d node has triad */
@@ -1253,7 +1267,7 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
             triadCompletingEdges = [];
 		
             path.attr("marker-end",function(o){
-            	if (getConnectedNodes(o.source, o.target)==1||getConnectedNodes(o.source, o.target)==2||getConnectedNodes(o.source, o.target)==3 ) {
+            	if (getConnectedNodes(o.source, o.target) > 0 || getIncomingEdges(o.source, o.target) > 0) {
     				return "url(#end)";
     			}else{
     				return "url(#)";
