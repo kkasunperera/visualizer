@@ -298,7 +298,7 @@ text {
 							   <div class="tab-pane fade" id="IncompleteTriad">
 							   		<div id="borderIncmp" style="border:2px solid;">	
 							   			<br>
-							   			<canvas id="graph_note4" width="500" height="50" style="float: right">                                
+							   			<canvas id="graph_note4" width="500" height="70" style="float: right">                                
                                         </canvas>
 							   			<script type="text/javascript">
 							   			var ctx3 = document.getElementById("graph_note4").getContext("2d");					                            

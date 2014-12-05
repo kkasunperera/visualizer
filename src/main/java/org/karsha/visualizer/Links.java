@@ -16,6 +16,7 @@ public class Links{
 	@JsonDeserialize(contentAs=String.class)
 	String Q4;
 	boolean status;
+	boolean inedge;
 		
 	public int getSource() {
 		return source;

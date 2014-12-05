@@ -257,7 +257,22 @@ public static List<Links> CompleteTriad(
 
 		for (int k = 0; k < nodes.length; k++) {
 			Node A = nodes[k];
-
+			
+			/*incoming edges of node A*/
+			Set<DefaultEdge> inSet=graph.incomingEdgesOf(A);
+			DefaultEdge[] inEdgeSet=inSet.toArray(new DefaultEdge[inSet.size()]);
+			
+			for (int i = 0; i < inEdgeSet.length; i++) {
+				Links link=new Links();				
+				link.setSource(Arrays.asList(nodes).indexOf(graph.getEdgeSource(inEdgeSet[i])));
+				link.setTarget(Arrays.asList(nodes).indexOf(graph.getEdgeTarget(inEdgeSet[i])));
+				link.inedge=true;
+				
+				if (!isIncomingEdgeAdded(link, list)) {
+					//this link cannot be already added link and only incoming edges true
+					list.add(link);
+				}			
+			}
 			Set<DefaultEdge> set = graph.outgoingEdgesOf(A);
 			DefaultEdge[] edgeSet = set.toArray(new DefaultEdge[set.size()]);
 
@@ -380,6 +395,18 @@ public static List<Links> CompleteTriad(
 				if (list.get(i).getSource() == link.getSource()
 						&& list.get(i).getTarget() == link.getTarget()) {
 					state = true;
+				}
+			}
+		}
+		return state;
+	}
+	
+	private static boolean isIncomingEdgeAdded(Links link,List<Links> list){
+		boolean state= false;
+		if(list.size() > 0){
+			for (int i = 0; i < list.size(); i++) {
+				if(list.get(i).getSource() == link.getSource() && list.get(i).getTarget() == link.getTarget() && link.inedge == true){
+					state=true;
 				}
 			}
 		}
