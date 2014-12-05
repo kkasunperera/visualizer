@@ -240,6 +240,7 @@ select {
 						</div>
 					</div>
 				</div>
+				<br></br>
 				<div class="row">
 					<div class="col-lg-12">
 						<div id="com_triad_data" style="border: 2px solid;">
@@ -252,6 +253,7 @@ select {
 						</div>
 					</div>
 				</div>
+				<br></br>
 				<div class="row">
 					<div class="col-lg-12">
 						<div id="Incom_triad_data" style="border: 2px solid;">
