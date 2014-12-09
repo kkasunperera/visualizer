@@ -102,11 +102,12 @@ json.links.forEach(function(d) {
     var rootFreeNode2;
     var freezeNodes= [];
     var freezePaths= [];
+    var tracedNodes = [];
     
 function click(opacity){
 	return function(d) {
 		rootFreeNode = d.index;
-		
+		tracedNodes.push(d.index);
 		//push incoming and outgoing nodes index
 		json.links.forEach(function(f){
 			if(f.source === d){
@@ -188,7 +189,7 @@ function mouseOver(opacity) {
     return function(d) {
     	 if(d.index != rootFreeNode ){
     		 for (var i = 0; i < freezeNodes.length; i++) {
-				if(d.index == freezeNodes[i]){
+				if(d.index == freezeNodes[i] & tracedNodes.indexOf(d.index)<0 ){
 					json.links.forEach(function(m){
 		    			 if(m.source.index === d.index && m.target.index === rootFreeNode){
 		    				 if (freezePaths.indexOf(d.index + "," + rootFreeNode) == -1) {
@@ -252,7 +253,7 @@ function mouseOut(opacity) {
 
         if(d.index != rootFreeNode){
         	for (var int = 0; int < freezeNodes.length; int++) {
-				if(d.index == freezeNodes[int]){
+				if(d.index == freezeNodes[int] & tracedNodes.indexOf(d.index)<0){
 					path.style("stroke-opacity",1);
 		     		
 		              //path.style("stroke","#666");
