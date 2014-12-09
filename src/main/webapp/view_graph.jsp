@@ -447,8 +447,11 @@ text {
 							   	</div>
 							   	
 							   	<!-- Trace paths -->
-							   	<div class="tab-pane fade" id="tracepath">							   	
+							   	<div class="tab-pane fade" id="tracepath">						   	
 							   		<div id="tpath" style="border:2px solid;">
+							   		<div><b>Note: </b> click the initial node and mouseover the realted nodes to see all connected nodes. Click mouseovered node to trace the path. Double click the nodes to trace back to the previous node.
+							   		You can see the traced history by clicking previous node. Green edges indicates the traced path. 
+							   		</div>
 							   			<script>
 							   			$("#traces").click(function(){
 							   				var width = 900, height = 950;											
