@@ -163,11 +163,11 @@ d3.json(file, function(error, json) {
       
   var path = svg.append("svg:g").selectAll("path")
     .data(force.links())
-  .enter().append("svg:path")
-	//.attr("class", function(d) { return "link " + d.type; })
+  .enter().append("svg:path")	
 	.attr("class", "linkSustain") 
 	.on("mouseover", mOver)
-  	.on("mouseout", mOut);
+  	.on("mouseout", mOut)
+  	.attr("id",function(d,i) { return  i; });//assign id for each link
 	//.attr("marker-end", "url(#end)");
   
   //path.append("text").attr("dx",12).attr("dy",".35em").text("quarters");
@@ -219,11 +219,16 @@ json.links.forEach(function(d) {
 
 
 function mOver(d){
-	alert("in");
+	//d3.selectAll($("#" + d.id)).style("stroke", "red");
+	d3.select(this)
+		.style("stroke-width", "5px")
+		.style("stroke", "green");
 }
     
 function mOut(d){
-	alert("out");
+	d3.select(this)
+		.style("stroke-width","1.5px")
+		.style("stroke","#0066FF");
 }
 
 function mouseOver(opacity) {
@@ -1472,6 +1477,7 @@ function getConnectedNodes(a, b) {
 }
 
 /*data retrieve from the server*/
+
 function LongerChainInQuarterData(nodes,links,svg1,width,height){
 
     d3.select("svg")
