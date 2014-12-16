@@ -166,12 +166,11 @@ d3.json(file, function(error, json) {
   .enter().append("svg:path")	
 	.attr("class", "linkSustain") 
 	.on("mouseover", mOver)
-  	.on("mouseout", mOut)
-  	.attr("id",function(d,i) { return  i; });//assign id for each link
-	//.attr("marker-end", "url(#end)");
+  	.on("mouseout", mOut) 
+  	.attr("marker-end", "url(#end)")
+  	.attr("id",function(d,i) { return "linkId_" + i; }); // assign id for each link/path
+  	   
   
-  //path.append("text").attr("dx",12).attr("dy",".35em").text("quarters");
-  	
   var node = svg.selectAll(".node")
       .data(force.nodes())
     .enter().append("g")
@@ -218,17 +217,51 @@ json.links.forEach(function(d) {
 }
 
 
+    var linktext = svg.append("svg:g").selectAll("g.linklabelholder").data(force.links());
+    
 function mOver(d){
 	//d3.selectAll($("#" + d.id)).style("stroke", "red");
 	d3.select(this)
-		.style("stroke-width", "5px")
+	.style("stroke-width", "5px")
 		.style("stroke", "green");
+			
+linktext.enter().append("g").attr("class", "linklabelholder").append("text")
+	   .attr("class", "linklabel")
+		 .style("font-size", "15px")
+		 .style("font-weight", "bold")
+	   .attr("x", "200")
+		 .attr("y", "-10")
+	   .attr("text-anchor", "middle")
+		   .style("fill","#FF0000")
+		 .append("textPath")
+	  .attr("xlink:href",function(d,i) { return "#linkId_" + i;})
+	   .text(function(d) { 		   		
+		   var ar=[];		   
+		   		if(d.Q1 == "1"){
+		   			ar.push("Q1");
+		   		}if(d.Q2 == "1"){
+		   			ar.push("Q2");
+		   		}if(d.Q3 == "1"){
+		   			ar.push("Q3");
+		   		}if(d.Q4 == "1"){
+		   			ar.push("Q4");
+		   		}
+		   		
+		   		if(ar.length == 1){
+		   			return ar[0];
+		   		}else if(ar.length == 2){
+		   			return ar[0]+","+ar[1];
+		   		}		   		
+		 });
+	//alert(d.Q1);
 }
     
 function mOut(d){
 	d3.select(this)
-		.style("stroke-width","1.5px")
+	    .style("stroke-width","1.5px")
 		.style("stroke","#0066FF");
+	
+	svg.selectAll("g.linklabelholder").remove();
 }
 
 function mouseOver(opacity) {
