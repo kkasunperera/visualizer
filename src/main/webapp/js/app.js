@@ -167,7 +167,7 @@ d3.json(file, function(error, json) {
 	.attr("class", "linkSustain") 
 	.on("mouseover", mOver)
   	.on("mouseout", mOut) 
-  	.attr("marker-end", "url(#end)")
+  	//.attr("marker-end", "url(#end)")
   	.attr("id",function(d,i) { return "linkId_" + i; }); // assign id for each link/path
   	   
   
@@ -223,7 +223,8 @@ function mOver(d){
 	//d3.selectAll($("#" + d.id)).style("stroke", "red");
 	d3.select(this)
 	.style("stroke-width", "5px")
-		.style("stroke", "green");
+		.style("stroke", "green")
+		.attr("marker-end", "url(#end)");
 			
 linktext.enter().append("g").attr("class", "linklabelholder").append("text")
 	   .attr("class", "linklabel")
@@ -253,13 +254,16 @@ linktext.enter().append("g").attr("class", "linklabelholder").append("text")
 		   			return ar[0]+","+ar[1];
 		   		}		   		
 		 });
+
+
 	//alert(d.Q1);
 }
     
 function mOut(d){
 	d3.select(this)
 	    .style("stroke-width","1.5px")
-		.style("stroke","#0066FF");
+		.style("stroke","#0066FF")
+		.attr("marker-end", "url(#)");
 	
 	svg.selectAll("g.linklabelholder").remove();
 }
