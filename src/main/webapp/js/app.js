@@ -168,7 +168,7 @@ d3.json(file, function(error, json) {
 	.on("mouseover", mOver)
   	.on("mouseout", mOut) 
   	//.attr("marker-end", "url(#end)")
-  	.attr("id",function(d,i) { return "linkId_" + i; }); // assign id for each link/path
+  	.attr("id",function(d,i) { return i; }); // assign id for each link/path
   	   
   
   var node = svg.selectAll(".node")
@@ -235,7 +235,7 @@ linktext.enter().append("g").attr("class", "linklabelholder").append("text")
 	   .attr("text-anchor", "middle")
 		   .style("fill","#FF0000")
 		 .append("textPath")
-	  .attr("xlink:href",function(d,i) { return "#linkId_" + i;})
+	  .attr("xlink:href","#"+this.id)
 	   .text(function(d) { 		   		
 		   var ar=[];		   
 		   		if(d.Q1 == "1"){
@@ -254,7 +254,6 @@ linktext.enter().append("g").attr("class", "linklabelholder").append("text")
 		   			return ar[0]+","+ar[1];
 		   		}		   		
 		 });
-
 
 	//alert(d.Q1);
 }
