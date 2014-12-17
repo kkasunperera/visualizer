@@ -23,9 +23,7 @@ function Svgbase(){
     ctx.fillText("Bond", 214,14); 
     ctx.closePath();
     ctx.fill();
-    
-    //should be dashed
-    
+
     ctx.strokeStyle="#666";
     ctx.beginPath();
     ctx.moveTo(350,35);
@@ -67,7 +65,7 @@ function Svgbase(){
 
 function SvgQuarterWeak(ctx){
 	
-    //#0066FF sustain
+
     ctx.strokeStyle ="#33CC33";
     ctx.beginPath();
  	ctx.moveTo(550,10);
@@ -85,7 +83,7 @@ function SvgQuarterWeak(ctx){
 
 function SvgQuarterEpisodic(ctx){
 	
-    //#0066FF sustain
+   
     ctx.strokeStyle ="#FF0000";
     ctx.beginPath();
  	ctx.moveTo(550,10);
@@ -104,7 +102,7 @@ function SvgQuarterEpisodic(ctx){
 
 function SvgQuaterSustained(ctx){
     
-    //#0066FF sustain
+   
     ctx.strokeStyle ="#0066FF";
     ctx.beginPath();
  	ctx.moveTo(550,10);
@@ -139,7 +137,7 @@ var force = d3.layout.force()
 d3.json(file, function(error, json) {
   force
       .nodes(nodes)
-      .links(json.links)
+      .links(json.links.filter(function(d){return d.type == "sustained"}))
       .on("tick", tick)
       .start();
  
@@ -165,26 +163,14 @@ d3.json(file, function(error, json) {
       
   var path = svg.append("svg:g").selectAll("path")
     .data(force.links())
-  .enter().append("svg:path")
-	//.attr("class", function(d) { return "link " + d.type; })
-	.attr("class", function(d){
-		if(d.type == "sustained"){
-			return "linkSustain";
-		}else{
-			return "linkWhite";
-		}
-	}) 
-	.attr("stroke-opacity",function(d){
-		if(d.type == "sustained"){
-			return 1;
-		}else{
-			return 0.001;
-		}
-	})
-	.attr("marker-end", "url(#end)");
+  .enter().append("svg:path")	
+	.attr("class", "linkSustain") 
+	.on("mouseover", mOver)
+  	.on("mouseout", mOut) 
+  	//.attr("marker-end", "url(#end)")
+  	.attr("id",function(d,i) { return i; }); // assign id for each link/path
+  	   
   
-  //path.append("text").attr("dx",12).attr("dy",".35em").text("quarters");
-  	
   var node = svg.selectAll(".node")
       .data(force.nodes())
     .enter().append("g")
@@ -231,8 +217,61 @@ json.links.forEach(function(d) {
 }
 
 
- 
+    var linktext = svg.append("svg:g").selectAll("g.linklabelholder").data(force.links());
     
+function mOver(d){
+	//d3.selectAll($("#" + d.id)).style("stroke", "red");
+	d3.select(this)
+	.style("stroke-width", "5px")
+		.style("stroke", "green")
+		.attr("marker-end", "url(#end)");
+			
+linktext.enter().append("g").attr("class", "linklabelholder").append("text")
+	   .attr("class", "linklabel")
+		 .style("font-size", "15px")
+		 .style("font-weight", "bold")
+	   .attr("x", "200")
+		 .attr("y", "-10")
+	   .attr("text-anchor", "middle")
+		   .style("fill","#FF0000")
+		 .append("textPath")
+	  .attr("xlink:href","#"+this.id)
+	   .text(function(d) { 		   		
+		   var ar=[];		   
+		   		if(d.Q1 == "1"){
+		   			ar.push("Q1");
+		   		}if(d.Q2 == "1"){
+		   			ar.push("Q2");
+		   		}if(d.Q3 == "1"){
+		   			ar.push("Q3");
+		   		}if(d.Q4 == "1"){
+		   			ar.push("Q4");
+		   		}
+		   		
+		   		if(ar.length == 1){
+		   			return ar[0];
+		   		}else if(ar.length == 2){
+		   			return ar[0]+","+ar[1];
+		   		}		   		
+		 });
+
+	//alert(d.source.index);
+
+d3.select(this.source).select("circle").transition()
+.duration(750)
+.attr("r", 25)
+.style("fill", function(d) { return color(d.group); });	
+}
+    
+function mOut(d){
+	d3.select(this)
+	    .style("stroke-width","1.5px")
+		.style("stroke","#0066FF")
+		.attr("marker-end", "url(#)");
+	
+	svg.selectAll("g.linklabelholder").remove();
+}
+
 function mouseOver(opacity) {
     return function(d) {
     	node.style("stroke-opacity", function(o) {
@@ -285,22 +324,8 @@ function mouseOut(opacity) {
          
          path.style();//stroke line 
 
-         path.style("stroke",function(d){
-        		if(d.type == "sustained"){
-					return "#0066FF";
-				}else{
-					return "#FFFFFF";
-				}
-         });
-         
-         path.style("stroke-opacity",function(d){
-        	 if(d.type == "sustained"){
-     			return 1;
-     		}else{
-     			return 0.001;
-     		}
-         });
-         
+         path.style("stroke", "#0066FF");
+
          path.style("stroke-dasharray",0); 
          
          arrow_head.style("opacity",function(o){
@@ -359,7 +384,7 @@ var force = d3.layout.force()
 d3.json(file, function(error, json) {
   force
       .nodes(nodes)
-      .links(json.links)
+      .links(json.links.filter(function(d){return d.type == "episodic"}))
       .on("tick", tick)
       .start();
  
@@ -387,20 +412,7 @@ d3.json(file, function(error, json) {
     .data(force.links())
   .enter().append("svg:path")
 	//.attr("class", function(d) { return "link " + d.type; })
-	.attr("class", function(d){
-		if(d.type == "episodic"){
-			return "linkEpisodic";
-		}else{
-			return "linkWhite";
-		}
-	}) 
-	.attr("stroke-opacity",function(d){
-		if(d.type == "episodic"){
-			return 1;
-		}else{
-			return 0.001;
-		}
-	})
+	.attr("class", "linkEpisodic") 
 	.attr("marker-end", "url(#end)")
 	.attr("id",function(d,i) { return "linkId_" + i; }); // assign id for each link/path
   
@@ -541,22 +553,8 @@ function mouseOut(opacity) {
          
          path.style();//stroke line 
 
-         path.style("stroke",function(d){
-        		if(d.type == "episodic"){
-					return "#FF0000";
-				}else{
-					return "#FFFFFF";
-				}
-         });
-         
-         path.style("stroke-opacity",function(d){
-        	 if(d.type == "episodic"){
-     			return 1;
-     		}else{
-     			return 0.001;
-     		}
-         });
-         
+         path.style("stroke", "#FF0000");
+ 
          path.style("stroke-dasharray",0); 
          
          linktext.style("opacity",function(o){
@@ -619,7 +617,7 @@ var force = d3.layout.force()
 d3.json(file, function(error, json) {
   force
       .nodes(nodes)
-      .links(json.links)
+      .links(json.links.filter(function(d){return d.type == "weak"}))
       .on("tick", tick)
       .start();
  
@@ -647,20 +645,7 @@ d3.json(file, function(error, json) {
     .data(force.links())
   .enter().append("svg:path")
 	//.attr("class", function(d) { return "link " + d.type; })
-	.attr("class", function(d){
-		if(d.type == "weak"){
-			return "linkWeak";
-		}else{
-			return "linkWhite";
-		}
-	}) 
-	.attr("stroke-opacity",function(d){
-		if(d.type == "weak"){
-			return 1;
-		}else{
-			return 0.001;
-		}
-	})
+	.attr("class", "linkWeak") 
 	.attr("marker-end", "url(#end)");
 
   var node = svg.selectAll(".node")
@@ -763,22 +748,8 @@ function mouseOut(opacity) {
          
          path.style();//stroke line 
 
-         path.style("stroke",function(d){
-        		if(d.type == "weak"){
-					return "#33CC33";
-				}else{
-					return "#FFFFFF";
-				}
-         });
-         
-         path.style("stroke-opacity",function(d){
-        	 if(d.type == "weak"){
-     			return 1;
-     		}else{
-     			return 0.001;
-     		}
-         });
-         
+         path.style("stroke", "#33CC33");
+        
          arrow_head.style("opacity",function(o){
              thisOpacity = isConnected(d, o) ? opacity : 1;
              this.setAttribute('fill-opacity', thisOpacity);
@@ -1241,23 +1212,24 @@ function isConnected(a, b) {
 	}
 });
 }
+
 function SvgQuarter(ctx){		
 	    
-	    //#0066FF sustain
+	    
 	    ctx.strokeStyle ="#33CC33";
 	    ctx.beginPath();
 	 	ctx.moveTo(550,10);
 	    ctx.lineTo(500,10);
 	    ctx.stroke();
 	    
-	    //#FF0000 episodic 
+	    
 	 	ctx.strokeStyle ="#0066FF";
 	    ctx.beginPath();
 	 	ctx.moveTo(550,35);
 	    ctx.lineTo(500,35);
 	    ctx.stroke();
 	    
-	    //#33CC33 weak
+	    
 	 	ctx.strokeStyle ="#FF0000";
 	    ctx.beginPath();
 	 	ctx.moveTo(550,60);
@@ -1284,7 +1256,6 @@ function SvgQuarter(ctx){
 	    ctx.fill();
 	    Svgbase();
 }
-
 
 function Longchain(nodes,file,svg1,width,height){
 	
@@ -1547,6 +1518,7 @@ function getConnectedNodes(a, b) {
 }
 
 /*data retrieve from the server*/
+
 function LongerChainInQuarterData(nodes,links,svg1,width,height){
 
     d3.select("svg")
