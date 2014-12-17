@@ -255,7 +255,12 @@ linktext.enter().append("g").attr("class", "linklabelholder").append("text")
 		   		}		   		
 		 });
 
-	//alert(d.Q1);
+	//alert(d.source.index);
+
+d3.select(this.source).select("circle").transition()
+.duration(750)
+.attr("r", 25)
+.style("fill", function(d) { return color(d.group); });	
 }
     
 function mOut(d){
