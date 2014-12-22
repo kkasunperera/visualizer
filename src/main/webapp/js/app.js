@@ -121,7 +121,7 @@ function SvgQuaterSustained(ctx){
 function QuarterGraphSustained(nodes,file,svg1,width,height){
 	
 	var linkedByIndex = {};
-	var color = d3.scale.category10();		 
+	var color = d3.scale.category10();		
 	
 	d3.select("svg").remove();
 	var svg = d3.select(svg1).append("svg").attr("width", width).attr("height", height);
@@ -159,6 +159,8 @@ d3.json(file, function(error, json) {
     .attr("orient", "auto")
   .append("svg:path")
     .attr("d", "M0,-5L10,0L0,5");
+ 
+
       
       
   var path = svg.append("svg:g").selectAll("path")
@@ -166,12 +168,11 @@ d3.json(file, function(error, json) {
   .enter().append("svg:path")	
 	.attr("class", "linkSustain") 
 	.on("mouseover", mOver)
-  	.on("mouseout", mOut)
-  	.attr("id",function(d,i) { return  i; });//assign id for each link
-	//.attr("marker-end", "url(#end)");
+  	.on("mouseout", mOut) 
+  	//.attr("marker-end", "url(#end)")
+  	.attr("id",function(d,i) { return i; }); // assign id for each link/path
+  	   
   
-  //path.append("text").attr("dx",12).attr("dy",".35em").text("quarters");
-  	
   var node = svg.selectAll(".node")
       .data(force.nodes())
     .enter().append("g")
@@ -218,17 +219,60 @@ json.links.forEach(function(d) {
 }
 
 
+    var linktext = svg.append("svg:g").selectAll("g.linklabelholder").data(force.links());
+    
 function mOver(d){
 	//d3.selectAll($("#" + d.id)).style("stroke", "red");
+	
 	d3.select(this)
-		.style("stroke-width", "5px")
-		.style("stroke", "green");
+	.style("stroke-width", "5px")
+		.style("stroke", "green")
+		.attr("marker-end", "url(#end)");
+			
+linktext.enter().append("g").attr("class", "linklabelholder").append("text")
+	   .attr("class", "linklabel")
+		 .style("font-size", "15px")
+		 .style("font-weight", "bold")
+	   .attr("x", "200")
+		 .attr("y", "-10")
+	   .attr("text-anchor", "middle")
+		   .style("fill","#FF0000")
+		 .append("textPath")
+	  .attr("xlink:href","#"+this.id)
+	   .text(function(d) { 		   		
+		   var ar=[];		   
+		   		if(d.Q1 == "1"){
+		   			ar.push("Q1");
+		   		}if(d.Q2 == "1"){
+		   			ar.push("Q2");
+		   		}if(d.Q3 == "1"){
+		   			ar.push("Q3");
+		   		}if(d.Q4 == "1"){
+		   			ar.push("Q4");
+		   		}
+		   		
+		   		if(ar.length == 1){
+		   			return ar[0];
+		   		}else if(ar.length == 2){
+		   			return ar[0]+","+ar[1];
+		   		}		   		
+		 });
+
+	//alert(d.source.index);
+
+d3.select(this.source).select("circle").transition()
+.duration(750)
+.attr("r", 25)
+.style("fill", function(d) { return color(d.group); });	
 }
     
 function mOut(d){
 	d3.select(this)
-		.style("stroke-width","1.5px")
-		.style("stroke","#0066FF");
+	    .style("stroke-width","1.5px")
+		.style("stroke","#0066FF")
+		.attr("marker-end", "url(#)");
+	
+	svg.selectAll("g.linklabelholder").remove();
 }
 
 function mouseOver(opacity) {
@@ -774,7 +818,7 @@ function data_set(quart,json) {
 	return json.links;
 }
 
-function OriginalNetworkGraph(nodes,file,svg1,width,height,quart){
+function OriginalNetworkGraph(nodes,file,svg1,width,height,quart,all_obj){
 	
 	var linkedByIndex = {};
 	var color = d3.scale.category10();		 	
@@ -797,8 +841,6 @@ d3.json(file, function(error, json) {
       .start();
   
  
- 
-  
   svg.selectAll(".link")
       .data(json.links)
     .enter().append("line")
@@ -822,6 +864,8 @@ d3.json(file, function(error, json) {
     .data(force.links())
   .enter().append("svg:path")
 	.attr("class", function(d) { return "link " + d.type; })
+	.on("mouseover", mOver)
+  	.on("mouseout", mOut) 
 	.attr("class", "link");
 	//.attr("marker-end", "url(#end)");
 
@@ -870,7 +914,19 @@ json.links.forEach(function(d) {
   	    return "translate(" + d.x + "," + d.y + ")"; });
 }
 
-
+    function mOver(d){
+    	d3.select(this)
+    		.style("stroke-width", "5px")
+    		.style("stroke", "green");
+    	overall_anlys(all_obj,d.source.index,d.target.index);
+    }
+        
+    function mOut(d){
+    	d3.select(this)
+    	    .style("stroke-width","1.5px")
+    		.style("stroke","#666666");
+    }
+    
 function mouseOver(opacity) {
 	//alert("links"+json.links.length);
     return function(d) {
