@@ -44,7 +44,7 @@ function overall_anlys(all_obj,source,target){
 			.append('p')
 			.html('<b> Source :</b> '+all_obj[i].causal_industry+' [ '+all_obj[i].causal_industry_description+' ]<br />'+
 				  '<b> Target :</b> '+all_obj[i].caused_industry+' [ '+all_obj[i].caused_industry_description+' ]<br />'+
-				  'Annually behavior :')
+				  'Annual behavior :')
 		    .append("table")
 		    .style("border-collapse", "collapse")
 		    .style("border", "2px black solid")
@@ -61,8 +61,6 @@ function overall_anlys(all_obj,source,target){
 		    .style("background-color",function(d){
 		    							if(d == 'TRUE')color_blk ="blue";
 		    							else color_blk ="white"; return color_blk;})
-		    .on("mouseover", function(){d3.select(this).style("background-color", "aliceblue")}) 
-		    .on("mouseout", function(){d3.select(this).style("background-color", "white")}) 
 		    .text(function(d){
 		    		return c++;})
 		    .style("font-size", "12px");

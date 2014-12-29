@@ -925,6 +925,7 @@ json.links.forEach(function(d) {
     	d3.select(this)
     	    .style("stroke-width","1.5px")
     		.style("stroke","#666666");
+    	
     }
     
 function mouseOver(opacity) {
