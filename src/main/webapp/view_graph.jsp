@@ -18,6 +18,7 @@
 <script src="js/jquery.1.9.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/function.js"></script>
+<script src="js/overall.js"></script>
 <script src="js/tracepaths.js"></script>
 <script src="js/node.js"></script>
 <script src="js/app.js"></script>
@@ -26,7 +27,28 @@
 		.demoHeaders {
 			margin-top: 2em;
 		}
-		
+		#tooltip {
+    position: absolute;
+    width: 200px;
+    height: auto;
+    padding: 10px;
+    background-color: white;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    -mox-box-shadow: 4px 4px 4px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 4px 4px 10px rbga(0, 0, 0, 0.4) pointer-events: none;
+}
+#tooltip.hidden {
+    opacity: 0;
+}
+#tooltip p {
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+}
 		#dialog-link {
 			padding: .4em 1em .4em 20px;
 			text-decoration: none;
@@ -66,7 +88,12 @@
 		
 		select {
 			width: 300px;
-	}
+	} 
+	label {
+    display: inline-block;
+    width: 5em;
+  }
+  table,td{border:1px solid green;border-collapse: collapse;}
 </style>
 </head>
 
@@ -189,15 +216,20 @@ text {
 							   <div class="tab-pane fade in active" id="home">
 							      <script src="js/d3.min.js"></script>
 									
+									
 									 <div id="gc_network" style="border:2px solid;">
 									 <br />
-                                        <canvas id="graph_note" width="500" height="50" style="float: right">                                
-
-                                        </canvas>
+									  <div class="row">
+									 	<div class="col-lg-6" id="analyse_bar" width="500" height="50" "></div>
+                                        <canvas class="col-rg-6" id="graph_note" width="500" height="50" "></canvas>
+                                      </div>
                             				<!-- load the svg using javascript function -->
 				                            <script>				
-					                            var ctx = document.getElementById("graph_note").getContext("2d");					                            
-					                            SvgLoad(ctx);					                            			
+					                            	
+					                     		var ctx = document.getElementById("graph_note").getContext("2d");
+					                            SvgLoad(ctx);
+					                           
+					                           
 				                            </script>
 				                        
 									 </div>             
@@ -428,7 +460,11 @@ text {
 							   						QuarterGraph(nodes, file, "#borderQgraph", width, height);
 							   					});							   					
 							   				</script>
-
+						   						<div id="tooltip" class="hidden">
+												    <p><strong>Important Label Heading</strong>
+												    </p>
+												    <p><span id="value">100</span>%</p>
+												</div>
 							   		</div>
 							   </div>
 							   
@@ -468,11 +504,15 @@ text {
 							$(document).ready(function(){
 								var filename =<%=name%>
 								<% String baseUrl="\'"+request.getScheme() + "://" + request.getServerName() + ":" + Integer.toString(request.getServerPort()) + request.getContextPath()+"/"+"\'";%>
+								
 								var url=<%=baseUrl%>+filename;
-
+								var filename1 = "json/overall.json";
+								var all_url = <%=baseUrl%>+filename1;
+								
 								var obj=new Object();
-								obj.nodes=nodes;
-										
+								var all_obj = new Object();
+								obj.nodes=nodes;	
+								
 								$.ajax({
 									type: 'GET',
 									url: url,
@@ -481,23 +521,42 @@ text {
 									error: function(data,error){alert(error);},
 									async: false
 								}); 
-										
+								
+								$.ajax({
+									type: 'GET',
+									url: all_url,
+									dataType: 'json',
+									success: function(data) {all_obj = data;},
+									error: function(data,error){alert(error);},
+									async: false
+								}); 
+							
 								//alert(JSON.stringify(obj.link));
 										//post the json string to servlet
 								$.post("PostDataServ",JSON.stringify(obj)).error(function(){
 									//alert("there is error while sending data to server");
 								});;  
 										//alert(JSON.stringify(obj.link));
-										
+								var width = 900, height = 950;
+								OriginalNetworkGraph(nodes, file, "#gc_network", width, height,0,all_obj);
+								
+								
+								//overall_anlys(all_obj);
+								
 								});
 								//graphload 
-								var width = 900, height = 950;
-								OriginalNetworkGraph(nodes, file, "#gc_network", width, height);
+								
+								
+									
+								
 								</script>                    
                     </div>
                 </div>               
             </div>       
         </div> 
+        
+        	<!-- <input id="tooltip-1" title="Enter You name"> -->
+        
 
     <!-- /#wrapper -->
 
@@ -517,8 +576,13 @@ text {
 		<% int a = Integer.parseInt(year)%2005;%>
 	$( "#accordion" ).accordion();
 	$( "#accordion" ).accordion({ active: <%=a%>});
+	$(function() {
+        $("#tooltip-1").tooltip();
+        $("#tooltip-2").tooltip();
+     });
 	</script>
-</div>    
+</div> 
+
 </body>
 
 </html>

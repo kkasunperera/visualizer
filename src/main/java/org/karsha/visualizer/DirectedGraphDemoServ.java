@@ -653,4 +653,3 @@ public static int CompleteTriad_count(
 		return temp.toArray(new Links[temp.size()]);
 	}
 }
-

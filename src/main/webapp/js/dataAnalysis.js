@@ -1,4 +1,3 @@
-
 function allData_histogram(pos,file,axistxt) {
 	var margin = {
 			top : 20,
