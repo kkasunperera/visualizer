@@ -1,5 +1,4 @@
-
-function cc_histogram(pos) {
+function allData_histogram(pos,file,axistxt) {
 	var margin = {
 			top : 20,
 			right : 20,
@@ -26,7 +25,7 @@ function cc_histogram(pos) {
 				height + margin.top + margin.bottom).append("g").attr("transform",
 				"translate(" + margin.left + "," + margin.top + ")");
 
-		d3.csv("csv/cc_overall_data.csv", function(error, data) {
+		d3.csv(file, function(error, data) {
 			var ageNames = d3.keys(data[0]).filter(function(key) {
 				return key !== "year";
 			});
@@ -55,7 +54,7 @@ function cc_histogram(pos) {
 
 			svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr(
 					"transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style(
-					"text-anchor", "end").text("Clustering Coefficient");
+					"text-anchor", "end").text(axistxt);
 
 			var state = svg.selectAll(".state").data(data).enter().append("g").attr(
 					"class", "g").attr("transform", function(d) {
