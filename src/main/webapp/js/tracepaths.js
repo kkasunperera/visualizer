@@ -296,5 +296,4 @@ function isConnected(a, b) {
 	}
 });
 	
->>>>>>> branch 'master' of https://github.com/tharindu99/visualizer.git
 }
