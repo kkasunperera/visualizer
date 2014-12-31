@@ -198,13 +198,13 @@
                         </ul>
                     </div>
                     <center>
-                        <h3>
+<!--                        <h3>
                             <b>Please Note that :</b>
                         </h3>
-                        <h4>fallowing analysis graphs are on under construction.</h4>
+                        <h4>fallowing analysis graphs are on under construction.</h4>-->
                     </center>
                     <div class="row">
-                        <div style="opacity: 0.2;">
+                        <div style="opacity: 0;">
                             <div class="col-lg-3 col-md-6">
                                 <div class="panel panel-primary">
                                     <div class="panel-heading">
@@ -298,7 +298,7 @@
                     <!-- /.row -->
 
                     <div class="row">
-                        <div style="opacity: 0.2;">
+                        <div style="opacity: 0;">
                             <div class="col-lg-12">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
@@ -316,7 +316,7 @@
                         <!-- /.row -->
 
                         <div class="row">
-                            <div style="opacity: 0.2;">
+                            <div style="opacity: 0;">
                                 <div class="col-lg-4">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
