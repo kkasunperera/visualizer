@@ -1,8 +1,8 @@
 var out_all,c=2005;
 function overall_anlys(all_obj,source,target){
 	
-	//alert(JSON.stringify(a));
-	//alert(a[0].causal_industry);
+	
+	//alert(all_obj[0].p_value_2005);
 	
 	//alert(nodes[source].group);
 	
@@ -21,7 +21,7 @@ function overall_anlys(all_obj,source,target){
 			
 			//d3.select('#analyse_bar').append('p').text(out_all);
 			
-			var dataset=[], tempSet= [],blk_nameTemp =[],blk_name =[],i, j;
+			var dataset=[], tempSet= [],blk_nameTemp =[],blk_name =[],i;
 			tempSet.push(all_obj[i].p_value_2005);
 			tempSet.push(all_obj[i].p_value_2006);
 			tempSet.push(all_obj[i].p_value_2007);
