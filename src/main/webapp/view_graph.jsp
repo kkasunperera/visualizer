@@ -223,6 +223,9 @@ text {
 									 	<div class="col-lg-6" id="analyse_bar" width="500" height="50" "></div>
                                         <canvas class="col-rg-6" id="graph_note" width="500" height="50" "></canvas>
                                       </div>
+                                      <div class="row">
+                                      <div class="col-lg-6" id="analyse_bar1" width="500" height="50" "></div>
+                                      </div>
                             				<!-- load the svg using javascript function -->
 				                            <script>				
 					                            	
