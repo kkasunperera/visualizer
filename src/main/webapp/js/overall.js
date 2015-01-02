@@ -79,6 +79,7 @@ function overall_anlys(all_obj,source,target){
 				  '<b> Target :</b> '+all_obj[i].caused_industry+' [ '+all_obj[i].caused_industry_description+' ]<br />'+
 				  'Annual behavior :')
 		    .append("table")
+		    
 		    .style("border-collapse", "collapse")
 		    .style("border", "2px black solid")
 		    .style("position","fixed")
@@ -90,9 +91,9 @@ function overall_anlys(all_obj,source,target){
 		    .selectAll("td")
 		    .data(function(d){return d;})
 		    .enter().append("td")
-		    		    
+		    .style("width","48px")		    
 		    .style("border", "1px black solid")
-		    .style("padding", "10px")
+		    .style("padding", "11px")
 		    .style("background-color",function(d){
 		    							if(d == 'TRUE')color_blk ="blue";
 		    							else color_blk ="white"; return color_blk;})
@@ -125,14 +126,16 @@ var c1 = 1;
 			.data(function(d){return d;})
 			.enter().append("td")
 			
-			.style("width","10px")		    
+			.style("width","12px")		    
 			.style("border", "1.1px black solid")
-			.style("padding", "2.1px")
+			.style("padding", "2px")
 			.style("background-color",function(d){
 										if(d == 'TRUE')color_blk ="blue";
 										else color_blk ="white"; return color_blk;})
 			.text(function(d){
-					return (c1++)%5;})
+				var k = (c1++)%5 ;
+				if(k==0)return (c1++)%5;
+				else return k ;})
 			.style("font-size", "10.4px");
 				
 	
