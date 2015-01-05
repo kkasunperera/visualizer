@@ -87,7 +87,6 @@ public class PostDataServ extends HttpServlet {
 		Gson gson = new Gson();
 
 		if (userPath.equals("/PostDataServ")) {
-
 			logger.info("userPath is " + userPath);
 
 			InputStream s = request.getInputStream();
@@ -176,10 +175,13 @@ public class PostDataServ extends HttpServlet {
 			logger.info("userPath is " + userPath);
 
 			int quater = Integer.parseInt(request.getParameter("Quater"));
-
+			
 			DirectedGraph<Node, DefaultEdge> gg = DirectedGraphDemoServ
 					.createHrefGraph(nodeSet,
 							DirectedGraphDemoServ.link_filter(quater, linkSet));
+			
+			//String year = request.getParameter("year");			
+			//DirectedGraphDemoServ.writeCSV(g, nodeSet, year);
 
 			linkCompleteTriad = DirectedGraphDemoServ
 					.CompleteTriad(gg, nodeSet);
