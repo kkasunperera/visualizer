@@ -75,7 +75,8 @@ function overall_anlys(all_obj,source,target){
 			d3.select("#analyse_bar")
 			.append('p')
 			.style("position","fixed")
-			.html('<b> Source :</b> '+all_obj[i].causal_industry+' [ '+all_obj[i].causal_industry_description+' ]<br />'+
+			.html('<b> Egde Analysis <b>'+
+				  '<b> Source :</b> '+all_obj[i].causal_industry+' [ '+all_obj[i].causal_industry_description+' ]<br />'+
 				  '<b> Target :</b> '+all_obj[i].caused_industry+' [ '+all_obj[i].caused_industry_description+' ]<br />'+
 				  'Annual behavior :')
 		    .append("table")
