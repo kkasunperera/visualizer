@@ -208,7 +208,7 @@ public static List<Links> CompleteTriad(
 						Node B = graph.getEdgeTarget(edgeSet[i]);
 						Node C = graph.getEdgeTarget(edgeSet[j]);
 
-						if ((graph.containsEdge(B, C) && !graph.containsEdge(C, B)) && (graph.containsEdge(A, B) && !graph.containsEdge(B, A)) && (graph.containsEdge(A, C) && !graph.containsEdge(C, A))) {
+						if (graph.containsEdge(edgeSet[i]) && graph.containsEdge(edgeSet[j]) && graph.containsEdge(B, C)) {
 							
 							// link A-->B
 							linkA.setSource(Arrays.asList(nodes).indexOf(A));
@@ -273,7 +273,7 @@ public static int CompleteTriad_count(
 					Node B = graph.getEdgeTarget(edgeSet[i]);
 					Node C = graph.getEdgeTarget(edgeSet[j]);
 
-					if ((graph.containsEdge(B, C) && !graph.containsEdge(C, B)) && (graph.containsEdge(A, B) && !graph.containsEdge(B, A)) && (graph.containsEdge(A, C) && !graph.containsEdge(C, A))) {
+					if (graph.containsEdge(edgeSet[i]) && graph.containsEdge(edgeSet[j]) && graph.containsEdge(B, C)) {
 						
 						// link A-->B
 						linkA.setSource(Arrays.asList(nodes).indexOf(A));
