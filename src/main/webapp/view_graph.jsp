@@ -123,6 +123,7 @@
 								<h3><a href="?filename=data<%=i%>.json&year=data<%=i%>.json&year=<%=i%>"><%=i%></a></h3>
 								<ul>
 									<li><a href="view_graph.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=0"><i class="fa fa-fw fa-table"></i> Overall </a></li>
+									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=5"><i class="fa fa-fw fa-table"></i> Annual </a></li>
 									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=1"><i class="fa fa-fw fa-table"></i> Quarter 1</a></li>
 									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=2"><i class="fa fa-fw fa-table"></i> Quarter 2</a></li>
 									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=3"><i class="fa fa-fw fa-table"></i> Quarter 3</a></li>
