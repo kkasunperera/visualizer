@@ -92,6 +92,17 @@ select {
 .x.axis path {
 	
 }
+
+.dot {
+  stroke: #000;
+}
+
+.tooltip {
+  position: absolute;
+  width: 200px;
+  height: 28px;
+  pointer-events: none;
+}
 </style>
 </head>
 
@@ -264,6 +275,19 @@ select {
 							</center>
 							<script type="text/javascript">
 								allData_histogram("#Incom_triad_data","csv/IncomTraid_overall_data.csv","Number of Incomplete triads");
+							</script>
+						</div>
+					</div>
+				</div>
+				<br></br>
+				<div class="row">
+					<div class="col-lg-12">
+						<div id="repeat_cmp_triad" style="border: 2px solid;">
+							<center>
+								<h2>Repeated Completed Triad Analysis - Log Volume Data</h2>
+							</center>
+							<script type="text/javascript">
+								repeatCmpTriad("#repeat_cmp_triad", "csv/repeat.csv");
 							</script>
 						</div>
 					</div>

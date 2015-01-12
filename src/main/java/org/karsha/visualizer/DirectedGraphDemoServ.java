@@ -1,5 +1,9 @@
 package org.karsha.visualizer;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -373,7 +377,7 @@ public static int CompleteTriad_count(
 							linkC.setTarget(Arrays.asList(nodes).indexOf(C));
 							linkC.status = true;
 
-							System.out.println(A.toString()+ " " + B.toString()+ " " + C.toString());
+							//System.out.println(A.toString()+ " " + B.toString()+ " " + C.toString());
 
 							if (!isAdded(linkA, list)) {
 								list.add(linkA);
@@ -397,7 +401,7 @@ public static int CompleteTriad_count(
 
 		}
 
-		// System.out.println("Number of IncompleteTriad are "+NumberOfIncompleteTriad);
+		System.out.println("Number of IncompleteTriad are "+NumberOfIncompleteTriad);
 		// System.out.println("Number of Edges Containing in the list is "+list.size());
 			System.out.println("links"+linkscount);
 		return list;
@@ -451,7 +455,7 @@ public static int CompleteTriad_count(
 							linkC.setTarget(Arrays.asList(nodes).indexOf(C));
 							linkC.status = true;
 
-							System.out.println(A.toString()+ " " + B.toString()+ " " + C.toString());
+							//System.out.println(A.toString()+ " " + B.toString()+ " " + C.toString());
 
 							if (!isAdded(linkA, list)) {
 								list.add(linkA);
@@ -603,7 +607,7 @@ public static int CompleteTriad_count(
 										list.add(BC);
 										list.add(CD);
 										
-										System.out.println("A-> "+A.toString()+" B-> "+B.toString()+" C-> "+C.toString()+" D-> "+D.toString());
+										//System.out.println("A-> "+A.toString()+" B-> "+B.toString()+" C-> "+C.toString()+" D-> "+D.toString());
 									}
 							}
 						}
@@ -656,4 +660,47 @@ public static int CompleteTriad_count(
 		}
 		return temp.toArray(new Links[temp.size()]);
 	}
+
+ 
+/**
+ * @param graph
+ * @param nodes
+ * @throws IOException 
+ * @param year
+ */
+public static void writeCSV(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes, String year) throws IOException{
+	
+	//write path
+	File file=new File("C://Users/lsf-admin/Desktop/data.csv");
+	BufferedWriter writer=new BufferedWriter(new FileWriter(file));
+		
+
+	for (int k = 0; k < nodes.length; k++) {
+		Node A=nodes[k];
+		Set<DefaultEdge> set = graph.outgoingEdgesOf(A);
+		DefaultEdge[] edgeSet = set.toArray(new DefaultEdge[set.size()]);
+
+		if (edgeSet.length > 1) {
+			for (int i = 0; i < edgeSet.length; i++) {
+				for (int j = 0; j < edgeSet.length; j++) {
+				
+					// System.out.println(edgeSet[i]+" "+edgeSet[j]);
+					Node B = graph.getEdgeTarget(edgeSet[i]);
+					Node C = graph.getEdgeTarget(edgeSet[j]);
+
+					if ((graph.containsEdge(B, C) && !graph.containsEdge(C, B)) && (graph.containsEdge(A, B) && !graph.containsEdge(B, A)) && (graph.containsEdge(A, C) && !graph.containsEdge(C, A))) {
+						
+						System.out.println(A.toString()+ " " + B.toString() + " " + C.toString());
+						writer.write("\""+A.toString()+ " " + B.toString() + " " + C.toString()+"\""+","+ year +"\n");
+					}
+
+				}
+			}
+		}
+	}	
+	
+	writer.close();
+
+	}
+
 }

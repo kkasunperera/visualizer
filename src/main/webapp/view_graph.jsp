@@ -190,6 +190,11 @@ text {
   font: 10px sans-serif;
   pointer-events: none;
 }
+
+.d3-tip {
+    line-height: 1;
+    color: black;
+}
 </style>
     
   <div id="page-wrapper">
@@ -315,7 +320,7 @@ text {
 			                            $("#Cmp").click(function(){							   												   					
 						   					$.ajax({
 						   					  type: 'GET',
-						   					  url: "CompleteTriad?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
+						   					  url: "CompleteTriad?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>&year=<%=year%>",
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 						   						var width = 1000,height = 900;							   						
