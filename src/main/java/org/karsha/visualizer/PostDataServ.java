@@ -311,7 +311,7 @@ public class PostDataServ extends HttpServlet {
 			
 			
 			
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 6; i++) {
 				Links[] link = DirectedGraphDemoServ.link_filter(i, linkSet);
 				edges_count_arry.add(link.length);
 				
