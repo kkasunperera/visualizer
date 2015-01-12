@@ -53,7 +53,7 @@
   {
     "source":1,
     "target":10,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -123,7 +123,7 @@
   {
     "source":2,
     "target":25,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -183,7 +183,7 @@
   {
     "source":3,
     "target":1,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -203,7 +203,7 @@
   {
     "source":3,
     "target":4,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -213,7 +213,7 @@
   {
     "source":3,
     "target":8,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -223,7 +223,7 @@
   {
     "source":3,
     "target":12,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -243,7 +243,7 @@
   {
     "source":3,
     "target":22,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -263,7 +263,7 @@
   {
     "source":3,
     "target":27,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -373,7 +373,7 @@
   {
     "source":3,
     "target":41,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -403,7 +403,7 @@
   {
     "source":3,
     "target":10,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -413,7 +413,7 @@
   {
     "source":3,
     "target":13,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -473,7 +473,7 @@
   {
     "source":4,
     "target":35,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -523,7 +523,7 @@
   {
     "source":5,
     "target":8,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -543,7 +543,7 @@
   {
     "source":5,
     "target":19,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -583,7 +583,7 @@
   {
     "source":5,
     "target":47,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -603,7 +603,7 @@
   {
     "source":5,
     "target":12,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -613,7 +613,7 @@
   {
     "source":6,
     "target":2,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -683,7 +683,7 @@
   {
     "source":6,
     "target":28,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -703,7 +703,7 @@
   {
     "source":6,
     "target":34,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -933,7 +933,7 @@
   {
     "source":8,
     "target":2,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -943,7 +943,7 @@
   {
     "source":8,
     "target":4,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -1073,7 +1073,7 @@
   {
     "source":9,
     "target":10,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -1123,7 +1123,7 @@
   {
     "source":9,
     "target":32,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -1143,7 +1143,7 @@
   {
     "source":9,
     "target":35,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -1183,7 +1183,7 @@
   {
     "source":9,
     "target":47,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -1503,7 +1503,7 @@
   {
     "source":12,
     "target":2,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -1563,7 +1563,7 @@
   {
     "source":12,
     "target":25,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -1573,7 +1573,7 @@
   {
     "source":12,
     "target":29,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -1583,7 +1583,7 @@
   {
     "source":12,
     "target":34,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -1593,7 +1593,7 @@
   {
     "source":12,
     "target":41,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -1673,7 +1673,7 @@
   {
     "source":13,
     "target":33,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -1813,7 +1813,7 @@
   {
     "source":15,
     "target":25,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -1863,7 +1863,7 @@
   {
     "source":15,
     "target":34,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -2233,7 +2233,7 @@
   {
     "source":22,
     "target":25,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -2243,7 +2243,7 @@
   {
     "source":25,
     "target":2,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -2273,7 +2273,7 @@
   {
     "source":25,
     "target":12,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -2283,7 +2283,7 @@
   {
     "source":25,
     "target":13,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -2423,7 +2423,7 @@
   {
     "source":27,
     "target":40,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -2443,7 +2443,7 @@
   {
     "source":27,
     "target":43,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -2463,7 +2463,7 @@
   {
     "source":27,
     "target":51,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -2563,7 +2563,7 @@
   {
     "source":28,
     "target":34,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -2673,7 +2673,7 @@
   {
     "source":29,
     "target":42,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -2773,7 +2773,7 @@
   {
     "source":30,
     "target":34,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -2883,7 +2883,7 @@
   {
     "source":31,
     "target":51,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -2933,7 +2933,7 @@
   {
     "source":32,
     "target":21,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -2993,7 +2993,7 @@
   {
     "source":32,
     "target":51,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -3033,7 +3033,7 @@
   {
     "source":33,
     "target":30,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -3163,7 +3163,7 @@
   {
     "source":34,
     "target":28,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -3173,7 +3173,7 @@
   {
     "source":34,
     "target":38,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -3193,7 +3193,7 @@
   {
     "source":34,
     "target":45,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -3203,7 +3203,7 @@
   {
     "source":34,
     "target":51,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -3323,7 +3323,7 @@
   {
     "source":36,
     "target":47,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -3633,7 +3633,7 @@
   {
     "source":39,
     "target":10,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -3743,7 +3743,7 @@
   {
     "source":40,
     "target":27,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -3883,7 +3883,7 @@
   {
     "source":42,
     "target":51,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -4123,7 +4123,7 @@
   {
     "source":45,
     "target":38,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
@@ -4253,7 +4253,7 @@
   {
     "source":51,
     "target":8,
-    "type":"week",
+    "type":"weak",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",

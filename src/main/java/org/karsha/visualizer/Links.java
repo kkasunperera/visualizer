@@ -15,6 +15,8 @@ public class Links{
 	String Q3;
 	@JsonDeserialize(contentAs=String.class)
 	String Q4;
+	@JsonDeserialize(contentAs=String.class)
+	String YEAR;
 	boolean status;
 	boolean inedge;
 		
@@ -59,6 +61,12 @@ public class Links{
 	}
 	public void setQ4(String q4) {
 		Q4 = q4;
+	}
+	public String getYEAR() {
+		return YEAR;
+	}
+	public void setYEAR(String year) {
+		YEAR = year;
 	}
 	
 }

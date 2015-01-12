@@ -649,6 +649,10 @@ public static int CompleteTriad_count(
 			for (int j = linkset.length-1; j >= 0; j--) {
 				if(linkset[j].Q4.equals("1"))temp.add(linkset[j]);
 			}
+		case 5:
+			for (int j = linkset.length-1; j >= 0; j--) {
+				if(linkset[j].YEAR.equals("1"))temp.add(linkset[j]);
+			}
 	    	
 			break;
 		default:
