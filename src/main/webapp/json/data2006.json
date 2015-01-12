@@ -1,12 +1,174 @@
-{"links":[
+{
+"links":[
   {
     "source":0,
-    "target":42,
-    "type":"weak",
+    "target":8,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":0,
+    "target":9,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":0,
+    "target":31,
+    "type":"episodic",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":0,
+    "target":35,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":0,
+    "target":42,
+    "type":"week",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":1,
+    "target":2,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":1,
+    "target":4,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":1,
+    "target":9,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":1,
+    "target":16,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":1,
+    "target":26,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":1,
+    "target":28,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":1,
+    "target":37,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":2,
+    "target":4,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":2,
+    "target":6,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":2,
+    "target":9,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":2,
+    "target":10,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":2,
+    "target":11,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":2,
@@ -15,25 +177,88 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"1",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":2,
+    "target":25,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":2,
+    "target":30,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":2,
+    "target":32,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":2,
+    "target":43,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":2,
+    "target":45,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":3,
     "target":1,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":3,
     "target":2,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":3,
+    "target":4,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":3,
@@ -42,25 +267,58 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"1"
+    "Q4":"1",
+    "year":"1"
+  },
+  {
+    "source":3,
+    "target":12,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":3,
     "target":21,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":3,
+    "target":41,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":3,
+    "target":42,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":4,
     "target":1,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":4,
@@ -69,7 +327,8 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"1"
+    "Q4":"1",
+    "year":"1"
   },
   {
     "source":4,
@@ -78,16 +337,18 @@
     "Q1":"0",
     "Q2":"1",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":4,
     "target":7,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":4,
@@ -96,7 +357,28 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"1",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":4,
+    "target":13,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":4,
+    "target":30,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":4,
@@ -105,16 +387,28 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"1",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":4,
+    "target":51,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":5,
     "target":1,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":5,
@@ -123,7 +417,8 @@
     "Q1":"0",
     "Q2":"1",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":5,
@@ -132,25 +427,138 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"1"
+    "Q4":"1",
+    "year":"1"
+  },
+  {
+    "source":5,
+    "target":19,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":5,
+    "target":25,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":5,
+    "target":29,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":5,
     "target":33,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":5,
+    "target":35,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":5,
+    "target":37,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":5,
+    "target":42,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":5,
     "target":47,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":5,
+    "target":48,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":6,
+    "target":2,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":6,
+    "target":3,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":6,
+    "target":4,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":6,
+    "target":5,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":6,
@@ -159,16 +567,38 @@
     "Q1":"1",
     "Q2":"1",
     "Q3":"1",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":6,
-    "target":15,
-    "type":"weak",
+    "target":14,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":6,
+    "target":17,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":6,
+    "target":19,
+    "type":"episodic",
     "Q1":"0",
     "Q2":"0",
-    "Q3":"0",
-    "Q4":"0"
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":6,
@@ -177,16 +607,48 @@
     "Q1":"0",
     "Q2":"1",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":6,
+    "target":25,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":6,
     "target":34,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":6,
+    "target":48,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":6,
+    "target":15,
+    "type":"week",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":7,
@@ -195,7 +657,8 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"1"
+    "Q4":"1",
+    "year":"1"
   },
   {
     "source":7,
@@ -204,16 +667,18 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"1"
+    "Q4":"1",
+    "year":"1"
   },
   {
     "source":7,
-    "target":6,
-    "type":"weak",
-    "Q1":"0",
+    "target":11,
+    "type":"episodic",
+    "Q1":"1",
     "Q2":"0",
-    "Q3":"0",
-    "Q4":"0"
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":7,
@@ -222,7 +687,8 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"1",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":7,
@@ -231,25 +697,298 @@
     "Q1":"1",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":7,
     "target":25,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":7,
+    "target":28,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":7,
+    "target":29,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":7,
+    "target":30,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":7,
+    "target":31,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":7,
+    "target":32,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":7,
+    "target":33,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":7,
+    "target":35,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":7,
+    "target":38,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":7,
+    "target":39,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":7,
+    "target":40,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":7,
+    "target":43,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":7,
+    "target":47,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":7,
+    "target":6,
+    "type":"week",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":8,
+    "target":10,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":8,
+    "target":15,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":8,
     "target":21,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":8,
+    "target":32,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":8,
+    "target":34,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":8,
+    "target":42,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":8,
+    "target":43,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":8,
+    "target":48,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":9,
+    "target":0,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":9,
+    "target":5,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":9,
+    "target":8,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":9,
+    "target":10,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":9,
+    "target":12,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":9,
+    "target":15,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":9,
+    "target":16,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":9,
@@ -258,16 +997,58 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"1"
+    "Q4":"1",
+    "year":"1"
+  },
+  {
+    "source":9,
+    "target":22,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":9,
+    "target":26,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
   },
   {
     "source":9,
     "target":31,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":9,
+    "target":39,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":9,
+    "target":40,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":9,
@@ -276,7 +1057,88 @@
     "Q1":"0",
     "Q2":"1",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":9,
+    "target":43,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":10,
+    "target":2,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":10,
+    "target":4,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":10,
+    "target":12,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":10,
+    "target":15,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":10,
+    "target":21,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":10,
+    "target":35,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":10,
+    "target":47,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":10,
@@ -285,25 +1147,78 @@
     "Q1":"1",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":11,
+    "target":5,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":11,
+    "target":32,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":11,
+    "target":33,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":12,
     "target":1,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":12,
+    "target":4,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":12,
     "target":6,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":12,
+    "target":7,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":12,
@@ -312,43 +1227,78 @@
     "Q1":"0",
     "Q2":"1",
     "Q3":"1",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":12,
     "target":13,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":12,
+    "target":19,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":12,
     "target":25,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":12,
+    "target":27,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":12,
+    "target":28,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":12,
     "target":30,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":13,
-    "target":1,
-    "type":"weak",
+    "target":0,
+    "type":"episodic",
     "Q1":"0",
-    "Q2":"0",
+    "Q2":"1",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":13,
@@ -357,7 +1307,38 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"1"
+    "Q4":"1",
+    "year":"1"
+  },
+  {
+    "source":13,
+    "target":4,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":13,
+    "target":5,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":13,
+    "target":9,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":13,
@@ -366,34 +1347,178 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"1"
+    "Q4":"1",
+    "year":"1"
+  },
+  {
+    "source":13,
+    "target":14,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":13,
+    "target":15,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":13,
     "target":21,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":13,
+    "target":22,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":13,
+    "target":27,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":13,
+    "target":35,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":13,
+    "target":1,
+    "type":"week",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":13,
     "target":25,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":13,
     "target":30,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":14,
+    "target":5,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":14,
+    "target":6,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":14,
+    "target":15,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":14,
+    "target":17,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":14,
+    "target":21,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":14,
+    "target":38,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":14,
+    "target":41,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":14,
+    "target":47,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":15,
@@ -402,34 +1527,158 @@
     "Q1":"0",
     "Q2":"1",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":15,
+    "target":5,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":15,
+    "target":8,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":15,
+    "target":9,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":15,
+    "target":11,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":15,
+    "target":12,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":15,
     "target":13,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":15,
     "target":21,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":15,
+    "target":25,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":15,
+    "target":26,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":15,
+    "target":30,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":15,
+    "target":31,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":15,
+    "target":33,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":16,
+    "target":1,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":16,
     "target":7,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":16,
+    "target":25,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":16,
@@ -438,16 +1687,138 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"1",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":16,
+    "target":32,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":16,
+    "target":38,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":16,
+    "target":41,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":16,
+    "target":43,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":17,
+    "target":1,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":17,
+    "target":2,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":17,
+    "target":9,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":17,
+    "target":13,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":17,
+    "target":16,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
   },
   {
     "source":17,
     "target":21,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":17,
+    "target":22,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":17,
+    "target":25,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":17,
+    "target":29,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
   },
   {
     "source":17,
@@ -456,7 +1827,28 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"1"
+    "Q4":"1",
+    "year":"1"
+  },
+  {
+    "source":17,
+    "target":33,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":17,
+    "target":36,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":19,
@@ -465,7 +1857,8 @@
     "Q1":"1",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":19,
@@ -474,7 +1867,48 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"1",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":19,
+    "target":35,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":19,
+    "target":48,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":19,
+    "target":51,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":21,
+    "target":1,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":21,
@@ -483,7 +1917,8 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"1",
-    "Q4":"1"
+    "Q4":"1",
+    "year":"1"
   },
   {
     "source":21,
@@ -492,7 +1927,28 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"1"
+    "Q4":"1",
+    "year":"1"
+  },
+  {
+    "source":21,
+    "target":7,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":21,
+    "target":8,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
   },
   {
     "source":21,
@@ -501,7 +1957,28 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"1"
+    "Q4":"1",
+    "year":"1"
+  },
+  {
+    "source":21,
+    "target":11,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":21,
+    "target":12,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
   },
   {
     "source":21,
@@ -510,7 +1987,28 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"1"
+    "Q4":"1",
+    "year":"1"
+  },
+  {
+    "source":21,
+    "target":15,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":21,
+    "target":17,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
   },
   {
     "source":21,
@@ -519,16 +2017,28 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"1"
+    "Q4":"1",
+    "year":"1"
   },
   {
     "source":21,
     "target":22,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":21,
+    "target":25,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
   },
   {
     "source":21,
@@ -537,25 +2047,48 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"1"
+    "Q4":"1",
+    "year":"1"
   },
   {
     "source":21,
     "target":30,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":21,
     "target":36,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":21,
+    "target":38,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":21,
+    "target":39,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
   },
   {
     "source":22,
@@ -564,25 +2097,88 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"1",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":22,
     "target":13,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":22,
     "target":15,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":22,
+    "target":21,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":22,
+    "target":26,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":22,
+    "target":27,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":22,
+    "target":31,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":22,
+    "target":36,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":22,
+    "target":43,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":25,
@@ -591,7 +2187,28 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"1"
+    "Q4":"1",
+    "year":"1"
+  },
+  {
+    "source":25,
+    "target":3,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":25,
+    "target":4,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
   },
   {
     "source":25,
@@ -600,52 +2217,188 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"1"
+    "Q4":"1",
+    "year":"1"
   },
   {
     "source":25,
     "target":6,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":25,
+    "target":12,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":25,
+    "target":27,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":25,
+    "target":30,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":25,
+    "target":31,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":25,
+    "target":37,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":25,
+    "target":47,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":25,
     "target":10,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":25,
     "target":21,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":26,
+    "target":3,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":26,
+    "target":7,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":26,
+    "target":12,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":26,
+    "target":16,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":26,
+    "target":21,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
   },
   {
     "source":26,
     "target":32,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":26,
+    "target":33,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":26,
     "target":36,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":26,
+    "target":43,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":27,
@@ -654,7 +2407,208 @@
     "Q1":"0",
     "Q2":"1",
     "Q3":"1",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":27,
+    "target":6,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":27,
+    "target":11,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":27,
+    "target":15,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":27,
+    "target":28,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":27,
+    "target":29,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":27,
+    "target":30,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":27,
+    "target":31,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":27,
+    "target":32,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":27,
+    "target":33,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":27,
+    "target":34,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":27,
+    "target":35,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":27,
+    "target":36,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":27,
+    "target":38,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":27,
+    "target":39,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":27,
+    "target":40,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":27,
+    "target":41,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":27,
+    "target":43,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":27,
+    "target":47,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":27,
+    "target":48,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":27,
+    "target":51,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":28,
@@ -663,34 +2617,158 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"1"
+    "Q4":"1",
+    "year":"1"
   },
   {
     "source":28,
-    "target":6,
-    "type":"weak",
+    "target":12,
+    "type":"episodic",
     "Q1":"0",
     "Q2":"0",
-    "Q3":"0",
-    "Q4":"0"
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":28,
+    "target":17,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":28,
     "target":26,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":28,
+    "target":33,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":28,
+    "target":6,
+    "type":"week",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":29,
+    "target":8,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":29,
+    "target":19,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":29,
+    "target":26,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":29,
+    "target":32,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
   },
   {
     "source":29,
     "target":34,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":29,
+    "target":38,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":29,
+    "target":42,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":30,
+    "target":2,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":30,
+    "target":10,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":30,
+    "target":19,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":30,
@@ -699,25 +2777,28 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"1",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":31,
     "target":1,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":31,
     "target":5,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":31,
@@ -726,16 +2807,48 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"1",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":31,
+    "target":10,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":31,
+    "target":14,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":31,
+    "target":15,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":31,
     "target":21,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":31,
@@ -744,16 +2857,38 @@
     "Q1":"0",
     "Q2":"1",
     "Q3":"1",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":31,
+    "target":30,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":31,
     "target":33,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":31,
+    "target":40,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":31,
@@ -762,16 +2897,18 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"1",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":31,
     "target":43,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":32,
@@ -780,7 +2917,8 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"1",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":32,
@@ -789,7 +2927,68 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"1",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":32,
+    "target":11,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":32,
+    "target":12,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":32,
+    "target":14,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":32,
+    "target":15,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":32,
+    "target":16,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":32,
+    "target":19,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":32,
@@ -798,34 +2997,148 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"1",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":32,
     "target":28,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":32,
-    "target":31,
-    "type":"weak",
+    "target":29,
+    "type":"episodic",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":32,
+    "target":33,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":32,
+    "target":35,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":32,
     "target":40,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":32,
+    "target":47,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":32,
+    "target":31,
+    "type":"week",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":33,
+    "target":2,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":33,
+    "target":3,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":33,
+    "target":7,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":33,
+    "target":12,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":33,
+    "target":14,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":33,
+    "target":19,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":33,
+    "target":25,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":33,
@@ -834,7 +3147,28 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"1",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":33,
+    "target":29,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":33,
+    "target":30,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":33,
@@ -843,25 +3177,58 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"1",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":33,
+    "target":48,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":34,
+    "target":5,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":34,
+    "target":12,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":34,
     "target":21,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":34,
     "target":26,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":34,
@@ -870,34 +3237,48 @@
     "Q1":"1",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":34,
     "target":28,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":34,
     "target":30,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":34,
+    "target":35,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":34,
     "target":39,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":34,
@@ -906,25 +3287,88 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"1",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":34,
+    "target":42,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":34,
     "target":43,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":34,
+    "target":47,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":35,
     "target":1,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":35,
+    "target":2,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":35,
+    "target":4,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":35,
+    "target":26,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":35,
+    "target":47,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":36,
@@ -933,25 +3377,158 @@
     "Q1":"1",
     "Q2":"0",
     "Q3":"1",
-    "Q4":"1"
+    "Q4":"1",
+    "year":"1"
   },
   {
     "source":36,
     "target":6,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":36,
+    "target":9,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":36,
+    "target":10,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":36,
+    "target":13,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":36,
+    "target":16,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":36,
+    "target":26,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":36,
+    "target":31,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":36,
+    "target":38,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":36,
+    "target":40,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":36,
     "target":41,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":36,
+    "target":42,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":37,
+    "target":0,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":37,
+    "target":6,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":37,
+    "target":8,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":37,
+    "target":9,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":37,
@@ -960,16 +3537,98 @@
     "Q1":"1",
     "Q2":"1",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":37,
     "target":39,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":37,
+    "target":40,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":38,
+    "target":2,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":38,
+    "target":4,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":38,
+    "target":6,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":38,
+    "target":10,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":38,
+    "target":14,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":38,
+    "target":15,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":38,
+    "target":17,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":38,
@@ -978,16 +3637,128 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"1"
+    "Q4":"1",
+    "year":"1"
   },
   {
     "source":38,
     "target":28,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":38,
+    "target":29,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":38,
+    "target":34,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":38,
+    "target":37,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":38,
+    "target":42,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":39,
+    "target":2,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":39,
+    "target":10,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":39,
+    "target":11,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":39,
+    "target":14,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":39,
+    "target":19,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":39,
+    "target":21,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":39,
+    "target":22,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
   },
   {
     "source":39,
@@ -996,7 +3767,8 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"1",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":39,
@@ -1005,16 +3777,158 @@
     "Q1":"1",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":39,
+    "target":37,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":40,
+    "target":8,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":40,
+    "target":16,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":40,
+    "target":37,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":40,
     "target":42,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":41,
+    "target":1,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":41,
+    "target":2,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":41,
+    "target":10,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":41,
+    "target":12,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":41,
+    "target":14,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":41,
+    "target":15,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":41,
+    "target":19,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":41,
+    "target":21,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":41,
+    "target":26,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":41,
+    "target":27,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":41,
@@ -1023,25 +3937,198 @@
     "Q1":"0",
     "Q2":"1",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":42,
+    "target":15,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":42,
+    "target":26,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":42,
+    "target":28,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":42,
+    "target":30,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":42,
+    "target":31,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":42,
+    "target":36,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":42,
+    "target":39,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":42,
     "target":47,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
-    "source":45,
-    "target":3,
-    "type":"weak",
+    "source":42,
+    "target":51,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":43,
+    "target":12,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":43,
+    "target":15,
+    "type":"episodic",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":43,
+    "target":26,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":43,
+    "target":28,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":43,
+    "target":31,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":43,
+    "target":32,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":43,
+    "target":36,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":43,
+    "target":40,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":43,
+    "target":41,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":43,
+    "target":42,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":45,
@@ -1050,43 +4137,68 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"1"
+    "Q4":"1",
+    "year":"1"
   },
   {
     "source":45,
     "target":26,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":45,
     "target":33,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
-  },
-  {
-    "source":45,
-    "target":39,
-    "type":"weak",
-    "Q1":"0",
-    "Q2":"0",
-    "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":45,
     "target":42,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":45,
+    "target":3,
+    "type":"week",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":45,
+    "target":39,
+    "type":"week",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":47,
+    "target":0,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":47,
@@ -1095,7 +4207,8 @@
     "Q1":"1",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":47,
@@ -1104,7 +4217,8 @@
     "Q1":"1",
     "Q2":"1",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
   },
   {
     "source":47,
@@ -1113,15 +4227,167 @@
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"1"
+    "Q4":"1",
+    "year":"1"
+  },
+  {
+    "source":47,
+    "target":13,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":47,
+    "target":15,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":47,
+    "target":25,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"1",
+    "year":"0"
+  },
+  {
+    "source":47,
+    "target":26,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":47,
+    "target":38,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   },
   {
     "source":47,
     "target":21,
-    "type":"weak",
+    "type":"week",
     "Q1":"0",
     "Q2":"0",
     "Q3":"0",
-    "Q4":"0"
+    "Q4":"0",
+    "year":"1"
+  },
+  {
+    "source":48,
+    "target":14,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":48,
+    "target":17,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":48,
+    "target":26,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":48,
+    "target":41,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":48,
+    "target":45,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":51,
+    "target":9,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":51,
+    "target":10,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":51,
+    "target":11,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"1",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":51,
+    "target":30,
+    "type":"episodic",
+    "Q1":"0",
+    "Q2":"0",
+    "Q3":"1",
+    "Q4":"0",
+    "year":"0"
+  },
+  {
+    "source":51,
+    "target":47,
+    "type":"episodic",
+    "Q1":"1",
+    "Q2":"0",
+    "Q3":"0",
+    "Q4":"0",
+    "year":"0"
   }
 ]}
