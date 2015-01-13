@@ -43,7 +43,7 @@ public class DirectedGraphDemoServ {
 	}
 
 	/* find the highest in coming edges from node */
-	public static List<Links> findHighInDegree(
+public static List<Links> findHighInDegree(
 			DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
 		log.log(Level.SEVERE, "findHighInDegree()  Data:{0},{1}", new Object[] {
 				"graph", "nodes[]" });
@@ -86,7 +86,7 @@ public class DirectedGraphDemoServ {
 	}
 
 	/* find the highest out going edges from node */
-	public static List<Links> findHighOutDegree(
+public static List<Links> findHighOutDegree(
 			DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
 		log.log(Level.SEVERE, "findHighOutDegree()  Data:{0},{1}",
 				new Object[] { "graph", "nodes[]" });
@@ -126,7 +126,7 @@ public class DirectedGraphDemoServ {
 	}
 
 	// input to be a array but for test two node
-	public static List<Links> findImmidietCycles(
+public static List<Links> findImmidietCycles(
 			DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
 		log.log(Level.SEVERE,
 				"findImmidietCycles() A <--> B cycles  Data:{0},{1}",
@@ -175,78 +175,63 @@ public class DirectedGraphDemoServ {
 		// System.out.println("imediate cycle ;"+listOfImEdges.size());
 		return list;
 	}
-
-	/* find the completeTriad of the graph */
 	
- /**
- * @param graph
- * @param nodes
- * @return list
- */
-public static List<Links> CompleteTriad(
-			DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
-		log.log(Level.SEVERE,
-				"CompleteTriad() A -> B && B->C --> A -> C Triad Data:{0},{1}",
-				new Object[] { "graph", "nodes[]" });
+public static List<Links> CompleteTriad(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
+		log.log(Level.SEVERE,"CompleteTriad() A -> B && B->C --> A -> C Triad Data:{0},{1}",new Object[] { "graph", "nodes[]" });
 
 		int NumberOfCompleteTriad = 0;
 		List<Links> list = new ArrayList<Links>();
+			for (int k = 0; k < nodes.length; k++) {
+				Node A=nodes[k];			
 
-		for (int k = 0; k < nodes.length; k++) {
-			Node A=nodes[k];
-			Set<DefaultEdge> set = graph.outgoingEdgesOf(A);
-			DefaultEdge[] edgeSet = set.toArray(new DefaultEdge[set.size()]);
+				Set<DefaultEdge> set = graph.outgoingEdgesOf(A);
+				DefaultEdge[] edgeSet = set.toArray(new DefaultEdge[set.size()]);
 
-			if (edgeSet.length > 1) {
-				for (int i = 0; i < edgeSet.length; i++) {
-					for (int j = 0; j < edgeSet.length; j++) {
-						Links linkA = new Links();
-						Links linkB = new Links();
-						Links linkC = new Links();
+				if (edgeSet.length > 0) {
+					for (int i = 0; i < edgeSet.length; i++) {
+						for (int j = 0; j < edgeSet.length; j++) {
+							Links linkA = new Links();
+							Links linkB = new Links();
+							Links linkC = new Links();
 
-						// System.out.println(edgeSet[i]+" "+edgeSet[j]);
-						Node B = graph.getEdgeTarget(edgeSet[i]);
-						Node C = graph.getEdgeTarget(edgeSet[j]);
+							// System.out.println(edgeSet[i]+" "+edgeSet[j]);
+							Node B = graph.getEdgeTarget(edgeSet[i]);
+							Node C = graph.getEdgeTarget(edgeSet[j]);
+							if(graph.containsEdge(edgeSet[i]) && graph.containsEdge(edgeSet[j]) && graph.containsEdge(B, C)){
+								//System.out.println(A.toString() + "," + B.toString() + "," + C.toString());
+								// link A-->B
+								linkA.setSource(Arrays.asList(nodes).indexOf(A));
+								linkA.setTarget(Arrays.asList(nodes).indexOf(B));
 
-						if ((graph.containsEdge(B, C) && !graph.containsEdge(C, B)) && (graph.containsEdge(A, B) && !graph.containsEdge(B, A)) && (graph.containsEdge(A, C) && !graph.containsEdge(C, A))) {
-							
-							// link A-->B
-							linkA.setSource(Arrays.asList(nodes).indexOf(A));
-							linkA.setTarget(Arrays.asList(nodes).indexOf(B));
+								// link A-->c
+								linkB.setSource(Arrays.asList(nodes).indexOf(A));
+								linkB.setTarget(Arrays.asList(nodes).indexOf(C));
 
-							// link A-->c
-							linkB.setSource(Arrays.asList(nodes).indexOf(A));
-							linkB.setTarget(Arrays.asList(nodes).indexOf(C));
-
-							// link B-->c
-							linkC.setSource(Arrays.asList(nodes).indexOf(B));
-							linkC.setTarget(Arrays.asList(nodes).indexOf(C));
-
-							if (!isAdded(linkA, list)) {
-								list.add(linkA);
+								// link B-->c
+								linkC.setSource(Arrays.asList(nodes).indexOf(B));
+								linkC.setTarget(Arrays.asList(nodes).indexOf(C));
+								
+								if (!isAdded(linkA, list)) {
+									list.add(linkA);
+								}
+								if (!isAdded(linkB, list)) {
+									list.add(linkB);
+								}
+								if (!isAdded(linkC, list)) {
+									list.add(linkC);
+								}
+								NumberOfCompleteTriad++;
 							}
-							if (!isAdded(linkB, list)) {
-								list.add(linkB);
-							}
-							if (!isAdded(linkC, list)) {
-								list.add(linkC);
-							}
-							NumberOfCompleteTriad++;
-							// displya to console
-							// System.out.println(edgeSet[i]+" "+edgeSet[j]+" "+graph.getEdge(A,
-							// B).toString());
-							// System.out.println("------------------------------------------------------------------");
 						}
-
 					}
 				}
 			}
-		}
 		System.out.println("Number of CompletedTriad are "+NumberOfCompleteTriad);
-		System.out.println("Number of Edges contain in the List are "+list.size());
+		//System.out.println("Number of Edges contain in the List are "+list.size());
 
 		return list;
 	}
+
 
 public static int CompleteTriad_count(
 		DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
@@ -273,7 +258,7 @@ public static int CompleteTriad_count(
 					Node B = graph.getEdgeTarget(edgeSet[i]);
 					Node C = graph.getEdgeTarget(edgeSet[j]);
 
-					if ((graph.containsEdge(B, C) && !graph.containsEdge(C, B)) && (graph.containsEdge(A, B) && !graph.containsEdge(B, A)) && (graph.containsEdge(A, C) && !graph.containsEdge(C, A))) {
+					if (graph.containsEdge(edgeSet[i]) && graph.containsEdge(edgeSet[j]) && graph.containsEdge(B, C)) {
 						
 						// link A-->B
 						linkA.setSource(Arrays.asList(nodes).indexOf(A));
@@ -313,8 +298,7 @@ public static int CompleteTriad_count(
 	return NumberOfCompleteTriad;
 }
 
-	/* find the IncompleteTriad of the graph */
-	public static List<Links> InCompleteTriad(
+public static List<Links> InCompleteTriad(
 			DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
 		log.log(Level.SEVERE,
 				"InCompleteTriad() A -> B && B->C --> A no C Triad Data:{0},{1}",
@@ -357,7 +341,8 @@ public static int CompleteTriad_count(
 
 						Node C = graph.getEdgeTarget(edgeSetOfB[j]);
 
-						if ((!graph.containsEdge(A, C) && !graph.containsEdge(C, A)) && (graph.containsEdge(A, B) && !graph.containsEdge(B, A)) && (graph.containsEdge(B, C) && !graph.containsEdge(C, B))) {
+						/*if ((!graph.containsEdge(A, C) && !graph.containsEdge(C, A)) && (graph.containsEdge(A, B) && !graph.containsEdge(B, A)) && (graph.containsEdge(B, C) && !graph.containsEdge(C, B))) {*/
+						if ((!graph.containsEdge(A, C) && !graph.containsEdge(C, A)) && graph.containsEdge(A, B) && graph.containsEdge(B, C)) {
 							Links linkA = new Links();
 							Links linkB = new Links();
 							Links linkC = new Links();// for the incomplete edge :D 
@@ -377,7 +362,7 @@ public static int CompleteTriad_count(
 							linkC.setTarget(Arrays.asList(nodes).indexOf(C));
 							linkC.status = true;
 
-							//System.out.println(A.toString()+ " " + B.toString()+ " " + C.toString());
+							System.out.println(graph.getEdge(A, B).toString() + graph.getEdge(B, C).toString());
 
 							if (!isAdded(linkA, list)) {
 								list.add(linkA);
@@ -391,8 +376,7 @@ public static int CompleteTriad_count(
 								list.add(linkC);
 								linkscount++;
 							}
-							NumberOfIncompleteTriad++;
-							
+							NumberOfIncompleteTriad++;							
 						}
 
 					}
@@ -407,7 +391,7 @@ public static int CompleteTriad_count(
 		return list;
 	}
 	
-	public static int InCompleteTriad_count(
+public static int InCompleteTriad_count(
 			DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
 		log.log(Level.SEVERE,
 				"InCompleteTriad() A -> B && B->C --> A no C Triad Data:{0},{1}",
@@ -481,12 +465,11 @@ public static int CompleteTriad_count(
 
 		// System.out.println("Number of IncompleteTriad are "+NumberOfIncompleteTriad);
 		// System.out.println("Number of Edges Containing in the list is "+list.size());
-			System.out.println("links"+linkscount);
+		//System.out.println("links"+linkscount);
 		return NumberOfIncompleteTriad;
 	}
 
-
-	public static double clusteringCoefficient(
+public static double clusteringCoefficient(
 			DirectedGraph<Node, DefaultEdge> graph, Node[] nodes, Links[] links) {
 		log.log(Level.SEVERE, "clusteringCoefficient() Data:{0},{1}",
 				new Object[] { "graph", "nodes[]" });
@@ -535,7 +518,7 @@ public static int CompleteTriad_count(
 
 	}
 
-	private static boolean isAdded(Links link, List<Links> list) {
+private static boolean isAdded(Links link, List<Links> list) {
 
 		boolean state = false;
 
@@ -550,7 +533,7 @@ public static int CompleteTriad_count(
 		return state;
 	}
 	
-	private static boolean isIncomingEdgeAdded(Links link,List<Links> list){
+private static boolean isIncomingEdgeAdded(Links link,List<Links> list){
 		boolean state= false;
 		if(list.size() > 0){
 			for (int i = 0; i < list.size(); i++) {
@@ -562,11 +545,8 @@ public static int CompleteTriad_count(
 		return state;
 	}
 
-	/**
-	 * @param graph
-	 * @param nodes
-	 */ //alt+shift+x+j
-	public static List<Links> LongerChain(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes){
+
+public static List<Links> LongerChain(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes){
 		System.out.println("method is gointo start......");
 		
 		List<Links> list=new ArrayList<Links>();
@@ -618,7 +598,7 @@ public static int CompleteTriad_count(
 		return list;
 	}
 	
- public static Links[] link_filter(int quater , Links[] linkset) {
+public static Links[] link_filter(int quater , Links[] linkset) {
 		ArrayList<Links> temp = new ArrayList<Links>();
 		switch (quater) {
 		case 0:
@@ -657,13 +637,6 @@ public static int CompleteTriad_count(
 		return temp.toArray(new Links[temp.size()]);
 	}
 
- 
-/**
- * @param graph
- * @param nodes
- * @throws IOException 
- * @param year
- */
 public static void writeCSV(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes, String year) throws IOException{
 	
 	//write path
@@ -699,4 +672,131 @@ public static void writeCSV(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes
 
 	}
 
+public static void chainStat(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) throws IOException{
+
+	int chainCout = 0;
+	File file=new File("C://Users/lsf-admin/Desktop/data.csv");
+	BufferedWriter writer=new BufferedWriter(new FileWriter(file));
+	
+	for (int i = 0; i < nodes.length; i++) {
+		Node A = nodes[i];
+		Set<DefaultEdge> setA=graph.outgoingEdgesOf(A);
+		DefaultEdge[] edgeSetA = setA.toArray(new DefaultEdge[setA.size()]);
+		
+	/*check where node a has outgoing edges or not*/
+		if(edgeSetA.length > 0){
+			for (int j = 0; j < edgeSetA.length; j++) {
+				Node B = graph.getEdgeTarget(edgeSetA[j]);
+				Set<DefaultEdge> setB = graph.outgoingEdgesOf(B);
+				DefaultEdge[] edgeSetB = setB.toArray(new DefaultEdge[setB.size()]);
+				
+			/*check whether node b has outgoing edges or not and should not contain B to A edge*/
+				if(edgeSetB.length > 0){
+					for (int k = 0; k < edgeSetB.length; k++) {
+						Node C = graph.getEdgeTarget(edgeSetB[k]);
+						//if(C != A){
+						if(!C.equals(A)){
+							Set<DefaultEdge> setC = graph.outgoingEdgesOf(C);
+							DefaultEdge[] edgeSetC = setC.toArray(new DefaultEdge[setC.size()]);
+							
+						/*check whether node c has outgoin edegs or not*/
+							if(edgeSetC.length > 0){
+								for (int l = 0; l < edgeSetC.length; l++) {
+									Node D = graph.getEdgeTarget(edgeSetC[l]);
+									//if(D != A && D != B){
+									if(!D.equals(A) && !D.equals(B)){
+										//System.out.println(A + "->" + B + "->" + C + "->" + D);
+										//System.out.println(A.toString() + "," + B.toString() + "," + C.toString() + "," + D.toString());
+										writer.write(A.toString() + "," + B.toString() + "," + C.toString() + "," + D.toString()+"\n");
+										chainCout++;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	writer.close();
+	//System.out.println("chain count is "+chainCout);
 }
+
+public static void TriadInChain(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) throws IOException{
+
+	int chainCout = 0;
+	int triadCmpCount = 0;
+	int triadInCmpCount = 0;
+	
+	File file=new File("C://Users/lsf-admin/Desktop/data1.csv");
+	BufferedWriter writer=new BufferedWriter(new FileWriter(file));
+	
+	File file1=new File("C://Users/lsf-admin/Desktop/data.csv");
+	BufferedWriter writer1=new BufferedWriter(new FileWriter(file1));
+	
+	for (int i = 0; i < nodes.length; i++) {
+		Node A = nodes[i];
+		Set<DefaultEdge> setA=graph.outgoingEdgesOf(A);
+		DefaultEdge[] edgeSetA = setA.toArray(new DefaultEdge[setA.size()]);
+		
+	/*check where node a has outgoing edges or not*/
+		if(edgeSetA.length > 0){
+			for (int j = 0; j < edgeSetA.length; j++) {
+				Node B = graph.getEdgeTarget(edgeSetA[j]);
+				Set<DefaultEdge> setB = graph.outgoingEdgesOf(B);
+				DefaultEdge[] edgeSetB = setB.toArray(new DefaultEdge[setB.size()]);
+				
+			/*check whether node b has outgoing edges or not and should not contain B to A edge*/
+				if(edgeSetB.length > 0){
+					for (int k = 0; k < edgeSetB.length; k++) {
+						Node C = graph.getEdgeTarget(edgeSetB[k]);
+						//if(C != A){
+						if(!C.equals(A)){
+							Set<DefaultEdge> setC = graph.outgoingEdgesOf(C);
+							DefaultEdge[] edgeSetC = setC.toArray(new DefaultEdge[setC.size()]);
+							
+						/*check whether node c has outgoing edegs or not*/
+							if(edgeSetC.length > 0){
+								for (int l = 0; l < edgeSetC.length; l++) {
+									Node D = graph.getEdgeTarget(edgeSetC[l]);
+									//if(D != A && D != B){
+									if(!D.equals(A) && !D.equals(B)){
+										chainCout++;
+										//System.out.println(A + "->" + B + "->" + C + "->" + D);
+										//System.out.println(A.toString() + "," + B.toString() + "," + C.toString() + "," + D.toString());
+										/*writer.write(A.toString() + "," + B.toString() + "," + C.toString() + "," + D.toString()+"\n");*/
+										
+										/*counting triad in each chain*/
+										/*complete triads*/
+										if(graph.containsEdge(A, C) && graph.containsEdge(B, D)){
+											//triadCmpCount = triadCmpCount + 2;
+											//writer.write(A.toString()+","+B.toString()+","+C.toString()+"\n");
+											//writer.write(B.toString()+","+C.toString()+","+D.toString()+"\n");
+											//System.out.println(A.toString()+","+B.toString()+","+C.toString());
+											//System.out.println(B.toString()+","+C.toString()+","+D.toString());
+											//System.out.println(graph.getEdge(B, C).toString()+graph.getEdge(C, D)+graph.getEdge(B, D));
+										}
+										
+										/*in complete triad count*/
+										if(!graph.containsEdge(A, C) && !graph.containsEdge(C, A) && !graph.containsEdge(B, D) &&  !graph.containsEdge(D, B)){
+											 writer1.write(graph.getEdge(A, B).toString()+graph.getEdge(B, C)+"\n");
+											 writer1.write(graph.getEdge(B, C).toString()+graph.getEdge(C, D)+"\n");
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	//writer.write(triadCmpCount+","+triadInCmpCount);
+	writer.close();
+	writer1.close();
+	//System.out.println("Cmp "+ triadCmpCount);
+	//System.out.println("Incmp"+triadInCmpCount);
+	//System.out.println("chain count is "+chainCout);	
+}
+}
+
