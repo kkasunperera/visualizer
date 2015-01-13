@@ -1283,7 +1283,7 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
             triadCompletingEdges = [];
 		
             path.attr("marker-end",function(o){
-            	if (getConnectedNodes(o.source, o.target) > 0 || getIncomingEdges(o.source, o.target) > 0) {
+            	if (getConnectedNodes(o.source, o.target) == 1 || getConnectedNodes(o.source, o.target) == 2 || getConnectedNodes(o.source, o.target) == 3/*|| getIncomingEdges(o.source, o.target) > 0*/) {
     				return "url(#end)";
     			}else{
     				return "url(#)";

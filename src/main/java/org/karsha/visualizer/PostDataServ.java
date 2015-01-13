@@ -115,10 +115,10 @@ public class PostDataServ extends HttpServlet {
 
 				g = DirectedGraphDemoServ.createHrefGraph(nodeSet, linkSet);
 				// linkChain = DirectedGraphDemoServ.LongerChain(g, nodeSet);
-				linkCompleteTriad = DirectedGraphDemoServ.CompleteTriad(g,
-						nodeSet);
-				linkIncomplete = DirectedGraphDemoServ.InCompleteTriad(g,
-						nodeSet);
+				linkCompleteTriad = DirectedGraphDemoServ.CompleteTriad(g, nodeSet);
+				linkIncomplete = DirectedGraphDemoServ.InCompleteTriad(g, nodeSet);
+				//DirectedGraphDemoServ.TriadInChain(g, nodeSet);
+				//DirectedGraphDemoServ.chainDepthTwo(g, nodeSet);
 
 			}
 
