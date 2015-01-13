@@ -813,6 +813,11 @@ function data_set(quart,json) {
     		if(json.links[i].Q4==0)json.links.splice(i,1);
     	}
         break;
+    case 5:
+    	for(var i = json.links.length-1; i--;){
+    		if(json.links[i].year==0)json.links.splice(i,1);
+    	}
+        break;
 	}
 	//alert(json.links.length);
 	return json.links;

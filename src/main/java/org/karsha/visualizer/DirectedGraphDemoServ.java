@@ -545,7 +545,6 @@ private static boolean isIncomingEdgeAdded(Links link,List<Links> list){
 		return state;
 	}
 
-
 public static List<Links> LongerChain(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes){
 		System.out.println("method is gointo start......");
 		
@@ -779,8 +778,8 @@ public static void TriadInChain(DirectedGraph<Node, DefaultEdge> graph, Node[] n
 										
 										/*in complete triad count*/
 										if(!graph.containsEdge(A, C) && !graph.containsEdge(C, A) && !graph.containsEdge(B, D) &&  !graph.containsEdge(D, B)){
-											 writer1.write(graph.getEdge(A, B).toString()+graph.getEdge(B, C)+"\n");
-											 writer1.write(graph.getEdge(B, C).toString()+graph.getEdge(C, D)+"\n");
+											 //writer1.write(graph.getEdge(A, B).toString()+graph.getEdge(B, C)+"\n");
+											 //writer1.write(graph.getEdge(B, C).toString()+graph.getEdge(C, D)+"\n");
 										}
 									}
 								}
@@ -798,5 +797,6 @@ public static void TriadInChain(DirectedGraph<Node, DefaultEdge> graph, Node[] n
 	//System.out.println("Incmp"+triadInCmpCount);
 	//System.out.println("chain count is "+chainCout);	
 }
+
 }
 

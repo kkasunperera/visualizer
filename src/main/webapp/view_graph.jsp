@@ -123,6 +123,7 @@
 								<h3><a href="?filename=data<%=i%>.json&year=data<%=i%>.json&year=<%=i%>"><%=i%></a></h3>
 								<ul>
 									<li><a href="view_graph.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=0"><i class="fa fa-fw fa-table"></i> Overall </a></li>
+									<li><a href="view_graph.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=5"><i class="fa fa-fw fa-table"></i> Annual </a></li>
 									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=1"><i class="fa fa-fw fa-table"></i> Quarter 1</a></li>
 									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=2"><i class="fa fa-fw fa-table"></i> Quarter 2</a></li>
 									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=3"><i class="fa fa-fw fa-table"></i> Quarter 3</a></li>
@@ -227,6 +228,9 @@ text {
 									  <div class="row">
 									 	<div class="col-lg-6" id="analyse_bar" width="500" height="50" "></div>
                                         <canvas class="col-rg-6" id="graph_note" width="500" height="50" "></canvas>
+                                      </div>
+                                      <div class="row">
+                                      <div class="col-lg-6" id="analyse_bar1" width="500" height="50" "></div>
                                       </div>
                             				<!-- load the svg using javascript function -->
 				                            <script>				
@@ -543,7 +547,8 @@ text {
 								});;  
 										//alert(JSON.stringify(obj.link));
 								var width = 900, height = 950;
-								OriginalNetworkGraph(nodes, file, "#gc_network", width, height,0,all_obj);
+								var quart = <%=Integer.parseInt(request.getParameter("Q"))%>;
+								OriginalNetworkGraph(nodes, file, "#gc_network", width, height,quart,all_obj);
 								
 								
 								//overall_anlys(all_obj);
