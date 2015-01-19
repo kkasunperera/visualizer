@@ -1,5 +1,12 @@
 package org.karsha.visualizer;
 
+/*
+ * This is POJO object which models the Node. Node has three properties such as group and node id, name
+ * tostring method print the node as string format
+ * group is bond or equity
+ * nodeId contain index
+ * name is node given name such as transport,admin,heathsoc...
+ * */
 public class Node {
 	
 	String group;
