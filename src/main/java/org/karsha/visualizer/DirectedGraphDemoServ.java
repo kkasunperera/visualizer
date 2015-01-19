@@ -757,7 +757,11 @@ public static Links[] link_filter(int quater , Links[] linkset) {
 		return temp.toArray(new Links[temp.size()]);
 	}
 
-
+/*
+ * writeCSV(graph,nodes,year)
+ * Complet triad counting and writing to the file 
+ * 
+ * */
 
 public static void writeCSV(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes, String year) throws IOException{
 	
@@ -780,7 +784,7 @@ public static void writeCSV(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes
 					Node C = graph.getEdgeTarget(edgeSet[j]);
 
 					if ((graph.containsEdge(B, C) && !graph.containsEdge(C, B)) && (graph.containsEdge(A, B) && !graph.containsEdge(B, A)) && (graph.containsEdge(A, C) && !graph.containsEdge(C, A))) {
-						
+						//it is fine there can be immidieat cycles.in triad
 						//System.out.println(A.toString()+ " " + B.toString() + " " + C.toString());
 						writer.write("\""+A.toString()+ " " + B.toString() + " " + C.toString()+"\""+","+ year +"\n");
 					}
@@ -794,6 +798,15 @@ public static void writeCSV(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes
 
 	}
 
+/*
+ * chainStat(graph, nodes)
+ * 
+ * This methods find chains upto length 3 that means consecutive node such as A,B,C,D are connected in
+ * sequential manner. In each node get the outgoing edges and find target node and get the outgoing edges 
+ * of that node this done 3 time repeatedly. finally write those chain paths into text file.
+ * change the filepath as you want.
+ * 
+ * */
 
 public static void chainStat(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) throws IOException{
 
@@ -845,6 +858,16 @@ public static void chainStat(DirectedGraph<Node, DefaultEdge> graph, Node[] node
 	//System.out.println("chain count is "+chainCout);
 }
 
+/*
+ * TriadInChain(graph,nodes)
+ * 
+ * This method finds incompleted and completed triads in the chain. depth 3 chain can contain 1 or 2 Complete triads
+ * and 1 or 2 Incomplete triad. consider A->B,B->C,C->D this is chain also graph can have A->C,B->C edge the consider
+ * this edges there are contain 2 triad A->B,B->C and A->C 1 triad and B->C,C->D and B->D this is another triad so 
+ * chain can contain 2 complete triad or 1. Chain can either contain incomplete triad if graph doesn't contain A->C,B->C
+ * these edge then A->B,B->C and B->C,C->D are incomplete triad in here only count each chain 2 triads complete or incomplete
+ * 
+ * */
 
 public static void TriadInChain(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) throws IOException{
 
