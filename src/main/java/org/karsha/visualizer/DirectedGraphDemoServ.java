@@ -298,7 +298,7 @@ public static List<Links> CompleteTriad(DirectedGraph<Node, DefaultEdge> graph, 
 	}
 
 /*
- * CompleteTriad(graph, nodes)
+ * CompleteTriad_count(graph, nodes)
  * 
  * Similar to above method,In addition to that this return the count of Complete triads
  * */
@@ -367,7 +367,22 @@ public static int CompleteTriad_count(
 	return NumberOfCompleteTriad;
 }
 
-
+/*
+ * InCompleteTriad(graph,nodes)
+ * 
+ * This method finds Incomplete Triads in the graph. Incomplete Traid is , There is 3 nodes A,B,C
+ * There is edge from A to B ( A->B )
+ * there is edge from B to C ( B->C )
+ * BUT there is no edge from A to C
+ * This is called Incompleted Triads of Node A. finding triad is expensive. Input to the method is graph and nodes.
+ * iterate nodes set, in each node finds the outgoing edge set.
+ * each edge finds the target Node in that target node, find the outgoing edges of that node and get the edgeset
+ * finds the target node in that edgeset and check whether there is directed edge between triad first node and this node 
+ * if not, the it is incompleted triad
+ * put the edges in to link object
+ * 
+ * see isAdded(linkObj, ObjList)
+ * */
 public static List<Links> InCompleteTriad(
 			DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
 		log.log(Level.SEVERE,
@@ -461,7 +476,11 @@ public static List<Links> InCompleteTriad(
 		return list;
 	}
 
-
+/*
+ * InCompleteTriad_count(graph, nodes)
+ * 
+ * Similar to above method,In addition to that this return the count of InComplete triads
+ * */
 public static int InCompleteTriad_count(
 			DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
 		log.log(Level.SEVERE,
@@ -546,10 +565,6 @@ public static double clusteringCoefficient(
 		log.log(Level.SEVERE, "clusteringCoefficient() Data:{0},{1}",
 				new Object[] { "graph", "nodes[]" });
 
-		
-		
-
-		
 		int count_open_trangle = 0;
 		int count_close_trangle = 0;
 		/*
@@ -590,7 +605,12 @@ public static double clusteringCoefficient(
 
 	}
 
-
+/*
+ * isAdded(linkObj, list)
+ * 
+ * This methods checks the link whether it was added to the list already if not add otherwise reject
+ * 
+ * */
 private static boolean isAdded(Links link, List<Links> list) {
 
 		boolean state = false;
@@ -606,7 +626,12 @@ private static boolean isAdded(Links link, List<Links> list) {
 		return state;
 	}
 
-
+/*
+ * isIncomingEdgeAdded(linkObj, list)
+ * 
+ * This methods checks the incoming link whether it was added to the list already if not add otherwise reject
+ * 
+ * */
 private static boolean isIncomingEdgeAdded(Links link,List<Links> list){
 		boolean state= false;
 		if(list.size() > 0){
@@ -619,7 +644,14 @@ private static boolean isIncomingEdgeAdded(Links link,List<Links> list){
 		return state;
 	}
 
-
+/*
+ * LongerChain(graph,nodes)
+ * 
+ * This method finds the chain upto length 3. This means there is edge between A to B and, B to C, and C to D the A,B,C,D are connected in sequentially.
+ * this kind of pattern called chain. Algorithm is, node set iterate the over graph and in each node finds outgoing edges in each edge check whether
+ * has more outgoing edges then again get the node and check the outgoing edge  repeatedly happen 3 times and return the set of link object in a list.
+ * 
+ * */
 public static List<Links> LongerChain(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes){
 		System.out.println("method is gointo start......");
 		
@@ -672,6 +704,13 @@ public static List<Links> LongerChain(DirectedGraph<Node, DefaultEdge> graph, No
 		return list;
 	}
 
+/*
+ * link_filter(attribute, link set) attribute can be quater id or year
+ * 
+ * This method filter the links according to given quarter number or year number. if quater or year is present then filter that links an return it.
+ * Quater attribute and Year attribute has defined in Links.java file.
+ * 
+ * */
 
 public static Links[] link_filter(int quater , Links[] linkset) {
 		ArrayList<Links> temp = new ArrayList<Links>();
@@ -717,6 +756,7 @@ public static Links[] link_filter(int quater , Links[] linkset) {
 		}
 		return temp.toArray(new Links[temp.size()]);
 	}
+
 
 
 public static void writeCSV(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes, String year) throws IOException{
