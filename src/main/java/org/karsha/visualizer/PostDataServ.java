@@ -1,6 +1,9 @@
 package org.karsha.visualizer;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -74,18 +77,34 @@ public class PostDataServ extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	/*
+	 * doPost method contain set of servlet paths and invokes the method of DirectedGraphDemoServ class
+	 * */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
 		logger.log(Level.SEVERE, "doPost  Data:{0},{1}", new Object[] {
 				"request", "response" });
 
-		// get the user path
+		/**
+		 * userPath is Servlet path that to be invoked 
+		 * for example, if  /indegre excecuted the relevant method would invoke 
+		 * */
 		String userPath = request.getServletPath();
 
 		/* Gson library have been used */
 		Gson gson = new Gson();
-
+		
+		/**
+		 * PostDataServ is defined in web.xml file { all the user paths defined there }
+		 * servlet get inputstream from the ajax and read the data using GSON library
+		 * which separates the arryas and object from inputstrema data.In stream contain 
+		 * NODE ARRAY and LINKS ARRY as JSON format. Jackson mapper identified the nodes list and 
+		 * links list then put it into the nodeSet array and linkSet array which are used later
+		 * operations. 
+		 * Also here initiate the graph from DirectedGraphDemoServ.Count the Triads when iniitiating.
+		 * 
+		 * */
 		if (userPath.equals("/PostDataServ")) {
 			logger.info("userPath is " + userPath);
 
@@ -119,12 +138,19 @@ public class PostDataServ extends HttpServlet {
 				linkIncomplete = DirectedGraphDemoServ.InCompleteTriad(g, nodeSet);
 				//DirectedGraphDemoServ.TriadInChain(g, nodeSet);
 				//DirectedGraphDemoServ.chainDepthTwo(g, nodeSet);
-
+								
 			}
-
+			/**
+			 * when Indegree executed it wil return the set of link array where it calculated from graph
+			 * method findHighInDegree will be called according to quater or year, data also will be filtered
+			 * then convet it to GSON element. and that object will put to output stream.
+			 * the it will read from ajax in web pages.
+			 * 
+			 * */
 		} else if (userPath.equals("/Indegree")) {
 			logger.info("userPath is " + userPath);
 
+			/* get quater id from url parameter*/
 			int quater = Integer.parseInt(request.getParameter("Quater"));
 
 			DirectedGraph<Node, DefaultEdge> gg = DirectedGraphDemoServ
@@ -133,19 +159,32 @@ public class PostDataServ extends HttpServlet {
 			List<Links> link = DirectedGraphDemoServ.findHighInDegree(gg,
 					nodeSet);
 
+			/*set the application content to json type of response object*/
 			response.setContentType("application/json");
+			
+			/*get the writer object of response object for writing data as output stream*/
 			PrintWriter out = response.getWriter();
 
+			/*initiate GSON element for sharing data in a root*/
 			JsonObject Obj = new JsonObject();
 
+			/*two json element for node set and link set and add it to root element*/
 			JsonElement links = gson.toJsonTree(link);
 			JsonElement nodes = gson.toJsonTree(node);
 			Obj.add("links", links);
 			Obj.add("nodes", nodes);
 
+			/*writer writes the data in to stream*/
 			out.println(Obj.toString());
 			out.close();
-
+			
+			/**
+			 * when Outdegree executed it wil return the set of link array where it calculated from graph
+			 * method findHighOutDegree will be called according to quater or year, data also will be filtered
+			 * then convet it to GSON element. and that object will put to output stream.
+			 * the it will read from ajax in web pages.
+			 * 
+			 * */
 		} else if (userPath.equals("/Outdegree")) {
 			logger.info("userPath is " + userPath);
 
@@ -170,7 +209,13 @@ public class PostDataServ extends HttpServlet {
 
 			out.println(Obj.toString());
 			out.close();
-
+			
+			/**
+			 * CompleteTriad executed the it will return set of links list object from calculated  which will
+			 * filter according to the quater or year and put it into the output stream.
+			 * Two GSON element will be seperated node set and links set.
+			 * 
+			 * */
 		} else if (userPath.equals("/CompleteTriad")) {
 			logger.info("userPath is " + userPath);
 
@@ -200,6 +245,12 @@ public class PostDataServ extends HttpServlet {
 			out.println(Obj.toString());
 			out.close();
 
+			/**
+			 * InCompleteTriad executed the it will return set of links list object from calculated  which will
+			 * filter according to the quater or year and put it into the output stream.
+			 * Two GSON element will be seperated node set and links set.it will be prited in output stream.
+			 * 
+			 * */
 		} else if (userPath.equals("/IncompleteTriad")) {
 			logger.info("userPath is " + userPath);
 			int quater = Integer.parseInt(request.getParameter("Quater"));
@@ -221,7 +272,12 @@ public class PostDataServ extends HttpServlet {
 
 			out.println(Obj.toString());
 			out.close();
-
+			
+			/**
+			 * this will return set of immediate cycles of graph. which calculated from DirectedGraph.
+			 * node set and link set put two GSON element and put it to output stream.
+			 * 
+			 * */
 		} else if (userPath.equals("/ImmediateCycles")) {
 			logger.info("userPath is " + userPath);
 
@@ -247,6 +303,10 @@ public class PostDataServ extends HttpServlet {
 			out.print(Obj.toString());
 			out.close();
 
+			/**
+			 * 
+			 * This will return the cluster coeffient of the graph. according to given quarter it can be read from 
+			 * ajax in web pages.*/
 		} else if (userPath.equals("/cc")) {
 			logger.info("userPath is " + userPath);
 			PrintWriter out = response.getWriter();
@@ -263,6 +323,11 @@ public class PostDataServ extends HttpServlet {
 			out.print(obj.toString());
 			out.close();
 
+			/**
+			 * This will called set of chain already calculated of graph. links and nodes object is add to output stream
+			 * using servlet reponse object.
+			 * 
+			 * */
 		} else if (userPath.equals("/chain")) {
 			logger.info("userPath is " + userPath);
 
@@ -300,6 +365,11 @@ public class PostDataServ extends HttpServlet {
 			out.print(Obj.toString());
 			out.close();
 
+			/**
+			 * here contains the set of data values of triads and number of edges contains in the graph and cluster 
+			 * coeffient of each year. and filtering all the data according to quater or year.
+			 * 
+			 * */
 		} else if (userPath.equals("/count")) {
 			logger.info("userPath is " + userPath);
 			ArrayList<Integer> edges_count_arry = new ArrayList<Integer>();

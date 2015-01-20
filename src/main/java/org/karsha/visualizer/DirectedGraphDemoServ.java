@@ -16,14 +16,26 @@ import org.jgrapht.graph.DefaultDirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 
 public class DirectedGraphDemoServ {
-	private static final Logger log = Logger
+private static final Logger log = Logger
 			.getLogger(DirectedGraphDemoServ.class.getName());
 
 	public static int indegree_count;
 	public static int outdegree_count;
 	
-	
-	public static DirectedGraph<Node, DefaultEdge> createHrefGraph(
+/*
+ * createHrefGraph(nodes,links) return DirectedGraph
+ * 
+ * This method initialize the defaultDirectedGraph with defualt edge factory 
+ * node array and link array are the input to the graph\
+ * Vetex is add as node, iterate all the list of nodes.
+ * Edge is added as links each as source node and target node
+ * finally return the whole graph
+ * 
+ * see the Node.java, Links.java
+ * 
+ * http://jgrapht.org/javadoc/
+ * */
+public static DirectedGraph<Node, DefaultEdge> createHrefGraph(
 			Node[] nodes, Links[] links) {
 		log.log(Level.SEVERE, "createHrefGraph()  Data:{0},{1}", new Object[] {
 				"nodes[]", "links[]" });
@@ -31,22 +43,33 @@ public class DirectedGraphDemoServ {
 		DirectedGraph<Node, DefaultEdge> g = new DefaultDirectedGraph<Node, DefaultEdge>(
 				DefaultEdge.class);
 
+		/*add all the vertex(nodes) in the node array/list*/
 		for (int i = 0; i < nodes.length; i++) {
 			g.addVertex(nodes[i]);
 		}
-
+		
+		/*add all edges in the links array/list each has source vertex and target vertex*/
 		for (int i = 0; i < links.length; i++) {
 			g.addEdge(nodes[links[i].getSource()], nodes[links[i].getTarget()]);
 		}
 
+		/*return complete graph which consist of set of vertexes and set of links*/
 		return g;
 	}
 
-	/* find the highest in coming edges from node */
-public static List<Links> findHighInDegree(
-			DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
-		log.log(Level.SEVERE, "findHighInDegree()  Data:{0},{1}", new Object[] {
-				"graph", "nodes[]" });
+/*
+ * findHighInDegree(graph, nodes) return edge list
+ * 
+ * This method finds the higest in degree in the graph which means, there is vertex/node which has highest incoming edges 
+ * relative to other vertex/nodes. Return the set of links object which participate to specific or higest incoming node.
+ * iterate all the nodes and identified the highest incoming edges
+ * 
+ * see incomingEdgesOf(Node node)
+ * 
+ * http://jgrapht.org/javadoc/  
+ * */
+public static List<Links> findHighInDegree(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
+		log.log(Level.SEVERE, "findHighInDegree()  Data:{0},{1}", new Object[] {"graph", "nodes[]" });
 
 		int highInDegre = 0;
 		Set<DefaultEdge> s = null;
@@ -85,7 +108,17 @@ public static List<Links> findHighInDegree(
 
 	}
 
-	/* find the highest out going edges from node */
+/*
+ * findHighOutDegree(graph, nodes) return edge list
+ * 
+ * This method finds the higest out degree in the graph which means, there is vertex/node which has highest outgoing edges 
+ * relative to other vertex/nodes. Return the set of links object which participate to specific or higest outgoing node.
+ * iterate all the nodes and identified the highest outgoing edges
+ * 
+ * see outgoingEdgesOf(Node node)
+ * 
+ * http://jgrapht.org/javadoc/  
+ * */
 public static List<Links> findHighOutDegree(
 			DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
 		log.log(Level.SEVERE, "findHighOutDegree()  Data:{0},{1}",
@@ -125,7 +158,22 @@ public static List<Links> findHighOutDegree(
 		return list;
 	}
 
-	// input to be a array but for test two node
+/*
+ * findImmidietCycles(graph, nodes)
+ * 
+ * This method finds immidiet cycles, for example there are two edges between Node A and Node B both direction which 
+ * called immidiet cycles. There is no method in api so that algorithm as follows,
+ * 
+ * iterate all the nodes, each findes the outgoing edges, then iterate all the outgoing edges
+ * each outgoing edges, get the target Node and check whether there is edge back to source Node
+ * if so, then there is cycles between that two nodes
+ * finds the index of nodes using nodeset as array, get the index for Link objec
+ * return the set of links objects
+ * 
+ * see contains(Edge e) , containsEdge(Node A,NodeB) , getEdgeTarget(Edge e), getEdgeSource(Edge e)
+ * 
+ * http://jgrapht.org/javadoc/ 
+ * */
 public static List<Links> findImmidietCycles(
 			DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
 		log.log(Level.SEVERE,
@@ -175,7 +223,24 @@ public static List<Links> findImmidietCycles(
 		// System.out.println("imediate cycle ;"+listOfImEdges.size());
 		return list;
 	}
-	
+
+/*
+ * CompleteTriad(graph, nodes)
+ * 
+ * This method finds Completed Triads in the Graph.Complete Triad is , There are 3 nodes A,B,C
+ * There is edge from A to B ( A->B )
+ * there is edge from B to C ( B->C )
+ * There is edge from A to C ( A->C )
+ * This is called Completed Triad of Node A . finding triad is little bit expensive.Input to the method is graph and node set.
+ * Iterate nodes set in each node finds the set of outgoing edges,
+ * using two for loops compare edges like edge1 and edge2 , edge1 and edge3....  (A->B) and (A->C)
+ * then, get the target node of two edges and check whether there is edge between two node in direction. (B->C) ??
+ * if so then put 3 nodes in to link object according to the index
+ * 
+ * see isAdded(linkObj, lisOfLink), containsEdge(Edge e)
+ * 
+ * http://jgrapht.org/javadoc/ 
+ * */
 public static List<Links> CompleteTriad(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
 		log.log(Level.SEVERE,"CompleteTriad() A -> B && B->C --> A -> C Triad Data:{0},{1}",new Object[] { "graph", "nodes[]" });
 
@@ -232,7 +297,11 @@ public static List<Links> CompleteTriad(DirectedGraph<Node, DefaultEdge> graph, 
 		return list;
 	}
 
-
+/*
+ * CompleteTriad_count(graph, nodes)
+ * 
+ * Similar to above method,In addition to that this return the count of Complete triads
+ * */
 public static int CompleteTriad_count(
 		DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
 	log.log(Level.SEVERE,
@@ -298,6 +367,22 @@ public static int CompleteTriad_count(
 	return NumberOfCompleteTriad;
 }
 
+/*
+ * InCompleteTriad(graph,nodes)
+ * 
+ * This method finds Incomplete Triads in the graph. Incomplete Traid is , There is 3 nodes A,B,C
+ * There is edge from A to B ( A->B )
+ * there is edge from B to C ( B->C )
+ * BUT there is no edge from A to C
+ * This is called Incompleted Triads of Node A. finding triad is expensive. Input to the method is graph and nodes.
+ * iterate nodes set, in each node finds the outgoing edge set.
+ * each edge finds the target Node in that target node, find the outgoing edges of that node and get the edgeset
+ * finds the target node in that edgeset and check whether there is directed edge between triad first node and this node 
+ * if not, the it is incompleted triad
+ * put the edges in to link object
+ * 
+ * see isAdded(linkObj, ObjList)
+ * */
 public static List<Links> InCompleteTriad(
 			DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
 		log.log(Level.SEVERE,
@@ -362,7 +447,7 @@ public static List<Links> InCompleteTriad(
 							linkC.setTarget(Arrays.asList(nodes).indexOf(C));
 							linkC.status = true;
 
-							System.out.println(graph.getEdge(A, B).toString() + graph.getEdge(B, C).toString());
+							//System.out.println(graph.getEdge(A, B).toString() + graph.getEdge(B, C).toString());
 
 							if (!isAdded(linkA, list)) {
 								list.add(linkA);
@@ -390,7 +475,12 @@ public static List<Links> InCompleteTriad(
 			System.out.println("links"+linkscount);
 		return list;
 	}
-	
+
+/*
+ * InCompleteTriad_count(graph, nodes)
+ * 
+ * Similar to above method,In addition to that this return the count of InComplete triads
+ * */
 public static int InCompleteTriad_count(
 			DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
 		log.log(Level.SEVERE,
@@ -469,15 +559,12 @@ public static int InCompleteTriad_count(
 		return NumberOfIncompleteTriad;
 	}
 
+
 public static double clusteringCoefficient(
 			DirectedGraph<Node, DefaultEdge> graph, Node[] nodes, Links[] links) {
 		log.log(Level.SEVERE, "clusteringCoefficient() Data:{0},{1}",
 				new Object[] { "graph", "nodes[]" });
 
-		
-		
-
-		
 		int count_open_trangle = 0;
 		int count_close_trangle = 0;
 		/*
@@ -518,6 +605,12 @@ public static double clusteringCoefficient(
 
 	}
 
+/*
+ * isAdded(linkObj, list)
+ * 
+ * This methods checks the link whether it was added to the list already if not add otherwise reject
+ * 
+ * */
 private static boolean isAdded(Links link, List<Links> list) {
 
 		boolean state = false;
@@ -532,7 +625,13 @@ private static boolean isAdded(Links link, List<Links> list) {
 		}
 		return state;
 	}
-	
+
+/*
+ * isIncomingEdgeAdded(linkObj, list)
+ * 
+ * This methods checks the incoming link whether it was added to the list already if not add otherwise reject
+ * 
+ * */
 private static boolean isIncomingEdgeAdded(Links link,List<Links> list){
 		boolean state= false;
 		if(list.size() > 0){
@@ -545,6 +644,14 @@ private static boolean isIncomingEdgeAdded(Links link,List<Links> list){
 		return state;
 	}
 
+/*
+ * LongerChain(graph,nodes)
+ * 
+ * This method finds the chain upto length 3. This means there is edge between A to B and, B to C, and C to D the A,B,C,D are connected in sequentially.
+ * this kind of pattern called chain. Algorithm is, node set iterate the over graph and in each node finds outgoing edges in each edge check whether
+ * has more outgoing edges then again get the node and check the outgoing edge  repeatedly happen 3 times and return the set of link object in a list.
+ * 
+ * */
 public static List<Links> LongerChain(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes){
 		System.out.println("method is gointo start......");
 		
@@ -596,7 +703,15 @@ public static List<Links> LongerChain(DirectedGraph<Node, DefaultEdge> graph, No
 		System.out.println("end");
 		return list;
 	}
-	
+
+/*
+ * link_filter(attribute, link set) attribute can be quater id or year
+ * 
+ * This method filter the links according to given quarter number or year number. if quater or year is present then filter that links an return it.
+ * Quater attribute and Year attribute has defined in Links.java file.
+ * 
+ * */
+
 public static Links[] link_filter(int quater , Links[] linkset) {
 		ArrayList<Links> temp = new ArrayList<Links>();
 		switch (quater) {
@@ -630,11 +745,23 @@ public static Links[] link_filter(int quater , Links[] linkset) {
 			}
 	    	
 			break;
+		case 5:
+			for (int j = linkset.length-1; j >= 0; j--) {
+				if(linkset[j].YEAR.equals("1"))temp.add(linkset[j]);
+			}
+	    	
+			break;
 		default:
 			break;
 		}
 		return temp.toArray(new Links[temp.size()]);
 	}
+
+/*
+ * writeCSV(graph,nodes,year)
+ * Complet triad counting and writing to the file 
+ * 
+ * */
 
 public static void writeCSV(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes, String year) throws IOException{
 	
@@ -657,8 +784,8 @@ public static void writeCSV(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes
 					Node C = graph.getEdgeTarget(edgeSet[j]);
 
 					if ((graph.containsEdge(B, C) && !graph.containsEdge(C, B)) && (graph.containsEdge(A, B) && !graph.containsEdge(B, A)) && (graph.containsEdge(A, C) && !graph.containsEdge(C, A))) {
-						
-						System.out.println(A.toString()+ " " + B.toString() + " " + C.toString());
+						//it is fine there can be immidieat cycles.in triad
+						//System.out.println(A.toString()+ " " + B.toString() + " " + C.toString());
 						writer.write("\""+A.toString()+ " " + B.toString() + " " + C.toString()+"\""+","+ year +"\n");
 					}
 
@@ -670,6 +797,16 @@ public static void writeCSV(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes
 	writer.close();
 
 	}
+
+/*
+ * chainStat(graph, nodes)
+ * 
+ * This methods find chains upto length 3 that means consecutive node such as A,B,C,D are connected in
+ * sequential manner. In each node get the outgoing edges and find target node and get the outgoing edges 
+ * of that node this done 3 time repeatedly. finally write those chain paths into text file.
+ * change the filepath as you want.
+ * 
+ * */
 
 public static void chainStat(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) throws IOException{
 
@@ -720,6 +857,17 @@ public static void chainStat(DirectedGraph<Node, DefaultEdge> graph, Node[] node
 	writer.close();
 	//System.out.println("chain count is "+chainCout);
 }
+
+/*
+ * TriadInChain(graph,nodes)
+ * 
+ * This method finds incompleted and completed triads in the chain. depth 3 chain can contain 1 or 2 Complete triads
+ * and 1 or 2 Incomplete triad. consider A->B,B->C,C->D this is chain also graph can have A->C,B->C edge the consider
+ * this edges there are contain 2 triad A->B,B->C and A->C 1 triad and B->C,C->D and B->D this is another triad so 
+ * chain can contain 2 complete triad or 1. Chain can either contain incomplete triad if graph doesn't contain A->C,B->C
+ * these edge then A->B,B->C and B->C,C->D are incomplete triad in here only count each chain 2 triads complete or incomplete
+ * 
+ * */
 
 public static void TriadInChain(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) throws IOException{
 
