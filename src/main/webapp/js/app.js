@@ -118,6 +118,9 @@ function SvgQuaterSustained(ctx){
     Svgbase();
 }
 
+/**
+ * this will identify the quarter sustained links
+ * */
 function QuarterGraphSustained(nodes,file,svg1,width,height){
 	
 	var linkedByIndex = {};
@@ -137,7 +140,7 @@ var force = d3.layout.force()
 d3.json(file, function(error, json) {
   force
       .nodes(nodes)
-      .links(json.links.filter(function(d){return d.type == "sustained"}))
+      .links(json.links.filter(function(d){return d.type == "sustained"})) // this filter only edge type "sustained" from json.links()
       .on("tick", tick)
       .start();
  
@@ -218,7 +221,7 @@ json.links.forEach(function(d) {
   	    return "translate(" + d.x + "," + d.y + ")"; });
 }
 
-
+    //adding label to edge
     var linktext = svg.append("svg:g").selectAll("g.linklabelholder").data(force.links());
     
 function mOver(d){
@@ -228,7 +231,8 @@ function mOver(d){
 	.style("stroke-width", "5px")
 		.style("stroke", "green")
 		.attr("marker-end", "url(#end)");
-			
+
+	//appending label to edge in what quarters this edge has been appeared.
 linktext.enter().append("g").attr("class", "linklabelholder").append("text")
 	   .attr("class", "linklabel")
 		 .style("font-size", "15px")
@@ -239,7 +243,7 @@ linktext.enter().append("g").attr("class", "linklabelholder").append("text")
 		   .style("fill","#FF0000")
 		 .append("textPath")
 	  .attr("xlink:href","#"+this.id)
-	   .text(function(d) { 		   		
+	   .text(function(d) { 	//making string for appending for label. "Q1","Q2".	
 		   var ar=[];		   
 		   		if(d.Q1 == "1"){
 		   			ar.push("Q1");
@@ -789,6 +793,11 @@ function isConnected(a, b) {
 
 }
 
+/**
+ * this will filter the data according to attribute define in link see json data fiel
+ * each edge has source,target,type,Q1,Q2,Q3,Q4,year removing element not need using 
+ * js splice method
+ * */
 function data_set(quart,json) {
 	switch (quart) {
 	case 0:
@@ -822,22 +831,29 @@ function data_set(quart,json) {
 	//alert(json.links.length);
 	return json.links;
 }
-
+/**
+ * this is original network graph which draw the network according to given data
+ * mouse over event shows incoming and outgoing edge for mouseovered node
+ * inputs are node set,link file, svg id, width and height of svg, quarter id and object
+ * */
 function OriginalNetworkGraph(nodes,file,svg1,width,height,quart,all_obj){
 	
+	/*this array used to store links as associative array*/
 	var linkedByIndex = {};
-	var color = d3.scale.category10();		 	
+	var color = d3.scale.category10();	
+	//remove the previous driven svg element
 	d3.select("svg").remove();
+	//selecting svg object in canvas using d3
 	var svg = d3.select(svg1).append("svg").attr("width", width).attr("height", height);
 	
+	//initiate the force layout with size and link distance
 	var force = d3.layout.force()
     .gravity(.15)
     .distance(350)
     .charge(-350)
     .size([width, height]);
     
- //input to the file name which is taken previously
- 
+	//file is file name such as data2008.json
 d3.json(file, function(error, json) {  
 	force
       .nodes(nodes)
@@ -845,12 +861,13 @@ d3.json(file, function(error, json) {
       .on("tick", tick)
       .start();
   
- 
+ // select all the link in the graph and append line for each link css class is link
   svg.selectAll(".link")
       .data(json.links)
     .enter().append("line")
       .attr("class", "link");
       
+  // define arrow head for each link
  var arrow_head = svg.append("svg:defs").selectAll("marker")
     .data(["end"])      // Different link/path types can be defined here
   .enter().append("svg:marker")    // This section adds in the arrows
@@ -864,28 +881,29 @@ d3.json(file, function(error, json) {
   .append("svg:path")
     .attr("d", "M0,-5L10,0L0,5");
       
-      
+     //append svg path element for each link in force links array
   var path = svg.append("svg:g").selectAll("path")
-    .data(force.links())
-  .enter().append("svg:path")
+    .data(force.links()) 
+  .enter().append("svg:path") // append svg path element
 	.attr("class", function(d) { return "link " + d.type; })
-	.on("mouseover", mOver)
-  	.on("mouseout", mOut) 
-	.attr("class", "link");
+	.on("mouseover", mOver) // if the selecting edge 
+  	.on("mouseout", mOut)    // deselecting edge
+	.attr("class", "link");  // css class type is link
 	//.attr("marker-end", "url(#end)");
 
+  // select all the node in the graph
   var node = svg.selectAll(".node")
-      .data(force.nodes())
-    .enter().append("g")
-      .attr("class", "node")
+      .data(force.nodes()) // node arry
+    .enter().append("g") // append canvas "g" element for each node in graph
+      .attr("class", "node")  // css class is  .node
       .style("fill", function(d) { return color(d.group); })
       //.on("click",click)
       //.on("dblclick", dblclick)
-       .on("mouseover", mouseOver(.001))
-      .on("mouseout", mouseOut(1))
-      .call(force.drag);
+       .on("mouseover", mouseOver(.001)) // mouseover function of node
+      .on("mouseout", mouseOut(1))       // mouseout function of node
+      .call(force.drag);  // enable dragging
 
-  node.append("circle")
+  node.append("circle") // append cycle for eachnode with text
       .attr("r",8);
 
   node.append("text")
@@ -893,11 +911,13 @@ d3.json(file, function(error, json) {
       .attr("dy", ".35em")
       .text(function(d) { return d.name;});
 
+  // iterate all the json link and put src index and trgt index in associative array manner.
 json.links.forEach(function(d) {
 //alert(d.source.index + "," + d.target.index);
   linkedByIndex[d.source.index + "," + d.target.index] = 1;
 });
  
+//curving the link 
     function tick() {
     path.attr("d", function(d) {
 
@@ -919,6 +939,8 @@ json.links.forEach(function(d) {
   	    return "translate(" + d.x + "," + d.y + ")"; });
 }
 
+    // edge mouse over function d is the current mouseover edge 
+    // will call the overall_anlys
     function mOver(d){
     	d3.select(this)
     		.style("stroke-width", "5px")
@@ -926,15 +948,18 @@ json.links.forEach(function(d) {
     	overall_anlys(all_obj,d.source.index,d.target.index);
     }
         
+    //edge mouseout function d is the current selection
     function mOut(d){
     	d3.select(this)
-    	    .style("stroke-width","1.5px")
+    	    .style("stroke-width","1.5px") // change css style
     		.style("stroke","#666666");
     	
     }
     
+    // node mouseover function  opacity is graph opacity value
 function mouseOver(opacity) {
 	//alert("links"+json.links.length);
+	//here d is the current selected node
     return function(d) {
     	node.style("stroke-opacity", function(o) {
             thisOpacity = isConnected(d, o) ? 1 : opacity;
@@ -942,11 +967,17 @@ function mouseOver(opacity) {
             return thisOpacity;
         });
     	
+    	//this iterate all the link o is the edges o.source is sourde node of edge
+    	//o.target node is the target node of that edge
+    	// add the opacity if selected node and connected edges.
         path.style("stroke-opacity", function(o) {
             return o.source === d || o.target === d ? 1 : opacity;                
         });
         //path.style("marker-end","url(#end););
 
+        //change the color of each path which are connected to the mouseovered node
+        //if incoming edge blue
+        //if outgoing edge red
         path.style("stroke",function(o){
             if (o.source === d) {
                 return "blue";
@@ -954,6 +985,8 @@ function mouseOver(opacity) {
                 return "red";
             };
         });
+        
+        // adding arrow head for each edge 
         path.attr("marker-end",function(o){
         	if (o.source === d || o.target === d ) {
 				return "url(#end)";
@@ -962,8 +995,7 @@ function mouseOver(opacity) {
 			}
         });
         
-       //arrow_head.style("opacity",0);
-       
+       //text transition when mouseover text wil large with node
        d3.select(this).select("text").transition()
        .duration(500)
        .style("fill", "black")
@@ -978,6 +1010,7 @@ function mouseOver(opacity) {
     };
 }
 
+//node mouseout function
 function mouseOut(opacity) {
     return function(d) {
     	 node.style("stroke-opacity", function(o) {
@@ -1015,6 +1048,7 @@ function neighboring(a, b) {
   return linkedByIndex[a.index + "," + b.index];
 }
 
+//checking node a and node b is in the array
 function isConnected(a, b) {
 //return incoming and outgoing
 	return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
@@ -1025,6 +1059,9 @@ function isConnected(a, b) {
 });
 }
 
+/**
+ * temporal pattern graph.contain sustain,episodic,weak edge type
+ * */
 function QuarterGraph(nodes,file,svg1,width,height,quart){
 	
 	var linkedByIndex = {};
@@ -1072,7 +1109,7 @@ d3.json(file, function(error, json) {
     .data(force.links())
   .enter().append("svg:path")
 	//.attr("class", function(d) { return "link " + d.type; })
-	.attr("class", function(d){
+	.attr("class", function(d){ // here identified the link and assign css class according to that.
 		if(d.type == "weak"){
 			return "linkWeak";
 		}else if(d.type == "sustained"){
@@ -1148,7 +1185,7 @@ function mouseOver(opacity) {
         path.style("stroke-opacity", function(o) {
             return o.source === d || o.target === d ? 1 : opacity;                
         });
-
+       // adding the  dash array
        path.style("stroke-dasharray",function(o){
     	   if(o.source === d){
     		   return "5, 5";
@@ -1190,7 +1227,7 @@ function mouseOut(opacity) {
          }); 
          
          path.style();//stroke line 
-
+         //according to link type chanage the color of the edge
          path.style("stroke",function(d){
         		if(d.type == "weak"){
 					return "#33CC33";
@@ -1278,6 +1315,10 @@ function SvgQuarter(ctx){
 	    Svgbase();
 }
 
+/**
+ * this calculates the change connected in sequentilly in graph upto depth 3
+ * A->B->C->D in this manner.iterating link set 3 times
+ * */
 function Longchain(nodes,file,svg1,width,height){
 	
 	var linkedByIndex = {};
@@ -1380,7 +1421,7 @@ function mouseOver(opacity) {
     var depthEdges = [];
    
     return function(d) {
-
+    	//add the fist children of root to connectedEdges array, means level 1 children
     	json.links.forEach(function(o) {
     		 if (o.source === d) {    
                  if(connectedEdges.indexOf(o.target.index) == -1){
@@ -1390,35 +1431,39 @@ function mouseOver(opacity) {
     		});
 
     	//alert("the length of connected edges " +connectedEdges.length);
+    	//each level 1 child has more childs 
         for(var i=0;i< connectedEdges.length;i++){
-        	
+        	//finding level 2 children of root means immediate children of level 1
+        	//f is path 
             json.links.forEach(function(f) {
             	// && !isSecondLayerEdge(f.target.index) second leyar removed
                 if (isConnectedIndex(connectedEdges[i], f.target.index ) && f.target != d && f.target.index != connectedEdges[i]) { 
-                    if(triadCompletingEdges.indexOf(f.target.index) == -1){                    	
+                    if(triadCompletingEdges.indexOf(f.target.index) == -1){      
+                    	//put the children in level 2
                         triadCompletingEdges.push(f.target.index);                        
                         //alert("connectededge "+connectedEdges[i]+"pushed " + f.target.index);                        
-                        
+                        //each level 2 children has more level 3 childre means level 2 have immediate children.
                         for(var j=0; j < triadCompletingEdges.length ; j++){
-                        	
+                        	//n is path 
                         	json.links.forEach(function(n){ // iterate all the links for finding children edge
                         		if(isConnectedIndex(triadCompletingEdges[j], n.target.index) && n.target != d && n.target != f.target && n.target.index != triadCompletingEdges[j]){
                         			//alert("connectededge "+connectedEdges[i]+" triadCompletingEdges[j] " + triadCompletingEdges[j] + " "+ n.target.index);
                         			
+                        			//check node index already in the array
                         			if(depthEdges.indexOf(n.target.index) == -1){
                         				/*add the leaf level node*/ 
                         				depthEdges.push(n.target.index);                        				
                         			}
                         			if(linksForSelectedNode.indexOf(triadCompletingEdges[j]+ "," + n.target.index) == -1){
-                        				linksForSelectedNode[triadCompletingEdges[j]+ "," + n.target.index] = 3;
+                        				linksForSelectedNode[triadCompletingEdges[j]+ "," + n.target.index] = 3; // paticipated edge to chain in 3td edge
                         				
                         				if(linksForSelectedNode.indexOf(d.index + "," + connectedEdges[i]) == -1){
-                                            linksForSelectedNode[d.index + "," + connectedEdges[i]] = 1;
+                                            linksForSelectedNode[d.index + "," + connectedEdges[i]] = 1;  // paticipated edge to chain in 1td edge
                                             //alert("level 1 d.index "+d.index+" "+" connectedEdges[i] "+connectedEdges[i]);
                                         }
                             			
                             			if(linksForSelectedNode.indexOf(connectedEdges[i] + "," + triadCompletingEdges[j]) == -1){// add the parent edge 
-                                    		linksForSelectedNode[connectedEdges[i] + "," + triadCompletingEdges[j]] = 2;
+                                    		linksForSelectedNode[connectedEdges[i] + "," + triadCompletingEdges[j]] = 2; // paticipated edge to chain in 2td edge
                                     		//alert(" level 2 "+" connectedEdges[i] "+connectedEdges[i]+" " + " triadCompletingEdges[j] "+triadCompletingEdges[j]);
                                     	}
                         			} 
@@ -1436,12 +1481,13 @@ function mouseOver(opacity) {
 
         }
 
-        path.style("stroke-opacity", function(o) {
-            var value= getConnectedNodes(o.source, o.target);
-            return (value>=1) ? 1 : opacity; 
+        //opacity for chain connected edges and nodes
+        path.style("stroke-opacity", function(o) { //this iterate all the links 
+            var value= getConnectedNodes(o.source, o.target); // linksforselectednode array will return the set of paths relate to chain
+            return (value>=1) ? 1 : opacity;  // each edge has value if greater than 0 then it paticipate to chain
         });
 	
-        path.style("stroke",function(o){
+        path.style("stroke",function(o){ /// adding colors to edges
             if (getConnectedNodes(o.source, o.target)==1||getConnectedNodes(o.source, o.target)==2||getConnectedNodes(o.source, o.target)==3 || getConnectedNodes(o.source, o.target)==3) { 
                 return "blue";
             }
@@ -1518,6 +1564,7 @@ function isConnected(a, b) {
     //alert(a.index + "," + b.index);
     return linkedByIndex[a.index + "," + b.index];
 }
+//returning edge if there is edge in way connected, index a and index b
 function isConnectedIndex(a,b){
     return linkedByIndex[a + "," + b];
 }

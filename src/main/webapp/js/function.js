@@ -549,7 +549,7 @@ function DrawGraph(nodes,links,svg1,width,height){
         return linkedByIndex[a.index + "," + b.index];
     }
 }
-
+/*this will draw the indgree and outdegree*/
 function DrawDegree(nodes,links,svg1,width,height){
 
 
@@ -744,7 +744,7 @@ function DrawDegree(nodes,links,svg1,width,height){
         return linkedByIndex[a.index + "," + b.index];
     }
 }
-
+/*drawing complete triad in canvas*/
 function DrawTrangleGraph(nodes,links,svg1,width,height){
 
 
@@ -862,7 +862,7 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
         */
         
 
-                
+        	//adding depath 1 or level 1 nodes to array
             links.forEach(function(o){
                 // if (isConnected(d, o.target)) {
                 if (o.source === d) {    
@@ -1052,7 +1052,7 @@ function DrawTrangleGraph(nodes,links,svg1,width,height){
     }
 
 }
-
+/*drawing incomplete triad in canvas*/
 function DrawIncompleteTriad(nodes,links,svg1,width,height){
 
     d3.select("svg")
@@ -1169,7 +1169,7 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
         var triadCompletingEdges = [];            
        
         return function(d) { 
-
+        	//adding level 1 children to array
             links.forEach(function(o){
                 // if (isConnected(d, o.target)) {
                 if (o.source === d && isConnected(d, o.target) == 1) {    

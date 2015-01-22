@@ -58,7 +58,7 @@
 		#dialog-link span.ui-icon {
 			margin: 0 5px 0 0;
 			position: absolute;
-			left: .2em;
+			left: .2em;1
 			top: 50%;
 			margin-top: -8px;
 		}
@@ -253,17 +253,18 @@ text {
 									   		<script type="text/javascript">
 									   		var ctx = document.getElementById("graph_note1").getContext("2d");					                            
 				                            SvgLoadDegree(ctx);
-											$("#In").click(function(){							   												   					
+											$("#In").click(function(){	
+												/* pass quarter number and request Indegree servlet and return set of links and objects in success function*/
 							   					$.ajax({
 							   					  type: 'GET',
-							   					  url: "Indegree?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
+							   					  url: "Indegree?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>", 
 							   					  dataType: 'json',
 							   					  success: function(data,status) {//data.Links,data.nodes	
 							   						
 							   					  	document.getElementById("max_indegree").innerHTML = data.links.length;
-							   						var width = 1000,height = 900;							   						
+							   						var width = 1000,height = 900;		
+							   						//drawing the graph in canvas with given data.nodes array and data.links array
 							   						DrawDegree(data.nodes, data.links,"#borderIn",width,height);	
-							   						
 							   						
 							   					  },
 							   					  error: function(data,error){
@@ -290,6 +291,7 @@ text {
 											$("#Out").click(function(){							   												   					
 							   					$.ajax({
 							   					  type: 'GET',
+							   					  /* this will pass quarter number and request outdegree servlet and draw the the degree of graph */
 							   					  url: "Outdegree?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
 							   					  dataType: 'json',
 							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
@@ -345,7 +347,7 @@ text {
 							   			<script type="text/javascript">
 							   			var ctx3 = document.getElementById("graph_note4").getContext("2d");					                            
 			                            SvgLoadIncTriad(ctx3);
-			                            		
+			                           	/*  passing quarter and and requesting IncompleteTriad servlet to execute */
 			                            $("#Incmp").click(function(){							   												   					
 						   					$.ajax({
 						   					  type: 'GET',
@@ -353,7 +355,7 @@ text {
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 						   						var width = 1000,height = 900;							   						
-						   						
+						   						//draw the incomplete triad graph using fetched data
                                                 DrawIncompleteTriad(data.nodes, data.links,"#borderIncmp",width,height);
 						   					  },
 						   					  error: function(data,error){
@@ -374,7 +376,8 @@ text {
 							   			var ctx4 = document.getElementById("graph_note5").getContext("2d");							   			
 			                            SvgLoad(ctx4);
 			                            		
-			                            $("#Imcycles").click(function(){							   												   					
+			                            $("#Imcycles").click(function(){	
+			                            	/*  passing quarter and and requesting ImmediateCycles servlet to execute. Return data to success function will read*/
 						   					$.ajax({
 						   					  type: 'GET',
 						   					  url: "ImmediateCycles?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
@@ -415,11 +418,11 @@ text {
 							   					var ctx=document.getElementById("graph_note6").getContext("2d");
 							   					ctx.clearRect(0, 0, 800, 80);
 							   					SvgQuarter(ctx);							   				
-							   					 
+							   					/* drawing the quater main graph */
 							   					$("#Quarters").click(function(){
 							   						var width = 900, height = 950;
 							   						QuarterGraph(nodes, file, "#borderQgraph", width, height);
-							   						
+							   						//requesting cluster coeffient
 							   						$.ajax({
 									   					  type: 'GET',
 									   					  url: "cc?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
@@ -432,7 +435,7 @@ text {
 
 									   					}); 								   													   			
 								   				});
-							   					
+							   					//drawing sustained quarter graph from data not data coming from server
 							   					$("#Sustained").click(function(){
 							   						//alert("sustained");
 							   						var can=document.getElementById("graph_note6");
@@ -442,6 +445,7 @@ text {
 							   						var width = 900, height = 950;
 							   						QuarterGraphSustained(nodes, file, "#borderQgraph", width, height);
 							   					});
+							   					//drawing episodic type quarter graph from data not data coming from server
 							   					$("#Episodic").click(function(){
 							   						//alert("episodic");
 							   						var can=document.getElementById("graph_note6");
@@ -451,6 +455,7 @@ text {
 							   						var width = 900, height = 950;
 							   						QuaterGraphEpisodic(nodes, file, "#borderQgraph", width, height);
 							   					});
+							   					//drawing weak type quarter graph from data not data coming from server
 							   					$("#Weak").click(function(){
 							   						//alert("weak");
 							   						var can=document.getElementById("graph_note6");
@@ -485,7 +490,7 @@ text {
 							   			<script type="text/javascript">							   				
 							   			$("#Chain").click(function(){
 							   				var width = 1000,height = 900;	
-							   				Longchain(nodes, file, "#Lchain", width, height) 
+							   				Longchain(nodes, file, "#Lchain", width, height);//draw longer chain using only javascript not data from server
 							   			});
 							   			</script>							   		
 							   		</div>
@@ -500,7 +505,7 @@ text {
 							   			<script>
 							   			$("#traces").click(function(){
 							   				var width = 900, height = 950;											
-											TracePaths(nodes, file, "#tpath", width, height);
+											TracePaths(nodes, file, "#tpath", width, height); // here contain trace path graph
 							   			});
 							   			
 							   			</script>						   		
@@ -511,7 +516,7 @@ text {
 
 							//load the nodes and links arrays
 							$(document).ready(function(){
-								var filename =<%=name%>
+								var filename =<%=name%> /*  json file name */
 								<% String baseUrl="\'"+request.getScheme() + "://" + request.getServerName() + ":" + Integer.toString(request.getServerPort()) + request.getContextPath()+"/"+"\'";%>
 								
 								var url=<%=baseUrl%>+filename;
@@ -521,7 +526,7 @@ text {
 								var obj=new Object();
 								var all_obj = new Object();
 								obj.nodes=nodes;	
-								
+								//access json file using ajax and put the json content ito javascript object
 								$.ajax({
 									type: 'GET',
 									url: url,
@@ -549,7 +554,7 @@ text {
 								var width = 900, height = 950;
 								var quart = <%=Integer.parseInt(request.getParameter("Q"))%>;
 								OriginalNetworkGraph(nodes, file, "#gc_network", width, height,quart,all_obj);
-								
+								//drawing original network graph
 								
 								//overall_anlys(all_obj);
 								
