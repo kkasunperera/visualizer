@@ -499,8 +499,8 @@ text {
 							   	<!-- Trace paths -->
 							   	<div class="tab-pane fade" id="tracepath">						   	
 							   		<div id="tpath" style="border:2px solid;">
-							   		<div><b>Note: </b> Click the initial node and mouseover the realted nodes to see all connected nodes. Click mouseovered node to trace the path. Double click the nodes to remove the trace.
-							   		You can see the traced history by clicking previous node. Green edges indicates the traced path. 
+							   		<div><b>Note: </b>Click the initial node then outgoing edges will display. click one of them to go further, all the path will freezed. if want to go back double click each traced node
+							   			except initial node if initial node double clicked, graph will be reset.
 							   		</div>
 							   			<script>
 							   			$("#traces").click(function(){

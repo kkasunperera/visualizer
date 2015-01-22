@@ -98,41 +98,44 @@ json.links.forEach(function(d) {
   	    return "translate(" + d.x + "," + d.y + ")"; });
 }
     
-    var rootFreeNode;
-    var rootFreeNode2;
+
     var freezeNodes= [];
     var freezePaths= [];
-    var tracedNodes = [];
+    var InitialNode = -1;
+    var ClickCount = 0;
     
-function click(opacity){
-	return function(d) {
-		rootFreeNode = d.index;
-		tracedNodes.push(d.index);
-		//push incoming and outgoing nodes index
+function click(opacity){	
+	return function(d) {		
+		ClickCount++;
+		/*identify the initial root node for traversing*/
+		if(ClickCount == 1){
+			InitialNode = d.index;
+			//alert(d.index);
+		}
+		
+		/*adding clicked node immediete children*/
 		json.links.forEach(function(f){
 			if(f.source === d){
-				freezeNodes.push(f.target.index);				
-			}else if(f.target === d){
-				freezeNodes.push(f.source.index);				
+				freezeNodes.push(f.target.index);	
+				freezePaths[d.index + "," + f.target.index] = 1; /*root not 1 level children connected edges*/
 			}
 		});
     	
+		/*display all the freezed edges*/
         path.style("stroke-opacity", function(o) {
-            return o.source === d || o.target === d || getPath(o.source, o.target) == 1? 1 : opacity;                
+            return o.source === d || getPath(o.source, o.target) == 1? 1 : opacity;                
         });
         
-
+        /*coloring edges as blue in displayed edges*/
         path.style("stroke",function(o){
-            if (o.source === d) {
+            if (o.source === d || getPath(o.source, o.target) == 1) {
                 return "blue";
-            }else if (o.target === d ) {
-                return "red";
-            }else if(getPath(o.source, o.target) == 1){
-           	 return "green";
-            };
+            }
         });
+        
+        /*add the arrow head end of each line freezed*/
         path.attr("marker-end",function(o){
-        	if (o.source === d || o.target === d || getPath(o.source, o.target) == 1) {
+        	if (o.source === d || getPath(o.source, o.target) == 1) {
 				return "url(#end)";
 			}else{
 				return "url(#)";
@@ -154,128 +157,107 @@ function click(opacity){
     };
 }
 
-function dbclick(opacity){
-	return function(d){
+//opacity = 1 
+function dbclick(opacity){	
+	return function(d){		
 		
-	freezeNodes = [];
-	rootFreeNode = -1;
+		/*check whether double clicked node is root node. if so then reset graph*/
+		if(d.index == InitialNode){
+			freezePaths = [];
+			ClickCount = 0;
+			InitialNode = -1;
+			path.style("stroke-opacity", function(o) {
+				//return o.source === d || o.target === d ? 1 : opacity;
+				        return o.source === d ? 1 : opacity;
+				    });
 
-    path.style("stroke-opacity", function(o) {
-//return o.source === d || o.target === d ? 1 : opacity;
-        return o.source === d ? 1 : opacity;
-    });
+				    path.style("stroke","#666");
+				    
+				    path.attr("marker-end","url(#)");
+				    
+		}else{
+			json.links.forEach(function(f){
+				if(f.source === d){				
+					freezePaths[d.index + "," + f.target.index] = 0; /*root not 1 level children connected edges*/
+				}
+			});
 
-    path.style("stroke","#666");
-    
-    path.attr("marker-end","url(#)");
-    
-    d3.select(this).select("circle").transition()
-    .duration(750)
-    .attr("r", 8)
-    .style("fill", function(d) {
-        return color(d.group);
-    });
-    d3.select(this).select("text").transition()
-    .duration(750)
-    .attr("x", 12)
-    .style("stroke", "none")
-    .style("fill", "black")
-    .style("stroke", "none")
-    .style("font", "10px sans-serif");
-    
+	    path.style("stroke-opacity", function(o) {
+	    	if(o.source === d){
+	    		return 0;
+	    	}else if (getPath(o.source, o.target) == 1){
+	    		return opacity;
+	    	}else {
+	    		return 0;
+	    	}
+	    });	    
+	    
+	    path.attr("marker-end",function(o){
+	    	if (getPath(o.source, o.target) == 1) {
+				return "url(#end)";
+			}else if(o.source === d){
+				return "url(#)";
+			}else{
+				return "url(#)";
+			}
+	    });
+		}		
+	    
+	    d3.select(this).select("circle").transition()
+	    .duration(750)
+	    .attr("r", 8)
+	    .style("fill", function(d) {
+	        return color(d.group);
+	    });
+	    d3.select(this).select("text").transition()
+	    .duration(750)
+	    .attr("x", 12)
+	    .style("stroke", "none")
+	    .style("fill", "black")
+	    .style("stroke", "none")
+	    .style("font", "10px sans-serif");
+
 	};
 }
 function mouseOver(opacity) {
     return function(d) {
-    	 if(d.index != rootFreeNode ){
-    		 for (var i = 0; i < freezeNodes.length; i++) {
-				if(d.index == freezeNodes[i] & tracedNodes.indexOf(d.index)<0 ){
-					json.links.forEach(function(m){
-		    			 if(m.source.index === d.index && m.target.index === rootFreeNode){
-		    				 if (freezePaths.indexOf(d.index + "," + rootFreeNode) == -1) {
-								//in edge
-								freezePaths[d.index + "," + rootFreeNode] = 1;
-							}
-		    			 }else if(m.source.index === rootFreeNode && m.target.index === d.index){
-		    				 if (freezePaths.indexOf(rootFreeNode + "," + d.index) == -1) {
-								//out
-								freezePaths[rootFreeNode + "," + d.index] = 1;
-							}
-		    			 }
-		    		 });
-		    		 path.style("stroke-opacity",function(o){
-						 if(o.source === d || o.target === d || getPath(o.source, o.target) == 1 ){
-							 return 1;
-						 }else {
-							 return opacity;
-						 }
-						 
-					 //return o.source === d || o.target === d ? 1 : opacity;
-				 });
-				 
-				 path.style("stroke",function(o){
-		             if (o.source === d ) {
-		                 return "blue";
-		             }else if (o.target === d ) {
-		                 return "red";
-		             }else if(getPath(o.source, o.target) == 1){
-		            	 return "green";
-		             }                
-		         });
-				
-		         /*path.attr("marker-end",function(o){
-		         	if (o.source === d || o.target === d ) {
-		 				return "url(#end)";
-		 			}else{
-		 				return "url(#)";
-		 			}
-		         });*/
-				 d3.select(this).select("text").transition()
-			        .duration(500)
-			        .style("fill", "black")
-			        .style("stroke", "lightsteelblue")
-			        .style("stroke-width", ".5px")
-			        .style("font", "20px sans-serif");
-			        d3.select(this).select("circle").transition()
-			        .duration(750)
-			        .attr("r", 25)
-			        .style("fill", function(d) {
-			            return color(d.group);
-			        });   
-				}
-			}
-    	 }
+    	 
+    	 /*d3.select(this).select("text").transition()
+	        .duration(500)
+	        .style("fill", "black")
+	        .style("stroke", "lightsteelblue")
+	        .style("stroke-width", ".5px")
+	        .style("font", "20px sans-serif");
+	        d3.select(this).select("circle").transition()
+	        .duration(750)
+	        .attr("r", 25)
+	        .style("fill", function(d) {
+	            return color(d.group);
+	        });  */
     };
 }
 
 function mouseOut(opacity) {
     return function(d) {    	
 
-        if(d.index != rootFreeNode){
-        	for (var int = 0; int < freezeNodes.length; int++) {
-				if(d.index == freezeNodes[int] & tracedNodes.indexOf(d.index)<0){
-					path.style("stroke-opacity",1);
-		     		
-		              //path.style("stroke","#666");
-		              //path.attr("marker-end","url(#end)");    
-		                     
-		              d3.select(this).select("circle").transition()
-		              .duration(750)
-		              .attr("r", 8)
-		              .style("fill", function(d) {
-		                  return color(d.group);
-		              });
-		              d3.select(this).select("text").transition()
-		              .duration(750)
-		              .attr("x", 12)
-		              .style("stroke", "none")
-		              .style("fill", "black")
-		              .style("stroke", "none")
-		              .style("font", "10px sans-serif");
-				}
-			} 
-    
-        }
+    	//path.style("stroke-opacity",1);
+ 		
+        //path.style("stroke","#666");
+        //path.attr("marker-end","url(#end)");    
+               
+       /* d3.select(this).select("circle").transition()
+        .duration(750)
+        .attr("r", 8)
+        .style("fill", function(d) {
+            return color(d.group);
+        });
+        d3.select(this).select("text").transition()
+        .duration(750)
+        .attr("x", 12)
+        .style("stroke", "none")
+        .style("fill", "black")
+        .style("stroke", "none")
+        .style("font", "10px sans-serif");*/
         
     };
 }
