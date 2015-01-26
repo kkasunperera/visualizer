@@ -248,7 +248,7 @@ select {
 								<h2>Edges Analysis - Log Volume Data</h2>
 							</center>
 							<script type="text/javascript">
-								allData_histogram("#edge_data","csv/edges_overall_data.csv","Number of edges");
+							edges_histogram("#edge_data","csv/edges_overall_data.csv","Number of edges");
 							</script>
 						</div>
 					</div>
