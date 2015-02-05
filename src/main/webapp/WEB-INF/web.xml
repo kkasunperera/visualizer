@@ -8,23 +8,22 @@
     <servlet-name>ControlerServelet</servlet-name>
     <url-pattern>/ControlerServelet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-  	<servlet-name>PostData</servlet-name>
-  	<servlet-class>org.karsha.visualizer.PostDataServ</servlet-class>
+    <servlet-name>PostData</servlet-name>
+    <servlet-class>org.karsha.visualizer.PostDataServ</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>PostData</servlet-name>
-  	<url-pattern>/PostDataServ</url-pattern>
-  	<url-pattern>/Indegree</url-pattern>
-  	<url-pattern>/Outdegree</url-pattern>
-  	<url-pattern>/CompleteTriad</url-pattern>
-  	<url-pattern>/IncompleteTriad</url-pattern>
-  	<url-pattern>/ImmediateCycles</url-pattern>
-  	<url-pattern>/cc</url-pattern>
-  	<url-pattern>/chain</url-pattern>
-  	<url-pattern>/LongerChain</url-pattern>
-  	<url-pattern>/count</url-pattern>
+    <servlet-name>PostData</servlet-name>
+    <url-pattern>/PostDataServ</url-pattern>
+    <url-pattern>/Indegree</url-pattern>
+    <url-pattern>/Outdegree</url-pattern>
+    <url-pattern>/CompleteTriad</url-pattern>
+    <url-pattern>/IncompleteTriad</url-pattern>
+    <url-pattern>/ImmediateCycles</url-pattern>
+    <url-pattern>/cc</url-pattern>
+    <url-pattern>/chain</url-pattern>
+    <url-pattern>/LongerChain</url-pattern>
+    <url-pattern>/count</url-pattern>
   </servlet-mapping>
   <session-config>
     <session-timeout>30</session-timeout>

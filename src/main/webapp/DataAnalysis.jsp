@@ -158,7 +158,7 @@ select {
 							%>
 						</ul></li>
 					<li><a href="DataAnalysis.jsp"><i
-							class="fa fa-fw fa-table"></i> Data-Analysis</a></li>
+							class="fa fa-fw fa-table"></i> Network Summary Statistics</a></li>
 					<li><a href="#"><i class="fa fa-fw fa-file"></i> More
 							About</a></li>
 
@@ -190,27 +190,26 @@ select {
 				<!-- Page Heading -->
 				<div class="row">
 					<div class="col-lg-12">
-						<h1 class="page-header">Data-Analysis</h1>
+						<h1 class="page-header">Network Summary Statistics</h1>
 						<ol class="breadcrumb">
 							<li><i class="fa fa-dashboard"></i> <a href="template.html">Visualizer</a>
 							</li>
-							<li class="active"><i class="fa fa-table"></i> Data-Analysis
+							<li class="active"><i class="fa fa-table"></i> Network Summary Statistics
 							</li>
 						</ol>
 					</div>
 				</div>
 				<!-- /.row -->
-
 				<div class="row">
 					<div class="col-lg-12">
-
-						<div id="cc_data" style="border: 2px solid;">
+						<div id="edge_data" style="border: 2px solid;">
 							<center>
-								<h2>Clustering Coefficient Analysis - Log Volume Data</h2>
+								<h2>Edge Distribution - Log Volume</h2>
 							</center>
 							<script type="text/javascript">
-								allData_histogram("#cc_data",
-										"csv/cc_overall_data.csv","Clustering Coefficient");
+								allData_histogram("#edge_data",
+										"csv/edges_overall_data.csv",
+										"Number of edges");
 							</script>
 						</div>
 					</div>
@@ -231,7 +230,7 @@ select {
 					<div class="col-rg-6" style="border: 2px solid;">
 						<div id="quater_edge_data">
 							<center>
-								<h4>GC edges occurrence count in quarterly</h4>
+								<h4>Single-Edge Quarterly-Repeat Count Distribution</h4>
 							</center>
 							<script type="text/javascript">
 								year_edge_histogrm("#quater_edge_data",
@@ -240,20 +239,26 @@ select {
 						</div>
 					</div>
 				</div>
+				<br></br>				
 				<br></br>
 				<div class="row">
 					<div class="col-lg-12">
-						<div id="edge_data" style="border: 2px solid;">
+
+						<div id="cc_data" style="border: 2px solid;">
 							<center>
-								<h2>Edges Analysis - Log Volume Data</h2>
+								<h2>Clustering Coefficient Analysis - Log Volume Data</h2>
 							</center>
 							<script type="text/javascript">
+<<<<<<< HEAD
 							edges_histogram("#edge_data","csv/edges_overall_data.csv","Number of edges");
+=======
+								allData_histogram("#cc_data",
+										"csv/cc_overall_data.csv","Clustering Coefficient");
+>>>>>>> branch 'master' of https://github.com/Karsha-Project-LSF/visualizer.git
 							</script>
 						</div>
 					</div>
-				</div>
-				<br></br>
+				</div>				
 				<div class="row">
 					<div class="col-lg-12">
 						<div id="com_triad_data" style="border: 2px solid;">
