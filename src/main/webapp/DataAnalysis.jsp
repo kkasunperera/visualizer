@@ -23,27 +23,22 @@
 	stroke: #666;
 	stroke-width: 1.5px;
 }
-
 .node circle {
 	stroke: #fff;
 	stroke-width: 1.5px;
 }
-
 text {
 	font: 10px sans-serif;
 	pointer-events: none;
 }
-
 .demoHeaders {
 	margin-top: 2em;
 }
-
 #dialog-link {
 	padding: .4em 1em .4em 20px;
 	text-decoration: none;
 	position: relative;
 }
-
 #dialog-link span.ui-icon {
 	margin: 0 5px 0 0;
 	position: absolute;
@@ -51,12 +46,10 @@ text {
 	top: 50%;
 	margin-top: -8px;
 }
-
 #icons {
 	margin: 0;
 	padding: 0;
 }
-
 #icons li {
 	margin: 2px;
 	position: relative;
@@ -65,38 +58,30 @@ text {
 	float: left;
 	list-style: none;
 }
-
 #icons span.ui-icon {
 	float: left;
 	margin: 0 4px;
 }
-
 .fakewindowcontain .ui-widget-overlay {
 	position: absolute;
 }
-
 select {
 	width: 300px;
 }
-
 .axis path,.axis line {
 	fill: none;
 	stroke: #000;
 	shape-rendering: crispEdges;
 }
-
 .bar {
 	fill: steelblue;
 }
-
 .x.axis path {
 	
 }
-
 .dot {
   stroke: #000;
 }
-
 .tooltip {
   position: absolute;
   width: 200px;
@@ -249,12 +234,7 @@ select {
 								<h2>Clustering Coefficient Analysis - Log Volume Data</h2>
 							</center>
 							<script type="text/javascript">
-<<<<<<< HEAD
-							edges_histogram("#edge_data","csv/edges_overall_data.csv","Number of edges");
-=======
-								allData_histogram("#cc_data",
-										"csv/cc_overall_data.csv","Clustering Coefficient");
->>>>>>> branch 'master' of https://github.com/Karsha-Project-LSF/visualizer.git
+								allData_histogram("#cc_data","csv/cc_overall_data.csv","Clustering Coefficient");
 							</script>
 						</div>
 					</div>
