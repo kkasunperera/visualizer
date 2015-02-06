@@ -416,7 +416,7 @@ function Hindex_histogram(pos,file,axistxt) {
 	var margin = {
 			top : 20,
 			right : 20,
-			bottom : 30,
+			bottom : 110,
 			left : 40
 		}, width = 960 - margin.left - margin.right, height = 400 - margin.top
 				- margin.bottom;
@@ -428,7 +428,7 @@ function Hindex_histogram(pos,file,axistxt) {
 		var y = d3.scale.linear().range([ height, 0 ]);
 
 		var color = d3.scale.ordinal().range(
-				[ "#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56" ]);
+				[ "#98abc5", "#8a89a6", "#a05d56", "#6b486b", "#7b6888" ]);
 
 		var xAxis = d3.svg.axis().scale(x0).orient("bottom");
 
@@ -463,8 +463,17 @@ function Hindex_histogram(pos,file,axistxt) {
 				});
 			}) ]);
 
-			svg.append("g").attr("class", "x axis").attr("transform",
-					"translate(0," + height + ")").call(xAxis);
+			svg.append("g")
+				.attr("class", "x axis")
+				.attr("transform","translate(0," + height + ")")
+				.call(xAxis)
+				.selectAll("text")
+					.style("text-anchor", "end")
+					.attr("dx", "-.8em")
+					.attr("dy", ".15em")
+					.attr("transform", function(d) {
+						return "rotate(-65)" 
+                });
 
 			svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr(
 					"transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style(
