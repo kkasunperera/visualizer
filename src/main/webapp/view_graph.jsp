@@ -58,7 +58,7 @@
 		#dialog-link span.ui-icon {
 			margin: 0 5px 0 0;
 			position: absolute;
-			left: .2em;1
+			left: .2em;
 			top: 50%;
 			margin-top: -8px;
 		}
