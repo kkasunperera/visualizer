@@ -116,7 +116,7 @@
 
                         </li>
                         <li><a href="DataAnalysis.jsp"><i class="fa fa-fw fa-table"></i>
-                                Data-Analysis</a></li>
+                                Network Summary Statistics</a></li>
                         <li><a href=""><i class="fa fa-fw fa-file"></i>
                                 More About</a></li>
 
@@ -186,7 +186,7 @@
                             </ul>
                             </br>
                             <p><strong>Dataset</strong></br>
-                                We report on the period 2005 - 2013. The data is obtained from the following repositories:</br>
+                                We report on the period 2005 - 2012. The data is obtained from the following repositories:</br>
                                 <a href="http://www.crsp.com/">The Center for Research in Security Prices(CRSP) </a>Daily Equity Data</br>
                                 <a href="http://www.finra.org/industry/compliance/markettransparency/trace/">Trade Reporting and Compliance Engine (TRACE) </a> Daily Bond Data
                             </p>

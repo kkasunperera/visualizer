@@ -204,7 +204,7 @@ select {
 					<div class="col-lg-6" style="border: 2px solid;">
 						<div id="year_edge_data">
 							<center>
-								<h4>GC edges occurrence count annually</h4>
+								<h4>Single-Edge Annually-Repeat Count Distribution</h4>
 							</center>
 							<script type="text/javascript">
 								year_edge_histogrm("#year_edge_data",
@@ -231,7 +231,7 @@ select {
 
 						<div id="cc_data" style="border: 2px solid;">
 							<center>
-								<h2>Clustering Coefficient Analysis - Log Volume Data</h2>
+								<h2>Clustering Coefficient - Log Volume Data</h2>
 							</center>
 							<script type="text/javascript">
 								allData_histogram("#cc_data","csv/cc_overall_data.csv","Clustering Coefficient");
@@ -243,7 +243,7 @@ select {
 					<div class="col-lg-12">
 						<div id="com_triad_data" style="border: 2px solid;">
 							<center>
-								<h2>Complete triad Analysis - Log Volume Data</h2>
+								<h2>Complete Triad Count - Log Volume Data</h2>
 							</center>
 							<script type="text/javascript">
 								allData_histogram("#com_triad_data","csv/comTraid_overall_data.csv","Number of Complete triads");
@@ -256,7 +256,7 @@ select {
 					<div class="col-lg-12">
 						<div id="Incom_triad_data" style="border: 2px solid;">
 							<center>
-								<h2>Incomplete triad Analysis - Log Volume Data</h2>
+								<h2>Incomplete Triad Count - Log Volume Data</h2>
 							</center>
 							<script type="text/javascript">
 								allData_histogram("#Incom_triad_data","csv/IncomTraid_overall_data.csv","Number of Incomplete triads");
@@ -269,7 +269,7 @@ select {
 					<div class="col-lg-12">
 						<div id="repeat_cmp_triad" style="border: 2px solid;">
 							<center>
-								<h2>Repeated Completed Triad Analysis - Log Volume Data</h2>
+								<h2>Repeated Completed Triad Count - Log Volume Data</h2>
 							</center>
 							<script type="text/javascript">
 								repeatCmpTriad("#repeat_cmp_triad", "csv/repeat.csv");
