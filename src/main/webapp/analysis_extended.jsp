@@ -190,7 +190,7 @@ select {
 								<h2>Clustering Coefficient - Log Volume Data</h2>
 							</center>
 							<script type="text/javascript">
-								Hindex_histogram("#cc_data","csv/cc_overall_data.csv","Clustering Coefficient");
+								Hindex_histogram("#cc_data","csv/Hindex_quarter.csv","Clustering Coefficient");
 							</script>
 						</div>
 					</div>
