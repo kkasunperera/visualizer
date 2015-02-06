@@ -1,9 +1,7 @@
 package org.karsha.visualizer;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -22,11 +20,10 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.util.ArrayUnenforcedSet;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.stream.JsonReader;
 
 import java.util.logging.*;
 
@@ -113,7 +110,7 @@ public class PostDataServ extends HttpServlet {
 
 			String o = "";
 			o = br.readLine();
-			// System.out.println(o);
+			System.out.println(o);
 
 			ObjectMapper mapper = new ObjectMapper();
 			JsonNode root = mapper.readTree(o);
@@ -401,6 +398,44 @@ public class PostDataServ extends HttpServlet {
 			
 			out.close();
 
+		}		
+		else if(userPath.equals("/ReadJson")){
+			
+			/*iterating over all years*/			
+			for (int i = 2005; i < 2013; i++) {
+				String filePath = "/json/data"+i+".json";
+				String path = request.getServletContext().getRealPath(filePath);
+				//System.out.println(path);
+				
+				/*reading json file using buffered reader*/
+				BufferedReader br = new BufferedReader(new FileReader(path));
+				
+				/*string builder for appending ease*/
+				StringBuilder builder = new StringBuilder();
+				String line = "";
+				
+				/*read and appending each line*/
+				while((line=br.readLine()) != null){
+					builder.append(line);
+				}
+				
+				//convert to stringbuilder to string
+				String Jstring = builder.toString();
+				
+				/*mapping the json string to chuncks*/
+				ObjectMapper mapper = new ObjectMapper();
+				JsonNode root = mapper.readTree(Jstring);			
+				JsonNode linkObj = root.get("links");
+				
+				/*reads the links array and assgning value*/
+				if(linkObj != null){
+				Links[] set= mapper.readValue(linkObj, Links[].class);
+					System.out.println(filePath+" "+set.length);
+				}
+								
+				br.close();
+			}						
+			
 		}
 
 	}
