@@ -24,7 +24,8 @@
     <url-pattern>/chain</url-pattern>
     <url-pattern>/LongerChain</url-pattern>
     <url-pattern>/count</url-pattern>
-    <url-pattern>/ReadJson</url-pattern>
+    <url-pattern>/get_degrees</url-pattern>
+     <url-pattern>/ReadJson</url-pattern>
   </servlet-mapping>
   <session-config>
     <session-timeout>30</session-timeout>
