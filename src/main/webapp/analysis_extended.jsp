@@ -172,12 +172,12 @@ select {
 					<div class="col-lg-12">
 						<div id="edge_data" style="border: 2px solid;">
 							<center>
-								<h2>Edge Distribution - Log Volume</h2>
+								<h2>Annual H-Index Comparison</h2>
 							</center>
 							<script type="text/javascript">
 								Hindex_histogram("#edge_data",
 										"csv/Hindex_year.csv",
-										"H-index");
+										"H-Index");
 							</script>
 						</div>
 					</div>
@@ -187,10 +187,10 @@ select {
 					<div class="col-lg-12">
 						<div id="cc_data" style="border: 2px solid;">
 							<center>
-								<h2>Clustering Coefficient - Log Volume Data</h2>
+								<h2>Quarterly H-Index Comparison</h2>
 							</center>
 							<script type="text/javascript">
-								Hindex_histogram("#cc_data","csv/Hindex_quarter.csv","Clustering Coefficient");
+								Hindex_histogram("#cc_data","csv/Hindex_quarter.csv","H-Index");
 							</script>
 						</div>
 					</div>
