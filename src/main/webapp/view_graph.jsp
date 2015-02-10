@@ -58,7 +58,7 @@
 		#dialog-link span.ui-icon {
 			margin: 0 5px 0 0;
 			position: absolute;
-			left: .2em;1
+			left: .2em;
 			top: 50%;
 			margin-top: -8px;
 		}
@@ -113,8 +113,8 @@
             </div>
            <div class="collapse navbar-collapse navbar-ex1-collapse">
                <ul class="nav navbar-nav side-nav">
-					<li class="active"><a href="index.jsp"><i
-							class="fa fa-fw fa-dashboard"></i> GC Visualizer</a></li>
+					<!-- <li class="active"><a href="index.jsp"><i
+							class="fa fa-fw fa-dashboard"></i> GC Visualizer</a></li> -->
 					<li><a ><i class="fa fa-fw fa-arrows-v"></i>
 							GC-Analysis </a>
 						<ul id="accordion">
@@ -136,8 +136,8 @@
                        </li>
                        <li><a href="DataAnalysis.jsp"><i class="fa fa-fw fa-table"></i>
                             Data-Analysis</a></li>
-                       <li><a href="#"><i class="fa fa-fw fa-file"></i>
-                            More About</a></li>
+                       <li><a href="analysis_extended.jsp"><i class="fa fa-fw fa-file"></i>
+                                Extended Analysis</a></li>
                             
                		   </ul>
            </div>

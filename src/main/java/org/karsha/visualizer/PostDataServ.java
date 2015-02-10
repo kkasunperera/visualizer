@@ -345,7 +345,7 @@ public class PostDataServ extends HttpServlet {
 			out.print(Obj.toString());
 			out.close();
 
-		} else if (userPath.equals("/chain")) {
+		} else if (userPath.equals("/chain1")) {
 			logger.info("userPath is " + userPath);
 			PrintWriter out = response.getWriter();
 			int quater = Integer.parseInt(request.getParameter("Quater"));
@@ -398,6 +398,28 @@ public class PostDataServ extends HttpServlet {
 			
 			out.close();
 
+		} else if (userPath.equals("/get_degrees")) {
+			logger.info("userPath is " + userPath);
+			ArrayList<Integer> degrees= new ArrayList<Integer>();
+			PrintWriter out = response.getWriter();
+			
+			for (int i = 1; i < 5; i++) {
+				Links[] link = DirectedGraphDemoServ.link_filter(i, linkSet);
+				
+				DirectedGraph<Node, DefaultEdge> gg = DirectedGraphDemoServ
+						.createHrefGraph(nodeSet,
+								DirectedGraphDemoServ.link_filter(i, linkSet));
+				//out.println(i+" : "+DirectedGraphDemoServ.degree_get(gg, nodeSet));
+				degrees = DirectedGraphDemoServ.degree_get(gg, nodeSet);
+				for (int j = 0; j < degrees.size(); j++) {
+					if(j==degrees.size()-1)out.print(degrees.get(j));
+					else out.print(degrees.get(j)+",");
+					
+				}
+				out.println();
+				
+			}
+			
 		}		
 		else if(userPath.equals("/ReadJson")){
 			

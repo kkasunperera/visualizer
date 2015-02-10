@@ -76,6 +76,7 @@
             select {
                 width: 300px;
             }
+            
         </style>
     </head>
 
@@ -94,8 +95,8 @@
                 </div>
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav side-nav">
-                        <li class="active"><a href="index.jsp"><i
-                                    class="fa fa-fw fa-dashboard"></i> GCVisualizer</a></li>
+                      <!--   <li class="active"><a href="index.jsp"><i
+                                    class="fa fa-fw fa-dashboard"></i> GCVisualizer</a></li> -->
                         <li><a ><i class="fa fa-fw fa-arrows-v"></i>
                                 GC-Analysis </a>
                             <ul id="accordion">
@@ -116,9 +117,9 @@
 
                         </li>
                         <li><a href="DataAnalysis.jsp"><i class="fa fa-fw fa-table"></i>
-                                Data-Analysis</a></li>
-                        <li><a href=""><i class="fa fa-fw fa-file"></i>
-                                More About</a></li>
+                                Network Summary Statistics</a></li>
+                        <li><a href="analysis_extended.jsp"><i class="fa fa-fw fa-file"></i>
+                                Extended Analysis</a></li>
 
                     </ul>
                     <%--  <li><a href="javascript:;" data-toggle="collapse"
@@ -186,7 +187,7 @@
                             </ul>
                             </br>
                             <p><strong>Dataset</strong></br>
-                                We report on the period 2005 - 2013. The data is obtained from the following repositories:</br>
+                                We report on the period 2005 - 2012. The data is obtained from the following repositories:</br>
                                 <a href="http://www.crsp.com/">The Center for Research in Security Prices(CRSP) </a>Daily Equity Data</br>
                                 <a href="http://www.finra.org/industry/compliance/markettransparency/trace/">Trade Reporting and Compliance Engine (TRACE) </a> Daily Bond Data
                             </p>

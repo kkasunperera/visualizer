@@ -86,8 +86,8 @@ select {
 		</div>
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav side-nav">
-				<li class="active"><a href="index.jsp"><i
-						class="fa fa-fw fa-dashboard"></i> Visualizer</a></li>
+				<!-- <li class="active"><a href="index.jsp"><i
+						class="fa fa-fw fa-dashboard"></i> GC Visualizer</a></li> -->
 				<li><a><i class="fa fa-fw fa-arrows-v"></i> GC-Analysis </a>
 					<ul id="accordion">
 						<% for(int i = 2005;i < 2013;i++) {%>
@@ -115,7 +115,8 @@ select {
 						<%} %>
 					</ul></li>
 				<li><a href="DataAnalysis.jsp"><i class="fa fa-fw fa-table"></i>Data-Analysis</a></li>
-				<li><a href="#"><i class="fa fa-fw fa-file"></i> More About</a></li>
+				<li><a href="analysis_extended.jsp"><i class="fa fa-fw fa-file"></i>
+                                Extended Analysis</a></li>
 
 			</ul>
 		</div>
