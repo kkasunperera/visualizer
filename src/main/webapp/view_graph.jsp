@@ -227,7 +227,7 @@ text {
 									 <br />
 									  <div class="row">
 									 	<div class="col-lg-6" id="analyse_bar" width="500" height="50" "></div>
-                                        <canvas class="col-rg-6" id="graph_note" width="500" height="50" "></canvas>
+                                        <canvas class="col-rg-6" id="graph_note" width="500" height="75" "></canvas>
                                       </div>
                                       <div class="row">
                                       <div class="col-lg-6" id="analyse_bar1" width="500" height="50" "></div>
@@ -247,7 +247,7 @@ text {
 									   <div id="borderIn" style="border:2px solid;">
 									   
 									   <br />
-									   <canvas id="graph_note1" width="500" height="50" style="float: right">                                
+									   <canvas id="graph_note1" width="500" height="75" style="float: right">                                
                                         </canvas>
                                         &nbsp; Max Indegree:<l id="max_indegree"></l>
 									   		<script type="text/javascript">
@@ -281,7 +281,7 @@ text {
 							   <div class="tab-pane fade" id="outdegree">							  
 							      <div id="borderOut" style="border:2px solid;">
 							      	<br />
-									   <canvas id="graph_note2" width="500" height="50" style="float: right">                                
+									   <canvas id="graph_note2" width="500" height="75" style="float: right">                                
                                         </canvas>
                                         &nbsp; Max Outdegree:<l id="max_outdegree"></l>
 									   		<script type="text/javascript">
@@ -313,7 +313,7 @@ text {
 							   <div class="tab-pane fade" id="completeTriad">
 							   		<div id="borderCmp" style="border:2px solid;">	
 							   			<br>
-							   			<canvas id="graph_note3" width="500" height="50" style="float: right">                                
+							   			<canvas id="graph_note3" width="500" height="75" style="float: right">                                
                                         </canvas>
 							   			<script type="text/javascript">
 							   			var ctx2 = document.getElementById("graph_note3").getContext("2d");					                            
@@ -370,7 +370,7 @@ text {
 							   <div class="tab-pane fade" id="ImmediateCycle">
 							   		<div id="borderImcycle" style="border:2px solid;">	
 							   			<br>
-							   			<canvas id="graph_note5" width="500" height="50" style="float: right">                                
+							   			<canvas id="graph_note5" width="500" height="75" style="float: right">                                
                                         </canvas>
 							   			<script type="text/javascript">
 							   			var ctx4 = document.getElementById("graph_note5").getContext("2d");							   			

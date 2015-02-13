@@ -23,6 +23,18 @@ function Svgbase(){
     ctx.fillText("Bond", 214,14); 
     ctx.closePath();
     ctx.fill();
+    
+    ctx.fillStyle = "#2ca02c";
+    ctx.beginPath();
+    ctx.arc(200,60,8,0,2*Math.PI);
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.fillStyle = "#2ca02c";
+    ctx.beginPath();
+    ctx.fillText("Equity", 214,66); 
+    ctx.closePath();
+    ctx.fill();
 
     ctx.strokeStyle="#666";
     ctx.beginPath();
@@ -945,7 +957,7 @@ json.links.forEach(function(d) {
     	d3.select(this)
     		.style("stroke-width", "5px")
     		.style("stroke", "green");
-    	overall_anlys(all_obj,d.source.index,d.target.index);
+    	//overall_anlys(all_obj,d.source.index,d.target.index);
     }
         
     //edge mouseout function d is the current selection

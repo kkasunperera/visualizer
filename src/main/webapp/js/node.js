@@ -1,209 +1,326 @@
-var nodes = [ {
-	"group" : 1,
-	"nodeId" : "11",
-	"name" : "AgNatRes"
-}, {
-	"group" : 1,
-	"nodeId" : "21",
-	"name" : "Oil+"
-}, {
-	"group" : 1,
-	"nodeId" : "22",
-	"name" : "Util"
-}, {
-	"group" : 1,
-	"nodeId" : "23",
-	"name" : "Const"
-}, {
-	"group" : 1,
-	"nodeId" : "31",
-	"name" : "ManEdible"
-}, {
-	"group" : 1,
-	"nodeId" : "32",
-	"name" : "ManChem"
-}, {
-	"group" : 1,
-	"nodeId" : "33",
-	"name" : "ManElect"
-}, {
-	"group" : 1,
-	"nodeId" : "42",
-	"name" : "WholTr"
-}, {
-	"group" : 1,
-	"nodeId" : "44",
-	"name" : "Retail"
-}, {
-	"group" : 1,
-	"nodeId" : "45",
-	"name" : "Retail"
-}, {
-	"group" : 1,
-	"nodeId" : "48",
-	"name" : "Transport"
-}, {
-	"group" : 1,
-	"nodeId" : "49",
-	"name" : "Transport"
-}, {
-	"group" : 1,
-	"nodeId" : "51",
-	"name" : "Inf"
-}, {
-	"group" : 1,
-	"nodeId" : "52",
-	"name" : "FinIns"
-}, {
-	"group" : 1,
-	"nodeId" : "53",
-	"name" : "RealEst"
-}, {
-	"group" : 1,
-	"nodeId" : "54",
-	"name" : "ProfServ"
-}, {
-	"group" : 1,
-	"nodeId" : "55",
-	"name" : "Mgmt"
-}, {
-	"group" : 1,
-	"nodeId" : "56",
-	"name" : "Admin"
-}, {
-	"group" : 1,
-	"nodeId" : "61",
-	"name" : "Ed"
-}, {
-	"group" : 1,
-	"nodeId" : "62",
-	"name" : "HealthSoc"
-}, {
-	"group" : 1,
-	"nodeId" : "67",
-	"name" : "U"
-}, {
-	"group" : 1,
-	"nodeId" : "71",
-	"name" : "R&R"
-}, {
-	"group" : 1,
-	"nodeId" : "72",
-	"name" : "Travel"
-}, {
-	"group" : 1,
-	"nodeId" : "81",
-	"name" : "ServOther"
-}, {
-	"group" : 1,
-	"nodeId" : "92",
-	"name" : "PubAdmin"
-}, {
-	"group" : 1,
-	"nodeId" : "NA",
-	"name" : "NA"
-}, {
-	"group" : 2,
-	"nodeId" : "11",
-	"name" : "AgNatRes"
-}, {
-	"group" : 2,
-	"nodeId" : "21",
-	"name" : "Oil+"
-}, {
-	"group" : 2,
-	"nodeId" : "22",
-	"name" : "Util"
-}, {
-	"group" : 2,
-	"nodeId" : "23",
-	"name" : "Const"
-}, {
-	"group" : 2,
-	"nodeId" : "31",
-	"name" : "ManEdible"
-}, {
-	"group" : 2,
-	"nodeId" : "32",
-	"name" : "ManChem"
-}, {
-	"group" : 2,
-	"nodeId" : "33",
-	"name" : "ManElect"
-}, {
-	"group" : 2,
-	"nodeId" : "42",
-	"name" : "WholTr"
-}, {
-	"group" : 2,
-	"nodeId" : "44",
-	"name" : "Retail"
-}, {
-	"group" : 2,
-	"nodeId" : "45",
-	"name" : "Retail"
-}, {
-	"group" : 2,
-	"nodeId" : "48",
-	"name" : "Transport"
-}, {
-	"group" : 2,
-	"nodeId" : "49",
-	"name" : "Transport"
-}, {
-	"group" : 2,
-	"nodeId" : "51",
-	"name" : "Inf"
-}, {
-	"group" : 2,
-	"nodeId" : "52",
-	"name" : "FinIns"
-}, {
-	"group" : 2,
-	"nodeId" : "53",
-	"name" : "RealEst"
-}, {
-	"group" : 2,
-	"nodeId" : "54",
-	"name" : "ProfServ"
-}, {
-	"group" : 2,
-	"nodeId" : "55",
-	"name" : "Mgmt"
-}, {
-	"group" : 2,
-	"nodeId" : "56",
-	"name" : "Admin"
-}, {
-	"group" : 2,
-	"nodeId" : "61",
-	"name" : "Ed"
-}, {
-	"group" : 2,
-	"nodeId" : "62",
-	"name" : "HealthSoc"
-}, {
-	"group" : 2,
-	"nodeId" : "67",
-	"name" : "U"
-}, {
-	"group" : 2,
-	"nodeId" : "71",
-	"name" : "R&R"
-}, {
-	"group" : 2,
-	"nodeId" : "72",
-	"name" : "Travel"
-}, {
-	"group" : 2,
-	"nodeId" : "81",
-	"name" : "ServOther"
-}, {
-	"group" : 2,
-	"nodeId" : "92",
-	"name" : "PubAdmin"
-}, {
-	"group" : 2,
-	"nodeId" : "NA",
-	"name" : "NA"
-} ];
+//group = 0 for Bond-HighYield
+//group = 1 for Bond-InvGrade
+//group = 2 for Equity 
+var nodes =
+[
+  {
+    "group":1,
+    "nodeId":"11I",
+    "name":"AgNatRes"
+  },
+  {
+    "group":0,
+    "nodeId":"21H",
+    "name":"Oil+"
+  },
+  {
+    "group":1,
+    "nodeId":"21I",
+    "name":"Oil+"
+  },
+  {
+    "group":0,
+    "nodeId":"22H",
+    "name":"Util"
+  },
+  {
+    "group":1,
+    "nodeId":"22I",
+    "name":"Util"
+  },
+  {
+    "group":0,
+    "nodeId":"23H",
+    "name":"Const"
+  },
+  {
+    "group":1,
+    "nodeId":"23I",
+    "name":"Const"
+  },
+  {
+    "group":0,
+    "nodeId":"31H",
+    "name":"ManEdible"
+  },
+  {
+    "group":1,
+    "nodeId":"31I",
+    "name":"ManEdible"
+  },
+  {
+    "group":0,
+    "nodeId":"32H",
+    "name":"ManChem"
+  },
+  {
+    "group":1,
+    "nodeId":"32I",
+    "name":"ManChem"
+  },
+  {
+    "group":0,
+    "nodeId":"33H",
+    "name":"ManElect"
+  },
+  {
+    "group":1,
+    "nodeId":"33I",
+    "name":"ManElect"
+  },
+  {
+    "group":0,
+    "nodeId":"42H",
+    "name":"WholTr"
+  },
+  {
+    "group":1,
+    "nodeId":"42I",
+    "name":"WholTr"
+  },
+  {
+    "group":0,
+    "nodeId":"44H",
+    "name":"Retail"
+  },
+  {
+    "group":1,
+    "nodeId":"44I",
+    "name":"Retail"
+  },
+  {
+    "group":0,
+    "nodeId":"45H",
+    "name":"Retail"
+  },
+  {
+    "group":1,
+    "nodeId":"45I",
+    "name":"Retail"
+  },
+  {
+    "group":0,
+    "nodeId":"48H",
+    "name":"Transport"
+  },
+  {
+    "group":1,
+    "nodeId":"48I",
+    "name":"Transport"
+  },
+  {
+    "group":1,
+    "nodeId":"49I",
+    "name":"Transport"
+  },
+  {
+    "group":0,
+    "nodeId":"51H",
+    "name":"Info"
+  },
+  {
+    "group":1,
+    "nodeId":"51I",
+    "name":"Info"
+  },
+  {
+    "group":0,
+    "nodeId":"52H",
+    "name":"FinIns"
+  },
+  {
+    "group":1,
+    "nodeId":"52I",
+    "name":"FinIns"
+  },
+  {
+    "group":0,
+    "nodeId":"53H",
+    "name":"RealEst"
+  },
+  {
+    "group":1,
+    "nodeId":"53I",
+    "name":"RealEst"
+  },
+  {
+    "group":0,
+    "nodeId":"54H",
+    "name":"ProfServ"
+  },
+  {
+    "group":1,
+    "nodeId":"54I",
+    "name":"ProfServ"
+  },
+  {
+    "group":0,
+    "nodeId":"55H",
+    "name":"Mgmt"
+  },
+  {
+    "group":1,
+    "nodeId":"55I",
+    "name":"Mgmt"
+  },
+  {
+    "group":0,
+    "nodeId":"56H",
+    "name":"Admin"
+  },
+  {
+    "group":1,
+    "nodeId":"56I",
+    "name":"Admin"
+  },
+  {
+    "group":0,
+    "nodeId":"62H",
+    "name":"HealthSoc"
+  },
+  {
+    "group":1,
+    "nodeId":"62I",
+    "name":"HealthSoc"
+  },
+  {
+    "group":0,
+    "nodeId":"71H",
+    "name":"R&R"
+  },
+  {
+    "group":1,
+    "nodeId":"71I",
+    "name":"R&R"
+  },
+  {
+    "group":0,
+    "nodeId":"72H",
+    "name":"Travel"
+  },
+  {
+    "group":1,
+    "nodeId":"72I",
+    "name":"Travel"
+  },
+  {
+    "group":0,
+    "nodeId":"NAH",
+    "name":"NA"
+  },
+  {
+    "group":1,
+    "nodeId":"NAI",
+    "name":"NA"
+  },
+  {
+    "group":2,
+    "nodeId":"11",
+    "name":"AgNatRes"
+  },
+  {
+    "group":2,
+    "nodeId":"21",
+    "name":"Oil+"
+  },
+  {
+    "group":2,
+    "nodeId":"22",
+    "name":"Util"
+  },
+  {
+    "group":2,
+    "nodeId":"23",
+    "name":"Const"
+  },
+  {
+    "group":2,
+    "nodeId":"31",
+    "name":"ManEdible"
+  },
+  {
+    "group":2,
+    "nodeId":"32",
+    "name":"ManChem"
+  },
+  {
+    "group":2,
+    "nodeId":"33",
+    "name":"ManElect"
+  },
+  {
+    "group":2,
+    "nodeId":"42",
+    "name":"WholTr"
+  },
+  {
+    "group":2,
+    "nodeId":"44",
+    "name":"Retail"
+  },
+  {
+    "group":2,
+    "nodeId":"45",
+    "name":"Retail"
+  },
+  {
+    "group":2,
+    "nodeId":"48",
+    "name":"Transport"
+  },
+  {
+    "group":2,
+    "nodeId":"49",
+    "name":"Transport"
+  },
+  {
+    "group":2,
+    "nodeId":"51",
+    "name":"Info"
+  },
+  {
+    "group":2,
+    "nodeId":"52",
+    "name":"FinIns"
+  },
+  {
+    "group":2,
+    "nodeId":"53",
+    "name":"RealEst"
+  },
+  {
+    "group":2,
+    "nodeId":"54",
+    "name":"ProfServ"
+  },
+  {
+    "group":2,
+    "nodeId":"55",
+    "name":"Mgmt"
+  },
+  {
+    "group":2,
+    "nodeId":"56",
+    "name":"Admin"
+  },
+  {
+    "group":2,
+    "nodeId":"62",
+    "name":"HealthSoc"
+  },
+  {
+    "group":2,
+    "nodeId":"71",
+    "name":"R&R"
+  },
+  {
+    "group":2,
+    "nodeId":"72",
+    "name":"Travel"
+  },
+  {
+    "group":2,
+    "nodeId":"NA",
+    "name":"NA"
+  }
+];
