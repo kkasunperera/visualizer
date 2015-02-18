@@ -114,9 +114,9 @@ select {
 						</li>
 						<%} %>
 					</ul></li>
-				<li><a href="DataAnalysis.jsp"><i class="fa fa-fw fa-table"></i>Data-Analysis</a></li>
+				<li><a href="DataAnalysis.jsp"><i class="fa fa-fw fa-table"></i>Network Summary Statistics</a></li>
 				<li><a href="analysis_extended.jsp"><i class="fa fa-fw fa-file"></i>
-                                Extended Analysis</a></li>
+                                H-Index Analysis</a></li>
 
 			</ul>
 		</div>
