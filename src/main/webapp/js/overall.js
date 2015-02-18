@@ -1,4 +1,14 @@
+
+//fallowing function use for generate edge analysis 
+/*
+ * input parameter "all_obj include a entire edges json array and source and target show
+ * a particular edge for the analysis.
+ * the internal procedeure of the function is, it may filter the json array with that 
+ * pirticular source and edge and all the data of that array element put into a array called 
+ * "tempSet" and d3 module will generate a table with that array data. 
+ *  */
 var out_all,c=2005;
+
 function overall_anlys(all_obj,source,target){
 	
 	
