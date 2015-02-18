@@ -265,7 +265,7 @@ select {
 					</div>
 				</div>
 				<br></br>
-				<div class="row">
+				<!-- <div class="row">
 					<div class="col-lg-12">
 						<div id="repeat_cmp_triad" style="border: 2px solid;">
 							<center>
@@ -276,7 +276,7 @@ select {
 							</script>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			<!-- /.container-fluid -->
 

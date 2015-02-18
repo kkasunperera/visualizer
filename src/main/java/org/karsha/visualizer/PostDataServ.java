@@ -403,7 +403,7 @@ public class PostDataServ extends HttpServlet {
 			ArrayList<Integer> degrees= new ArrayList<Integer>();
 			PrintWriter out = response.getWriter();
 			
-			for (int i = 1; i < 5; i++) {
+			for (int i = 5; i < 6; i++) {
 				Links[] link = DirectedGraphDemoServ.link_filter(i, linkSet);
 				
 				DirectedGraph<Node, DefaultEdge> gg = DirectedGraphDemoServ
