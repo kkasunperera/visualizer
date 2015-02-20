@@ -957,6 +957,7 @@ json.links.forEach(function(d) {
     	d3.select(this)
     		.style("stroke-width", "5px")
     		.style("stroke", "green");
+    	// fallowing js function is for edge analysis module 
     	//overall_anlys(all_obj,d.source.index,d.target.index);
     }
         
