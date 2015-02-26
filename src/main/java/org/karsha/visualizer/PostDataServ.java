@@ -473,16 +473,17 @@ public class PostDataServ extends HttpServlet {
 						incompleted_traid_count_arry.add(DirectedGraphDemoServ.InCompleteTriad_count(gg, nodeSet));
 						cc_count_arry.add(DirectedGraphDemoServ.clusteringCoefficient(gg,nodeSet, linkSet));
 					}
-					
-					out.println("edges count : " +edges_count_arry);
-					out.println("completed traid : " +completed_traid_count_arry);
-					out.println("incompleted traid : " +incompleted_traid_count_arry);
-					out.println("cc value : " +cc_count_arry);
-					
+										
 					out.println();
 				}
 				br.close();	
 			}
+			out.println("edges count : " +edges_count_arry);
+			out.println("completed traid : " +completed_traid_count_arry);
+			out.println("incompleted traid : " +incompleted_traid_count_arry);
+			out.println("cc value : " +cc_count_arry);
+			
+			//out.println("lengths: "+edges_count_arry.size()+" "+completed_traid_count_arry.size());
 			
 			
 		}
