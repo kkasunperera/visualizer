@@ -104,12 +104,13 @@ public class PostDataServ extends HttpServlet {
 		 * */
 		if (userPath.equals("/PostDataServ")) {
 			logger.info("userPath is " + userPath);
-
+			PrintWriter out = response.getWriter();
 			InputStream s = request.getInputStream();
 			BufferedReader br = new BufferedReader(new InputStreamReader(s));
 
 			String o = "";
 			o = br.readLine();
+			
 			System.out.println(o);
 
 			ObjectMapper mapper = new ObjectMapper();
@@ -422,7 +423,12 @@ public class PostDataServ extends HttpServlet {
 			
 		}		
 		else if(userPath.equals("/ReadJson")){
-			
+			PrintWriter out = response.getWriter();
+			ArrayList<Integer> edges_count_arry = new ArrayList<Integer>();
+			ArrayList<Integer> completed_traid_count_arry = new ArrayList<Integer>();
+			ArrayList<Integer> incompleted_traid_count_arry = new ArrayList<Integer>();
+			ArrayList<Double> cc_count_arry = new ArrayList<Double>();
+			Links[] set = null;
 			/*iterating over all years*/			
 			for (int i = 2005; i < 2013; i++) {
 				String filePath = "/json/data"+i+".json";
@@ -446,17 +452,38 @@ public class PostDataServ extends HttpServlet {
 				
 				/*mapping the json string to chuncks*/
 				ObjectMapper mapper = new ObjectMapper();
-				JsonNode root = mapper.readTree(Jstring);			
-				JsonNode linkObj = root.get("links");
+				JsonNode root = mapper.readTree(Jstring);	
+				JsonNode linkObj = root.get("links");			
 				
 				/*reads the links array and assgning value*/
 				if(linkObj != null){
-				Links[] set= mapper.readValue(linkObj, Links[].class);
+				set = mapper.readValue(linkObj, Links[].class);
 					System.out.println(filePath+" "+set.length);
+					//System.out.println(linkSet.length);
+					
+					for (int k = 0; k < 6; k++) {
+						Links[] link = DirectedGraphDemoServ.link_filter(k, set);
+						edges_count_arry.add(link.length);
+						
+						DirectedGraph<Node, DefaultEdge> gg = DirectedGraphDemoServ
+								.createHrefGraph(nodeSet,
+										DirectedGraphDemoServ.link_filter(k, linkSet));
+						
+						completed_traid_count_arry.add(DirectedGraphDemoServ.CompleteTriad_count(gg, nodeSet));
+						incompleted_traid_count_arry.add(DirectedGraphDemoServ.InCompleteTriad_count(gg, nodeSet));
+						cc_count_arry.add(DirectedGraphDemoServ.clusteringCoefficient(gg,nodeSet, linkSet));
+					}
+					
+					out.println("edges count : " +edges_count_arry);
+					out.println("completed traid : " +completed_traid_count_arry);
+					out.println("incompleted traid : " +incompleted_traid_count_arry);
+					out.println("cc value : " +cc_count_arry);
+					
+					out.println();
 				}
-								
-				br.close();
-			}						
+				br.close();	
+			}
+			
 			
 		}
 
