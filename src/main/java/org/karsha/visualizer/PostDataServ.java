@@ -382,7 +382,7 @@ public class PostDataServ extends HttpServlet {
 			
 			
 			
-			for (int i = 0; i < 6; i++) {
+			for (int i = 1; i < 6; i++) {
 				Links[] link = DirectedGraphDemoServ.link_filter(i, linkSet);
 				edges_count_arry.add(link.length);
 				
@@ -464,37 +464,49 @@ public class PostDataServ extends HttpServlet {
 					System.out.println(filePath+" "+set.length);
 					//System.out.println(linkSet.length);
 					
-					for (int k = 0; k < 6; k++) {
+					for (int k = 1; k < 6; k++) {
 						Links[] link = DirectedGraphDemoServ.link_filter(k, set);
 						edges_count_arry.add(link.length);
 						
 						DirectedGraph<Node, DefaultEdge> gg = DirectedGraphDemoServ
 								.createHrefGraph(nodeSet,
-										DirectedGraphDemoServ.link_filter(k, linkSet));
+										DirectedGraphDemoServ.link_filter(k, link));
 						
 						completed_traid_count_arry.add(DirectedGraphDemoServ.CompleteTriad_count(gg, nodeSet));
 						incompleted_traid_count_arry.add(DirectedGraphDemoServ.InCompleteTriad_count(gg, nodeSet));
-						cc_count_arry.add(DirectedGraphDemoServ.clusteringCoefficient(gg,nodeSet, linkSet));
+						cc_count_arry.add(DirectedGraphDemoServ.clusteringCoefficient(gg,nodeSet, link));
+						
+						
 					}
-										
-					out.println();
+									
+					
 				}
+				
 				br.close();	
 			}
-			
 			String UpdatefilePath = "/csv/test.csv";
 			String path1 = request.getServletContext().getRealPath(UpdatefilePath);
 			
-			out.println(path1);
+			
 			BufferedWriter wr = new BufferedWriter(new FileWriter(path1));
 			String header = "State,Quarter-1,Quarter-2,Quarter-3,Quarter-4,Annual";
 			
-			for (int i = 0; i <9; i++) {
-				String yr = "Year - "+(2005+i)+",";
-					
-			}
+			//out.println("lllll : "+completed_traid_count_arry.size());
 			
-			wr.write();
+			String lin = header+"\n";
+			for (int i = 0; i < 8; i++) {
+				lin = lin + "Year-"+(2005+i);
+				for (int j = 0; j < 5; j++) {
+					lin = lin +","+ completed_traid_count_arry.get(i*5+j);
+				}
+				lin = lin +"\n";
+				
+			}
+			out.println(lin);
+			
+			//wr.write(completed_traid_count_arry.toString());
+			
+			
 			wr.close();
 			
 			out.println("edges count : " +edges_count_arry);
