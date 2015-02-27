@@ -1,7 +1,9 @@
 package org.karsha.visualizer;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,6 +22,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -478,6 +481,22 @@ public class PostDataServ extends HttpServlet {
 				}
 				br.close();	
 			}
+			
+			String UpdatefilePath = "/csv/test.csv";
+			String path1 = request.getServletContext().getRealPath(UpdatefilePath);
+			
+			out.println(path1);
+			BufferedWriter wr = new BufferedWriter(new FileWriter(path1));
+			String header = "State,Quarter-1,Quarter-2,Quarter-3,Quarter-4,Annual";
+			
+			for (int i = 0; i <9; i++) {
+				String yr = "Year - "+(2005+i)+",";
+					
+			}
+			
+			wr.write();
+			wr.close();
+			
 			out.println("edges count : " +edges_count_arry);
 			out.println("completed traid : " +completed_traid_count_arry);
 			out.println("incompleted traid : " +incompleted_traid_count_arry);
