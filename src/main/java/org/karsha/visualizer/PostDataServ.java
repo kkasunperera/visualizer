@@ -486,12 +486,16 @@ public class PostDataServ extends HttpServlet {
 			}
 			String UpdatefilePath = "/csv/test.csv";
 			String path1 = request.getServletContext().getRealPath(UpdatefilePath);
-			
-			
-			BufferedWriter wr = new BufferedWriter(new FileWriter(path1));
 			String header = "State,Quarter-1,Quarter-2,Quarter-3,Quarter-4,Annual";
 			
-			//out.println("lllll : "+completed_traid_count_arry.size());
+			overall_dataUpdate ow = new overall_dataUpdate();
+			ow.write_it(path1, header, completed_traid_count_arry);
+			
+			/*
+			BufferedWriter wr = new BufferedWriter(new FileWriter(path1));
+			
+			
+		
 			
 			String lin = header+"\n";
 			for (int i = 0; i < 8; i++) {
@@ -502,12 +506,12 @@ public class PostDataServ extends HttpServlet {
 				lin = lin +"\n";
 				
 			}
-			out.println(lin);
-			
-			//wr.write(completed_traid_count_arry.toString());
+			out.println(lin);*/
 			
 			
-			wr.close();
+			
+			
+			
 			
 			out.println("edges count : " +edges_count_arry);
 			out.println("completed traid : " +completed_traid_count_arry);
