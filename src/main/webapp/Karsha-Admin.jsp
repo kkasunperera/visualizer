@@ -153,46 +153,40 @@ select {
 						</ol>
 					</div>
 				</div>
-				<!-- /.row -->
+				<script type="text/javascript">
+				function a() {
+					 var win = window.open("ReadJson", '_blank',false);
+					 setInterval(function(){win.close();},2500);
+					 
+					 document.getElementById("d_up").innerHTML = "Data Updated !!";
+				}
+				</script>
 
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="alert alert-info alert-dismissable">
-							<button type="button" class="close" data-dismiss="alert"
-								aria-hidden="true">&times;</button>
-							<i class="fa fa-info-circle"></i> <strong>Like SB Admin?</strong>
-							Try out <a
-								href="http://startbootstrap.com/template-overviews/sb-admin-2"
-								class="alert-link">SB Admin 2</a> for additional features!
-						</div>
-					</div>
-				</div>
 				<!-- /.row -->
-
 				<div class="row">
 					<div class="col-lg-3 col-md-6">
-						<div class="panel panel-primary">
+						<div class="panel panel-primary" onclick="a();">
 							<div class="panel-heading">
 								<div class="row">
 									<div class="col-xs-3">
-										<i class="fa fa-comments fa-5x"></i>
+										<i class="fa fa-info fa-5x"></i>
 									</div>
-									<div class="col-xs-9 text-right">
-										<div class="huge">26</div>
-										<div>New Comments!</div>
+									<div class="col-xs-9 text-right" id="data_update" >
+										<div class="huge">Data</div>
+										<div>Update overall Data</div>
 									</div>
 								</div>
 							</div>
-							<a href="#">
 								<div class="panel-footer">
-									<span class="pull-left">View Details</span> <span
-										class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+									<span class="pull-left"><p id="d_up">Update data</p></span> <span
+										class="pull-right"><i class="fa fa-arrow-circle-left"></i></span>
 									<div class="clearfix"></div>
 								</div>
-							</a>
 						</div>
 					</div>
-					<div class="col-lg-3 col-md-6">
+					
+					
+				<!-- 	<div class="col-lg-3 col-md-6">
 						<div class="panel panel-green">
 							<div class="panel-heading">
 								<div class="row">
@@ -257,7 +251,9 @@ select {
 								</div>
 							</a>
 						</div>
-					</div>
+					</div> -->
+					
+					
 				</div>
 				<div class="row">
 					<br />
