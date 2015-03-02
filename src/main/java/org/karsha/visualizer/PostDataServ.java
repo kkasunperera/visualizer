@@ -484,34 +484,13 @@ public class PostDataServ extends HttpServlet {
 				
 				br.close();	
 			}
-			String UpdatefilePath = "/csv/test.csv";
-			String path1 = request.getServletContext().getRealPath(UpdatefilePath);
+			
 			String header = "State,Quarter-1,Quarter-2,Quarter-3,Quarter-4,Annual";
 			
-			overall_dataUpdate ow = new overall_dataUpdate();
-			ow.write_it(path1, header, completed_traid_count_arry);
-			
-			/*
-			BufferedWriter wr = new BufferedWriter(new FileWriter(path1));
-			
-			
-		
-			
-			String lin = header+"\n";
-			for (int i = 0; i < 8; i++) {
-				lin = lin + "Year-"+(2005+i);
-				for (int j = 0; j < 5; j++) {
-					lin = lin +","+ completed_traid_count_arry.get(i*5+j);
-				}
-				lin = lin +"\n";
-				
-			}
-			out.println(lin);*/
-			
-			
-			
-			
-			
+			overall_data_update(request.getServletContext().getRealPath("/csv/cc_overall_data.csv"),header,cc_count_arry);
+			overall_data_update(request.getServletContext().getRealPath("/csv/comTraid_overall_data.csv"),header,completed_traid_count_arry);
+			overall_data_update(request.getServletContext().getRealPath("/csv/edges_overall_data.csv"),header,edges_count_arry);
+			overall_data_update(request.getServletContext().getRealPath("/csv/incomTraid_overall_data.csv"),header,incompleted_traid_count_arry);
 			
 			out.println("edges count : " +edges_count_arry);
 			out.println("completed traid : " +completed_traid_count_arry);
@@ -523,6 +502,12 @@ public class PostDataServ extends HttpServlet {
 			
 		}
 
+	}
+	
+	public static void overall_data_update(String path1,String header, ArrayList<?> arr) {
+		
+		overall_dataUpdate ow = new overall_dataUpdate();
+		ow.write_it(path1, header, arr);
 	}
 
 }
