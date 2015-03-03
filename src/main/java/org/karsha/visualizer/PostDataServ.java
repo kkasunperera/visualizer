@@ -1,7 +1,9 @@
 package org.karsha.visualizer;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,6 +22,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -104,12 +107,13 @@ public class PostDataServ extends HttpServlet {
 		 * */
 		if (userPath.equals("/PostDataServ")) {
 			logger.info("userPath is " + userPath);
-
+			PrintWriter out = response.getWriter();
 			InputStream s = request.getInputStream();
 			BufferedReader br = new BufferedReader(new InputStreamReader(s));
 
 			String o = "";
 			o = br.readLine();
+			
 			System.out.println(o);
 
 			ObjectMapper mapper = new ObjectMapper();
@@ -378,7 +382,7 @@ public class PostDataServ extends HttpServlet {
 			
 			
 			
-			for (int i = 0; i < 6; i++) {
+			for (int i = 1; i < 6; i++) {
 				Links[] link = DirectedGraphDemoServ.link_filter(i, linkSet);
 				edges_count_arry.add(link.length);
 				
@@ -422,7 +426,12 @@ public class PostDataServ extends HttpServlet {
 			
 		}		
 		else if(userPath.equals("/ReadJson")){
-			
+			PrintWriter out = response.getWriter();
+			ArrayList<Integer> edges_count_arry = new ArrayList<Integer>();
+			ArrayList<Integer> completed_traid_count_arry = new ArrayList<Integer>();
+			ArrayList<Integer> incompleted_traid_count_arry = new ArrayList<Integer>();
+			ArrayList<Double> cc_count_arry = new ArrayList<Double>();
+			Links[] set = null;
 			/*iterating over all years*/			
 			for (int i = 2005; i < 2013; i++) {
 				String filePath = "/json/data"+i+".json";
@@ -446,20 +455,59 @@ public class PostDataServ extends HttpServlet {
 				
 				/*mapping the json string to chuncks*/
 				ObjectMapper mapper = new ObjectMapper();
-				JsonNode root = mapper.readTree(Jstring);			
-				JsonNode linkObj = root.get("links");
+				JsonNode root = mapper.readTree(Jstring);	
+				JsonNode linkObj = root.get("links");			
 				
 				/*reads the links array and assgning value*/
 				if(linkObj != null){
-				Links[] set= mapper.readValue(linkObj, Links[].class);
+				set = mapper.readValue(linkObj, Links[].class);
 					System.out.println(filePath+" "+set.length);
+					//System.out.println(linkSet.length);
+					
+					for (int k = 1; k < 6; k++) {
+						Links[] link = DirectedGraphDemoServ.link_filter(k, set);
+						edges_count_arry.add(link.length);
+						
+						DirectedGraph<Node, DefaultEdge> gg = DirectedGraphDemoServ
+								.createHrefGraph(nodeSet,
+										DirectedGraphDemoServ.link_filter(k, link));
+						
+						completed_traid_count_arry.add(DirectedGraphDemoServ.CompleteTriad_count(gg, nodeSet));
+						incompleted_traid_count_arry.add(DirectedGraphDemoServ.InCompleteTriad_count(gg, nodeSet));
+						cc_count_arry.add(DirectedGraphDemoServ.clusteringCoefficient(gg,nodeSet, link));
+						
+						
+					}
+									
+					
 				}
-								
-				br.close();
-			}						
+				
+				br.close();	
+			}
+			
+			String header = "State,Quarter-1,Quarter-2,Quarter-3,Quarter-4,Annual";
+			
+			overall_data_update(request.getServletContext().getRealPath("/csv/cc_overall_data.csv"),header,cc_count_arry);
+			overall_data_update(request.getServletContext().getRealPath("/csv/comTraid_overall_data.csv"),header,completed_traid_count_arry);
+			overall_data_update(request.getServletContext().getRealPath("/csv/edges_overall_data.csv"),header,edges_count_arry);
+			overall_data_update(request.getServletContext().getRealPath("/csv/incomTraid_overall_data.csv"),header,incompleted_traid_count_arry);
+			
+			out.println("edges count : " +edges_count_arry);
+			out.println("completed traid : " +completed_traid_count_arry);
+			out.println("incompleted traid : " +incompleted_traid_count_arry);
+			out.println("cc value : " +cc_count_arry);
+			
+			//out.println("lengths: "+edges_count_arry.size()+" "+completed_traid_count_arry.size());
+			
 			
 		}
 
+	}
+	
+	public static void overall_data_update(String path1,String header, ArrayList<?> arr) {
+		
+		overall_dataUpdate ow = new overall_dataUpdate();
+		ow.write_it(path1, header, arr);
 	}
 
 }
