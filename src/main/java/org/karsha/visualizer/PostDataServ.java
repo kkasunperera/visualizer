@@ -421,7 +421,13 @@ public class PostDataServ extends HttpServlet {
 					
 				}
 				out.println();
-				
+				DBconnector dbCon = new DBconnector();
+				try {
+					dbCon.dbConnect();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 		}		
