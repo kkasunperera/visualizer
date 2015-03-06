@@ -12,6 +12,10 @@
     <servlet-name>PostData</servlet-name>
     <servlet-class>org.karsha.visualizer.PostDataServ</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>overallData_serve</servlet-name>
+    <servlet-class>org.karsha.visualizer.overallData_serve</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>PostData</servlet-name>
     <url-pattern>/PostDataServ</url-pattern>
@@ -25,8 +29,13 @@
     <url-pattern>/LongerChain</url-pattern>
     <url-pattern>/count</url-pattern>
     <url-pattern>/get_degrees</url-pattern>
-     <url-pattern>/ReadJson</url-pattern>
+    <url-pattern>/ReadJson</url-pattern>
   </servlet-mapping>
+   <servlet-mapping>
+     <servlet-name>overallData_serve</servlet-name>
+     <url-pattern>/db</url-pattern>
+  </servlet-mapping>
+ 
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>

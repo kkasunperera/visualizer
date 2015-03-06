@@ -22,6 +22,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
+import org.json.JSONArray;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -421,13 +422,13 @@ public class PostDataServ extends HttpServlet {
 					
 				}
 				out.println();
-				DBconnector dbCon = new DBconnector();
+				/*DBconnector dbCon = new DBconnector();
 				try {
 					dbCon.dbConnect();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}*/
 			}
 			
 		}		
