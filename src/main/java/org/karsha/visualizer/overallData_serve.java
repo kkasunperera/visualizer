@@ -49,16 +49,14 @@ public class overallData_serve extends HttpServlet {
 		
 		DBconnector dbCon = new DBconnector();
 		PrintWriter out = response.getWriter();
-		Gson gson = new Gson();
-		System.out.println("000000000000000000000000000");
-		
+				
 		if(userPath.equals("/db")){
 	    
 			try {
 				String sql = "SELECT * FROM `year`";
 				JSONArray data_ar = dbCon.dbConnect(sql);
 				System.out.println("5555555555555555555555555");
-				
+				System.out.println(data_ar.toString());
 				out.write(data_ar.toString());
 				out.close();
 								

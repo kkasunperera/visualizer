@@ -154,5 +154,26 @@ var c1 = 1;
 }
 
 function db_overall_analysis(source,target) {
+
+	var node_name_source,node_name_target;
+	if (nodes[source].group ==1)node_name_source = "bond.";
+	if (nodes[source].group ==2)node_name_source = "equity.";
+	node_name_source = node_name_source + nodes[source].nodeId ;
+	
+	if (nodes[target].group ==1)node_name_target = "bond.";
+	if (nodes[target].group ==2)node_name_target = "equity.";
+	node_name_target = node_name_target + nodes[target].nodeId ;
+	
+	$.ajax({
+		  type: 'POST',
+		  url: "db",
+		  dataType: 'json',
+		  success: function(data,status) {
+			alert(data[0].p_value_2007);
+		  },
+		  error: function(data,error){alert(error);},
+		  async: false
+
+		});
 	
 }

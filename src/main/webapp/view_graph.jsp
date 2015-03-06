@@ -260,7 +260,7 @@ text {
 							   					  url: "Indegree?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>", 
 							   					  dataType: 'json',
 							   					  success: function(data,status) {//data.Links,data.nodes	
-							   						
+							   						 
 							   					  	document.getElementById("max_indegree").innerHTML = data.links.length;
 							   						var width = 1000,height = 900;		
 							   						//drawing the graph in canvas with given data.nodes array and data.links array
@@ -427,7 +427,7 @@ text {
 									   					  type: 'GET',
 									   					  url: "cc?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
 									   					  dataType: 'json',
-									   					  success: function(data,status) {
+									   					  success: function(data,status) {					
 									   						document.getElementById("cc_show").innerHTML = data.Clustering_C;
 									   					  },
 									   					  error: function(data,error){alert(error);},

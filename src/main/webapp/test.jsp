@@ -22,10 +22,20 @@
 <body>
 	<script>
 	$(document).ready(function(){
-		$.post("db",function(responce){
-			alert(responce);
-		});
-		
+		/* $.post("db",function(responce){
+			//alert(responce);
+		}); */
+		$.ajax({
+				  type: 'POST',
+				  url: "db",
+				  dataType: 'json',
+				  success: function(data,status) {
+					alert(data[0].p_value_2007);
+				  },
+				  error: function(data,error){alert(error);},
+				  async: false
+
+				}); 	
 		
 	});
 	

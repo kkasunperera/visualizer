@@ -959,6 +959,7 @@ json.links.forEach(function(d) {
     		.style("stroke", "green");
     	// fallowing js function is for edge analysis module 
     	//overall_anlys(all_obj,d.source.index,d.target.index);
+    	db_overall_analysis(d.source.index,d.target.index);
     }
         
     //edge mouseout function d is the current selection
