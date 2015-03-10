@@ -27,7 +27,7 @@
 		}); */
 		$.ajax({
 				  type: 'POST',
-				  url: "db",
+				  url: "db?source=1&target=3",
 				  dataType: 'json',
 				  success: function(data,status) {
 					alert(data[0].p_value_2007);
