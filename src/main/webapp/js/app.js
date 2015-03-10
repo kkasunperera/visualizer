@@ -838,6 +838,7 @@ function data_set(quart,json) {
     	for(var i = json.links.length-1; i--;){
     		if(json.links[i].year==0)json.links.splice(i,1);
     	}
+    	console.log("kk ;"+json.links.length);
         break;
 	}
 	//alert(json.links.length);
@@ -958,8 +959,8 @@ json.links.forEach(function(d) {
     		.style("stroke-width", "5px")
     		.style("stroke", "green");
     	// fallowing js function is for edge analysis module 
-    	//overall_anlys(all_obj,d.source.index,d.target.index);
-    	db_overall_analysis(d.source.index,d.target.index);
+    	overall_anlys(all_obj,d.source.index,d.target.index);
+    	//db_overall_analysis(d.source.index,d.target.index);
     }
         
     //edge mouseout function d is the current selection
