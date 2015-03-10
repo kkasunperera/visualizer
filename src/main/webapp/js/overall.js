@@ -18,13 +18,17 @@ function overall_anlys(all_obj,source,target){
 	
 	
 	var node_name_source,node_name_target;
-	if (nodes[source].group ==1)node_name_source = "bond.";
+	if (nodes[source].group ==1 |nodes[source].group ==0)node_name_source = "bond.";
 	if (nodes[source].group ==2)node_name_source = "equity.";
 	node_name_source = node_name_source + nodes[source].nodeId ;
 	
-	if (nodes[target].group ==1)node_name_target = "bond.";
+	if (nodes[target].group ==1|nodes[target].group ==0)node_name_target = "bond.";
 	if (nodes[target].group ==2)node_name_target = "equity.";
 	node_name_target = node_name_target + nodes[target].nodeId ;
+	
+	console.log("source :"+node_name_source+" target :"+node_name_target+"\n");
+	console.log(nodes[source].group)
+	
 	var dataset=[], tempSet= [],dataset1=[], tempSet1= [],blk_nameTemp =[],blk_nameTemp1 =[],blk_name =[],i;
 	for ( var i in all_obj) {
 		if(all_obj[i].causal_industry == node_name_source & all_obj[i].caused_industry == node_name_target){
@@ -153,3 +157,27 @@ var c1 = 1;
 		
 }
 
+function db_overall_analysis(source,target) {
+
+	var node_name_source,node_name_target;
+	if (nodes[source].group ==1)node_name_source = "bond.";
+	if (nodes[source].group ==2)node_name_source = "equity.";
+	node_name_source = node_name_source + nodes[source].nodeId ;
+	
+	if (nodes[target].group ==1)node_name_target = "bond.";
+	if (nodes[target].group ==2)node_name_target = "equity.";
+	node_name_target = node_name_target + nodes[target].nodeId ;
+	
+	$.ajax({
+		  type: 'POST',
+		  url: "db?source="+node_name_source+"&target="+node_name_target,
+		  dataType: 'json',
+		  success: function(data,status) {
+			//alert(data[0].p_value_2007);
+		  },
+		  error: function(data,error){alert(error);},
+		  async: false
+
+		});
+	
+}
