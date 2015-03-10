@@ -51,8 +51,11 @@ public class overallData_serve extends HttpServlet {
 		PrintWriter out = response.getWriter();
 				
 		if(userPath.equals("/db")){
-	    
-			try {
+			String source = request.getParameter("source");
+			String target = request.getParameter("target");
+			
+			System.out.println("s "+source+"ta"+target);
+			/*try {
 				String sql = "SELECT * FROM `year`";
 				JSONArray data_ar = dbCon.dbConnect(sql);
 				System.out.println("5555555555555555555555555");
@@ -63,7 +66,7 @@ public class overallData_serve extends HttpServlet {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 		
 		}
 	}
