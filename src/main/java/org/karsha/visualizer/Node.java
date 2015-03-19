@@ -10,8 +10,9 @@ package org.karsha.visualizer;
 public class Node {
 	
 	String group;
-	String nodeId;
+	String nodeid;
 	String name;
+	String description;
 	
 	public String getGroup() {
 		return group;
@@ -19,11 +20,11 @@ public class Node {
 	public void setGroup(String group) {
 		this.group = group;
 	}
-	public String getNodeId() {
-		return nodeId;
+	public String getNodeid() {
+		return nodeid;
 	}
-	public void setNodeId(String nodeId) {
-		this.nodeId = nodeId;
+	public void setNodeid(String nodeid) {
+		this.nodeid = nodeid;
 	}
 	public String getName() {
 		return name;
@@ -31,10 +32,17 @@ public class Node {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getdescription() {
+		return description;
+	}
+	public void setdescription(String description) {
+		this.description = description;
+	}
 	
 	@Override
 	public String toString() {
-		String node="\""+group+" "+nodeId+" "+name+"\"";
+		String node="\""+group+" "+nodeid+" "+name+"\"";
 		return node;
 	}
+	
 }
