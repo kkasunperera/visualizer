@@ -24,7 +24,6 @@ public class QueryDB {
 					obj.put(resultSet.getMetaData().getColumnLabel(i + 1)
 							.toLowerCase(), resultSet.getObject(i + 1));
 				}
-
 				jsonArray.put(obj);
 			}
 		} catch (SQLException e) {
