@@ -75,9 +75,9 @@ public class PostDataServ extends HttpServlet {
 		Connection connect = con.getConnection();
 		DBconnect.QueryDB qdb = new QueryDB();
 		
-		String q_gt = qdb.getFromDB("select * from nodes",connect).toString();
-	
+		String q_gt = qdb.getFromDB("select * from nodes",connect).toString();	
 		ObjectMapper mapper = new ObjectMapper();
+		
 		try {
 			nodeSet = mapper.readValue(q_gt,Node[].class);
 		} catch (JsonParseException e) {
@@ -91,45 +91,7 @@ public class PostDataServ extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		/*try {
-			JsonNode root = mapper.readTree(q_gt);
-			JsonNode nodes = root.get("nodes");
-			nodeSet = mapper.readValue(nodes, Node[].class);
-			System.out.println("ppppppppppppppppppppppppppppp :"+nodeSet.length);
-			
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
-		
-		
-		
-		
-		
-		
-		//System.out.println(json_str);
-		/* try {
-			Node[] nod = mapper.readValue(json_str,Node[].class);
-			System.out.println("kkkkkkkkkkkkkkkkkkkk : "+nod.length);
-		} catch (JsonParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
-		//get all nodes 
-		
-		//System.out.println(qdb.getFromDB("select * from nodes",connect).toString());
-		
+				
 	}
 
 	/**
@@ -191,7 +153,7 @@ public class PostDataServ extends HttpServlet {
 			JsonNode links = linkObj.get("links");
 
 			if (nodes != null && linkObj != null) {
-				nodeSet = mapper.readValue(nodes, Node[].class);
+				//nodeSet = mapper.readValue(nodes, Node[].class);
 				linkSet = mapper.readValue(links, Links[].class);
 				System.out.println("nodeset length " + nodeSet.length);
 				System.out.println("linkset length " + linkSet.length);
@@ -199,7 +161,7 @@ public class PostDataServ extends HttpServlet {
 				// System.out.println(linkSet[0].getQ3());
 
 				// this is for send node set data with link set as json
-				node = Arrays.asList(nodeSet);
+				//node = Arrays.asList(nodeSet);
 
 				g = DirectedGraphDemoServ.createHrefGraph(nodeSet, linkSet);
 				// linkChain = DirectedGraphDemoServ.LongerChain(g, nodeSet);
