@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,10 +20,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.JsonProcessingException;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 import org.json.JSONArray;
+
+import DBconnect.ConnectionPool;
+import DBconnect.QueryDB;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -63,6 +70,66 @@ public class PostDataServ extends HttpServlet {
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		logger.info("servlet initiating.....");
+		
+		DBconnect.ConnectionPool con = new ConnectionPool();
+		Connection connect = con.getConnection();
+		DBconnect.QueryDB qdb = new QueryDB();
+		
+		String q_gt = qdb.getFromDB("select * from nodes",connect).toString();
+	
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			nodeSet = mapper.readValue(q_gt,Node[].class);
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		/*try {
+			JsonNode root = mapper.readTree(q_gt);
+			JsonNode nodes = root.get("nodes");
+			nodeSet = mapper.readValue(nodes, Node[].class);
+			System.out.println("ppppppppppppppppppppppppppppp :"+nodeSet.length);
+			
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
+		
+		
+		
+		
+		
+		
+		//System.out.println(json_str);
+		/* try {
+			Node[] nod = mapper.readValue(json_str,Node[].class);
+			System.out.println("kkkkkkkkkkkkkkkkkkkk : "+nod.length);
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
+		//get all nodes 
+		
+		//System.out.println(qdb.getFromDB("select * from nodes",connect).toString());
+		
 	}
 
 	/**
