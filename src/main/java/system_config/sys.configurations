@@ -1,0 +1,7 @@
+#Fri Jan 17 22:37:45 MYT 2014
+
+#Mysql database configuarations 
+database=visualizer
+dbuser=root
+dbpassword=
+

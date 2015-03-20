@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -28,6 +29,7 @@ import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 import org.json.JSONArray;
 
+import system_config.R_sysConfig;
 import DBconnect.ConnectionPool;
 import DBconnect.QueryDB;
 
@@ -72,11 +74,13 @@ public class PostDataServ extends HttpServlet {
 		logger.info("servlet initiating.....");
 		
 		DBconnect.ConnectionPool con = new ConnectionPool();
-		Connection connect = con.getConnection();
+		Connection connect = null;
+		connect = con.getConnection();
 		DBconnect.QueryDB qdb = new QueryDB();
 		
 		String q_gt = qdb.getFromDB("select * from nodes",connect).toString();	
 		ObjectMapper mapper = new ObjectMapper();
+		
 		
 		try {
 			nodeSet = mapper.readValue(q_gt,Node[].class);
