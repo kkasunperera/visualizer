@@ -139,7 +139,34 @@ public class PostDataServ extends HttpServlet {
 		 * Also here initiate the graph from DirectedGraphDemoServ.Count the Triads when iniitiating.
 		 * 
 		 * */
-		if (userPath.equals("/PostDataServ")) {
+		
+		if(userPath.equals("/dataGet")){
+			DBconnect.ConnectionPool con = new ConnectionPool();
+			Connection connect = null;
+			connect = con.getConnection();
+			DBconnect.QueryDB qdb = new QueryDB();
+			
+			String Query = "select source,target from year where p_value_"+request.getParameter("year")+"=1";
+			
+			String q_gt = qdb.getFromDB(Query,connect).toString();	
+			ObjectMapper mapper = new ObjectMapper();
+			
+			
+			try {
+				linkSet = mapper.readValue(q_gt,Links[].class);
+				System.out.println("ooooooooooo :"+linkSet.length);
+			} catch (JsonParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if (userPath.equals("/PostDataServ")) {
 			logger.info("userPath is " + userPath);
 			PrintWriter out = response.getWriter();
 			InputStream s = request.getInputStream();
