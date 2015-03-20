@@ -8,9 +8,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -19,10 +21,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.JsonProcessingException;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 import org.json.JSONArray;
+
+import system_config.R_sysConfig;
+import DBconnect.ConnectionPool;
+import DBconnect.QueryDB;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -63,6 +72,30 @@ public class PostDataServ extends HttpServlet {
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		logger.info("servlet initiating.....");
+		
+		DBconnect.ConnectionPool con = new ConnectionPool();
+		Connection connect = null;
+		connect = con.getConnection();
+		DBconnect.QueryDB qdb = new QueryDB();
+		
+		String q_gt = qdb.getFromDB("select * from nodes",connect).toString();	
+		ObjectMapper mapper = new ObjectMapper();
+		
+		
+		try {
+			nodeSet = mapper.readValue(q_gt,Node[].class);
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+				
 	}
 
 	/**
@@ -124,7 +157,7 @@ public class PostDataServ extends HttpServlet {
 			JsonNode links = linkObj.get("links");
 
 			if (nodes != null && linkObj != null) {
-				nodeSet = mapper.readValue(nodes, Node[].class);
+				//nodeSet = mapper.readValue(nodes, Node[].class);
 				linkSet = mapper.readValue(links, Links[].class);
 				System.out.println("nodeset length " + nodeSet.length);
 				System.out.println("linkset length " + linkSet.length);
@@ -132,7 +165,7 @@ public class PostDataServ extends HttpServlet {
 				// System.out.println(linkSet[0].getQ3());
 
 				// this is for send node set data with link set as json
-				node = Arrays.asList(nodeSet);
+				//node = Arrays.asList(nodeSet);
 
 				g = DirectedGraphDemoServ.createHrefGraph(nodeSet, linkSet);
 				// linkChain = DirectedGraphDemoServ.LongerChain(g, nodeSet);
