@@ -459,6 +459,7 @@ text {
 
 							//load the nodes and links arrays
 							$(document).ready(function(){
+                                                             /*  the "name" parameter contains json file name corresponding to the clicked year*/
 								var filename =<%=name%>
 								
 								<% String baseUrl="\'"+request.getScheme() + "://" + request.getServerName() + ":" + Integer.toString(request.getServerPort()) + request.getContextPath()+"/"+"\'";%>
