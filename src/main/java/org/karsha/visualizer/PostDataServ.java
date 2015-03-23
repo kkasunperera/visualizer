@@ -72,18 +72,17 @@ public class PostDataServ extends HttpServlet {
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		logger.info("servlet initiating.....");
-		
+
 		DBconnect.ConnectionPool con = new ConnectionPool();
 		Connection connect = null;
 		connect = con.getConnection();
 		DBconnect.QueryDB qdb = new QueryDB();
-		
-		String q_gt = qdb.getFromDB("select * from nodes",connect).toString();	
+
+		String q_gt = qdb.getFromDB("select * from nodes", connect).toString();
 		ObjectMapper mapper = new ObjectMapper();
-		
-		
+
 		try {
-			nodeSet = mapper.readValue(q_gt,Node[].class);
+			nodeSet = mapper.readValue(q_gt, Node[].class);
 		} catch (JsonParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -94,8 +93,7 @@ public class PostDataServ extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-				
+
 	}
 
 	/**
@@ -112,8 +110,9 @@ public class PostDataServ extends HttpServlet {
 	 *      response)
 	 */
 	/*
-	 * doPost method contain set of servlet paths and invokes the method of DirectedGraphDemoServ class
-	 * */
+	 * doPost method contain set of servlet paths and invokes the method of
+	 * DirectedGraphDemoServ class
+	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
@@ -121,50 +120,52 @@ public class PostDataServ extends HttpServlet {
 				"request", "response" });
 
 		/**
-		 * userPath is Servlet path that to be invoked 
-		 * for example, if  /indegre excecuted the relevant method would invoke 
+		 * userPath is Servlet path that to be invoked for example, if /indegre
+		 * excecuted the relevant method would invoke
 		 * */
 		String userPath = request.getServletPath();
 
 		/* Gson library have been used */
 		Gson gson = new Gson();
-		
+
 		/**
-		 * PostDataServ is defined in web.xml file { all the user paths defined there }
-		 * servlet get inputstream from the ajax and read the data using GSON library
-		 * which separates the arryas and object from inputstrema data.In stream contain 
-		 * NODE ARRAY and LINKS ARRY as JSON format. Jackson mapper identified the nodes list and 
-		 * links list then put it into the nodeSet array and linkSet array which are used later
-		 * operations. 
-		 * Also here initiate the graph from DirectedGraphDemoServ.Count the Triads when iniitiating.
+		 * PostDataServ is defined in web.xml file { all the user paths defined
+		 * there } servlet get inputstream from the ajax and read the data using
+		 * GSON library which separates the arryas and object from inputstrema
+		 * data.In stream contain NODE ARRAY and LINKS ARRY as JSON format.
+		 * Jackson mapper identified the nodes list and links list then put it
+		 * into the nodeSet array and linkSet array which are used later
+		 * operations. Also here initiate the graph from
+		 * DirectedGraphDemoServ.Count the Triads when iniitiating.
 		 * 
 		 * */
-		
-		if(userPath.equals("/dataGet")){
+
+		if (userPath.equals("/dataGet")) {
 			DBconnect.ConnectionPool con = new ConnectionPool();
 			Connection connect = null;
 			connect = con.getConnection();
 			DBconnect.QueryDB qdb = new QueryDB();
 			String year = request.getParameter("year");
-			String Query = "select source,target from year where p_value_"+year+"=1";
-			
-			String q_gt = qdb.getFromDB(Query,connect).toString();	
+			String Query = "select source,target from year where p_value_"
+					+ year + "=1";
+
+			String q_gt = qdb.getFromDB(Query, connect).toString();
 			ObjectMapper mapper = new ObjectMapper();
 			response.setContentType("application/json");
 			PrintWriter out = response.getWriter();
-			
-			
+
 			try {
-				linkSet = mapper.readValue(q_gt,Links[].class);
+				linkSet = mapper.readValue(q_gt, Links[].class);
 				g = DirectedGraphDemoServ.createHrefGraph(nodeSet, linkSet);
-				
+
 				JsonObject Obj = new JsonObject();
 				JsonElement links = gson.toJsonTree(linkSet);
+				JsonElement nodes = gson.toJsonTree(nodeSet);
 				Obj.add("links", links);
+				Obj.add("nodes", nodes);
 				out.println(Obj.toString());
 				out.close();
-				
-				
+
 			} catch (JsonParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -175,8 +176,7 @@ public class PostDataServ extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		else if (userPath.equals("/PostDataServ")) {
+		} else if (userPath.equals("/PostDataServ")) {
 			logger.info("userPath is " + userPath);
 			PrintWriter out = response.getWriter();
 			InputStream s = request.getInputStream();
@@ -184,7 +184,7 @@ public class PostDataServ extends HttpServlet {
 
 			String o = "";
 			o = br.readLine();
-			
+
 			System.out.println(o);
 
 			ObjectMapper mapper = new ObjectMapper();
@@ -194,7 +194,7 @@ public class PostDataServ extends HttpServlet {
 			JsonNode links = linkObj.get("links");
 
 			if (nodes != null && linkObj != null) {
-				//nodeSet = mapper.readValue(nodes, Node[].class);
+				// nodeSet = mapper.readValue(nodes, Node[].class);
 				linkSet = mapper.readValue(links, Links[].class);
 				System.out.println("nodeset length " + nodeSet.length);
 				System.out.println("linkset length " + linkSet.length);
@@ -202,27 +202,30 @@ public class PostDataServ extends HttpServlet {
 				// System.out.println(linkSet[0].getQ3());
 
 				// this is for send node set data with link set as json
-				//node = Arrays.asList(nodeSet);
+				// node = Arrays.asList(nodeSet);
 
 				g = DirectedGraphDemoServ.createHrefGraph(nodeSet, linkSet);
 				// linkChain = DirectedGraphDemoServ.LongerChain(g, nodeSet);
-				linkCompleteTriad = DirectedGraphDemoServ.CompleteTriad(g, nodeSet);
-				linkIncomplete = DirectedGraphDemoServ.InCompleteTriad(g, nodeSet);
-				//DirectedGraphDemoServ.TriadInChain(g, nodeSet);
-				//DirectedGraphDemoServ.chainDepthTwo(g, nodeSet);
-								
+				linkCompleteTriad = DirectedGraphDemoServ.CompleteTriad(g,
+						nodeSet);
+				linkIncomplete = DirectedGraphDemoServ.InCompleteTriad(g,
+						nodeSet);
+				// DirectedGraphDemoServ.TriadInChain(g, nodeSet);
+				// DirectedGraphDemoServ.chainDepthTwo(g, nodeSet);
+
 			}
 			/**
-			 * when Indegree executed it wil return the set of link array where it calculated from graph
-			 * method findHighInDegree will be called according to quater or year, data also will be filtered
-			 * then convet it to GSON element. and that object will put to output stream.
-			 * the it will read from ajax in web pages.
+			 * when Indegree executed it wil return the set of link array where
+			 * it calculated from graph method findHighInDegree will be called
+			 * according to quater or year, data also will be filtered then
+			 * convet it to GSON element. and that object will put to output
+			 * stream. the it will read from ajax in web pages.
 			 * 
 			 * */
 		} else if (userPath.equals("/Indegree")) {
 			logger.info("userPath is " + userPath);
 
-			/* get quater id from url parameter*/
+			/* get quater id from url parameter */
 			int quater = Integer.parseInt(request.getParameter("Quater"));
 
 			DirectedGraph<Node, DefaultEdge> gg = DirectedGraphDemoServ
@@ -231,30 +234,37 @@ public class PostDataServ extends HttpServlet {
 			List<Links> link = DirectedGraphDemoServ.findHighInDegree(gg,
 					nodeSet);
 
-			/*set the application content to json type of response object*/
+			/* set the application content to json type of response object */
 			response.setContentType("application/json");
-			
-			/*get the writer object of response object for writing data as output stream*/
+
+			/*
+			 * get the writer object of response object for writing data as
+			 * output stream
+			 */
 			PrintWriter out = response.getWriter();
 
-			/*initiate GSON element for sharing data in a root*/
+			/* initiate GSON element for sharing data in a root */
 			JsonObject Obj = new JsonObject();
 
-			/*two json element for node set and link set and add it to root element*/
+			/*
+			 * two json element for node set and link set and add it to root
+			 * element
+			 */
 			JsonElement links = gson.toJsonTree(link);
 			JsonElement nodes = gson.toJsonTree(node);
 			Obj.add("links", links);
 			Obj.add("nodes", nodes);
 
-			/*writer writes the data in to stream*/
+			/* writer writes the data in to stream */
 			out.println(Obj.toString());
 			out.close();
-			
+
 			/**
-			 * when Outdegree executed it wil return the set of link array where it calculated from graph
-			 * method findHighOutDegree will be called according to quater or year, data also will be filtered
-			 * then convet it to GSON element. and that object will put to output stream.
-			 * the it will read from ajax in web pages.
+			 * when Outdegree executed it wil return the set of link array where
+			 * it calculated from graph method findHighOutDegree will be called
+			 * according to quater or year, data also will be filtered then
+			 * convet it to GSON element. and that object will put to output
+			 * stream. the it will read from ajax in web pages.
 			 * 
 			 * */
 		} else if (userPath.equals("/Outdegree")) {
@@ -281,24 +291,25 @@ public class PostDataServ extends HttpServlet {
 
 			out.println(Obj.toString());
 			out.close();
-			
+
 			/**
-			 * CompleteTriad executed the it will return set of links list object from calculated  which will
-			 * filter according to the quater or year and put it into the output stream.
-			 * Two GSON element will be seperated node set and links set.
+			 * CompleteTriad executed the it will return set of links list
+			 * object from calculated which will filter according to the quater
+			 * or year and put it into the output stream. Two GSON element will
+			 * be seperated node set and links set.
 			 * 
 			 * */
 		} else if (userPath.equals("/CompleteTriad")) {
 			logger.info("userPath is " + userPath);
 
 			int quater = Integer.parseInt(request.getParameter("Quater"));
-			
+
 			DirectedGraph<Node, DefaultEdge> gg = DirectedGraphDemoServ
 					.createHrefGraph(nodeSet,
 							DirectedGraphDemoServ.link_filter(quater, linkSet));
-			
-			//String year = request.getParameter("year");			
-			//DirectedGraphDemoServ.writeCSV(g, nodeSet, year);
+
+			// String year = request.getParameter("year");
+			// DirectedGraphDemoServ.writeCSV(g, nodeSet, year);
 
 			linkCompleteTriad = DirectedGraphDemoServ
 					.CompleteTriad(gg, nodeSet);
@@ -318,9 +329,11 @@ public class PostDataServ extends HttpServlet {
 			out.close();
 
 			/**
-			 * InCompleteTriad executed the it will return set of links list object from calculated  which will
-			 * filter according to the quater or year and put it into the output stream.
-			 * Two GSON element will be seperated node set and links set.it will be prited in output stream.
+			 * InCompleteTriad executed the it will return set of links list
+			 * object from calculated which will filter according to the quater
+			 * or year and put it into the output stream. Two GSON element will
+			 * be seperated node set and links set.it will be prited in output
+			 * stream.
 			 * 
 			 * */
 		} else if (userPath.equals("/IncompleteTriad")) {
@@ -344,10 +357,11 @@ public class PostDataServ extends HttpServlet {
 
 			out.println(Obj.toString());
 			out.close();
-			
+
 			/**
-			 * this will return set of immediate cycles of graph. which calculated from DirectedGraph.
-			 * node set and link set put two GSON element and put it to output stream.
+			 * this will return set of immediate cycles of graph. which
+			 * calculated from DirectedGraph. node set and link set put two GSON
+			 * element and put it to output stream.
 			 * 
 			 * */
 		} else if (userPath.equals("/ImmediateCycles")) {
@@ -377,8 +391,9 @@ public class PostDataServ extends HttpServlet {
 
 			/**
 			 * 
-			 * This will return the cluster coeffient of the graph. according to given quarter it can be read from 
-			 * ajax in web pages.*/
+			 * This will return the cluster coeffient of the graph. according to
+			 * given quarter it can be read from ajax in web pages.
+			 */
 		} else if (userPath.equals("/cc")) {
 			logger.info("userPath is " + userPath);
 			PrintWriter out = response.getWriter();
@@ -396,8 +411,9 @@ public class PostDataServ extends HttpServlet {
 			out.close();
 
 			/**
-			 * This will called set of chain already calculated of graph. links and nodes object is add to output stream
-			 * using servlet reponse object.
+			 * This will called set of chain already calculated of graph. links
+			 * and nodes object is add to output stream using servlet reponse
+			 * object.
 			 * 
 			 * */
 		} else if (userPath.equals("/chain")) {
@@ -438,8 +454,9 @@ public class PostDataServ extends HttpServlet {
 			out.close();
 
 			/**
-			 * here contains the set of data values of triads and number of edges contains in the graph and cluster 
-			 * coeffient of each year. and filtering all the data according to quater or year.
+			 * here contains the set of data values of triads and number of
+			 * edges contains in the graph and cluster coeffient of each year.
+			 * and filtering all the data according to quater or year.
 			 * 
 			 * */
 		} else if (userPath.equals("/count")) {
@@ -448,141 +465,155 @@ public class PostDataServ extends HttpServlet {
 			ArrayList<Integer> completed_traid_count_arry = new ArrayList<Integer>();
 			ArrayList<Integer> incompleted_traid_count_arry = new ArrayList<Integer>();
 			ArrayList<Double> cc_count_arry = new ArrayList<Double>();
-			
+
 			PrintWriter out = response.getWriter();
-			
-			
-			
+
 			for (int i = 1; i < 6; i++) {
 				Links[] link = DirectedGraphDemoServ.link_filter(i, linkSet);
 				edges_count_arry.add(link.length);
-				
+
 				DirectedGraph<Node, DefaultEdge> gg = DirectedGraphDemoServ
 						.createHrefGraph(nodeSet,
 								DirectedGraphDemoServ.link_filter(i, linkSet));
-				
-				completed_traid_count_arry.add(DirectedGraphDemoServ.CompleteTriad_count(gg, nodeSet));
-				incompleted_traid_count_arry.add(DirectedGraphDemoServ.InCompleteTriad_count(gg, nodeSet));
-				cc_count_arry.add(DirectedGraphDemoServ.clusteringCoefficient(gg,nodeSet, linkSet));
+
+				completed_traid_count_arry.add(DirectedGraphDemoServ
+						.CompleteTriad_count(gg, nodeSet));
+				incompleted_traid_count_arry.add(DirectedGraphDemoServ
+						.InCompleteTriad_count(gg, nodeSet));
+				cc_count_arry.add(DirectedGraphDemoServ.clusteringCoefficient(
+						gg, nodeSet, linkSet));
 			}
-			
-			out.println("edges count : " +edges_count_arry);
-			out.println("completed traid : " +completed_traid_count_arry);
-			out.println("incompleted traid : " +incompleted_traid_count_arry);
-			out.println("cc value : " +cc_count_arry);
-			
+
+			out.println("edges count : " + edges_count_arry);
+			out.println("completed traid : " + completed_traid_count_arry);
+			out.println("incompleted traid : " + incompleted_traid_count_arry);
+			out.println("cc value : " + cc_count_arry);
+
 			out.close();
 
 		} else if (userPath.equals("/get_degrees")) {
 			logger.info("userPath is " + userPath);
-			ArrayList<Integer> degrees= new ArrayList<Integer>();
+			ArrayList<Integer> degrees = new ArrayList<Integer>();
 			PrintWriter out = response.getWriter();
-			
+
 			for (int i = 5; i < 6; i++) {
 				Links[] link = DirectedGraphDemoServ.link_filter(i, linkSet);
-				
+
 				DirectedGraph<Node, DefaultEdge> gg = DirectedGraphDemoServ
 						.createHrefGraph(nodeSet,
 								DirectedGraphDemoServ.link_filter(i, linkSet));
-				//out.println(i+" : "+DirectedGraphDemoServ.degree_get(gg, nodeSet));
+				// out.println(i+" : "+DirectedGraphDemoServ.degree_get(gg,
+				// nodeSet));
 				degrees = DirectedGraphDemoServ.degree_get(gg, nodeSet);
 				for (int j = 0; j < degrees.size(); j++) {
-					if(j==degrees.size()-1)out.print(degrees.get(j));
-					else out.print(degrees.get(j)+",");
-					
+					if (j == degrees.size() - 1)
+						out.print(degrees.get(j));
+					else
+						out.print(degrees.get(j) + ",");
+
 				}
 				out.println();
-				/*DBconnector dbCon = new DBconnector();
-				try {
-					dbCon.dbConnect();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}*/
+				/*
+				 * DBconnector dbCon = new DBconnector(); try {
+				 * dbCon.dbConnect(); } catch (Exception e) { // TODO
+				 * Auto-generated catch block e.printStackTrace(); }
+				 */
 			}
-			
-		}		
-		else if(userPath.equals("/ReadJson")){
+
+		} else if (userPath.equals("/ReadJson")) {
 			PrintWriter out = response.getWriter();
 			ArrayList<Integer> edges_count_arry = new ArrayList<Integer>();
 			ArrayList<Integer> completed_traid_count_arry = new ArrayList<Integer>();
 			ArrayList<Integer> incompleted_traid_count_arry = new ArrayList<Integer>();
 			ArrayList<Double> cc_count_arry = new ArrayList<Double>();
 			Links[] set = null;
-			/*iterating over all years*/			
+			/* iterating over all years */
 			for (int i = 2005; i < 2013; i++) {
-				String filePath = "/json/data"+i+".json";
+				String filePath = "/json/data" + i + ".json";
 				String path = request.getServletContext().getRealPath(filePath);
-				//System.out.println(path);
-				
-				/*reading json file using buffered reader*/
+				// System.out.println(path);
+
+				/* reading json file using buffered reader */
 				BufferedReader br = new BufferedReader(new FileReader(path));
-				
-				/*string builder for appending ease*/
+
+				/* string builder for appending ease */
 				StringBuilder builder = new StringBuilder();
 				String line = "";
-				
-				/*read and appending each line*/
-				while((line=br.readLine()) != null){
+
+				/* read and appending each line */
+				while ((line = br.readLine()) != null) {
 					builder.append(line);
 				}
-				
-				//convert to stringbuilder to string
+
+				// convert to stringbuilder to string
 				String Jstring = builder.toString();
-				
-				/*mapping the json string to chuncks*/
+
+				/* mapping the json string to chuncks */
 				ObjectMapper mapper = new ObjectMapper();
-				JsonNode root = mapper.readTree(Jstring);	
-				JsonNode linkObj = root.get("links");			
-				
-				/*reads the links array and assgning value*/
-				if(linkObj != null){
-				set = mapper.readValue(linkObj, Links[].class);
-					System.out.println(filePath+" "+set.length);
-					//System.out.println(linkSet.length);
-					
+				JsonNode root = mapper.readTree(Jstring);
+				JsonNode linkObj = root.get("links");
+
+				/* reads the links array and assgning value */
+				if (linkObj != null) {
+					set = mapper.readValue(linkObj, Links[].class);
+					System.out.println(filePath + " " + set.length);
+					// System.out.println(linkSet.length);
+
 					for (int k = 1; k < 6; k++) {
-						Links[] link = DirectedGraphDemoServ.link_filter(k, set);
+						Links[] link = DirectedGraphDemoServ
+								.link_filter(k, set);
 						edges_count_arry.add(link.length);
-						
+
 						DirectedGraph<Node, DefaultEdge> gg = DirectedGraphDemoServ
-								.createHrefGraph(nodeSet,
-										DirectedGraphDemoServ.link_filter(k, link));
-						
-						completed_traid_count_arry.add(DirectedGraphDemoServ.CompleteTriad_count(gg, nodeSet));
-						incompleted_traid_count_arry.add(DirectedGraphDemoServ.InCompleteTriad_count(gg, nodeSet));
-						cc_count_arry.add(DirectedGraphDemoServ.clusteringCoefficient(gg,nodeSet, link));
-						
-						
+								.createHrefGraph(nodeSet, DirectedGraphDemoServ
+										.link_filter(k, link));
+
+						completed_traid_count_arry.add(DirectedGraphDemoServ
+								.CompleteTriad_count(gg, nodeSet));
+						incompleted_traid_count_arry.add(DirectedGraphDemoServ
+								.InCompleteTriad_count(gg, nodeSet));
+						cc_count_arry.add(DirectedGraphDemoServ
+								.clusteringCoefficient(gg, nodeSet, link));
+
 					}
-									
-					
+
 				}
-				
-				br.close();	
+
+				br.close();
 			}
-			
+
 			String header = "State,Quarter-1,Quarter-2,Quarter-3,Quarter-4,Annual";
-			
-			overall_data_update(request.getServletContext().getRealPath("/csv/cc_overall_data.csv"),header,cc_count_arry);
-			overall_data_update(request.getServletContext().getRealPath("/csv/comTraid_overall_data.csv"),header,completed_traid_count_arry);
-			overall_data_update(request.getServletContext().getRealPath("/csv/edges_overall_data.csv"),header,edges_count_arry);
-			overall_data_update(request.getServletContext().getRealPath("/csv/incomTraid_overall_data.csv"),header,incompleted_traid_count_arry);
-			
-			out.println("edges count : " +edges_count_arry);
-			out.println("completed traid : " +completed_traid_count_arry);
-			out.println("incompleted traid : " +incompleted_traid_count_arry);
-			out.println("cc value : " +cc_count_arry);
-			
-			//out.println("lengths: "+edges_count_arry.size()+" "+completed_traid_count_arry.size());
-			
-			
+
+			overall_data_update(
+					request.getServletContext().getRealPath(
+							"/csv/cc_overall_data.csv"), header, cc_count_arry);
+			overall_data_update(
+					request.getServletContext().getRealPath(
+							"/csv/comTraid_overall_data.csv"), header,
+					completed_traid_count_arry);
+			overall_data_update(
+					request.getServletContext().getRealPath(
+							"/csv/edges_overall_data.csv"), header,
+					edges_count_arry);
+			overall_data_update(
+					request.getServletContext().getRealPath(
+							"/csv/incomTraid_overall_data.csv"), header,
+					incompleted_traid_count_arry);
+
+			out.println("edges count : " + edges_count_arry);
+			out.println("completed traid : " + completed_traid_count_arry);
+			out.println("incompleted traid : " + incompleted_traid_count_arry);
+			out.println("cc value : " + cc_count_arry);
+
+			// out.println("lengths: "+edges_count_arry.size()+" "+completed_traid_count_arry.size());
+
 		}
 
 	}
-	
-	public static void overall_data_update(String path1,String header, ArrayList<?> arr) {
-		
+
+	public static void overall_data_update(String path1, String header,
+			ArrayList<?> arr) {
+
 		overall_dataUpdate ow = new overall_dataUpdate();
 		ow.write_it(path1, header, arr);
 	}
