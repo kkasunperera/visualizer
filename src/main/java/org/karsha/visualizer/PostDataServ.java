@@ -145,16 +145,26 @@ public class PostDataServ extends HttpServlet {
 			Connection connect = null;
 			connect = con.getConnection();
 			DBconnect.QueryDB qdb = new QueryDB();
-			
-			String Query = "select source,target from year where p_value_"+request.getParameter("year")+"=1";
+			String year = request.getParameter("year");
+			String Query = "select source,target from year where p_value_"+year+"=1";
 			
 			String q_gt = qdb.getFromDB(Query,connect).toString();	
 			ObjectMapper mapper = new ObjectMapper();
+			response.setContentType("application/json");
+			PrintWriter out = response.getWriter();
 			
 			
 			try {
 				linkSet = mapper.readValue(q_gt,Links[].class);
-				System.out.println("ooooooooooo :"+linkSet.length);
+				g = DirectedGraphDemoServ.createHrefGraph(nodeSet, linkSet);
+				
+				JsonObject Obj = new JsonObject();
+				JsonElement links = gson.toJsonTree(linkSet);
+				Obj.add("links", links);
+				out.println(Obj.toString());
+				out.close();
+				
+				
 			} catch (JsonParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
