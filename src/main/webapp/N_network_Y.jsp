@@ -1,31 +1,134 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>karsha</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
 
+<title>GCVisualizer - Karsha project</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
-
-<!-- MetisMenu CSS -->
-<link href="css/metisMenu.min.css" rel="stylesheet">
-
-<!-- Custom CSS -->
 <link href="css/sb-admin-2.css" rel="stylesheet">
-
-<!-- Custom Fonts -->
+<link href="css/plugins/morris.css" rel="stylesheet">
 <link href="font-awesome-4.1.0/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css">
-<script src="js/jquery.js"></script>
+    rel="stylesheet" type="text/css">
+<link href="css/jquery-ui.css" rel="stylesheet">
+<script src="js/jquery.1.9.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 <script src="js/function.js"></script>
 <script src="js/overall.js"></script>
 <script src="js/tracepaths.js"></script>
 <script src="js/node.js"></script>
 <script src="js/app.js"></script>
-<script src="js/d3.min.js"></script>
 
+<style type="text/css">
+		.demoHeaders {
+			margin-top: 2em;
+		}
+		#dialog-link {
+			padding: .4em 1em .4em 20px;
+			text-decoration: none;
+			position: relative;
+		}
+		
+		#dialog-link span.ui-icon {
+			margin: 0 5px 0 0;
+			position: absolute;
+			left: .2em;
+			top: 50%;
+			margin-top: -8px;
+		}
+		
+		#icons {
+			margin: 0;
+			padding: 0;
+		}
+		
+		#icons li {
+			margin: 2px;
+			position: relative;
+			padding: 4px 0;
+			cursor: pointer;
+			float: left;
+			list-style: none;
+		}
+		
+		#icons span.ui-icon {
+			float: left;
+			margin: 0 4px;
+		}
+		
+		.fakewindowcontain .ui-widget-overlay {
+			position: absolute;
+		}
+		
+		select {
+			width: 300px;
+	} 
+	label {
+    display: inline-block;
+    width: 5em;
+  }
+  table,td{border:1px solid green;border-collapse: collapse;}
+</style>
 </head>
+
+<body style="background-color: #e7e7e7">
+    <div id="wrapper">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.jsp">GC Visualizer - Karsha
+                    project</a>
+            </div>
+            <!-- /.navbar-header -->
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav navbar-nav side-nav">
+					<!-- <li class="active"><a href="index.jsp"><i
+							class="fa fa-fw fa-dashboard"></i> GC Visualizer</a></li> -->
+					<li><a ><i class="fa fa-fw fa-arrows-v"></i>
+							GC-Analysis </a>
+						<ul id="accordion">
+						<% for(int i = 2005;i < 2013;i++) {%>
+							<li>
+								<h3><a href="?filename=data<%=i%>.json&year=data<%=i%>.json&year=<%=i%>"><%=i%></a></h3>
+								<ul>
+									<li><a href="view_graph.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=0"><i class="fa fa-fw fa-table"></i> Overall </a></li>
+									<li><a href="view_graph.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=5"><i class="fa fa-fw fa-table"></i> Annual </a></li>
+									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=1"><i class="fa fa-fw fa-table"></i> Quarter 1</a></li>
+									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=2"><i class="fa fa-fw fa-table"></i> Quarter 2</a></li>
+									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=3"><i class="fa fa-fw fa-table"></i> Quarter 3</a></li>
+									<li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=4"><i class="fa fa-fw fa-table"></i> Quarter 4</a></li>
+								</ul>
+							</li>
+							<%} %>
+						</ul>               
+                
+                       </li>
+                       <li><a href="DataAnalysis.jsp"><i class="fa fa-fw fa-table"></i>
+                            Network Summary Statistics</a></li>
+                       <li><a href="analysis_extended.jsp"><i class="fa fa-fw fa-file"></i>
+                                H-Index Analysis</a></li>
+                            
+               		   </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+                        
+	<% 
+		String year = request.getParameter("year");		
+	%>
+    
 <style>
 
 
@@ -75,118 +178,324 @@ text {
     color: black;
 }
 </style>
-<body>
-<div id="wrapper">
+    
+  <div id="page-wrapper">
 
-       <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">Karsha</a>
-            </div>
-            <!-- /.navbar-header -->
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
-                        <li>
-                            <a class="active" href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="network.html"><i class="fa fa-table fa-fw"></i> Network</a>
-                        </li>
-                            <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Network Operations<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li><a href="#">ADD node<span class="fa arrow"></span></a>
-                                     <ul class="nav nav-third-level">
-                                     <li>
-                                       <div class="panel panel-default">
-                                            <div class="panel-body" style="background-color: #6495ed">
-                                               Node name  : <input class="form-control" size="8"><br/>
-                                               Node group : 
-                                               <select>
-                                                  <option value="1">1</option>
-                                                  <option value="2">2</option>
-                                                  <option value="3">3</option>
-                                                  <option value="4">4</option>
-                                                </select><br /><br />
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                    <h2><center> Granger causality Log Volume Data Analysis <%= year%></center> </h2>
+       
+                            <ul id="myTab" class="nav nav-tabs" style="font-size: 13px;">
+							   <li class="active"><a href="#home" style="padding: 10px 10px;" onclick="window.location.reload(true);" data-toggle="tab">
+							      Network</a></li>
 
-                                                <button type="submit" class="btn btn-default">Add This Node to Network</button>
-
-                                            </div>
-                                        </div>                                         
-                                     </li>
-                                     </ul>
-                                </li>
-                                <li>
-                                    <a href="#">ADD edge<span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                    <li>
-                                        <div class="panel panel-default">
-                                            <div class="panel-body" style="background-color: #6495ed">
-                                             Source  : <input class="form-control" size="8"><br/>
-                                             Target  : <input class="form-control" size="8"><br/>
-                                               <br />
-                                            <button type="submit" class="btn btn-default">Add This Edge to Network</button>
-
-                                            </div>
-                                        </div> 
-                                    </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Graphical Analysis <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="hive_plot.html">Hive plot</a>
-                                </li>
-                                <li>
-                                    <a href="grph_analysis.html">Other Graph </a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Network</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-body11" >
-                            <div id="network"></div>
+							   	<li><a id="In"  href="#indegree" data-toggle="tab" style="padding: 10px 10px;" >Indegree</a></li>
+							    <li><a id="Out" href="#outdegree" style="padding: 10px 10px;" data-toggle="tab" >Outdegree</a></li>
+							    <li><a id="Cmp" href="#completeTriad" data-toggle="tab" style="padding: 10px 10px;">CompleteTriad</a></li>
+							    <li><a id="Incmp" href="#IncompleteTriad" data-toggle="tab" style="padding: 10px 10px;">IncompleteTriad</a></li>
+							    <li><a id="Imcycles" href="#ImmediateCycle" data-toggle="tab" style="padding: 10px 10px;">ImmediateCycles</a></li>
+							    <li><a id="Quarters" href="#QuarterlyTemporalPatterns" data-toggle="tab" style="padding: 10px 10px;">QuarterlyTemporalPatterns</a></li>
+							    <li><a id="Chain"  href="#longerchain" data-toggle="tab" style="padding: 10px 10px;" >Chain</a></li>
+							    <li><a id="traces"  href="#tracepath" data-toggle="tab" style="padding: 10px 10px;">Trace Path</a></li>			
+							</ul>
                             
+                            <div id="myTabContent" class="tab-content">
+							   <div class="tab-pane fade in active" id="home">
+							      <script src="js/d3.min.js"></script>
+									
+									
+									 <div id="network" style="border:2px solid;">
+									 <br />
+									  <div class="row">
+									 	<div class="col-lg-6" id="analyse_bar" width="500" height="50" "></div>
+                                        <canvas class="col-rg-6" id="graph_note" width="500" height="75" "></canvas>
+                                      </div>
+                                      <div class="row">
+                                      <div class="col-lg-6" id="analyse_bar1" width="500" height="50" "></div>
+                                      </div>
+                            				<!-- load the svg using javascript function -->
+				                            <script>				
+					                            	
+					                     		var ctx = document.getElementById("graph_note").getContext("2d");
+					                            SvgLoad(ctx);
+					                           
+					                           
+				                            </script>
+				                        
+									 </div>             
+							   </div>
+								   <div class="tab-pane fade" id="indegree">								   								   
+									   <div id="borderIn" style="border:2px solid;">
+									   
+									   <br />
+									   <canvas id="graph_note1" width="500" height="75" style="float: right">                                
+                                        </canvas>
+                                        &nbsp; Max Indegree:<l id="max_indegree"></l>
+									   		<script type="text/javascript">
+									   		var ctx = document.getElementById("graph_note1").getContext("2d");					                            
+				                            SvgLoadDegree(ctx);
+											$("#In").click(function(){	
+												/* pass quarter number and request Indegree servlet and return set of links and objects in success function*/
+							   					$.ajax({
+							   					  type: 'GET',
+							   					  url: "Indegree?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>", 
+							   					  dataType: 'json',
+							   					  success: function(data,status) {//data.Links,data.nodes	
+							   						 
+							   					  	document.getElementById("max_indegree").innerHTML = data.links.length;
+							   						var width = 1000,height = 900;		
+							   						//drawing the graph in canvas with given data.nodes array and data.links array
+							   						DrawDegree(data.nodes, data.links,"#borderIn",width,height);	
+							   						
+							   					  },
+							   					  error: function(data,error){
+							   						  //alert(error);
+							   						  },
+							   					  async: false
+							   					}); 							   					
+							   				});
+											
+									   		</script>
+									   </div>
+								   </div>
 
-                        </div>
-                        <script>							
+							   <div class="tab-pane fade" id="outdegree">							  
+							      <div id="borderOut" style="border:2px solid;">
+							      	<br />
+									   <canvas id="graph_note2" width="500" height="75" style="float: right">                                
+                                        </canvas>
+                                        &nbsp; Max Outdegree:<l id="max_outdegree"></l>
+									   		<script type="text/javascript">
+									   		var ctx1 = document.getElementById("graph_note2").getContext("2d");					                            
+				                            SvgLoadDegree(ctx1);
+				                            
+											$("#Out").click(function(){							   												   					
+							   					$.ajax({
+							   					  type: 'GET',
+							   					  /* this will pass quarter number and request outdegree servlet and draw the the degree of graph */
+							   					  url: "Outdegree?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
+							   					  dataType: 'json',
+							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
+							   						var width = 1000,height = 900;							   						
+							   						DrawDegree(data.nodes, data.links,"#borderOut",width,height);
+							   						document.getElementById("max_outdegree").innerHTML = data.links.length;							   						
+							   					  },
+							   					  error: function(data,error){alert(error);},
+							   					  async: false
+							   					}); 							   					
+							   				});
+											
+									   		</script>
+
+									</div>
+
+							   </div>
+							   
+							   <div class="tab-pane fade" id="completeTriad">
+							   		<div id="borderCmp" style="border:2px solid;">	
+							   			<br>
+							   			<canvas id="graph_note3" width="500" height="75" style="float: right">                                
+                                        </canvas>
+							   			<script type="text/javascript">
+							   			var ctx2 = document.getElementById("graph_note3").getContext("2d");					                            
+			                            SvgLoadCompTriad(ctx2);
+			                            		
+			                            $("#Cmp").click(function(){							   												   					
+						   					$.ajax({
+						   					  type: 'GET',
+						   					  url: "CompleteTriad?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>&year=<%=year%>",
+						   					  dataType: 'json',
+						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
+						   						var width = 1000,height = 900;							   						
+						   						//DrawGraph(data.nodes, data.Links,"#borderCmp",width,height);							   						
+						   				DrawTrangleGraph(data.nodes, data.links,"#borderCmp",width,height);	 
+                                         },
+						   					  error: function(data,error){
+						   						 // alert(error);
+						   						  },
+						   					  async: false
+						   					}); 							   					
+						   				});
+							   			</script>
+									</div>
+							   </div>		
+							   
+							   <div class="tab-pane fade" id="IncompleteTriad">
+							   		<div id="borderIncmp" style="border:2px solid;">	
+							   			<br>
+							   			<canvas id="graph_note4" width="500" height="70" style="float: right">                                
+                                        </canvas>
+							   			<script type="text/javascript">
+							   			var ctx3 = document.getElementById("graph_note4").getContext("2d");					                            
+			                            SvgLoadIncTriad(ctx3);
+			                           	/*  passing quarter and and requesting IncompleteTriad servlet to execute */
+			                            $("#Incmp").click(function(){							   												   					
+						   					$.ajax({
+						   					  type: 'GET',
+						   					  url: "IncompleteTriad?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
+						   					  dataType: 'json',
+						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
+						   						var width = 1000,height = 900;							   						
+						   						//draw the incomplete triad graph using fetched data
+                                                DrawIncompleteTriad(data.nodes, data.links,"#borderIncmp",width,height);
+						   					  },
+						   					  error: function(data,error){
+						   						  alert(error);},
+						   					  async: false
+						   					}); 							   					
+						   				});
+							   			</script>
+									</div>
+							   </div>		
+							   
+							   <div class="tab-pane fade" id="ImmediateCycle">
+							   		<div id="borderImcycle" style="border:2px solid;">	
+							   			<br>
+							   			<canvas id="graph_note5" width="500" height="75" style="float: right">                                
+                                        </canvas>
+							   			<script type="text/javascript">
+							   			var ctx4 = document.getElementById("graph_note5").getContext("2d");							   			
+			                            SvgLoad(ctx4);
+			                            		
+			                            $("#Imcycles").click(function(){	
+			                            	/*  passing quarter and and requesting ImmediateCycles servlet to execute. Return data to success function will read*/
+						   					$.ajax({
+						   					  type: 'GET',
+						   					  url: "ImmediateCycles?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
+						   					  dataType: 'json',
+						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
+						   						var width = 1000,height = 900;							   						
+						   						DrawGraph(data.nodes, data.links,"#borderImcycle",width,height);							   						
+						   					  },
+						   					  error: function(data,error){alert(error);},
+						   					  async: false
+						   					}); 							   					
+						   				});
+							   			</script>
+									</div>
+							   </div>
+
+							<%
+								/*get the name of the file releven to clicked year ane filename */
+								String filename = request.getParameter("filename");
+								String name = "\'" + "json/" + filename + "\'";
+								System.out.println(filename);
+							%>
+
+							<div class="tab-pane fade" id="QuarterlyTemporalPatterns">							   	
+							   		<div id="borderQgraph" style="border:2px solid;">
+							   			<br>
+							   			<canvas id="graph_note6" width="800" height="80" style="float: left"></canvas>
+							   			&nbsp; Clustering Coefficient : <l id="cc_show"></l>
+							   			<div style="float: right">
+							   			<button class="btn btn-default" id="main">Main</button>
+							   			<button class="btn btn-primary" id="Sustained">Sustained</button>
+							   			<button class="btn btn-danger" id="Episodic">Episodic</button>
+							   			<button class="btn btn-success" id="Weak">Weak</button>
+							   			</div>
+							   				<script type="text/javascript">
+							   					
+							   					var file=<%= name%>;							   				
+							   					var ctx=document.getElementById("graph_note6").getContext("2d");
+							   					ctx.clearRect(0, 0, 800, 80);
+							   					SvgQuarter(ctx);							   				
+							   					/* drawing the quater main graph */
+							   					$("#Quarters").click(function(){
+							   						var width = 900, height = 950;
+							   						QuarterGraph(nodes, file, "#borderQgraph", width, height);
+							   						//requesting cluster coeffient
+							   						$.ajax({
+									   					  type: 'GET',
+									   					  url: "cc?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
+									   					  dataType: 'json',
+									   					  success: function(data,status) {					
+									   						document.getElementById("cc_show").innerHTML = data.Clustering_C;
+									   					  },
+									   					  error: function(data,error){alert(error);},
+									   					  async: false
+
+									   					}); 								   													   			
+								   				});
+							   					//drawing sustained quarter graph from data not data coming from server
+							   					$("#Sustained").click(function(){
+							   						//alert("sustained");
+							   						var can=document.getElementById("graph_note6");
+								   					var ctx = can.getContext("2d");
+								   					can.width=800;
+							   						SvgQuaterSustained(ctx); 
+							   						var width = 900, height = 950;
+							   						QuarterGraphSustained(nodes, file, "#borderQgraph", width, height);
+							   					});
+							   					//drawing episodic type quarter graph from data not data coming from server
+							   					$("#Episodic").click(function(){
+							   						//alert("episodic");
+							   						var can=document.getElementById("graph_note6");
+								   					var ctx = can.getContext("2d");
+								   					can.width=800;							   						
+							   						SvgQuarterEpisodic(ctx);
+							   						var width = 900, height = 950;
+							   						QuaterGraphEpisodic(nodes, file, "#borderQgraph", width, height);
+							   					});
+							   					//drawing weak type quarter graph from data not data coming from server
+							   					$("#Weak").click(function(){
+							   						//alert("weak");
+							   						var can=document.getElementById("graph_note6");
+								   					var ctx = can.getContext("2d");
+								   					can.width=800;
+							   						SvgQuarterWeak(ctx);
+							   						var width = 900, height = 950;
+							   						QuatergraphWeak(nodes, file, "#borderQgraph", width, height);
+							   					});
+							   					$("#main").click(function(){
+								   					var can=document.getElementById("graph_note6");
+								   					var ctx = can.getContext("2d");
+								   					can.width=800;
+								   					SvgQuarter(ctx);
+							   						var width = 900, height = 950;
+							   						QuarterGraph(nodes, file, "#borderQgraph", width, height);
+							   					});							   					
+							   				</script>
+						   						<div id="tooltip" class="hidden">
+												    <p><strong>Important Label Heading</strong>
+												    </p>
+												    <p><span id="value">100</span>%</p>
+												</div>
+							   		</div>
+							   </div>
+							   
+							   <div class="tab-pane fade" id="longerchain">							   	
+							   		<div id="Lchain" style="border:2px solid;">
+							   		<div><b>Note:</b>
+										longer chain will find path only upto depth 3, due to computational complexity 
+									</div>
+							   			<script type="text/javascript">							   				
+							   			$("#Chain").click(function(){
+							   				var width = 1000,height = 900;	
+							   				Longchain(nodes, file, "#Lchain", width, height);//draw longer chain using only javascript not data from server
+							   			});
+							   			</script>							   		
+							   		</div>
+							   	</div>
+							   	
+							   	<!-- Trace paths -->
+							   	<div class="tab-pane fade" id="tracepath">						   	
+							   		<div id="tpath" style="border:2px solid;">
+							   		<div><b>Note: </b>Click the initial node then outgoing edges will display. click one of them to go further, all the path will freezed. if want to go back double click each traced node
+							   			except initial node if initial node double clicked, graph will be reset.
+							   		</div>
+							   			<script>
+							   			$("#traces").click(function(){
+							   				var width = 900, height = 950;											
+											TracePaths(nodes, file, "#tpath", width, height); // here contain trace path graph
+							   			});
+							   			
+							   			</script>						   		
+							   		</div>
+							   	</div>						   							  							  
+						</div>
+						 
+						<script>							
 
 							//load the nodes and links arrays
 							$(document).ready(function(){
@@ -203,47 +512,44 @@ text {
 									error: function(data,error){alert(error);},
 									async: false
 								}); 
+								
+								$.post("PostDataServ",JSON.stringify(obj)).error(function(){
+									//alert("there is error while sending data to server");
+								});;
 															
 								N_OriginalNetworkGraph(nodes,obj.link,"#network",900,500);
 								
 								});
-								//graphload 
 								
 								
 									
 								
-								</script>    
-                        <!-- /.panel-heading -->
-                    
-                        <!-- /.panel-body -->
+								</script>                    
                     </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            
-        </div>
-        <!-- /#page-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-
+                </div>               
+            </div>       
+        </div> 
+       
     <!-- jQuery Version 1.11.0 -->
     <script src="js/jquery-1.11.0.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-    
-     <script src="js/jquery.js"></script>
-	 <script src="js/jquery-ui.js"></script>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="js/view_js/metisMenu.min.js"></script>
-    
-    <!-- Custom Theme JavaScript -->
-    <script src="js/view_js/sb-admin-2.js"></script>
-    
-    
+
+    <script src="js/jquery.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		<script>
+		<% int a = Integer.parseInt(year)%2005;%>
+	$( "#accordion" ).accordion();
+	$( "#accordion" ).accordion({ active: <%=a%>});
+	$(function() {
+        $("#tooltip-1").tooltip();
+        $("#tooltip-2").tooltip();
+     });
+	</script>
+</div> 
 
 </body>
+
 </html>
