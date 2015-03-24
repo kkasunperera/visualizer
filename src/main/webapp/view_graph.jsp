@@ -223,7 +223,7 @@ text {
 							      <script src="js/d3.min.js"></script>
 									
 									
-									 <div id="gc_network" style="border:2px solid;">
+									 <div id="network" style="border:2px solid;">
 									 <br />
 									  <div class="row">
 									 	<div class="col-lg-6" id="analyse_bar" width="500" height="50" "></div>
@@ -512,54 +512,32 @@ text {
 							   		</div>
 							   	</div>						   							  							  
 						</div>
+						 
 						<script>							
 
 							//load the nodes and links arrays
 							$(document).ready(function(){
-								var filename =<%=name%> /*  json file name */
-								<% String baseUrl="\'"+request.getScheme() + "://" + request.getServerName() + ":" + Integer.toString(request.getServerPort()) + request.getContextPath()+"/"+"\'";%>
-								
-								var url=<%=baseUrl%>+filename;
-								var filename1 = "json/overall.json";
-								var all_url = <%=baseUrl%>+filename1;
-								
 								var obj=new Object();
-								var all_obj = new Object();
-								obj.nodes=nodes;	
+								//obj.nodes=nodes;	
 								//access json file using ajax and put the json content ito javascript object
 								$.ajax({
 									type: 'GET',
-									url: url,
+									url: "dataGet?year=2005",
 									dataType: 'json',
-									success: function(data) { obj.link = data;},
+									success: function(data) { 
+										obj.link = data.links;
+										obj.node = data.nodes;},
 									error: function(data,error){alert(error);},
 									async: false
 								}); 
 								
-								$.ajax({
-									type: 'GET',
-									url: all_url,
-									dataType: 'json',
-									success: function(data) {all_obj = data;},
-									error: function(data,error){alert(error);},
-									async: false
-								}); 
-							
-								//alert(JSON.stringify(obj.link));
-										//post the json string to servlet
 								$.post("PostDataServ",JSON.stringify(obj)).error(function(){
 									//alert("there is error while sending data to server");
-								});;  
-										//alert(JSON.stringify(obj.link));
-								var width = 900, height = 950;
-								var quart = <%=Integer.parseInt(request.getParameter("Q"))%>;
-								OriginalNetworkGraph(nodes, file, "#gc_network", width, height,quart,all_obj);
-								//drawing original network graph
-								
-								//overall_anlys(all_obj);
+								});;
+															
+								N_OriginalNetworkGraph(nodes,obj.link,"#network",900,500);
 								
 								});
-								//graphload 
 								
 								
 									
