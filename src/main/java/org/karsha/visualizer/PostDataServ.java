@@ -224,38 +224,26 @@ public class PostDataServ extends HttpServlet {
 			 * */
 		} else if (userPath.equals("/Indegree")) {
 			logger.info("userPath is " + userPath);
-
-			/* get quater id from url parameter */
-			int quater = Integer.parseInt(request.getParameter("Quater"));
-
-			DirectedGraph<Node, DefaultEdge> gg = DirectedGraphDemoServ
-					.createHrefGraph(nodeSet,
-							DirectedGraphDemoServ.link_filter(quater, linkSet));
-			List<Links> link = DirectedGraphDemoServ.findHighInDegree(gg,
-					nodeSet);
-
-			/* set the application content to json type of response object */
+			 
+			int quater = Integer.parseInt(request.getParameter("Q"));
+			DirectedGraph<Node, DefaultEdge> gg;
+			if(quater==5){
+				 gg = DirectedGraphDemoServ.createHrefGraph(nodeSet,linkSet);
+				}else {
+				 gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, DirectedGraphDemoServ.link_filter(quater, linkSet));
+			}
+			List<Links> link = DirectedGraphDemoServ.findHighInDegree(gg,nodeSet);
+			
 			response.setContentType("application/json");
-
-			/*
-			 * get the writer object of response object for writing data as
-			 * output stream
-			 */
+			 
 			PrintWriter out = response.getWriter();
-
-			/* initiate GSON element for sharing data in a root */
 			JsonObject Obj = new JsonObject();
 
-			/*
-			 * two json element for node set and link set and add it to root
-			 * element
-			 */
 			JsonElement links = gson.toJsonTree(link);
-			JsonElement nodes = gson.toJsonTree(node);
+			JsonElement nodes = gson.toJsonTree(nodeSet);
 			Obj.add("links", links);
 			Obj.add("nodes", nodes);
 
-			/* writer writes the data in to stream */
 			out.println(Obj.toString());
 			out.close();
 
@@ -269,29 +257,32 @@ public class PostDataServ extends HttpServlet {
 			 * */
 		} else if (userPath.equals("/Outdegree")) {
 			logger.info("userPath is " + userPath);
+			int quater = Integer.parseInt(request.getParameter("Q"));
+			DirectedGraph<Node, DefaultEdge> gg;
+			
+			if(quater==5){
+			 gg = DirectedGraphDemoServ.createHrefGraph(nodeSet,linkSet);
+			}else {
+			 gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, DirectedGraphDemoServ.link_filter(quater, linkSet));
+			}
 
-			int quater = Integer.parseInt(request.getParameter("Quater"));
+			
+			
+			List<Links> link = DirectedGraphDemoServ.findHighOutDegree(gg,nodeSet);
 
-			DirectedGraph<Node, DefaultEdge> gg = DirectedGraphDemoServ
-					.createHrefGraph(nodeSet,
-							DirectedGraphDemoServ.link_filter(quater, linkSet));
-
-			List<Links> link = DirectedGraphDemoServ.findHighOutDegree(gg,
-					nodeSet);
-
+			
 			response.setContentType("application/json");
+			 
 			PrintWriter out = response.getWriter();
-
 			JsonObject Obj = new JsonObject();
 
 			JsonElement links = gson.toJsonTree(link);
-			JsonElement nodes = gson.toJsonTree(node);
+			JsonElement nodes = gson.toJsonTree(nodeSet);
 			Obj.add("links", links);
 			Obj.add("nodes", nodes);
 
 			out.println(Obj.toString());
 			out.close();
-
 			/**
 			 * CompleteTriad executed the it will return set of links list
 			 * object from calculated which will filter according to the quater
@@ -303,13 +294,12 @@ public class PostDataServ extends HttpServlet {
 			logger.info("userPath is " + userPath);
 
 			int quater = Integer.parseInt(request.getParameter("Quater"));
-
-			DirectedGraph<Node, DefaultEdge> gg = DirectedGraphDemoServ
-					.createHrefGraph(nodeSet,
-							DirectedGraphDemoServ.link_filter(quater, linkSet));
-
-			// String year = request.getParameter("year");
-			// DirectedGraphDemoServ.writeCSV(g, nodeSet, year);
+			DirectedGraph<Node, DefaultEdge> gg;
+			if(quater==5){
+				 gg = DirectedGraphDemoServ.createHrefGraph(nodeSet,linkSet);
+				}else {
+				 gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, DirectedGraphDemoServ.link_filter(quater, linkSet));
+				}
 
 			linkCompleteTriad = DirectedGraphDemoServ
 					.CompleteTriad(gg, nodeSet);
