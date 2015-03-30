@@ -863,20 +863,15 @@ var force = d3.layout.force()
     .gravity(.15)
     .distance(350)
     .charge(-350)
-    .size([width, height]);
-    
- //input to the file name which is taken previously
- 
-d3.json(file, function(error, json) {
-  force
+    .size([width, height])
       .nodes(nodes)
-      .links(data_set(quart, json))
+      .links(links)
       .on("tick", tick)
       .start();
  
   
    svg.selectAll(".link")
-      .data(json.links)
+      .data(links)
     .enter().append("line");
       //.attr("class", "link");
       
@@ -929,7 +924,7 @@ d3.json(file, function(error, json) {
       .attr("dy", ".35em")
       .text(function(d) { return d.name;});
 
-json.links.forEach(function(d) {
+links.forEach(function(d) {
 //alert(d.source.index + "," + d.target.index);
   linkedByIndex[d.source.index + "," + d.target.index] = 1;
 });
@@ -1057,7 +1052,6 @@ function isConnected(a, b) {
 //alert(a.index + "," + b.index);
 	//return linkedByIndex[a.index + "," + b.index];
 	}
-});
 }
 
 function Longchain(nodes,links,svg1,width,height){

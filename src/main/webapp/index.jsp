@@ -10,8 +10,7 @@
 
         <title>GCVisualizer - Karsha project</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/sb-admin.css" rel="stylesheet">
-        <link href="css/plugins/morris.css" rel="stylesheet">
+        <link href="css/sb-admin-2.css" rel="stylesheet">
         <link href="font-awesome-4.1.0/css/font-awesome.min.css"
               rel="stylesheet" type="text/css">
         <link href="css/jquery-ui.css" rel="stylesheet">
@@ -82,65 +81,68 @@
 
     <body>
         <div id="wrapper">
-            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse"
-                            data-target=".navbar-ex1-collapse">
-                        <span class="sr-only">Toggle navigation</span> <span
-                            class="icon-bar"></span> <span class="icon-bar"></span> <span
-                            class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.jsp"><font color="white">GCVisualizer - Karsha
-                        project</font></a>
-                </div>
-                <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul class="nav navbar-nav side-nav">
-                      <!--   <li class="active"><a href="index.jsp"><i
-                                    class="fa fa-fw fa-dashboard"></i> GCVisualizer</a></li> -->
-                        <li><a ><i class="fa fa-fw fa-arrows-v"></i>
-                                GC-Analysis </a>
-                            <ul id="accordion">
-                                <% for (int i = 2005; i < 2013; i++) {%>
-                                <li>
-                                    <h3><a href="view_graph.jsp?filename=data<%=i%>.json&year=data<%=i%>.json&year=<%=i%>"><%=i%></a></h3>
-                                    <ul>
-                                        <li><a href="view_graph.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=0"><i class="fa fa-fw fa-table"></i> Overall </a></li>
-                                        <li><a href="view_graph.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=5"><i class="fa fa-fw fa-table"></i> Annual </a></li>
-                                        <li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=1"><i class="fa fa-fw fa-table"></i> Quarter 1</a></li>
-                                        <li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=2"><i class="fa fa-fw fa-table"></i> Quarter 2</a></li>
-                                        <li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=3"><i class="fa fa-fw fa-table"></i> Quarter 3</a></li>
-                                        <li><a href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=4"><i class="fa fa-fw fa-table"></i> Quarter 4</a></li>
-                                    </ul>
-                                </li>
-                                <%}%>
-                            </ul>               
+            <nav class="navbar navbar-default navbar-static-top" role="navigation"
+			style="margin-bottom: 0">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.jsp">GC Visualizer - Karsha
+					project</a>
+			</div>
+			<!-- /.navbar-header -->
+			<div class="navbar-default sidebar" role="navigation">
+				<div class="sidebar-nav navbar-collapse">
+					<ul class="nav navbar-nav side-nav">
+						<!-- <li class="active"><a href="index.jsp"><i
+							class="fa fa-fw fa-dashboard"></i> GC Visualizer</a></li> -->
+						<li><a><i class="fa fa-fw fa-arrows-v"></i> GC-Analysis
+						</a>
+							<ul id="accordion">
+								<%
+									for (int i = 2005; i < 2013; i++) {
+								%>
+								<li>
+									<h3>
+										<a
+											href="?filename=data<%=i%>.json&year=data<%=i%>.json&year=<%=i%>"><%=i%></a>
+									</h3>
+									<ul>
+										<li><a
+											href="N_network_Y.jsp?year=<%=i%>&Q=-1"><i
+												class="fa fa-fw fa-table"></i> Annual </a></li>
+										<li><a
+											href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=1"><i
+												class="fa fa-fw fa-table"></i> Quarter 1</a></li>
+										<li><a
+											href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=2"><i
+												class="fa fa-fw fa-table"></i> Quarter 2</a></li>
+										<li><a
+											href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=3"><i
+												class="fa fa-fw fa-table"></i> Quarter 3</a></li>
+										<li><a
+											href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=4"><i
+												class="fa fa-fw fa-table"></i> Quarter 4</a></li>
+									</ul>
+								</li>
+								<%
+									}
+								%>
+							</ul></li>
+						<li><a href="DataAnalysis.jsp"><i
+								class="fa fa-fw fa-table"></i> Network Summary Statistics</a></li>
+						<li><a href="analysis_extended.jsp"><i
+								class="fa fa-fw fa-file"></i> H-Index Analysis</a></li>
 
-                        </li>
-                        <li><a href="DataAnalysis.jsp"><i class="fa fa-fw fa-table"></i>
-                                Network Summary Statistics</a></li>
-                        <li><a href="analysis_extended.jsp"><i class="fa fa-fw fa-file"></i>
-                                H-Index Analysis</a></li>
-
-                    </ul>
-                    <%--  <li><a href="javascript:;" data-toggle="collapse"
-                        data-target="#demo2"><i class="fa fa-fw fa-arrows-v"></i>
-                            GC-Analysis 2 <i class="fa fa-fw fa-caret-down"></i></a>
-                        
-                        <ul id="demo2" name="demo" class="collapse">
-                            <% for(int j = 2004;j < 2014;j++) {%>
-                            <li><a href="view_graph.jsp?filename=data<%=j%>.json"><%=j%></a></li>                            
-                            <%}%>
-                        </ul></li> --%>
-
-                    <!--  <li><a href="Overall.html"><i
-                             class="fa fa-fw fa-bar-chart-o"></i> Overall</a></li>
-                     <li><a href="RowData.html"><i class="fa fa-fw fa-table"></i>
-                             Row Data</a></li>
-                     <li><a href="blank-page.html"><i class="fa fa-fw fa-file"></i>
-                             More About</a></li> -->
-
-                </div>
-            </nav>
+					</ul>
+				</div>
+				<!-- /.sidebar-collapse -->
+			</div>
+			<!-- /.navbar-static-side -->
+		</nav>
             <div id="page-wrapper">
                 <div class="container-fluid">
                     <div class="row">

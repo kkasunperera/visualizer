@@ -218,8 +218,8 @@ text {
 								style="padding: 10px 10px;">IncompleteTriad</a></li>
 							<li><a id="Imcycles" href="#ImmediateCycle"
 								data-toggle="tab" style="padding: 10px 10px;">ImmediateCycles</a></li>
-							<li><a id="Quarters" href="#QuarterlyTemporalPatterns"
-								data-toggle="tab" style="padding: 10px 10px;">QuarterlyTemporalPatterns</a></li>
+							<!-- <li><a id="Quarters" href="#QuarterlyTemporalPatterns"
+								data-toggle="tab" style="padding: 10px 10px;">QuarterlyTemporalPatterns</a></li> -->
 							<li><a id="Chain" href="#longerchain" data-toggle="tab"
 								style="padding: 10px 10px;">Chain</a></li>
 							<li><a id="traces" href="#tracepath" data-toggle="tab"

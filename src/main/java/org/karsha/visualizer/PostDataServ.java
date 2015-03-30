@@ -380,10 +380,9 @@ public class PostDataServ extends HttpServlet {
 		} else if (userPath.equals("/cc")) {
 			logger.info("userPath is " + userPath);
 			PrintWriter out = response.getWriter();
-			int quater = Integer.parseInt(request.getParameter("Quater"));
+			
 			DirectedGraph<Node, DefaultEdge> gg = DirectedGraphDemoServ
-					.createHrefGraph(nodeSet,
-							DirectedGraphDemoServ.link_filter(quater, linkSet));
+					.createHrefGraph(nodeSet, linkSet);
 
 			double cc_value = DirectedGraphDemoServ.clusteringCoefficient(gg,
 					nodeSet, linkSet);
