@@ -155,7 +155,7 @@ text {
 									</h3>
 									<ul>
 										<li><a
-											href="N_network_Y.jsp?year=<%=i%>&Q=5"><i
+											href="N_network_Y.jsp?year=<%=i%>&Q=-1"><i
 												class="fa fa-fw fa-table"></i> Annual </a></li>
 										<li><a
 											href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=1"><i
@@ -334,7 +334,7 @@ text {
 							   			</script>
 									</div>
 							   </div>		
-<!-- 	
+	
 							   <div class="tab-pane fade" id="IncompleteTriad">
 							   		<div id="borderIncmp" style="border:2px solid;">	
 							   			<br>
@@ -342,7 +342,7 @@ text {
                                         </canvas>
 							   			<script type="text/javascript">
 							   			var ctx3 = document.getElementById("graph_note4").getContext("2d");					                            
-			                            SvgLoadIncTriad(ctx3);
+			                            //SvgLoadIncTriad(ctx3);
 			                           	/*  passing quarter and and requesting IncompleteTriad servlet to execute */
 			                            $("#Incmp").click(function(){							   												   					
 						   					$.ajax({
@@ -362,7 +362,7 @@ text {
 							   			</script>
 									</div>
 							   </div>		
-							   
+						   
 							   <div class="tab-pane fade" id="ImmediateCycle">
 							   		<div id="borderImcycle" style="border:2px solid;">	
 							   			<br>
@@ -379,8 +379,8 @@ text {
 						   					  url: "ImmediateCycles?Quater=<%=Integer.parseInt(request.getParameter("Q"))%>",
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
-						   						var width = 1000,height = 900;							   						
-						   						DrawGraph(data.nodes, data.links,"#borderImcycle",width,height);							   						
+						   						var width = 1000,height = 900;		
+						   					 	N_OriginalNetworkGraph(data.nodes, data.links,"#borderImcycle",width,height);							   						
 						   					  },
 						   					  error: function(data,error){alert(error);},
 						   					  async: false
@@ -389,6 +389,7 @@ text {
 							   			</script>
 									</div>
 							   </div>
+			<!-- 
 
 							<%/*get the name of the file releven to clicked year ane filename */
 			String filename = request.getParameter("filename");
@@ -514,7 +515,7 @@ text {
 									.ready(
 											function() {
 												var obj = new Object();
-												var url = "dataGet?year="+<%=request.getParameter("year") %>
+												var url = "dataGet?year="+<%=request.getParameter("year") %>+"&Q=-1"
 												//obj.nodes=nodes;	
 												//access json file using ajax and put the json content ito javascript object
 												$.ajax({
