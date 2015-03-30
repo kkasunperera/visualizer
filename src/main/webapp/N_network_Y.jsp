@@ -485,8 +485,25 @@ text {
 									</div>
 							   			<script type="text/javascript">							   				
 							   			$("#Chain").click(function(){
-							   				var width = 1000,height = 900;	
-							   				Longchain(nodes, file, "#Lchain", width, height);//draw longer chain using only javascript not data from server
+							   				var width = 1000,height = 900;
+							   				var obj = new Object();
+							   				var url = "dataGet?year="+<%=request.getParameter("year") %>+"&Q=-1"
+							   				$.ajax({
+												type : 'GET',
+												url : url,
+												dataType : 'json',
+												success : function(data) {
+													obj.link = data.links;
+													obj.node = data.nodes;
+												},
+												error : function(data,
+														error) {
+													alert(error);
+												},
+												async : false
+											});
+							   				
+							   				Longchain(obj.node, obj.link, "#Lchain", width, height);//draw longer chain using only javascript not data from server
 							   			});
 							   			</script>							   		
 							   		</div>
