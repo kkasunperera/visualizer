@@ -18,6 +18,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/d3.min.js"></script>
 <script src="js/N_networkDraw.js"></script>
+<script src="js/tracepaths.js"></script>
 
 <style type="text/css">
 .demoHeaders {
@@ -389,7 +390,7 @@ text {
 							   			</script>
 									</div>
 							   </div>
-			<!-- 
+			
 
 							<%/*get the name of the file releven to clicked year ane filename */
 			String filename = request.getParameter("filename");
@@ -412,7 +413,7 @@ text {
 							   					var file=<%=name%>;							   				
 							   					var ctx=document.getElementById("graph_note6").getContext("2d");
 							   					ctx.clearRect(0, 0, 800, 80);
-							   					SvgQuarter(ctx);							   				
+							   					//SvgQuarter(ctx);							   				
 							   					/* drawing the quater main graph */
 							   					$("#Quarters").click(function(){
 							   						var width = 900, height = 950;
@@ -492,20 +493,38 @@ text {
 							   	</div>
 							   	
 							   	<!-- Trace paths -->
-							<!-- <div class="tab-pane fade" id="tracepath">						   	
+							 <div class="tab-pane fade" id="tracepath">						   	
 							   		<div id="tpath" style="border:2px solid;">
 							   		<div><b>Note: </b>Click the initial node then outgoing edges will display. click one of them to go further, all the path will freezed. if want to go back double click each traced node
 							   			except initial node if initial node double clicked, graph will be reset.
 							   		</div>
 							   			<script>
 							   			$("#traces").click(function(){
-							   				var width = 900, height = 950;											
-											TracePaths(nodes, file, "#tpath", width, height); // here contain trace path graph
+							   				var width = 900, height = 950;	
+							   				var obj = new Object();
+											var url = "dataGet?year="+<%=request.getParameter("year") %>+"&Q=-1"
+											//obj.nodes=nodes;	
+											//access json file using ajax and put the json content ito javascript object
+											$.ajax({
+												type : 'GET',
+												url : url,
+												dataType : 'json',
+												success : function(data) {
+													obj.link = data.links;
+													obj.node = data.nodes;
+												},
+												error : function(data,
+														error) {
+													alert(error);
+												},
+												async : false
+											});
+											TracePaths(obj.node, obj.link,"#tpath", width, height); // here contain trace path graph
 							   			});
 							   			
 							   			</script>						   		
 							   		</div>
-							   	</div>	 -->
+							   	</div>	
 
 						</div>
 
