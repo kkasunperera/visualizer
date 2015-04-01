@@ -851,7 +851,7 @@ function DrawIncompleteTriad(nodes,links,svg1,width,height){
 
 }
 
-function QuarterGraph(nodes,file,svg1,width,height,quart){
+function QuarterGraph(nodes,links,svg1,width,height,quart){
 	
 	var linkedByIndex = {};
 	var color = d3.scale.category10();		 
@@ -1314,80 +1314,659 @@ function getConnectedNodes(a, b) {
 
 }
 
+function QuarterGraphSustained(nodes,links,svg1,width,height){
+	
+	var linkedByIndex = {};
+	var color = d3.scale.category10();		
+	
+	d3.select("svg").remove();
+	var svg = d3.select(svg1).append("svg").attr("width", width).attr("height", height);
 
-function SvgLoad(ctx){
-	//bondI
-    ctx.fillStyle = "#1f77b4";
-    ctx.beginPath();
-    ctx.arc(200,10,8,0,2*Math.PI);
-    ctx.closePath();
-    ctx.fill();
-    
-    
-    ctx.fillStyle = "#ff7f0d";
-    ctx.beginPath();
-    ctx.arc(200,35,8,0,2*Math.PI);
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.fillStyle = "#2ca02c";
-    ctx.beginPath();
-    ctx.arc(200,60,8,0,2*Math.PI);
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.fillStyle = "#ff7f0d";
-    ctx.beginPath();
-    ctx.fillText("Bond-InvGrade", 214,40); 
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.fillStyle = "#1f77b4";
-    ctx.beginPath();
-    ctx.fillText("Bond-HighYield", 214,14); 
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.fillStyle = "#2ca02c";
-    ctx.beginPath();
-    ctx.fillText("Equity", 214,66); 
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.strokeStyle="#FF0000";
-    ctx.beginPath();
-    ctx.moveTo(350,10);
-    ctx.lineTo(301,10);
-    ctx.stroke();
-    
-    ctx.strokeStyle="#0000FF";
-    ctx.beginPath();
-    ctx.moveTo(350,35);
-    ctx.lineTo(301,35);
-    ctx.stroke();
-    
-    ctx.fillStyle = "#1f77b4";
-    ctx.beginPath();
-    ctx.arc(300,10,8,0,2*Math.PI);
-    ctx.closePath();
-    ctx.fill();
+var force = d3.layout.force()
+    .gravity(.15)
+    .distance(350)
+    .charge(-350)
+    .size([width, height])
+    .nodes(nodes)
+    .links(links.filter(function(d){return d.type == "sustained"})) // this filter only edge type "sustained" from json.links()
+    .on("tick", tick)
+    .start();
+ 
   
-    
-    ctx.fillStyle = "#1f77b4";
-    ctx.beginPath();
-    ctx.arc(300,35,8,0,2*Math.PI);
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.fillStyle = "#0000FF";
-    ctx.beginPath();
-    ctx.fillText("Output Edge from the Node", 360,40); 
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.fillStyle = "#FF0000";
-    ctx.beginPath();
-    ctx.fillText("Input Edge to the Node", 360,14); 
-    ctx.closePath();
-    ctx.fill();
+   svg.selectAll(".link")
+      .data(links)
+    .enter().append("line");
+      //.attr("class", "link");
+      
+ var arrow_head = svg.append("svg:defs").selectAll("marker")
+    .data(["end"])      // Different link/path types can be defined here
+  .enter().append("svg:marker")    // This section adds in the arrows
+    .attr("id", String)
+    .attr("viewBox", "0 -5 10 10")
+    .attr("refX", 15)
+    .attr("refY", -1.5)
+    .attr("markerWidth", 6)
+    .attr("markerHeight", 6)
+    .attr("orient", "auto")
+  .append("svg:path")
+    .attr("d", "M0,-5L10,0L0,5");
+ 
+
+      
+      
+  var path = svg.append("svg:g").selectAll("path")
+    .data(force.links())
+  .enter().append("svg:path")	
+	.attr("class", "linkSustain") 
+	.on("mouseover", mOver)
+  	.on("mouseout", mOut) 
+  	//.attr("marker-end", "url(#end)")
+  	.attr("id",function(d,i) { return i; }); // assign id for each link/path
+  	   
+  
+  var node = svg.selectAll(".node")
+      .data(force.nodes())
+    .enter().append("g")
+      .attr("class", "node")
+      .style("fill", function(d) { return color(d.group); })
+      //.on("click",click)
+      //.on("dblclick", dblclick)
+       .on("mouseover", mouseOver(.001))
+      .on("mouseout", mouseOut(1))
+      .call(force.drag);
+
+  node.append("circle")
+      .attr("r",8);
+
+  node.append("text")
+      .attr("dx", 12)
+      .attr("dy", ".35em")
+      .text(function(d) { return d.name;});
+
+links.forEach(function(d) {
+//alert(d.source.index + "," + d.target.index);
+  linkedByIndex[d.source.index + "," + d.target.index] = 1;
+});
+ 
+    function tick() {
+    path.attr("d", function(d) {
+
+	
+        var dx = d.target.x - d.source.x,
+            dy = d.target.y - d.source.y,
+            dr = Math.sqrt(dx * dx + dy * dy);
+        return "M" + 
+            d.source.x + "," + 
+            d.source.y + "A" + 
+            dr + "," + dr + " 0 0,1 " + 
+            d.target.x + "," + 
+            d.target.y;
+		
+   });
+
+    node
+        .attr("transform", function(d) { 
+  	    return "translate(" + d.x + "," + d.y + ")"; });
 }
+
+    //adding label to edge
+    var linktext = svg.append("svg:g").selectAll("g.linklabelholder").data(force.links());
+    
+function mOver(d){
+	//d3.selectAll($("#" + d.id)).style("stroke", "red");
+	
+	d3.select(this)
+	.style("stroke-width", "5px")
+		.style("stroke", "green")
+		.attr("marker-end", "url(#end)");
+
+	//appending label to edge in what quarters this edge has been appeared.
+linktext.enter().append("g").attr("class", "linklabelholder").append("text")
+	   .attr("class", "linklabel")
+		 .style("font-size", "15px")
+		 .style("font-weight", "bold")
+	   .attr("x", "200")
+		 .attr("y", "-10")
+	   .attr("text-anchor", "middle")
+		   .style("fill","#FF0000")
+		 .append("textPath")
+	  .attr("xlink:href","#"+this.id)
+	   .text(function(d) { 	//making string for appending for label. "Q1","Q2".	
+		   var ar=[];		   
+		   		if(d.Q1 == "1"){
+		   			ar.push("Q1");
+		   		}if(d.Q2 == "1"){
+		   			ar.push("Q2");
+		   		}if(d.Q3 == "1"){
+		   			ar.push("Q3");
+		   		}if(d.Q4 == "1"){
+		   			ar.push("Q4");
+		   		}
+		   		
+		   		if(ar.length == 1){
+		   			return ar[0];
+		   		}else if(ar.length == 2){
+		   			return ar[0]+","+ar[1];
+		   		}		   		
+		 });
+
+	//alert(d.source.index);
+
+d3.select(this.source).select("circle").transition()
+.duration(750)
+.attr("r", 25)
+.style("fill", function(d) { return color(d.group); });	
+}
+    
+function mOut(d){
+	d3.select(this)
+	    .style("stroke-width","1.5px")
+		.style("stroke","#0066FF")
+		.attr("marker-end", "url(#)");
+	
+	svg.selectAll("g.linklabelholder").remove();
+}
+
+function mouseOver(opacity) {
+    return function(d) {
+    	node.style("stroke-opacity", function(o) {
+            thisOpacity = isConnected(d, o) ? 1 : opacity;
+            this.setAttribute('fill-opacity', thisOpacity);
+            return thisOpacity;
+        });
+
+        path.style("stroke-opacity", function(o) {
+            return o.source === d || o.target === d ? 1 : opacity;                
+        });
+
+       path.style("stroke-dasharray",function(o){
+    	   if(o.source === d){
+    		   return "5, 5";
+    	   }
+       });
+
+       arrow_head.style("opacity",function(o){
+            thisOpacity = isConnected(d, o) ? 1 : opacity;
+            this.setAttribute('fill-opacity', thisOpacity);
+            return thisOpacity;
+        });
+       
+       d3.select(this).select("text").transition()
+       .duration(500)
+       .style("fill", "black")
+       .style("stroke", "lightsteelblue")
+       .style("stroke-width", ".5px")
+       .style("font", "20px sans-serif");
+   d3.select(this).select("circle").transition()
+       .duration(750)
+       .attr("r", 25)
+       .style("fill", function(d) { return color(d.group); });										        
+    };
+}
+
+function mouseOut(opacity) {
+    return function(d) {
+    	 node.style("stroke-opacity", function(o) {
+             thisOpacity = isConnected(d, o) ? 1 : opacity;
+             this.setAttribute('fill-opacity', thisOpacity);
+             return thisOpacity;
+         });
+
+         path.style("stroke-opacity", function(o) {
+     //return o.source === d || o.target === d ? 1 : opacity;
+             return o.source === d ? 1 : opacity;
+         }); 
+         
+         path.style();//stroke line 
+
+         path.style("stroke", "#0066FF");
+
+         path.style("stroke-dasharray",0); 
+         
+         arrow_head.style("opacity",function(o){
+             thisOpacity = isConnected(d, o) ? opacity : 1;
+             this.setAttribute('fill-opacity', thisOpacity);
+             return thisOpacity;
+         });
+         
+         d3.select(this).select("circle").transition()
+         .duration(750)
+         .attr("r", 8)
+         .style("fill", function(d) { return color(d.group); });
+     d3.select(this).select("text").transition()
+         .duration(750)
+         .attr("x", 12)
+         .style("stroke", "none")
+         .style("fill", "black")
+         .style("stroke", "none")
+         .style("font", "10px sans-serif");
+        
+    };
+}
+
+function neighboring(a, b) {
+  return linkedByIndex[a.index + "," + b.index];
+}
+
+function isConnected(a, b) {
+//return incoming and outgoing
+	return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
+//return outgong
+//alert(a.index + "," + b.index);
+	//return linkedByIndex[a.index + "," + b.index];
+	}
+
+}
+
+function QuaterGraphEpisodic(nodes,links,svg1,width,height){
+
+	
+	var linkedByIndex = {};
+	var color = d3.scale.category10();		 
+	
+	d3.select("svg").remove();
+	var svg = d3.select(svg1).append("svg").attr("width", width).attr("height", height);
+
+var force = d3.layout.force()
+    .gravity(.15)
+    .distance(350)
+    .charge(-350)
+    .size([width, height])
+      .nodes(nodes)
+      .links(links.filter(function(d){return d.type == "episodic"}))
+      .on("tick", tick)
+      .start();
+ 
+  
+   svg.selectAll(".link")
+      .data(links)
+    .enter().append("line");
+      //.attr("class", "link");
+      
+ var arrow_head = svg.append("svg:defs").selectAll("marker")
+    .data(["end"])      // Different link/path types can be defined here
+  .enter().append("svg:marker")    // This section adds in the arrows
+    .attr("id", String)
+    .attr("viewBox", "0 -5 10 10")
+    .attr("refX", 15)
+    .attr("refY", -1.5)
+    .attr("markerWidth", 6)
+    .attr("markerHeight", 6)
+    .attr("orient", "auto")
+  .append("svg:path")
+    .attr("d", "M0,-5L10,0L0,5");
+      
+      
+  var path = svg.append("svg:g").selectAll("path")
+    .data(force.links())
+  .enter().append("svg:path")
+	//.attr("class", function(d) { return "link " + d.type; })
+	.attr("class", "linkEpisodic") 
+	.attr("marker-end", "url(#end)")
+	.attr("id",function(d,i) { return "linkId_" + i; }); // assign id for each link/path
+  
+  
+  var linktext = svg.append("svg:g").selectAll("g.linklabelholder").data(force.links());
+	
+  linktext.enter().append("g").attr("class", "linklabelholder")
+	   .append("text")
+	   .attr("class", "linklabel")
+		 .style("font-size", "13px")
+	   .attr("x", "200")
+		 .attr("y", "-10")
+	   .attr("text-anchor", "middle")
+		   .style("fill","#000")
+		 .append("textPath")
+	  .attr("xlink:href",function(d,i) { return "#linkId_" + i;})
+	   .text(function(d) { 		   		
+		   var ar=[];		   
+		   		if(d.Q1 == "1"){
+		   			ar.push("Q1");
+		   		}if(d.Q2 == "1"){
+		   			ar.push("Q2");
+		   		}if(d.Q3 == "1"){
+		   			ar.push("Q3");
+		   		}if(d.Q4 == "1"){
+		   			ar.push("Q4");
+		   		}
+		   		
+		   		if(ar.length == 1){
+		   			return ar[0];
+		   		}else if(ar.length == 2){
+		   			return ar[0]+","+ar[1];
+		   		}		   		
+		 });
+  
+
+  var node = svg.selectAll(".node")
+      .data(force.nodes())
+    .enter().append("g")
+      .attr("class", "node")
+      .style("fill", function(d) { return color(d.group); })
+      //.on("click",click)
+      //.on("dblclick", dblclick)
+       .on("mouseover", mouseOver(.001))
+      .on("mouseout", mouseOut(1))
+      .call(force.drag);
+
+  node.append("circle")
+      .attr("r",8);
+
+  node.append("text")
+      .attr("dx", 12)
+      .attr("dy", ".35em")
+      .text(function(d) { return d.name;});
+
+links.forEach(function(d) {
+//alert(d.source.index + "," + d.target.index);
+  linkedByIndex[d.source.index + "," + d.target.index] = 1;
+});
+ 
+    function tick() {
+    path.attr("d", function(d) {
+
+	
+        var dx = d.target.x - d.source.x,
+            dy = d.target.y - d.source.y,
+            dr = Math.sqrt(dx * dx + dy * dy);
+        return "M" + 
+            d.source.x + "," + 
+            d.source.y + "A" + 
+            dr + "," + dr + " 0 0,1 " + 
+            d.target.x + "," + 
+            d.target.y;
+		
+   });
+
+    node
+        .attr("transform", function(d) { 
+  	    return "translate(" + d.x + "," + d.y + ")"; });
+}
+
+
+ 
+    
+function mouseOver(opacity) {
+    return function(d) {
+    	node.style("stroke-opacity", function(o) {
+            thisOpacity = isConnected(d, o) ? 1 : opacity;
+            this.setAttribute('fill-opacity', thisOpacity);
+            return thisOpacity;
+        });
+
+        path.style("stroke-opacity", function(o) {
+            return o.source === d || o.target === d ? 1 : opacity;                
+        });
+
+       path.style("stroke-dasharray",function(o){
+    	   if(o.source === d){
+    		   return "5, 5";
+    	   }
+       });
+       
+       linktext.style("opacity",function(o){
+    	   return o.source === d || o.target === d ? 1 : opacity;
+       });
+
+       arrow_head.style("opacity",function(o){
+            thisOpacity = isConnected(d, o) ? 1 : opacity;
+            this.setAttribute('fill-opacity', thisOpacity);
+            return thisOpacity;
+        });
+       
+       d3.select(this).select("text").transition()
+       .duration(500)
+       .style("fill", "black")
+       .style("stroke", "lightsteelblue")
+       .style("stroke-width", ".5px")
+       .style("font", "20px sans-serif");
+   d3.select(this).select("circle").transition()
+       .duration(750)
+       .attr("r", 25)
+       .style("fill", function(d) { return color(d.group); });										        
+    };
+}
+
+function mouseOut(opacity) {
+    return function(d) {
+    	 node.style("stroke-opacity", function(o) {
+             thisOpacity = isConnected(d, o) ? 1 : opacity;
+             this.setAttribute('fill-opacity', thisOpacity);
+             return thisOpacity;
+         });
+
+         path.style("stroke-opacity", function(o) {
+     //return o.source === d || o.target === d ? 1 : opacity;
+             return o.source === d ? 1 : opacity;
+         }); 
+         
+         path.style();//stroke line 
+
+         path.style("stroke", "#FF0000");
+ 
+         path.style("stroke-dasharray",0); 
+         
+         linktext.style("opacity",function(o){
+      	   return o.source === d || o.target === d ? opacity : 1;
+         });
+         
+         arrow_head.style("opacity",function(o){
+             thisOpacity = isConnected(d, o) ? opacity : 1;
+             this.setAttribute('fill-opacity', thisOpacity);
+             return thisOpacity;
+         });
+         
+         d3.select(this).select("circle").transition()
+         .duration(750)
+         .attr("r", 8)
+         .style("fill", function(d) { return color(d.group); });
+     d3.select(this).select("text").transition()
+         .duration(750)
+         .attr("x", 12)
+         .style("stroke", "none")
+         .style("fill", "black")
+         .style("stroke", "none")
+         .style("font", "10px sans-serif");
+        
+    };
+}
+
+function neighboring(a, b) {
+  return linkedByIndex[a.index + "," + b.index];
+}
+
+function isConnected(a, b) {
+//return incoming and outgoing
+	return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
+//return outgong
+//alert(a.index + "," + b.index);
+	//return linkedByIndex[a.index + "," + b.index];
+	}
+
+
+}
+
+function QuatergraphWeak(nodes,links,svg1,width,height){
+
+	
+	var linkedByIndex = {};
+	var color = d3.scale.category10();		 
+	
+	d3.select("svg").remove();
+	var svg = d3.select(svg1).append("svg").attr("width", width).attr("height", height);
+
+var force = d3.layout.force()
+    .gravity(.15)
+    .distance(350)
+    .charge(-350)
+    .size([width, height])
+      .nodes(nodes)
+      .links(links.filter(function(d){return d.type == "weak"}))
+      .on("tick", tick)
+      .start();
+ 
+  
+   svg.selectAll(".link")
+      .data(links)
+    .enter().append("line");
+      //.attr("class", "link");
+      
+ var arrow_head = svg.append("svg:defs").selectAll("marker")
+    .data(["end"])      // Different link/path types can be defined here
+  .enter().append("svg:marker")    // This section adds in the arrows
+    .attr("id", String)
+    .attr("viewBox", "0 -5 10 10")
+    .attr("refX", 15)
+    .attr("refY", -1.5)
+    .attr("markerWidth", 6)
+    .attr("markerHeight", 6)
+    .attr("orient", "auto")
+  .append("svg:path")
+    .attr("d", "M0,-5L10,0L0,5");
+      
+      
+  var path = svg.append("svg:g").selectAll("path")
+    .data(force.links())
+  .enter().append("svg:path")
+	//.attr("class", function(d) { return "link " + d.type; })
+	.attr("class", "linkWeak") 
+	.attr("marker-end", "url(#end)");
+
+  var node = svg.selectAll(".node")
+      .data(force.nodes())
+    .enter().append("g")
+      .attr("class", "node")
+      .style("fill", function(d) { return color(d.group); })
+      //.on("click",click)
+      //.on("dblclick", dblclick)
+       .on("mouseover", mouseOver(.001))
+      .on("mouseout", mouseOut(1))
+      .call(force.drag);
+
+  node.append("circle")
+      .attr("r",8);
+
+  node.append("text")
+      .attr("dx", 12)
+      .attr("dy", ".35em")
+      .text(function(d) { return d.name;});
+
+links.forEach(function(d) {
+//alert(d.source.index + "," + d.target.index);
+  linkedByIndex[d.source.index + "," + d.target.index] = 1;
+});
+ 
+    function tick() {
+    path.attr("d", function(d) {
+
+	
+        var dx = d.target.x - d.source.x,
+            dy = d.target.y - d.source.y,
+            dr = Math.sqrt(dx * dx + dy * dy);
+        return "M" + 
+            d.source.x + "," + 
+            d.source.y + "A" + 
+            dr + "," + dr + " 0 0,1 " + 
+            d.target.x + "," + 
+            d.target.y;
+		
+   });
+
+    node
+        .attr("transform", function(d) { 
+  	    return "translate(" + d.x + "," + d.y + ")"; });
+}
+
+
+ 
+    
+function mouseOver(opacity) {
+    return function(d) {
+    	node.style("stroke-opacity", function(o) {
+            thisOpacity = isConnected(d, o) ? 1 : opacity;
+            this.setAttribute('fill-opacity', thisOpacity);
+            return thisOpacity;
+        });
+
+        path.style("stroke-opacity", function(o) {
+            return o.source === d || o.target === d ? 1 : opacity;                
+        });
+
+       path.style("stroke-dasharray",function(o){
+    	   if(o.source === d){
+    		   return "5, 5";
+    	   }
+       });
+
+       arrow_head.style("opacity",function(o){
+            thisOpacity = isConnected(d, o) ? 1 : opacity;
+            this.setAttribute('fill-opacity', thisOpacity);
+            return thisOpacity;
+        });
+       
+       d3.select(this).select("text").transition()
+       .duration(500)
+       .style("fill", "black")
+       .style("stroke", "lightsteelblue")
+       .style("stroke-width", ".5px")
+       .style("font", "20px sans-serif");
+   d3.select(this).select("circle").transition()
+       .duration(750)
+       .attr("r", 25)
+       .style("fill", function(d) { return color(d.group); });										        
+    };
+}
+
+function mouseOut(opacity) {
+    return function(d) {
+    	 node.style("stroke-opacity", function(o) {
+             thisOpacity = isConnected(d, o) ? 1 : opacity;
+             this.setAttribute('fill-opacity', thisOpacity);
+             return thisOpacity;
+         });
+
+         path.style("stroke-opacity", function(o) {
+     //return o.source === d || o.target === d ? 1 : opacity;
+             return o.source === d ? 1 : opacity;
+         }); 
+         
+         path.style();//stroke line 
+
+         path.style("stroke", "#33CC33");
+        
+         arrow_head.style("opacity",function(o){
+             thisOpacity = isConnected(d, o) ? opacity : 1;
+             this.setAttribute('fill-opacity', thisOpacity);
+             return thisOpacity;
+         });
+         
+         d3.select(this).select("circle").transition()
+         .duration(750)
+         .attr("r", 8)
+         .style("fill", function(d) { return color(d.group); });
+     d3.select(this).select("text").transition()
+         .duration(750)
+         .attr("x", 12)
+         .style("stroke", "none")
+         .style("fill", "black")
+         .style("stroke", "none")
+         .style("font", "10px sans-serif");
+        
+    };
+}
+
+function neighboring(a, b) {
+  return linkedByIndex[a.index + "," + b.index];
+}
+
+function isConnected(a, b) {
+//return incoming and outgoing
+	return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
+//return outgong
+//alert(a.index + "," + b.index);
+	//return linkedByIndex[a.index + "," + b.index];
+	}
+
+}
+
+
