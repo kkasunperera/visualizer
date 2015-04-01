@@ -58,6 +58,7 @@ public class PostDataServ extends HttpServlet {
 	List<Links> linkCompleteTriad;
 	List<Links> linkIncomplete;
 	List<Links> linkChain;
+	Connection connect = null;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -74,7 +75,7 @@ public class PostDataServ extends HttpServlet {
 		logger.info("servlet initiating.....");
 
 		DBconnect.ConnectionPool con = new ConnectionPool();
-		Connection connect = null;
+
 		connect = con.getConnection();
 		DBconnect.QueryDB qdb = new QueryDB();
 
@@ -142,20 +143,20 @@ public class PostDataServ extends HttpServlet {
 
 		if (userPath.equals("/dataGet")) {
 			DBconnect.ConnectionPool con = new ConnectionPool();
-			Connection connect = null;
+
 			connect = con.getConnection();
 			DBconnect.QueryDB qdb = new QueryDB();
 			String year = request.getParameter("year");
 			int Q = Integer.parseInt(request.getParameter("Q"));
 			String Query = null;
-			if(Q==-1){
-				Query = "select source,target from year where p_value_"
-						+ year + "=1";	
-			}else{
-				Query = "select  source,target from quarter where p_value_"+year+"_Q"+Q+"=1";
-						
+			if (Q == -1) {
+				Query = "select source,target from year where p_value_" + year
+						+ "=1";
+			} else {
+				Query = "select  source,target from quarter where p_value_"
+						+ year + "_Q" + Q + "=1";
+
 			}
-				
 
 			String q_gt = qdb.getFromDB(Query, connect).toString();
 			ObjectMapper mapper = new ObjectMapper();
@@ -232,15 +233,16 @@ public class PostDataServ extends HttpServlet {
 			 * */
 		} else if (userPath.equals("/Indegree")) {
 			logger.info("userPath is " + userPath);
-			 
+
 			DirectedGraph<Node, DefaultEdge> gg;
-			
-			gg = DirectedGraphDemoServ.createHrefGraph(nodeSet,linkSet);
-				
-			List<Links> link = DirectedGraphDemoServ.findHighInDegree(gg,nodeSet);
-			
+
+			gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, linkSet);
+
+			List<Links> link = DirectedGraphDemoServ.findHighInDegree(gg,
+					nodeSet);
+
 			response.setContentType("application/json");
-			 
+
 			PrintWriter out = response.getWriter();
 			JsonObject Obj = new JsonObject();
 
@@ -264,14 +266,14 @@ public class PostDataServ extends HttpServlet {
 			logger.info("userPath is " + userPath);
 			int quater = Integer.parseInt(request.getParameter("Q"));
 			DirectedGraph<Node, DefaultEdge> gg;
-			
-			gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, linkSet);
-			
-			List<Links> link = DirectedGraphDemoServ.findHighOutDegree(gg,nodeSet);
 
-			
+			gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, linkSet);
+
+			List<Links> link = DirectedGraphDemoServ.findHighOutDegree(gg,
+					nodeSet);
+
 			response.setContentType("application/json");
-			 
+
 			PrintWriter out = response.getWriter();
 			JsonObject Obj = new JsonObject();
 
@@ -292,11 +294,10 @@ public class PostDataServ extends HttpServlet {
 		} else if (userPath.equals("/CompleteTriad")) {
 			logger.info("userPath is " + userPath);
 
-			
 			DirectedGraph<Node, DefaultEdge> gg;
-			
-			gg = DirectedGraphDemoServ.createHrefGraph(nodeSet,linkSet);
-				
+
+			gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, linkSet);
+
 			linkCompleteTriad = DirectedGraphDemoServ
 					.CompleteTriad(gg, nodeSet);
 
@@ -326,7 +327,7 @@ public class PostDataServ extends HttpServlet {
 			logger.info("userPath is " + userPath);
 			int quater = Integer.parseInt(request.getParameter("Quater"));
 			DirectedGraph<Node, DefaultEdge> gg = DirectedGraphDemoServ
-					.createHrefGraph(nodeSet,linkSet);
+					.createHrefGraph(nodeSet, linkSet);
 
 			linkIncomplete = DirectedGraphDemoServ.InCompleteTriad(gg, nodeSet);
 			response.setContentType("application/json");
@@ -353,7 +354,7 @@ public class PostDataServ extends HttpServlet {
 			logger.info("userPath is " + userPath);
 
 			DirectedGraph<Node, DefaultEdge> gg = DirectedGraphDemoServ
-					.createHrefGraph(nodeSet,linkSet);
+					.createHrefGraph(nodeSet, linkSet);
 
 			List<Links> link = DirectedGraphDemoServ.findImmidietCycles(gg,
 					nodeSet);
@@ -377,10 +378,50 @@ public class PostDataServ extends HttpServlet {
 			 * This will return the cluster coeffient of the graph. according to
 			 * given quarter it can be read from ajax in web pages.
 			 */
+		} else if (userPath.equals("/QTempPat")) {
+			logger.info("userPath is " + userPath);
+			
+			Links[] link_QT = null;
+			DBconnect.QueryDB qdb = new QueryDB();
+			String year = request.getParameter("year");
+			String Query = "select source,target ,p_value_"+year+",p_value_"+year+"_Q1,p_value_"+year
+					+"_Q2,p_value_"+year+"_Q3,p_value_"+year+"_Q4 from all_data where p_value_"+year
+					+" = 1 or p_value_"+year+"_Q1=1 or p_value_"+year+"_Q2=1 or p_value_"+year
+					+"_Q3=1 or p_value_"+year+"_Q4=1";
+
+			String q_gt = qdb.getFromDB_QT(Query, connect).toString();
+			
+			ObjectMapper mapper = new ObjectMapper();
+			response.setContentType("application/json");
+			PrintWriter out = response.getWriter();
+			
+			try {
+				link_QT = mapper.readValue(q_gt, Links[].class);
+				
+				JsonObject Obj = new JsonObject();
+				JsonElement links = gson.toJsonTree(link_QT);
+				JsonElement nodes = gson.toJsonTree(nodeSet);
+				Obj.add("links", links);
+				Obj.add("nodes", nodes);
+				out.println(Obj.toString());
+				out.close();
+
+			} catch (JsonParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+
 		} else if (userPath.equals("/cc")) {
 			logger.info("userPath is " + userPath);
 			PrintWriter out = response.getWriter();
-			
+
 			DirectedGraph<Node, DefaultEdge> gg = DirectedGraphDemoServ
 					.createHrefGraph(nodeSet, linkSet);
 
