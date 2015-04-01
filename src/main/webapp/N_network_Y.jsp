@@ -19,6 +19,7 @@
 <script src="js/d3.min.js"></script>
 <script src="js/N_networkDraw.js"></script>
 <script src="js/tracepaths.js"></script>
+<script src="js/graph_legend.js"></script>
 
 <style type="text/css">
 .demoHeaders {
@@ -218,8 +219,8 @@ text {
 								style="padding: 10px 10px;">IncompleteTriad</a></li>
 							<li><a id="Imcycles" href="#ImmediateCycle"
 								data-toggle="tab" style="padding: 10px 10px;">ImmediateCycles</a></li>
-							<!-- <li><a id="Quarters" href="#QuarterlyTemporalPatterns"
-								data-toggle="tab" style="padding: 10px 10px;">QuarterlyTemporalPatterns</a></li> -->
+							<li><a id="Quarters" href="#QuarterlyTemporalPatterns"
+								data-toggle="tab" style="padding: 10px 10px;">QuarterlyTemporalPatterns</a></li>
 							<li><a id="Chain" href="#longerchain" data-toggle="tab"
 								style="padding: 10px 10px;">Chain</a></li>
 							<li><a id="traces" href="#tracepath" data-toggle="tab"
@@ -251,7 +252,7 @@ text {
                                         &nbsp; Max Indegree:<l id="max_indegree"></l>
 									   		<script type="text/javascript">
 									   		var ctx = document.getElementById("graph_note1").getContext("2d");					                            
-				                            //SvgLoadDegree(ctx);
+				                            SvgLoadDegree(ctx);
 											$("#In").click(function(){	
 												/* pass quarter number and request Indegree servlet and return set of links and objects in success function*/
 							   					$.ajax({
@@ -286,7 +287,7 @@ text {
                                         &nbsp; Max Outdegree:<l id="max_outdegree"></l>
 									   		<script type="text/javascript">
 									   		var ctx1 = document.getElementById("graph_note2").getContext("2d");					                            
-				                           // SvgLoadDegree(ctx1);
+				                            SvgLoadDegree(ctx1);
 				                            
 											$("#Out").click(function(){							   												   					
 							   					$.ajax({
@@ -314,7 +315,7 @@ text {
                                         </canvas>
 							   			<script type="text/javascript">
 							   			var ctx2 = document.getElementById("graph_note3").getContext("2d");					                            
-			                            //SvgLoadCompTriad(ctx2);
+			                            SvgLoadCompTriad(ctx2);
 			                            		
 			                            $("#Cmp").click(function(){							   												   					
 						   					$.ajax({
@@ -324,7 +325,7 @@ text {
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 						   						var width = 1000,height = 900;							   						
 						   						//DrawGraph(data.nodes, data.Links,"#borderCmp",width,height);							   						
-						   				DrawTrangleGraph(data.nodes, data.links,"#borderCmp",width,height);	 
+						   				      DrawTrangleGraph(data.nodes, data.links,"#borderCmp",width,height);	 
                                          },
 						   					  error: function(data,error){
 						   						 // alert(error);
@@ -343,7 +344,7 @@ text {
                                         </canvas>
 							   			<script type="text/javascript">
 							   			var ctx3 = document.getElementById("graph_note4").getContext("2d");					                            
-			                            //SvgLoadIncTriad(ctx3);
+			                            SvgLoadIncTriad(ctx3);
 			                           	/*  passing quarter and and requesting IncompleteTriad servlet to execute */
 			                            $("#Incmp").click(function(){							   												   					
 						   					$.ajax({
@@ -413,11 +414,11 @@ text {
 							   					var file=<%=name%>;							   				
 							   					var ctx=document.getElementById("graph_note6").getContext("2d");
 							   					ctx.clearRect(0, 0, 800, 80);
-							   					//SvgQuarter(ctx);							   				
+							   					var data;
+							   					SvgQuarter(ctx);							   				
 							   					/* drawing the quater main graph */
 							   					$("#Quarters").click(function(){
 							   						var width = 900, height = 950;
-							   						QuarterGraph(nodes, file, "#borderQgraph", width, height);
 							   						//requesting cluster coeffient
 							   						$.ajax({
 									   					  type: 'GET',
@@ -429,17 +430,37 @@ text {
 									   					  error: function(data,error){alert(error);},
 									   					  async: false
 
-									   					}); 								   													   			
+									   					}); 
+							   						$.ajax({
+									   					  type: 'GET',
+									   					  url: "QTempPat?year=<%=Integer.parseInt(request.getParameter("year"))%>",
+									   					  dataType: 'json',
+									   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
+									   						var width = 1000,height = 900;	
+									   						QuarterGraph(data.nodes, data.links, "#borderQgraph", width, height);						   						
+									   					  },
+									   					  error: function(data,error){alert(error);},
+									   					  async: false
+									   					}); 	
 								   				});
 							   					//drawing sustained quarter graph from data not data coming from server
 							   					$("#Sustained").click(function(){
-							   						//alert("sustained");
 							   						var can=document.getElementById("graph_note6");
 								   					var ctx = can.getContext("2d");
 								   					can.width=800;
 							   						SvgQuaterSustained(ctx); 
 							   						var width = 900, height = 950;
-							   						QuarterGraphSustained(nodes, file, "#borderQgraph", width, height);
+							   						$.ajax({
+									   					  type: 'GET',
+									   					  url: "QTempPat?year=<%=Integer.parseInt(request.getParameter("year"))%>",
+									   					  dataType: 'json',
+									   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
+									   						var width = 1000,height = 900;	
+									   						QuarterGraphSustained(data.nodes, data.links, "#borderQgraph", width, height);						   						
+									   					  },
+									   					  error: function(data,error){alert(error);},
+									   					  async: false
+									   					}); 
 							   					});
 							   					//drawing episodic type quarter graph from data not data coming from server
 							   					$("#Episodic").click(function(){
@@ -448,18 +469,38 @@ text {
 								   					var ctx = can.getContext("2d");
 								   					can.width=800;							   						
 							   						SvgQuarterEpisodic(ctx);
-							   						var width = 900, height = 950;
-							   						QuaterGraphEpisodic(nodes, file, "#borderQgraph", width, height);
+							   						$.ajax({
+									   					  type: 'GET',
+									   					  url: "QTempPat?year=<%=Integer.parseInt(request.getParameter("year"))%>",
+									   					  dataType: 'json',
+									   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
+									   						var width = 1000,height = 900;	
+									   						QuaterGraphEpisodic(data.nodes, data.links, "#borderQgraph", width, height);						   						
+									   					  },
+									   					  error: function(data,error){alert(error);},
+									   					  async: false
+									   					}); 
+							   						
 							   					});
 							   					//drawing weak type quarter graph from data not data coming from server
 							   					$("#Weak").click(function(){
-							   						//alert("weak");
 							   						var can=document.getElementById("graph_note6");
 								   					var ctx = can.getContext("2d");
 								   					can.width=800;
 							   						SvgQuarterWeak(ctx);
 							   						var width = 900, height = 950;
-							   						QuatergraphWeak(nodes, file, "#borderQgraph", width, height);
+							   						$.ajax({
+									   					  type: 'GET',
+									   					  url: "QTempPat?year=<%=Integer.parseInt(request.getParameter("year"))%>",
+									   					  dataType: 'json',
+									   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
+									   						var width = 1000,height = 900;	
+									   						QuatergraphWeak(data.nodes, data.links, "#borderQgraph", width, height);						   						
+									   					  },
+									   					  error: function(data,error){alert(error);},
+									   					  async: false
+									   					}); 
+							  
 							   					});
 							   					$("#main").click(function(){
 								   					var can=document.getElementById("graph_note6");
@@ -467,7 +508,18 @@ text {
 								   					can.width=800;
 								   					SvgQuarter(ctx);
 							   						var width = 900, height = 950;
-							   						QuarterGraph(nodes, file, "#borderQgraph", width, height);
+							   						$.ajax({
+									   					  type: 'GET',
+									   					  url: "QTempPat?year=<%=Integer.parseInt(request.getParameter("year"))%>",
+									   					  dataType: 'json',
+									   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
+									   						var width = 1000,height = 900;	
+									   						QuarterGraph(data.nodes, data.links, "#borderQgraph", width, height);						   						
+									   					  },
+									   					  error: function(data,error){alert(error);},
+									   					  async: false
+									   					}); 	
+							   						
 							   					});							   					
 							   				</script>
 						   						<div id="tooltip" class="hidden">
