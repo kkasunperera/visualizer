@@ -31,6 +31,7 @@
     <url-pattern>/get_degrees</url-pattern>
     <url-pattern>/ReadJson</url-pattern>
     <url-pattern>/dataGet</url-pattern>
+    <url-pattern>/QTempPat</url-pattern>
     
   </servlet-mapping>
    <servlet-mapping>
