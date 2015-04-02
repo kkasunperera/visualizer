@@ -162,9 +162,10 @@ public class PostDataServ extends HttpServlet {
 			ObjectMapper mapper = new ObjectMapper();
 			response.setContentType("application/json");
 			PrintWriter out = response.getWriter();
-
+			
 			try {
 				linkSet = mapper.readValue(q_gt, Links[].class);
+				System.out.println("length : "+linkSet.length);
 				g = DirectedGraphDemoServ.createHrefGraph(nodeSet, linkSet);
 
 				JsonObject Obj = new JsonObject();
