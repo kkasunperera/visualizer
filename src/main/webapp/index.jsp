@@ -115,16 +115,16 @@
 											href="N_network_Y.jsp?year=<%=i%>&Q=-1"><i
 												class="fa fa-fw fa-table"></i> Annual </a></li>
 										<li><a
-											href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=1"><i
+											href="N_network_Q.jsp?year=<%=i%>&Q=1"><i
 												class="fa fa-fw fa-table"></i> Quarter 1</a></li>
 										<li><a
-											href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=2"><i
+											href="N_network_Q.jsp?year=<%=i%>&Q=2"><i
 												class="fa fa-fw fa-table"></i> Quarter 2</a></li>
 										<li><a
-											href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=3"><i
+											href="N_network_Q.jsp?year=<%=i%>&Q=3"><i
 												class="fa fa-fw fa-table"></i> Quarter 3</a></li>
 										<li><a
-											href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=4"><i
+											href="N_network_Q.jsp?year=<%=i%>&Q=4"><i
 												class="fa fa-fw fa-table"></i> Quarter 4</a></li>
 									</ul>
 								</li>
