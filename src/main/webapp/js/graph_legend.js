@@ -75,8 +75,6 @@ function SvgLoad(ctx){
     ctx.fill();
 }
 
-
-
 function SvgLoadDegree(ctx){
 	ctx.fillStyle = "#1f77b4";
     ctx.beginPath();
