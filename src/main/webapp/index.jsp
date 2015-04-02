@@ -7,156 +7,71 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-
-        <title>GCVisualizer - Karsha project</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/sb-admin-2.css" rel="stylesheet">
-        <link href="font-awesome-4.1.0/css/font-awesome.min.css"
-              rel="stylesheet" type="text/css">
+        <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="css/jquery-ui.css" rel="stylesheet">
-        <style>
-            .link {
-                fill: none;
-                stroke: #666;
-                stroke-width: 1.5px;
-            }
-
-            .node circle {
-                stroke: #fff;
-                stroke-width: 1.5px;
-            }
-
-            text {
-                font: 10px sans-serif;
-                pointer-events: none;
-            }
-
-            .demoHeaders {
-                margin-top: 2em;
-            }
-
-            #dialog-link {
-                padding: .4em 1em .4em 20px;
-                text-decoration: none;
-                position: relative;
-            }
-
-            #dialog-link span.ui-icon {
-                margin: 0 5px 0 0;
-                position: absolute;
-                left: .2em;
-                top: 50%;
-                margin-top: -8px;
-            }
-
-            #icons {
-                margin: 0;
-                padding: 0;
-            }
-
-            #icons li {
-                margin: 2px;
-                position: relative;
-                padding: 4px 0;
-                cursor: pointer;
-                float: left;
-                list-style: none;
-            }
-
-            #icons span.ui-icon {
-                float: left;
-                margin: 0 4px;
-            }
-
-            .fakewindowcontain .ui-widget-overlay {
-                position: absolute;
-            }
-
-            select {
-                width: 300px;
-            }
-            
-        </style>
+        <link href="css/network.css" rel="stylesheet">
+        <title>GCVisualizer - Karsha project</title>
     </head>
 
     <body>
         <div id="wrapper">
-            <nav class="navbar navbar-default navbar-static-top" role="navigation"
-			style="margin-bottom: 0">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="index.jsp">GC Visualizer - Karsha
-					project</a>
-			</div>
-			<!-- /.navbar-header -->
-			<div class="navbar-default sidebar" role="navigation">
-				<div class="sidebar-nav navbar-collapse">
-					<ul class="nav navbar-nav side-nav">
-						<!-- <li class="active"><a href="index.jsp"><i
-							class="fa fa-fw fa-dashboard"></i> GC Visualizer</a></li> -->
-						<li><a><i class="fa fa-fw fa-arrows-v"></i> GC-Analysis
-						</a>
-							<ul id="accordion">
-								<%
-									for (int i = 2005; i < 2013; i++) {
-								%>
-								<li>
-									<h3>
-										<a
-											href="?filename=data<%=i%>.json&year=data<%=i%>.json&year=<%=i%>"><%=i%></a>
-									</h3>
-									<ul>
-										<li><a
-											href="N_network_Y.jsp?year=<%=i%>&Q=-1"><i
-												class="fa fa-fw fa-table"></i> Annual </a></li>
-										<li><a
-											href="N_network_Q.jsp?year=<%=i%>&Q=1"><i
-												class="fa fa-fw fa-table"></i> Quarter 1</a></li>
-										<li><a
-											href="N_network_Q.jsp?year=<%=i%>&Q=2"><i
-												class="fa fa-fw fa-table"></i> Quarter 2</a></li>
-										<li><a
-											href="N_network_Q.jsp?year=<%=i%>&Q=3"><i
-												class="fa fa-fw fa-table"></i> Quarter 3</a></li>
-										<li><a
-											href="N_network_Q.jsp?year=<%=i%>&Q=4"><i
-												class="fa fa-fw fa-table"></i> Quarter 4</a></li>
-									</ul>
-								</li>
-								<%
-									}
-								%>
-							</ul></li>
-						<li><a href="DataAnalysis.jsp"><i
-								class="fa fa-fw fa-table"></i> Network Summary Statistics</a></li>
-						<li><a href="analysis_extended.jsp"><i
-								class="fa fa-fw fa-file"></i> H-Index Analysis</a></li>
-
-					</ul>
+            <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="index.jsp">GC Visualizer - Karsha project</a>
 				</div>
-				<!-- /.sidebar-collapse -->
-			</div>
-			<!-- /.navbar-static-side -->
-		</nav>
-            <div id="page-wrapper">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1 class="page-header">
-                                Granger Causality Visualizer<small></small>
-                            </h1>
+				<div class="navbar-default sidebar">
+					<div class="sidebar-nav navbar-collapse">
+						<ul class="nav navbar-nav side-nav">
+							<li><a><i class="fa fa-fw fa-arrows-v"></i> GC-Analysis</a>
+								<ul id="accordion">
+									<% for (int i = 2005; i < 2013; i++) {%>
+									<li>
+										<a href="?filename=data<%=i%>.json&year=data<%=i%>.json&year=<%=i%>"><%=i%></a>
+										<ul>
+											<li><a
+												href="N_network_Y.jsp?year=<%=i%>&Q=-1"><i
+													class="fa fa-fw fa-table"></i> Annual </a></li>
+											<li><a
+												href="N_network_Q.jsp?year=<%=i%>&Q=1"><i
+													class="fa fa-fw fa-table"></i> Quarter 1</a></li>
+											<li><a
+												href="N_network_Q.jsp?year=<%=i%>&Q=2"><i
+													class="fa fa-fw fa-table"></i> Quarter 2</a></li>
+											<li><a
+												href="N_network_Q.jsp?year=<%=i%>&Q=3"><i
+													class="fa fa-fw fa-table"></i> Quarter 3</a></li>
+											<li><a
+												href="N_network_Q.jsp?year=<%=i%>&Q=4"><i
+													class="fa fa-fw fa-table"></i> Quarter 4</a></li>
+										</ul>
+									</li>
+									<%}%>
+								</ul>
+							</li>
+							<li><a href="DataAnalysis.jsp"><i
+									class="fa fa-fw fa-table"></i> Network Summary Statistics</a></li>
+							<li><a href="analysis_extended.jsp"><i
+									class="fa fa-fw fa-file"></i> H-Index Analysis</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+        <div id="page-wrapper">
+        	<div class="container-fluid">
+            	<div class="row">
+                	<div class="col-lg-12">
+                    	<h1 class="page-header">Granger Causality Visualizer<small></small></h1>
                             <ol class="breadcrumb">
-                                <li class="active"><i class="fa fa-dashboard"></i>
-                                    Visualizer</li>
+                                <li class="active"><i class="fa fa-dashboard"></i>Visualizer</li>
                             </ol>
-                        </div>
                     </div>
-                    <!-- /.row -->
+                </div>
+                
+                
+                <!--  formated to here.... -->
                     <div class="row">
                         <ul>
                             <p><strong>The Karsha GC Visualizer presents  Granger Causality(GC) based interaction patterns when comparing</br> the market volume of trades in US corporate bonds and US equities, grouped by NAICS industry sectors.</strong></p>
