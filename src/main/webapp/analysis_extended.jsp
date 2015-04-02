@@ -10,12 +10,11 @@
 
 <title>Visualizer - Karsha project</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/sb-admin.css" rel="stylesheet">
-<link href="css/plugins/morris.css" rel="stylesheet">
+<link href="css/sb-admin-2.css" rel="stylesheet">
 <link href="font-awesome-4.1.0/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
 <link href="css/jquery-ui.css" rel="stylesheet">
-<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="js/d3.min.js"></script>
 <script src="js/dataAnalysis.js"></script>
 <style>
 .link {
@@ -93,62 +92,67 @@ select {
 
 <body>
 	<div id="wrapper">
-		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		 <nav class="navbar navbar-default navbar-static-top" role="navigation"
+			style="margin-bottom: 0">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target=".navbar-ex1-collapse">
+					data-target=".navbar-collapse">
 					<span class="sr-only">Toggle navigation</span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.jsp"><font color="white">GC
-						Visualizer - Karsha project</font></a>
+				<a class="navbar-brand" href="index.jsp">GC Visualizer - Karsha
+					project</a>
 			</div>
-			<div class="collapse navbar-collapse navbar-ex1-collapse">
-				<ul class="nav navbar-nav side-nav">
-					<!-- <li class="active"><a href="index.jsp"><i
-							class="fa fa-fw fa-dashboard"></i>GC Visualizer</a></li> -->
-					<li><a><i class="fa fa-fw fa-arrows-v"></i> GC-Analysis </a>
-						<ul id="accordion">
-							<%
-								for (int i = 2005; i < 2013; i++) {
-							%>
-							<li>
-								<h3>
-									<a
-										href="view_graph.jsp?filename=data<%=i%>.json&year=data<%=i%>.json&year=<%=i%>"><%=i%></a>
-								</h3>
-								<ul>
-									<li><a
-										href="view_graph.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=0"><i
-											class="fa fa-fw fa-table"></i> Overall </a></li>
-									<li><a href="view_graph.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=5"><i 
-											class="fa fa-fw fa-table"></i> Annual </a></li>
-									<li><a
-										href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=1"><i
-											class="fa fa-fw fa-table"></i> Quarter 1</a></li>
-									<li><a
-										href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=2"><i
-											class="fa fa-fw fa-table"></i> Quarter 2</a></li>
-									<li><a
-										href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=3"><i
-											class="fa fa-fw fa-table"></i> Quarter 3</a></li>
-									<li><a
-										href="Quater_view.jsp?filename=data<%=i%>.json&year=<%=i%>&Q=4"><i
-											class="fa fa-fw fa-table"></i> Quarter 4</a></li>
-								</ul>
-							</li>
-							<%
-								}
-							%>
-						</ul></li>
-					<li><a href="DataAnalysis.jsp"><i
-							class="fa fa-fw fa-table"></i> Network Summary Statistics</a></li>
-					<li><a href="analysis_extended.jsp"><i class="fa fa-fw fa-file"></i>
-                                H-Index Analysis</a></li>
+			<!-- /.navbar-header -->
+			<div class="navbar-default sidebar" role="navigation">
+				<div class="sidebar-nav navbar-collapse">
+					<ul class="nav navbar-nav side-nav">
+						<!-- <li class="active"><a href="index.jsp"><i
+							class="fa fa-fw fa-dashboard"></i> GC Visualizer</a></li> -->
+						<li><a><i class="fa fa-fw fa-arrows-v"></i> GC-Analysis
+						</a>
+							<ul id="accordion">
+								<%
+									for (int i = 2005; i < 2013; i++) {
+								%>
+								<li>
+									<h3>
+										<a
+											href="?filename=data<%=i%>.json&year=data<%=i%>.json&year=<%=i%>"><%=i%></a>
+									</h3>
+									<ul>
+										<li><a
+											href="N_network_Y.jsp?year=<%=i%>&Q=-1"><i
+												class="fa fa-fw fa-table"></i> Annual </a></li>
+										<li><a
+											href="N_network_Q.jsp?year=<%=i%>&Q=1"><i
+												class="fa fa-fw fa-table"></i> Quarter 1</a></li>
+										<li><a
+											href="N_network_Q.jsp?year=<%=i%>&Q=2"><i
+												class="fa fa-fw fa-table"></i> Quarter 2</a></li>
+										<li><a
+											href="N_network_Q.jsp?year=<%=i%>&Q=3"><i
+												class="fa fa-fw fa-table"></i> Quarter 3</a></li>
+										<li><a
+											href="N_network_Q.jsp?year=<%=i%>&Q=4"><i
+												class="fa fa-fw fa-table"></i> Quarter 4</a></li>
+									</ul>
+								</li>
+								<%
+									}
+								%>
+							</ul></li>
+						<li><a href="DataAnalysis.jsp"><i
+								class="fa fa-fw fa-table"></i> Network Summary Statistics</a></li>
+						<li><a href="analysis_extended.jsp"><i
+								class="fa fa-fw fa-file"></i> H-Index Analysis</a></li>
 
-				</ul>
+					</ul>
+				</div>
+				<!-- /.sidebar-collapse -->
 			</div>
+			<!-- /.navbar-static-side -->
 		</nav>
 
 		<div id="page-wrapper">
@@ -210,10 +214,7 @@ select {
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
-	<!-- Morris Charts JavaScript -->
-	<script src="js/plugins/morris/raphael.min.js"></script>
-	<script src="js/plugins/morris/morris.min.js"></script>
-	<script src="js/plugins/morris/morris-data.js"></script>
+	
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery-ui.js"></script>
 	<script>
