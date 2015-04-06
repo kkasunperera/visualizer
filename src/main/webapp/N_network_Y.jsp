@@ -7,126 +7,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-
-<title>GCVisualizer - Karsha project</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/sb-admin-2.css" rel="stylesheet">
-<link href="font-awesome-4.1.0/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css">
 <link href="css/jquery-ui.css" rel="stylesheet">
+<link href="css/network.css" rel="stylesheet">
+<link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <script src="js/jquery.1.9.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/d3.min.js"></script>
 <script src="js/N_networkDraw.js"></script>
 <script src="js/tracepaths.js"></script>
 <script src="js/graph_legend.js"></script>
-
-<style type="text/css">
-.demoHeaders {
-	margin-top: 2em;
-}
-
-#dialog-link {
-	padding: .4em 1em .4em 20px;
-	text-decoration: none;
-	position: relative;
-}
-
-#dialog-link span.ui-icon {
-	margin: 0 5px 0 0;
-	position: absolute;
-	left: .2em;
-	top: 50%;
-	margin-top: -8px;
-}
-
-#icons {
-	margin: 0;
-	padding: 0;
-}
-
-#icons li {
-	margin: 2px;
-	position: relative;
-	padding: 4px 0;
-	cursor: pointer;
-	float: left;
-	list-style: none;
-}
-
-#icons span.ui-icon {
-	float: left;
-	margin: 0 4px;
-}
-
-.fakewindowcontain .ui-widget-overlay {
-	position: absolute;
-}
-
-select {
-	width: 300px;
-}
-
-label {
-	display: inline-block;
-	width: 5em;
-}
-
-table,td {
-	border: 1px solid green;
-	border-collapse: collapse;
-}
-
-.link {
-	fill: none;
-	stroke: #666;
-	stroke-width: 1.5px;
-}
-
-.linkSustain {
-	fill: none;
-	stroke: #0066FF;
-	stroke-width: 1.5 px;
-}
-
-.linkEpisodic {
-	fill: none;
-	stroke: #FF0000;
-	stroke-width: 1.5px;
-}
-
-.linkWeak {
-	fill: none;
-	stroke: #33CC33;
-	stroke-with: 1.5px;
-}
-
-.linkWhite {
-	fill: none;
-	stroke: #FFFFFF;
-	stroke-with: -10 px;
-}
-
-.node circle {
-	stroke: #fff;
-	stroke-width: 1.5px;
-}
-
-text {
-	font: 10px sans-serif;
-	pointer-events: none;
-}
-
-.d3-tip {
-	line-height: 1;
-	color: black;
-}
-</style>
+<title>GCVisualizer - Karsha project</title>
 </head>
 
 <body style="background-color: #e7e7e7">
 	<div id="wrapper">
-		<nav class="navbar navbar-default navbar-static-top" role="navigation"
+		<nav class="navbar navbar-default navbar-static-top"
 			style="margin-bottom: 0">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -138,72 +35,57 @@ text {
 				<a class="navbar-brand" href="index.jsp">GC Visualizer - Karsha
 					project</a>
 			</div>
-			<!-- /.navbar-header -->
-			<div class="navbar-default sidebar" role="navigation">
+			<div class="navbar-default sidebar">
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav navbar-nav side-nav">
-						<!-- <li class="active"><a href="index.jsp"><i
-							class="fa fa-fw fa-dashboard"></i> GC Visualizer</a></li> -->
-						<li><a><i class="fa fa-fw fa-arrows-v"></i> GC-Analysis
-						</a>
+						<li><a><i class="fa fa-fw fa-arrows-v"></i> GC-Analysis </a>
 							<ul id="accordion">
 								<%
 									for (int i = 2005; i < 2013; i++) {
 								%>
 								<li>
 									<h3>
-										<a
-											href="?filename=data<%=i%>.json&year=data<%=i%>.json&year=<%=i%>"><%=i%></a>
+										<a href="?filename=data<%=i%>.json&year=data<%=i%>.json&year=<%=i%>"><%=i%></a>
 									</h3>
 									<ul>
-										<li><a
-											href="N_network_Y.jsp?year=<%=i%>&Q=-1"><i
+										<li><a href="N_network_Y.jsp?year=<%=i%>&Q=-1"><i
 												class="fa fa-fw fa-table"></i> Annual </a></li>
-										<li><a
-											href="N_network_Q.jsp?year=<%=i%>&Q=1"><i
+										<li><a href="N_network_Q.jsp?year=<%=i%>&Q=1"><i
 												class="fa fa-fw fa-table"></i> Quarter 1</a></li>
-										<li><a
-											href="N_network_Q.jsp?year=<%=i%>&Q=2"><i
+										<li><a href="N_network_Q.jsp?year=<%=i%>&Q=2"><i
 												class="fa fa-fw fa-table"></i> Quarter 2</a></li>
-										<li><a
-											href="N_network_Q.jsp?year=<%=i%>&Q=3"><i
+										<li><a href="N_network_Q.jsp?year=<%=i%>&Q=3"><i
 												class="fa fa-fw fa-table"></i> Quarter 3</a></li>
-										<li><a
-											href="N_network_Q.jsp?year=<%=i%>&Q=4"><i
+										<li><a href="N_network_Q.jsp?year=<%=i%>&Q=4"><i
 												class="fa fa-fw fa-table"></i> Quarter 4</a></li>
 									</ul>
 								</li>
 								<%
 									}
 								%>
-							</ul></li>
+							</ul>
+						</li>
 						<li><a href="DataAnalysis.jsp"><i
 								class="fa fa-fw fa-table"></i> Network Summary Statistics</a></li>
 						<li><a href="analysis_extended.jsp"><i
 								class="fa fa-fw fa-file"></i> H-Index Analysis</a></li>
-
 					</ul>
 				</div>
-				<!-- /.sidebar-collapse -->
 			</div>
-			<!-- /.navbar-static-side -->
 		</nav>
-
 		<%
 			String year = request.getParameter("year");
 		%>
-
 		<div id="page-wrapper">
-
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
 						<h2>
 							<center>
 								Granger causality Log Volume Data Analysis
-								<%=year%></center>
+								<%=year%>
+							</center>
 						</h2>
-
 						<ul id="myTab" class="nav nav-tabs" style="font-size: 13px;">
 							<li class="active"><a href="#home"
 								style="padding: 10px 10px;"
@@ -226,31 +108,31 @@ text {
 							<li><a id="traces" href="#tracepath" data-toggle="tab"
 								style="padding: 10px 10px;">Trace Path</a></li>
 						</ul>
-
 						<div id="myTabContent" class="tab-content">
-							<div class="tab-pane fade in active" id="home" style="border: 2px solid;">
-								
-								<canvas class="col-rg-6" id="graph_note" width="500" height="75" style="float:right"></canvas>
-								<br><br><br><br>
+							<div class="tab-pane fade in active" id="home"
+								style="border: 2px solid;">
+								<canvas class="col-rg-6" id="graph_note" width="500" height="75"
+									style="float: right"></canvas>
+								<br> <br> <br> <br>
 								<div id="network"></div>
-								
-								
-									<script>
-										var ctx = document.getElementById(
-												"graph_note").getContext("2d");
-										SvgLoad(ctx);
-									</script>
+								<script>
+									var ctx = document.getElementById(
+										"graph_note").getContext("2d");
+									SvgLoad(ctx);
+								</script>
 							</div>
 
-							 
-							   <div class="tab-pane fade" id="indegree">								   								   
-									   <div id="borderIn" style="border:2px solid;">
-									   
-									   <br />
-									   <canvas id="graph_note1" width="500" height="75" style="float: right">                                
+
+							<div class="tab-pane fade" id="indegree">
+								<div id="borderIn" style="border: 2px solid;">
+
+									<br />
+									<canvas id="graph_note1" width="500" height="75"
+										style="float: right">                                
                                         </canvas>
-                                        &nbsp; Max Indegree:<l id="max_indegree"></l>
-									   		<script type="text/javascript">
+									&nbsp; Max Indegree:
+									<l id="max_indegree"></l>
+									<script type="text/javascript">
 									   		var ctx = document.getElementById("graph_note1").getContext("2d");					                            
 				                            SvgLoadDegree(ctx);
 											$("#In").click(function(){	
@@ -276,16 +158,18 @@ text {
 							   				});
 											
 									   		</script>
-									   </div>
-								   </div>
-  
-							   <div class="tab-pane fade" id="outdegree">							  
-							      <div id="borderOut" style="border:2px solid;">
-							      	<br />
-									   <canvas id="graph_note2" width="500" height="75" style="float: right">                                
+								</div>
+							</div>
+
+							<div class="tab-pane fade" id="outdegree">
+								<div id="borderOut" style="border: 2px solid;">
+									<br />
+									<canvas id="graph_note2" width="500" height="75"
+										style="float: right">                                
                                         </canvas>
-                                        &nbsp; Max Outdegree:<l id="max_outdegree"></l>
-									   		<script type="text/javascript">
+									&nbsp; Max Outdegree:
+									<l id="max_outdegree"></l>
+									<script type="text/javascript">
 									   		var ctx1 = document.getElementById("graph_note2").getContext("2d");					                            
 				                            SvgLoadDegree(ctx1);
 				                            
@@ -305,15 +189,16 @@ text {
 							   					}); 							   					
 							   				});
 									   		</script>
-									</div>
-							   </div>
- 
-							   <div class="tab-pane fade" id="completeTriad">
-							   		<div id="borderCmp" style="border:2px solid;">	
-							   			<br>
-							   			<canvas id="graph_note3" width="500" height="75" style="float: right">                                
+								</div>
+							</div>
+
+							<div class="tab-pane fade" id="completeTriad">
+								<div id="borderCmp" style="border: 2px solid;">
+									<br>
+									<canvas id="graph_note3" width="500" height="75"
+										style="float: right">                                
                                         </canvas>
-							   			<script type="text/javascript">
+									<script type="text/javascript">
 							   			var ctx2 = document.getElementById("graph_note3").getContext("2d");					                            
 			                            SvgLoadCompTriad(ctx2);
 			                            		
@@ -334,15 +219,16 @@ text {
 						   					}); 							   					
 						   				});
 							   			</script>
-									</div>
-							   </div>		
-	
-							   <div class="tab-pane fade" id="IncompleteTriad">
-							   		<div id="borderIncmp" style="border:2px solid;">	
-							   			<br>
-							   			<canvas id="graph_note4" width="500" height="70" style="float: right">                                
+								</div>
+							</div>
+
+							<div class="tab-pane fade" id="IncompleteTriad">
+								<div id="borderIncmp" style="border: 2px solid;">
+									<br>
+									<canvas id="graph_note4" width="500" height="70"
+										style="float: right">                                
                                         </canvas>
-							   			<script type="text/javascript">
+									<script type="text/javascript">
 							   			var ctx3 = document.getElementById("graph_note4").getContext("2d");					                            
 			                            SvgLoadIncTriad(ctx3);
 			                           	/*  passing quarter and and requesting IncompleteTriad servlet to execute */
@@ -362,15 +248,16 @@ text {
 						   					}); 							   					
 						   				});
 							   			</script>
-									</div>
-							   </div>		
-						   
-							   <div class="tab-pane fade" id="ImmediateCycle">
-							   		<div id="borderImcycle" style="border:2px solid;">	
-							   			<br>
-							   			<canvas id="graph_note5" width="500" height="75" style="float: right">                                
+								</div>
+							</div>
+
+							<div class="tab-pane fade" id="ImmediateCycle">
+								<div id="borderImcycle" style="border: 2px solid;">
+									<br>
+									<canvas id="graph_note5" width="500" height="75"
+										style="float: right">                                
                                         </canvas>
-							   			<script type="text/javascript">
+									<script type="text/javascript">
 							   			var ctx4 = document.getElementById("graph_note5").getContext("2d");							   			
 			                            SvgLoad(ctx4);
 			                            		
@@ -389,27 +276,31 @@ text {
 						   					}); 							   					
 						   				});
 							   			</script>
+								</div>
+							</div>
+
+
+							<%
+								/*get the name of the file releven to clicked year ane filename */
+								String filename = request.getParameter("filename");
+								String name = "\'" + "json/" + filename + "\'";
+								System.out.println(filename);
+							%>
+
+							<div class="tab-pane fade" id="QuarterlyTemporalPatterns">
+								<div id="borderQgraph" style="border: 2px solid;">
+									<br>
+									<canvas id="graph_note6" width="800" height="80"
+										style="float: left"></canvas>
+									&nbsp; Clustering Coefficient :
+									<l id="cc_show"></l>
+									<div style="float: right">
+										<button class="btn btn-default" id="main">Main</button>
+										<button class="btn btn-primary" id="Sustained">Sustained</button>
+										<button class="btn btn-danger" id="Episodic">Episodic</button>
+										<button class="btn btn-success" id="Weak">Weak</button>
 									</div>
-							   </div>
-			
-
-							<%/*get the name of the file releven to clicked year ane filename */
-			String filename = request.getParameter("filename");
-			String name = "\'" + "json/" + filename + "\'";
-			System.out.println(filename);%>
-
-							<div class="tab-pane fade" id="QuarterlyTemporalPatterns">							   	
-							   		<div id="borderQgraph" style="border:2px solid;">
-							   			<br>
-							   			<canvas id="graph_note6" width="800" height="80" style="float: left"></canvas>
-							   			&nbsp; Clustering Coefficient : <l id="cc_show"></l>
-							   			<div style="float: right">
-							   			<button class="btn btn-default" id="main">Main</button>
-							   			<button class="btn btn-primary" id="Sustained">Sustained</button>
-							   			<button class="btn btn-danger" id="Episodic">Episodic</button>
-							   			<button class="btn btn-success" id="Weak">Weak</button>
-							   			</div>
-							   				<script type="text/javascript">
+									<script type="text/javascript">
 							   					
 							   					var file=<%=name%>;							   				
 							   					var ctx=document.getElementById("graph_note6").getContext("2d");
@@ -511,89 +402,132 @@ text {
 							   						$.ajax({
 									   					  type: 'GET',
 									   					  url: "QTempPat?year=<%=Integer.parseInt(request.getParameter("year"))%>",
-									   					  dataType: 'json',
-									   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
-									   						var width = 1000,height = 900;	
-									   						QuarterGraph(data.nodes, data.links, "#borderQgraph", width, height);						   						
-									   					  },
-									   					  error: function(data,error){alert(error);},
-									   					  async: false
-									   					}); 	
-							   						
-							   					});							   					
-							   				</script>
-						   						<div id="tooltip" class="hidden">
-												    <p><strong>Important Label Heading</strong>
-												    </p>
-												    <p><span id="value">100</span>%</p>
-												</div>
-							   		</div>
-							   </div>
-							   
-							   <div class="tab-pane fade" id="longerchain">							   	
-							   		<div id="Lchain" style="border:2px solid;">
-							   		<div><b>Note:</b>
-										longer chain will find path only upto depth 3, due to computational complexity 
+																		dataType : 'json',
+																		success : function(
+																				data,
+																				status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
+																			var width = 1000, height = 900;
+																			QuarterGraph(
+																					data.nodes,
+																					data.links,
+																					"#borderQgraph",
+																					width,
+																					height);
+																		},
+																		error : function(
+																				data,
+																				error) {
+																			alert(error);
+																		},
+																		async : false
+																	});
+
+														});
+									</script>
+									<div id="tooltip" class="hidden">
+										<p>
+											<strong>Important Label Heading</strong>
+										</p>
+										<p>
+											<span id="value">100</span>%
+										</p>
 									</div>
-							   			<script type="text/javascript">							   				
-							   			$("#Chain").click(function(){
-							   				var width = 1000,height = 900;
-							   				var obj = new Object();
-							   				var url = "dataGet?year="+<%=request.getParameter("year") %>+"&Q=-1"
-							   				$.ajax({
-												type : 'GET',
-												url : url,
-												dataType : 'json',
-												success : function(data) {
-													obj.link = data.links;
-													obj.node = data.nodes;
-												},
-												error : function(data,
-														error) {
-													alert(error);
-												},
-												async : false
-											});
-							   				
-							   				Longchain(obj.node, obj.link, "#Lchain", width, height);//draw longer chain using only javascript not data from server
-							   			});
-							   			</script>							   		
-							   		</div>
-							   	</div>
-							   	
-							   	<!-- Trace paths -->
-							 <div class="tab-pane fade" id="tracepath">						   	
-							   		<div id="tpath" style="border:2px solid;">
-							   		<div><b>Note: </b>Click the initial node then outgoing edges will display. click one of them to go further, all the path will freezed. if want to go back double click each traced node
-							   			except initial node if initial node double clicked, graph will be reset.
-							   		</div>
-							   			<script>
-							   			$("#traces").click(function(){
-							   				var width = 900, height = 950;	
-							   				var obj = new Object();
-											var url = "dataGet?year="+<%=request.getParameter("year") %>+"&Q=-1"
-											//obj.nodes=nodes;	
-											//access json file using ajax and put the json content ito javascript object
-											$.ajax({
-												type : 'GET',
-												url : url,
-												dataType : 'json',
-												success : function(data) {
-													obj.link = data.links;
-													obj.node = data.nodes;
-												},
-												error : function(data,
-														error) {
-													alert(error);
-												},
-												async : false
-											});
-											TracePaths(obj.node, obj.link,"#tpath", width, height); // here contain trace path graph
-							   			});
-							   			
-							   			</script>						   		
-							   		</div>
-							   	</div>	
+								</div>
+							</div>
+
+							<div class="tab-pane fade" id="longerchain">
+								<div id="Lchain" style="border: 2px solid;">
+									<div>
+										<b>Note:</b> longer chain will find path only upto depth 3,
+										due to computational complexity
+									</div>
+									<script type="text/javascript">
+										$("#Chain")
+												.click(
+														function() {
+															var width = 1000, height = 900;
+															var obj = new Object();
+															var url = "dataGet?year="
+																	+
+									<%=request.getParameter("year")%>
+										+ "&Q=-1"
+															$
+																	.ajax({
+																		type : 'GET',
+																		url : url,
+																		dataType : 'json',
+																		success : function(
+																				data) {
+																			obj.link = data.links;
+																			obj.node = data.nodes;
+																		},
+																		error : function(
+																				data,
+																				error) {
+																			alert(error);
+																		},
+																		async : false
+																	});
+
+															Longchain(obj.node,
+																	obj.link,
+																	"#Lchain",
+																	width,
+																	height);//draw longer chain using only javascript not data from server
+														});
+									</script>
+								</div>
+							</div>
+
+							<!-- Trace paths -->
+							<div class="tab-pane fade" id="tracepath">
+								<div id="tpath" style="border: 2px solid;">
+									<div>
+										<b>Note: </b>Click the initial node then outgoing edges will
+										display. click one of them to go further, all the path will
+										freezed. if want to go back double click each traced node
+										except initial node if initial node double clicked, graph will
+										be reset.
+									</div>
+									<script>
+										$("#traces")
+												.click(
+														function() {
+															var width = 900, height = 950;
+															var obj = new Object();
+															var url = "dataGet?year="
+																	+
+									<%=request.getParameter("year")%>
+										+ "&Q=-1"
+															//obj.nodes=nodes;	
+															//access json file using ajax and put the json content ito javascript object
+															$
+																	.ajax({
+																		type : 'GET',
+																		url : url,
+																		dataType : 'json',
+																		success : function(
+																				data) {
+																			obj.link = data.links;
+																			obj.node = data.nodes;
+																		},
+																		error : function(
+																				data,
+																				error) {
+																			alert(error);
+																		},
+																		async : false
+																	});
+															TracePaths(
+																	obj.node,
+																	obj.link,
+																	"#tpath",
+																	width,
+																	height); // here contain trace path graph
+														});
+									</script>
+								</div>
+							</div>
 
 						</div>
 
@@ -603,8 +537,13 @@ text {
 									.ready(
 											function() {
 												var obj = new Object();
-												var url = "dataGet?year="+<%=request.getParameter("year") %>+"&Q="+<%=request.getParameter("Q") %>
-												//obj.nodes=nodes;	
+												var url = "dataGet?year="
+														+
+						<%=request.getParameter("year")%>
+							+ "&Q="
+														+
+						<%=request.getParameter("Q")%>
+							//obj.nodes=nodes;	
 												//access json file using ajax and put the json content ito javascript object
 												$.ajax({
 													type : 'GET',
@@ -653,7 +592,8 @@ text {
 		<%int a = Integer.parseInt(year) % 2005;%>
 			$("#accordion").accordion();
 			$("#accordion").accordion({
-				active :<%=a%>
+				active :
+		<%=a%>
 			});
 			$(function() {
 				$("#tooltip-1").tooltip();
