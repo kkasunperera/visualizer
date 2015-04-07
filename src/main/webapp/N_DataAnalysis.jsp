@@ -18,7 +18,45 @@
 <script src="js/d3.min.js"></script>
 <script src="js/c3.js"></script>
 <script src="js/N_dataAnalysis.js"></script>
+<style type="text/css">
+.c3-tooltip-container {
+  z-index: 10; }
 
+.c3-tooltip {
+  border-collapse: collapse;
+  border-spacing: 0;
+  background-color: #fff;
+  empty-cells: show;
+  -webkit-box-shadow: 7px 7px 12px -9px #777777;
+  -moz-box-shadow: 7px 7px 12px -9px #777777;
+  box-shadow: 7px 7px 12px -9px #777777;
+  opacity: 0.9; }
+
+.c3-tooltip tr {
+  border: 1px solid #CCC; }
+
+.c3-tooltip th {
+  background-color: #aaa;
+  font-size: 14px;
+  padding: 2px 5px;
+  text-align: left;
+  color: #FFF; }
+
+.c3-tooltip td {
+  font-size: 13px;
+  padding: 3px 6px;
+  background-color: #fff;
+  border-left: 1px dotted #999; }
+
+.c3-tooltip td > span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 6px; }
+
+.c3-tooltip td.value {
+  text-align: right; }
+</style>
 </head>
 
 <body>
@@ -104,15 +142,16 @@
 				</div>
 				<!-- /.row -->
 				<div class="row">
-					<div class="col-lg-12">
-						<div id="chart" style="border: 2px solid; height:400px">
-							<center>
-								<h2>Edge Distribution - Log Volume</h2>
+					<div class="col-lg-12" style="border: 2px solid;">
+						<center>
+								<h2 style="z-index: 9;">Edge Distribution - Log Volume</h2>
 							</center>
+						<div id="chart" height:400px"></div>
+							
 							<script type="text/javascript">	
 								c3_edge();
 							</script>
-						</div>
+						
 					</div>
 				</div>
 				<br></br>
