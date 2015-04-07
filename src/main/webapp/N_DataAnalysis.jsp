@@ -140,23 +140,44 @@
 						</ol>
 					</div>
 				</div>
-				<!-- /.row -->
 				<div class="row">
 					<div class="col-lg-12" style="border: 2px solid;">
 						<center>
-								<h2 style="z-index: 9;">Edge Distribution - Log Volume</h2>
-							</center>
-						<div id="chart" height:400px"></div>
-							
+							<h3 style="z-index: 9;">Edge Distribution - Log Volume</h3>
+						</center>
+						<div id="edge_graph" height:400px">
 							<script type="text/javascript">	
-								c3_edge();
+								c3_edge('#edge_graph');
 							</script>
-						
+						</div>
 					</div>
 				</div>
-				<br></br>
+				<br>
+				<div class="row">
+					<div class="col-lg-6" style="border: 2px solid;">
+						<center>
+							<h4 style="z-index: 9;">Single-Edge Annually-Repeat Count Distribution</h4>
+						</center>
+						<div id="YrepCount_grp" height:200px">
+							<script type="text/javascript">	
+							c3_barGrp('#YrepCount_grp',1);
+							</script>
+						</div>
+					</div>
+					<!-- <div class="col-lg-1"></div> -->
+					<div class="col-lg-6" style="border: 2px solid;">
+						<center>
+							<h4 style="z-index: 9;">Single-Edge Quarterly-Repeat Count Distribution</h4>
+						</center>
+						<div id="QrepCount_grp" height:200px">
+							<script type="text/javascript">	
+							c3_barGrp('#QrepCount_grp',2);
+							</script>
+						</div>
+					</div>
+				</div>
 				
-			<!-- /.container-fluid -->
+			
 
 		</div>
 		<!-- /#page-wrapper -->
