@@ -485,7 +485,7 @@ text {
 										
 								});
 								//graphload 
-								var width = 900, height = 950;
+								var width = 918, height = 950;
 								var quart = <%=Integer.parseInt(request.getParameter("Q"))%>;
 								
 								OriginalNetworkGraph(nodes, file, "#gc_network", width, height,quart);

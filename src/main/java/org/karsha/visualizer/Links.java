@@ -16,6 +16,7 @@ public class Links{
 	
 	int source;
 	int target;
+	String behave;
 	String type;
 	@JsonDeserialize(contentAs=String.class)
 	String Q1;

@@ -11,88 +11,57 @@
 <title>Visualizer - Karsha project</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/sb-admin-2.css" rel="stylesheet">
+<link href="css/c3.css">
 <link href="font-awesome-4.1.0/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
 <link href="css/jquery-ui.css" rel="stylesheet">
 <script src="js/d3.min.js"></script>
-<script src="js/dataAnalysis.js"></script>
-<style>
-.link {
-	fill: none;
-	stroke: #666;
-	stroke-width: 1.5px;
-}
-.node circle {
-	stroke: #fff;
-	stroke-width: 1.5px;
-}
-text {
-	font: 10px sans-serif;
-	pointer-events: none;
-}
-.demoHeaders {
-	margin-top: 2em;
-}
-#dialog-link {
-	padding: .4em 1em .4em 20px;
-	text-decoration: none;
-	position: relative;
-}
-#dialog-link span.ui-icon {
-	margin: 0 5px 0 0;
-	position: absolute;
-	left: .2em;
-	top: 50%;
-	margin-top: -8px;
-}
-#icons {
-	margin: 0;
-	padding: 0;
-}
-#icons li {
-	margin: 2px;
-	position: relative;
-	padding: 4px 0;
-	cursor: pointer;
-	float: left;
-	list-style: none;
-}
-#icons span.ui-icon {
-	float: left;
-	margin: 0 4px;
-}
-.fakewindowcontain .ui-widget-overlay {
-	position: absolute;
-}
-select {
-	width: 300px;
-}
-.axis path,.axis line {
-	fill: none;
-	stroke: #000;
-	shape-rendering: crispEdges;
-}
-.bar {
-	fill: steelblue;
-}
-.x.axis path {
-	
-}
-.dot {
-  stroke: #000;
-}
-.tooltip {
-  position: absolute;
-  width: 200px;
-  height: 28px;
-  pointer-events: none;
-}
+<script src="js/c3.js"></script>
+<script src="js/N_dataAnalysis.js"></script>
+<style type="text/css">
+.c3-tooltip-container {
+  z-index: 10; }
+
+.c3-tooltip {
+  border-collapse: collapse;
+  border-spacing: 0;
+  background-color: #fff;
+  empty-cells: show;
+  -webkit-box-shadow: 7px 7px 12px -9px #777777;
+  -moz-box-shadow: 7px 7px 12px -9px #777777;
+  box-shadow: 7px 7px 12px -9px #777777;
+  opacity: 0.9; }
+
+.c3-tooltip tr {
+  border: 1px solid #CCC; }
+
+.c3-tooltip th {
+  background-color: #aaa;
+  font-size: 14px;
+  padding: 2px 5px;
+  text-align: left;
+  color: #FFF; }
+
+.c3-tooltip td {
+  font-size: 13px;
+  padding: 3px 6px;
+  background-color: #fff;
+  border-left: 1px dotted #999; }
+
+.c3-tooltip td > span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 6px; }
+
+.c3-tooltip td.value {
+  text-align: right; }
 </style>
 </head>
 
 <body>
 	<div id="wrapper">
-		 <nav class="navbar navbar-default navbar-static-top" role="navigation"
+		<nav class="navbar navbar-default navbar-static-top" role="navigation"
 			style="margin-bottom: 0">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -162,46 +131,53 @@ select {
 				<!-- Page Heading -->
 				<div class="row">
 					<div class="col-lg-12">
-						<h1 class="page-header">Extended Analysis</h1>
+						<h1 class="page-header">Network Summary Statistics</h1>
 						<ol class="breadcrumb">
 							<li><i class="fa fa-dashboard"></i> <a href="template.html">Visualizer</a>
 							</li>
-							<li class="active"><i class="fa fa-table"></i> Extended Analysis
+							<li class="active"><i class="fa fa-table"></i> Network Summary Statistics
 							</li>
 						</ol>
 					</div>
 				</div>
-				<!-- /.row -->
 				<div class="row">
-					<div class="col-lg-12">
-						<div id="edge_data" style="border: 2px solid;">
-							<center>
-								<h2>Annual H-Index Comparison</h2>
-							</center>
-							<script type="text/javascript">
-								Hindex_histogram("#edge_data",
-										"csv/Hindex_year.csv",
-										"H-Index");
+					<div class="col-lg-12" style="border: 2px solid;">
+						<center>
+							<h3 style="z-index: 9;">Edge Distribution - Log Volume</h3>
+						</center>
+						<div id="edge_graph" height:400px">
+							<script type="text/javascript">	
+								c3_edge('#edge_graph');
 							</script>
 						</div>
 					</div>
-				</div>	
-				<br></br>
-				<div class="row">
-					<div class="col-lg-12">
-						<div id="cc_data" style="border: 2px solid;">
-							<center>
-								<h2>Quarterly H-Index Comparison</h2>
-							</center>
-							<script type="text/javascript">
-								Hindex_histogram("#cc_data","csv/Hindex_quarter.csv","H-Index");
-							</script>
-						</div>
-					</div>
-				</div>				
 				</div>
-			</div>
-			<!-- /.container-fluid -->
+				<br>
+				<div class="row">
+					<div class="col-lg-6" style="border: 2px solid;">
+						<center>
+							<h4 style="z-index: 9;">Single-Edge Annually-Repeat Count Distribution</h4>
+						</center>
+						<div id="YrepCount_grp" height:200px">
+							<script type="text/javascript">	
+							c3_barGrp('#YrepCount_grp',1);
+							</script>
+						</div>
+					</div>
+					<!-- <div class="col-lg-1"></div> -->
+					<div class="col-lg-6" style="border: 2px solid;">
+						<center>
+							<h4 style="z-index: 9;">Single-Edge Quarterly-Repeat Count Distribution</h4>
+						</center>
+						<div id="QrepCount_grp" height:200px">
+							<script type="text/javascript">	
+							c3_barGrp('#QrepCount_grp',2);
+							</script>
+						</div>
+					</div>
+				</div>
+				
+			
 
 		</div>
 		<!-- /#page-wrapper -->
@@ -214,7 +190,6 @@ select {
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
-	
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery-ui.js"></script>
 	<script>

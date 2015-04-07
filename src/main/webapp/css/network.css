@@ -1,0 +1,160 @@
+.link {
+	fill: none;
+	stroke: #666;
+	stroke-width: 1.5px;
+}
+
+.node circle {
+	stroke: #fff;
+	stroke-width: 1.5px;
+}
+
+text {
+	font: 10px sans-serif;
+	pointer-events: none;
+}
+
+.demoHeaders {
+	margin-top: 2em;
+}
+
+#dialog-link {
+	padding: .4em 1em .4em 20px;
+	text-decoration: none;
+	position: relative;
+}
+
+#dialog-link span.ui-icon {
+	margin: 0 5px 0 0;
+	position: absolute;
+	left: .2em;
+	top: 50%;
+	margin-top: -8px;
+}
+
+#icons {
+	margin: 0;
+	padding: 0;
+}
+
+#icons li {
+	margin: 2px;
+	position: relative;
+	padding: 4px 0;
+	cursor: pointer;
+	float: left;
+	list-style: none;
+}
+
+#icons span.ui-icon {
+	float: left;
+	margin: 0 4px;
+}
+
+.fakewindowcontain .ui-widget-overlay {
+	position: absolute;
+}
+
+select {
+	width: 300px;
+}
+
+.demoHeaders {
+	margin-top: 2em;
+}
+
+#dialog-link {
+	padding: .4em 1em .4em 20px;
+	text-decoration: none;
+	position: relative;
+}
+
+#dialog-link span.ui-icon {
+	margin: 0 5px 0 0;
+	position: absolute;
+	left: .2em;
+	top: 50%;
+	margin-top: -8px;
+}
+
+#icons {
+	margin: 0;
+	padding: 0;
+}
+
+#icons li {
+	margin: 2px;
+	position: relative;
+	padding: 4px 0;
+	cursor: pointer;
+	float: left;
+	list-style: none;
+}
+
+#icons span.ui-icon {
+	float: left;
+	margin: 0 4px;
+}
+
+.fakewindowcontain .ui-widget-overlay {
+	position: absolute;
+}
+
+select {
+	width: 300px;
+}
+
+label {
+	display: inline-block;
+	width: 5em;
+}
+
+table,td {
+	border: 1px solid green;
+	border-collapse: collapse;
+}
+
+.link {
+	fill: none;
+	stroke: #666;
+	stroke-width: 1.5px;
+}
+
+.linkSustain {
+	fill: none;
+	stroke: #0066FF;
+	stroke-width: 1.5 px;
+}
+
+.linkEpisodic {
+	fill: none;
+	stroke: #FF0000;
+	stroke-width: 1.5px;
+}
+
+.linkWeak {
+	fill: none;
+	stroke: #33CC33;
+	stroke-with: 1.5px;
+}
+
+.linkWhite {
+	fill: none;
+	stroke: #FFFFFF;
+	stroke-with: -10 px;
+}
+
+.node circle {
+	stroke: #fff;
+	stroke-width: 1.5px;
+}
+
+text {
+	font: 10px sans-serif;
+	pointer-events: none;
+}
+
+.d3-tip {
+	line-height: 1;
+	color: black;
+}
