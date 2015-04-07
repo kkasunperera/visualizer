@@ -177,7 +177,7 @@ text {
 									}
 								%>
 							</ul></li>
-						<li><a href="DataAnalysis.jsp"><i
+						<li><a href="N_DataAnalysis.jsp"><i
 								class="fa fa-fw fa-table"></i> Network Summary Statistics</a></li>
 						<li><a href="analysis_extended.jsp"><i
 								class="fa fa-fw fa-file"></i> H-Index Analysis</a></li>
