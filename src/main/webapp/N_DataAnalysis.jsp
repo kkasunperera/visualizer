@@ -189,6 +189,32 @@
 						</div>
 					</div>
 				</div>
+				<br>
+				<div class="row">
+					<div class="col-lg-12" style="border: 2px solid;">
+						<center>
+							<h3 style="z-index: 9;">Complete Triad Count - Log Volume Data</h3>
+						</center>
+						<div id="com_graph" height:400px">
+							<script type="text/javascript">	
+								c3_edge('#com_graph',3);
+							</script>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-lg-12" style="border: 2px solid;">
+						<center>
+							<h3 style="z-index: 9;">Incomplete Triad Count - Log Volume Data</h3>
+						</center>
+						<div id="incom_graph" height:400px">
+							<script type="text/javascript">	
+								c3_edge('#incom_graph',4);
+							</script>
+						</div>
+					</div>
+				</div>
 				
 			
 

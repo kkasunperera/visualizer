@@ -6,6 +6,12 @@ function c3_edge(tag,typ){
 	}else if(typ==2){
 		file = 'csv/cc_overall_data.csv';
 		y_lbl = 'Clustering Coefficient';
+	}else if(typ==3){
+		file = 'csv/comTraid_overall_data.csv';
+		y_lbl = 'Number of Edges';
+	}else if(typ==4){
+		file = 'csv/IncomTraid_overall_data.csv';
+		y_lbl = 'Number of Edges';
 	}
 	
 var chart = c3.generate({
