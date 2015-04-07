@@ -147,7 +147,7 @@
 						</center>
 						<div id="edge_graph" height:400px">
 							<script type="text/javascript">	
-								c3_edge('#edge_graph');
+								c3_edge('#edge_graph',1);
 							</script>
 						</div>
 					</div>
@@ -172,6 +172,19 @@
 						<div id="QrepCount_grp" height:200px">
 							<script type="text/javascript">	
 							c3_barGrp('#QrepCount_grp',2);
+							</script>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-lg-12" style="border: 2px solid;">
+						<center>
+							<h3 style="z-index: 9;">Clustering Coefficient - Log Volume Data</h3>
+						</center>
+						<div id="clusterCof_graph" height:400px">
+							<script type="text/javascript">	
+								c3_edge('#clusterCof_graph',2);
 							</script>
 						</div>
 					</div>

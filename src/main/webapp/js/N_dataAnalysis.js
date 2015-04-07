@@ -1,4 +1,13 @@
-function c3_edge(tag){
+function c3_edge(tag,typ){
+	var file,y_lbl;
+	if(typ==1){
+		file = 'csv/edges.csv';
+		y_lbl = 'Number of Edges';
+	}else if(typ==2){
+		file = 'csv/cc_overall_data.csv';
+		y_lbl = 'Clustering Coefficient';
+	}
+	
 var chart = c3.generate({
 	bindto: tag,
     data: {
@@ -8,8 +17,7 @@ var chart = c3.generate({
              ['Q1', 0],
              ['Q2', 0],
              ['Q3', 0],
-             ['Q4', 0],
-             ['Year', 0],
+             ['Q4', 0]
          ],
          type: 'bar'
     },
@@ -25,14 +33,14 @@ var chart = c3.generate({
             type: 'category' // this needed to load string x value
         },
         y:{
-        	label: 'Number of Edges'
+        	label: y_lbl
         }
     }
     
 });
 setTimeout(function () {
     chart.load({
-        url: 'csv/edges.csv'
+        url: file
     });
 }, 50);
  
