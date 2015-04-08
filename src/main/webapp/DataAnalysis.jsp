@@ -11,85 +11,60 @@
 <title>Visualizer - Karsha project</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/sb-admin-2.css" rel="stylesheet">
+<link href="css/c3.css">
 <link href="font-awesome-4.1.0/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
 <link href="css/jquery-ui.css" rel="stylesheet">
 <script src="js/d3.min.js"></script>
-<script src="js/dataAnalysis.js"></script>
-<style>
-.link {
-	fill: none;
-	stroke: #666;
-	stroke-width: 1.5px;
+<script src="js/c3.js"></script>
+<script src="js/N_dataAnalysis.js"></script>
+<style type="text/css">
+.c3-tooltip-container {
+	z-index: 10;
 }
-.node circle {
-	stroke: #fff;
-	stroke-width: 1.5px;
+
+.c3-tooltip {
+	border-collapse: collapse;
+	border-spacing: 0;
+	background-color: #fff;
+	empty-cells: show;
+	-webkit-box-shadow: 7px 7px 12px -9px #777777;
+	-moz-box-shadow: 7px 7px 12px -9px #777777;
+	box-shadow: 7px 7px 12px -9px #777777;
+	opacity: 0.9;
 }
-text {
-	font: 10px sans-serif;
-	pointer-events: none;
+
+.c3-tooltip tr {
+	border: 1px solid #CCC;
 }
-.demoHeaders {
-	margin-top: 2em;
+
+.c3-tooltip th {
+	background-color: #aaa;
+	font-size: 14px;
+	padding: 2px 5px;
+	text-align: left;
+	color: #FFF;
 }
-#dialog-link {
-	padding: .4em 1em .4em 20px;
-	text-decoration: none;
-	position: relative;
+
+.c3-tooltip td {
+	font-size: 13px;
+	padding: 3px 6px;
+	background-color: #fff;
+	border-left: 1px dotted #999;
 }
-#dialog-link span.ui-icon {
-	margin: 0 5px 0 0;
-	position: absolute;
-	left: .2em;
-	top: 50%;
-	margin-top: -8px;
+
+.c3-tooltip td>span {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin-right: 6px;
 }
-#icons {
-	margin: 0;
-	padding: 0;
-}
-#icons li {
-	margin: 2px;
-	position: relative;
-	padding: 4px 0;
-	cursor: pointer;
-	float: left;
-	list-style: none;
-}
-#icons span.ui-icon {
-	float: left;
-	margin: 0 4px;
-}
-.fakewindowcontain .ui-widget-overlay {
-	position: absolute;
-}
-select {
-	width: 300px;
-}
-.axis path,.axis line {
-	fill: none;
-	stroke: #000;
-	shape-rendering: crispEdges;
-}
-.bar {
-	fill: steelblue;
-}
-.x.axis path {
-	
-}
-.dot {
-  stroke: #000;
-}
-.tooltip {
-  position: absolute;
-  width: 200px;
-  height: 28px;
-  pointer-events: none;
+
+.c3-tooltip td.value {
+	text-align: right;
 }
 </style>
 </head>
-
 <body>
 	<div id="wrapper">
 		<nav class="navbar navbar-default navbar-static-top" role="navigation"
@@ -104,14 +79,12 @@ select {
 				<a class="navbar-brand" href="index.jsp">GC Visualizer - Karsha
 					project</a>
 			</div>
-			<!-- /.navbar-header -->
 			<div class="navbar-default sidebar" role="navigation">
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav navbar-nav side-nav">
 						<!-- <li class="active"><a href="index.jsp"><i
 							class="fa fa-fw fa-dashboard"></i> GC Visualizer</a></li> -->
-						<li><a><i class="fa fa-fw fa-arrows-v"></i> GC-Analysis
-						</a>
+						<li><a><i class="fa fa-fw fa-arrows-v"></i> GC-Analysis </a>
 							<ul id="accordion">
 								<%
 									for (int i = 2005; i < 2013; i++) {
@@ -122,20 +95,15 @@ select {
 											href="?filename=data<%=i%>.json&year=data<%=i%>.json&year=<%=i%>"><%=i%></a>
 									</h3>
 									<ul>
-										<li><a
-											href="N_network_Y.jsp?year=<%=i%>&Q=-1"><i
+										<li><a href="network_Y.jsp?year=<%=i%>&Q=-1"><i
 												class="fa fa-fw fa-table"></i> Annual </a></li>
-										<li><a
-											href="N_network_Q.jsp?year=<%=i%>&Q=1"><i
+										<li><a href="network_Q.jsp?year=<%=i%>&Q=1"><i
 												class="fa fa-fw fa-table"></i> Quarter 1</a></li>
-										<li><a
-											href="N_network_Q.jsp?year=<%=i%>&Q=2"><i
+										<li><a href="network_Q.jsp?year=<%=i%>&Q=2"><i
 												class="fa fa-fw fa-table"></i> Quarter 2</a></li>
-										<li><a
-											href="N_network_Q.jsp?year=<%=i%>&Q=3"><i
+										<li><a href="network_Q.jsp?year=<%=i%>&Q=3"><i
 												class="fa fa-fw fa-table"></i> Quarter 3</a></li>
-										<li><a
-											href="N_network_Q.jsp?year=<%=i%>&Q=4"><i
+										<li><a href="network_Q.jsp?year=<%=i%>&Q=4"><i
 												class="fa fa-fw fa-table"></i> Quarter 4</a></li>
 									</ul>
 								</li>
@@ -147,146 +115,112 @@ select {
 								class="fa fa-fw fa-table"></i> Network Summary Statistics</a></li>
 						<li><a href="analysis_extended.jsp"><i
 								class="fa fa-fw fa-file"></i> H-Index Analysis</a></li>
-
 					</ul>
 				</div>
-				<!-- /.sidebar-collapse -->
 			</div>
-			<!-- /.navbar-static-side -->
 		</nav>
-
 		<div id="page-wrapper">
-
 			<div class="container-fluid">
-
-				<!-- Page Heading -->
 				<div class="row">
 					<div class="col-lg-12">
 						<h1 class="page-header">Network Summary Statistics</h1>
 						<ol class="breadcrumb">
 							<li><i class="fa fa-dashboard"></i> <a href="template.html">Visualizer</a>
 							</li>
-							<li class="active"><i class="fa fa-table"></i> Network Summary Statistics
-							</li>
+							<li class="active"><i class="fa fa-table"></i> Network
+								Summary Statistics</li>
 						</ol>
 					</div>
 				</div>
-				<!-- /.row -->
 				<div class="row">
-					<div class="col-lg-12">
-						<div id="edge_data" style="border: 2px solid;">
-							<center>
-								<h2>Edge Distribution - Log Volume</h2>
-							</center>
+					<div class="col-lg-12" style="border: 2px solid;">
+						<center>
+							<h3 style="z-index: 9;">Edge Distribution - Log Volume</h3>
+						</center>
+						<div id="edge_graph" height:400px">
 							<script type="text/javascript">
-								allData_histogram("#edge_data",
-										"csv/edges_overall_data.csv",
-										"Number of edges");
+								c3_edge('#edge_graph', 1);
 							</script>
 						</div>
 					</div>
 				</div>
-				<br></br>
+				<br>
 				<div class="row">
 					<div class="col-lg-6" style="border: 2px solid;">
-						<div id="year_edge_data">
-							<center>
-								<h4>Single-Edge Annually-Repeat Count Distribution</h4>
-							</center>
+						<center>
+							<h4 style="z-index: 9;">Single-Edge Annually-Repeat Count
+								Distribution</h4>
+						</center>
+						<div id="YrepCount_grp"height:200px">
 							<script type="text/javascript">
-								year_edge_histogrm("#year_edge_data",
-										"csv/year_edge_analysis.csv");
+								c3_barGrp('#YrepCount_grp', 1);
 							</script>
 						</div>
 					</div>
-					<div class="col-rg-6" style="border: 2px solid;">
-						<div id="quater_edge_data">
-							<center>
-								<h4>Single-Edge Quarterly-Repeat Count Distribution</h4>
-							</center>
+					<!-- <div class="col-lg-1"></div> -->
+					<div class="col-lg-6" style="border: 2px solid;">
+						<center>
+							<h4 style="z-index: 9;">Single-Edge Quarterly-Repeat Count
+								Distribution</h4>
+						</center>
+						<div id="QrepCount_grp"height:200px">
 							<script type="text/javascript">
-								year_edge_histogrm("#quater_edge_data",
-										"csv/quater_edge_analysis.csv");
-							</script>
-						</div>
-					</div>
-				</div>
-				<br></br>				
-				<br></br>
-				<div class="row">
-					<div class="col-lg-12">
-
-						<div id="cc_data" style="border: 2px solid;">
-							<center>
-								<h2>Clustering Coefficient - Log Volume Data</h2>
-							</center>
-							<script type="text/javascript">
-								allData_histogram("#cc_data","csv/cc_overall_data.csv","Clustering Coefficient");
-							</script>
-						</div>
-					</div>
-				</div>				
-				<div class="row">
-					<div class="col-lg-12">
-						<div id="com_triad_data" style="border: 2px solid;">
-							<center>
-								<h2>Complete Triad Count - Log Volume Data</h2>
-							</center>
-							<script type="text/javascript">
-								allData_histogram("#com_triad_data","csv/comTraid_overall_data.csv","Number of Complete triads");
+								c3_barGrp('#QrepCount_grp', 2);
 							</script>
 						</div>
 					</div>
 				</div>
-				<br></br>
+				<br>
 				<div class="row">
-					<div class="col-lg-12">
-						<div id="Incom_triad_data" style="border: 2px solid;">
-							<center>
-								<h2>Incomplete Triad Count - Log Volume Data</h2>
-							</center>
+					<div class="col-lg-12" style="border: 2px solid;">
+						<center>
+							<h3 style="z-index: 9;">Clustering Coefficient - Log Volume
+								Data</h3>
+						</center>
+						<div id="clusterCof_graph"height:400px">
 							<script type="text/javascript">
-								allData_histogram("#Incom_triad_data","csv/IncomTraid_overall_data.csv","Number of Incomplete triads");
+								c3_edge('#clusterCof_graph', 2);
 							</script>
 						</div>
 					</div>
 				</div>
-				<br></br>
-				<!-- <div class="row">
-					<div class="col-lg-12">
-						<div id="repeat_cmp_triad" style="border: 2px solid;">
-							<center>
-								<h2>Repeated Completed Triad Count - Log Volume Data</h2>
-							</center>
+				<br>
+				<div class="row">
+					<div class="col-lg-12" style="border: 2px solid;">
+						<center>
+							<h3 style="z-index: 9;">Complete Triad Count - Log Volume
+								Data</h3>
+						</center>
+						<div id="com_graph"height:400px">
 							<script type="text/javascript">
-								repeatCmpTriad("#repeat_cmp_triad", "csv/repeat.csv");
+								c3_edge('#com_graph', 3);
 							</script>
 						</div>
 					</div>
-				</div> -->
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-lg-12" style="border: 2px solid;">
+						<center>
+							<h3 style="z-index: 9;">Incomplete Triad Count - Log Volume
+								Data</h3>
+						</center>
+						<div id="incom_graph"height:400px">
+							<script type="text/javascript">
+								c3_edge('#incom_graph', 4);
+							</script>
+						</div>
+					</div>
+				</div>
 			</div>
-			<!-- /.container-fluid -->
-
 		</div>
-		<!-- /#page-wrapper -->
-
-	</div>
-	<!-- /#wrapper -->
-
-	<!-- jQuery Version 1.11.0 -->
-	<script src="js/jquery-1.11.0.js"></script>
-
-	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- Morris Charts JavaScript -->
-	<script src="js/plugins/morris/raphael.min.js"></script>
-	<script src="js/plugins/morris/morris.min.js"></script>
-	<script src="js/plugins/morris/morris-data.js"></script>
-	<script src="js/jquery.js"></script>
-	<script src="js/jquery-ui.js"></script>
-	<script>
-		$("#accordion").accordion();
-	</script>
+		<script src="js/jquery-1.11.0.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		<script>
+			$("#accordion").accordion();
+		</script>
 </body>
 
 </html>
