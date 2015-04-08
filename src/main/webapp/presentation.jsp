@@ -14,6 +14,8 @@
 <script src="js/d3.min.js"></script>
 <script src="js/c3.js"></script>
 <script src="js/N_dataAnalysis.js"></script>
+<script src="js/jquery.1.9.1.min.js"></script>
+<script src="js/jquery-ui.js"></script>
 <style type="text/css">
 [data-col="16"] {
 	left: 1655px;
@@ -350,6 +352,12 @@
 </style>
 </head>
 <body>
+<a href="index.jsp">
+<button id="home"><h4>Back to Karsha Visualizer</h4></button>
+</a>
+<a href="presentation.jsp">
+<button id="refresh"><h4>Refresh</h4></button><br>
+</a>
  <div class="gridster ready">
     <ul style="height: 5200px; width: 1540px; position: relative;">
       <li data-row="1" data-col="1" data-sizex="6" data-sizey="6">
