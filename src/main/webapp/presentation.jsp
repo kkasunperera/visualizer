@@ -302,32 +302,105 @@
 [data-sizex="15"] {
 	width: 1640px;
 }
+
+.c3-tooltip-container {
+	z-index: 10;
+}
+
+.c3-tooltip {
+	border-collapse: collapse;
+	border-spacing: 0;
+	background-color: #fff;
+	empty-cells: show;
+	-webkit-box-shadow: 7px 7px 12px -9px #777777;
+	-moz-box-shadow: 7px 7px 12px -9px #777777;
+	box-shadow: 7px 7px 12px -9px #777777;
+	opacity: 0.9;
+}
+
+.c3-tooltip tr {
+	border: 1px solid #CCC;
+}
+
+.c3-tooltip th {
+	background-color: #aaa;
+	font-size: 14px;
+	padding: 2px 5px;
+	text-align: left;
+	color: #FFF;
+}
+
+.c3-tooltip td {
+	font-size: 13px;
+	padding: 3px 6px;
+	background-color: #fff;
+	border-left: 1px dotted #999;
+}
+
+.c3-tooltip td>span {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin-right: 6px;
+}
+
+.c3-tooltip td.value {
+	text-align: right;
+}
 </style>
 </head>
 <body>
  <div class="gridster ready">
-    <ul style="height: 520px; width: 1540px; position: relative;">
-      <li data-row="1" data-col="1" data-sizex="2" data-sizey="2" class="gs-w">Edge distribution
+    <ul style="height: 5200px; width: 1540px; position: relative;">
+      <li data-row="1" data-col="1" data-sizex="6" data-sizey="6">
+      <br><h3>Edge distribution</h3>
       	<div id="edge_graph">
 			<script type="text/javascript">
 				c3_edge('#edge_graph', 1);
 			</script>
 		</div>
-      	<span class="gs-resize-handle gs-resize-handle-both" height:400px">
-      	</span></li>
-      <li data-row="1" data-col="2" data-sizex="3" data-sizey="1" class="gs-w">Single-Edge Annually-Repeat Count Distribution<span class="gs-resize-handle gs-resize-handle-both"></span></li>
-      <li data-row="1" data-col="2" data-sizex="3" data-sizey="1" class="gs-w">Single-Edge Quarterly-Repeat Count Distribution<span class="gs-resize-handle gs-resize-handle-both"></span></li>
-      <li data-row="1" data-col="1" data-sizex="2" data-sizey="2" class="gs-w">Clustering Coefficient<span class="gs-resize-handle gs-resize-handle-both"></span></li>
-      <li data-row="1" data-col="1" data-sizex="2" data-sizey="3" class="gs-w">Complete Triad Count<span class="gs-resize-handle gs-resize-handle-both"></span></li>
-      <li data-row="3" data-col="1" data-sizex="1" data-sizey="1" class="gs-w">5<span class="gs-resize-handle gs-resize-handle-both"></span></li>
-      <li data-row="4" data-col="2" data-sizex="1" data-sizey="1" class="gs-w">6<span class="gs-resize-handle gs-resize-handle-both"></span></li>
-      <li data-row="5" data-col="2" data-sizex="1" data-sizey="1" class="gs-w">7<span class="gs-resize-handle gs-resize-handle-both"></span></li>
-      <li data-row="5" data-col="2" data-sizex="2" data-sizey="1" class="gs-w">11<span class="gs-resize-handle gs-resize-handle-both"></span></li>
-      <li data-row="5" data-col="2" data-sizex="4" data-sizey="1" class="gs-w">Incomplete Triad Count<span class="gs-resize-handle gs-resize-handle-both"></span></li>
-      <li data-row="4" data-col="4" data-sizex="1" data-sizey="1" class="gs-w">8<span class="gs-resize-handle gs-resize-handle-both"></span></li>
-      <li data-row="2" data-col="5" data-sizex="5" data-sizey="4" class="gs-w">9<span class="gs-resize-handle gs-resize-handle-both"></span></li>
-      <li data-row="2" data-col="5" data-sizex="5" data-sizey="4" class="gs-w">10<span class="gs-resize-handle gs-resize-handle-both"></span></li>
-    </ul>
+      </li>
+      <li data-row="1" data-col="1" data-sizex="4" data-sizey="6" class="gs-w">
+      <br><h4>Single-Edge Annually-Repeat Count Distribution</h4>
+      	<div id="YrepCount_grp">
+			<script type="text/javascript">
+			c3_barGrp('#YrepCount_grp', 1);
+			</script>
+		</div>
+      </li>
+      <li data-row="2" data-col="1" data-sizex="4" data-sizey="6" class="gs-w">
+      <br><h4>Single-Edge Quarterly-Repeat Count Distribution</h4>
+      <div id="QrepCount_grp">
+		<script type="text/javascript">
+			c3_barGrp('#QrepCount_grp', 2);
+		</script>
+	  </div>
+      </li>
+      <li data-row="2" data-col="1" data-sizex="6" data-sizey="6" class="gs-w">
+      <br><h4>Clustering Coefficient</h4>
+      <div id="clusterCof_graph">
+	  	<script type="text/javascript">
+			c3_edge('#clusterCof_graph', 2);
+		</script>
+	  </div>
+      </li>
+      <li data-row="3" data-col="1" data-sizex="5" data-sizey="6" class="gs-w">
+      <br><h4>Complete Triad Count</h4>
+      <div id="com_graph">
+		<script type="text/javascript">
+			c3_edge('#com_graph', 3);
+		</script>
+	  </div>
+      </li>
+      <li data-row="3" data-col="1" data-sizex="5" data-sizey="6" class="gs-w">
+      <br><h4>Incomplete Triad Count</h4>
+      <div id="incom_graph">
+			<script type="text/javascript">
+				c3_edge('#incom_graph', 4);
+			</script>
+	  </div>
+      </li>
+     </ul>
   </div>
 
 
@@ -351,7 +424,7 @@
 				widget_margins : [ 5, 5 ],
 				autogrow_cols : true,
 				resize : {
-					enabled : true
+					enabled : false
 				}
 			}).data('gridster');
 
