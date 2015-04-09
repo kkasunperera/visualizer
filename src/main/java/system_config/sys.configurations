@@ -3,5 +3,5 @@
 #Mysql database configuarations 
 database=jdbc:mysql://localhost:3306/visualizer
 dbuser=root
-dbpassword=nbuser
+dbpassword=
 
