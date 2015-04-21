@@ -324,7 +324,8 @@ text {
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 						   						var width = 1000,height = 900;							   						
-						   						//DrawGraph(data.nodes, data.Links,"#borderCmp",width,height);							   						
+						   						//DrawGraph(data.nodes, data.Links,"#borderCmp",width,height);	
+						   						
 						   				      DrawTrangleGraph(data.nodes, data.links,"#borderCmp",width,height);	 
                                          },
 						   					  error: function(data,error){
