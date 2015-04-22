@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class QueryDB {
@@ -21,8 +22,13 @@ public class QueryDB {
 				int total_rows = resultSet.getMetaData().getColumnCount();
 				JSONObject obj = new JSONObject();
 				for (int i = 0; i < total_rows; i++) {
-					obj.put(resultSet.getMetaData().getColumnLabel(i + 1)
-							.toLowerCase(), resultSet.getObject(i + 1));
+					try {
+						obj.put(resultSet.getMetaData().getColumnLabel(i + 1)
+								.toLowerCase(), resultSet.getObject(i + 1));
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				jsonArray.put(obj);
 			}
@@ -47,8 +53,13 @@ public class QueryDB {
 				int total_rows = resultSet.getMetaData().getColumnCount();
 				JSONObject obj = new JSONObject();
 				for (int i = 0; i < total_rows; i++) {
-					obj.put(resultSet.getMetaData().getColumnLabel(i + 1)
-							.toLowerCase(), resultSet.getObject(i + 1));
+					try {
+						obj.put(resultSet.getMetaData().getColumnLabel(i + 1)
+								.toLowerCase(), resultSet.getObject(i + 1));
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				jsonArray.put(obj);
 			}
@@ -74,13 +85,18 @@ public class QueryDB {
 				
 				JSONObject obj = new JSONObject();
 				
-				obj.put("source", resultSet.getObject(1));
-				obj.put("target", resultSet.getObject(2));
-				obj.put("YEAR", resultSet.getObject(3));
-				obj.put("Q1", resultSet.getObject(4));
-				obj.put("Q2", resultSet.getObject(5));
-				obj.put("Q3", resultSet.getObject(6));
-				obj.put("Q4", resultSet.getObject(7));
+				try {
+					obj.put("source", resultSet.getObject(1));
+					obj.put("target", resultSet.getObject(2));
+					obj.put("YEAR", resultSet.getObject(3));
+					obj.put("Q1", resultSet.getObject(4));
+					obj.put("Q2", resultSet.getObject(5));
+					obj.put("Q3", resultSet.getObject(6));
+					obj.put("Q4", resultSet.getObject(7));
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				int yr = Integer.parseInt(resultSet.getObject(3).toString());
 				int q1 = Integer.parseInt(resultSet.getObject(4).toString());
@@ -88,7 +104,12 @@ public class QueryDB {
 				int q3 = Integer.parseInt(resultSet.getObject(6).toString());
 				int q4 = Integer.parseInt(resultSet.getObject(7).toString());
 				
-				obj.put("type",type_gen(yr,q1,q2,q3,q4));
+				try {
+					obj.put("type",type_gen(yr,q1,q2,q3,q4));
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				jsonArray.put(obj);
 			}
