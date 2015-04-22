@@ -181,6 +181,8 @@ text {
 								class="fa fa-fw fa-table"></i> Network Summary Statistics</a></li>
 						<li><a href="analysis_extended.jsp"><i
 								class="fa fa-fw fa-file"></i> H-Index Analysis</a></li>
+						<li><a href="presentation.jsp"><i
+								class="fa fa-fw fa-file"></i>Presentation</a></li>
 
 					</ul>
 				</div>
@@ -322,7 +324,8 @@ text {
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
 						   						var width = 1000,height = 900;							   						
-						   						//DrawGraph(data.nodes, data.Links,"#borderCmp",width,height);							   						
+						   						//DrawGraph(data.nodes, data.Links,"#borderCmp",width,height);	
+						   						
 						   				      DrawTrangleGraph(data.nodes, data.links,"#borderCmp",width,height);	 
                                          },
 						   					  error: function(data,error){

@@ -312,7 +312,7 @@ public class PostDataServ extends HttpServlet {
 
 			Obj.add("links", links);
 			Obj.add("nodes", nodes);
-
+			
 			out.println(Obj.toString());
 			out.close();
 
@@ -491,6 +491,10 @@ public class PostDataServ extends HttpServlet {
 			ArrayList<Double> cc_count_arry = new ArrayList<Double>();
 
 			PrintWriter out = response.getWriter();
+			
+			
+			
+			
 
 			for (int i = 1; i < 6; i++) {
 				Links[] link = DirectedGraphDemoServ.link_filter(i, linkSet);
