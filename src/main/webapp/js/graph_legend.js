@@ -1,41 +1,5 @@
 function SvgLoad(ctx){
-	//bondI
-    ctx.fillStyle = "#1f77b4";
-    ctx.beginPath();
-    ctx.arc(200,10,8,0,2*Math.PI);
-    ctx.closePath();
-    ctx.fill();
-    
-    
-    ctx.fillStyle = "#ff7f0d";
-    ctx.beginPath();
-    ctx.arc(200,35,8,0,2*Math.PI);
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.fillStyle = "#2ca02c";
-    ctx.beginPath();
-    ctx.arc(200,60,8,0,2*Math.PI);
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.fillStyle = "#ff7f0d";
-    ctx.beginPath();
-    ctx.fillText("Bond-InvGrade", 214,40); 
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.fillStyle = "#1f77b4";
-    ctx.beginPath();
-    ctx.fillText("Bond-HighYield", 214,14); 
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.fillStyle = "#2ca02c";
-    ctx.beginPath();
-    ctx.fillText("Equity", 214,66); 
-    ctx.closePath();
-    ctx.fill();
+	
     
     ctx.strokeStyle="#FF0000";
     ctx.beginPath();
@@ -116,42 +80,7 @@ function SvgLoadDegree(ctx){
 }
 
 function SvgLoadCompTriad(ctx){
-	ctx.fillStyle = "#1f77b4";
-    ctx.beginPath();
-    ctx.arc(200,10,8,0,2*Math.PI);
-    ctx.closePath();
-    ctx.fill();
-    
-    
-    ctx.fillStyle = "#ff7f0d";
-    ctx.beginPath();
-    ctx.arc(200,35,8,0,2*Math.PI);
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.fillStyle = "#2ca02c";
-    ctx.beginPath();
-    ctx.arc(200,60,8,0,2*Math.PI);
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.fillStyle = "#ff7f0d";
-    ctx.beginPath();
-    ctx.fillText("Bond-InvGrade", 214,40); 
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.fillStyle = "#1f77b4";
-    ctx.beginPath();
-    ctx.fillText("Bond-HighYield", 214,14); 
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.fillStyle = "#2ca02c";
-    ctx.beginPath();
-    ctx.fillText("Equity", 214,66); 
-    ctx.closePath();
-    ctx.fill();
+	
     
     ctx.strokeStyle="#0000FF";
     ctx.beginPath();
@@ -195,54 +124,13 @@ function SvgLoadCompTriad(ctx){
 }
 
 function SvgLoadIncTriad(ctx){
-	ctx.fillStyle = "#1f77b4";
-    ctx.beginPath();
-    ctx.arc(200,10,8,0,2*Math.PI);
-    ctx.closePath();
-    ctx.fill();
-    
-    
-    ctx.fillStyle = "#ff7f0d";
-    ctx.beginPath();
-    ctx.arc(200,35,8,0,2*Math.PI);
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.fillStyle = "#2ca02c";
-    ctx.beginPath();
-    ctx.arc(200,60,8,0,2*Math.PI);
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.fillStyle = "#ff7f0d";
-    ctx.beginPath();
-    ctx.fillText("Bond-InvGrade", 214,40); 
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.fillStyle = "#1f77b4";
-    ctx.beginPath();
-    ctx.fillText("Bond-HighYield", 214,14); 
-    ctx.closePath();
-    ctx.fill();
-    
-    ctx.fillStyle = "#2ca02c";
-    ctx.beginPath();
-    ctx.fillText("Equity", 214,66); 
-    ctx.closePath();
-    ctx.fill();
+	
         
     ctx.strokeStyle="#0000FF";
     ctx.beginPath();
     ctx.moveTo(350,35);
     ctx.lineTo(301,35);
     ctx.stroke();    
-        
-    ctx.strokeStyle="green";
-    ctx.beginPath();
-    ctx.moveTo(350,60);
-    ctx.lineTo(301,60);
-    ctx.stroke();
     
     ctx.strokeStyle="#FF0000";
     ctx.beginPath();
@@ -263,12 +151,6 @@ function SvgLoadIncTriad(ctx){
     ctx.closePath();
     ctx.fill();
     
-    ctx.fillStyle = "#1f77b4";
-    ctx.beginPath();
-    ctx.arc(300,60,8,0,2*Math.PI);
-    ctx.closePath();
-    ctx.fill();
-    
     ctx.fillStyle = "#0000FF";
     ctx.beginPath();
     ctx.fillText("A to B OR B to C edge", 360,40); 
@@ -280,12 +162,7 @@ function SvgLoadIncTriad(ctx){
     ctx.fillText("Triad Completing edge", 360,14); 
     ctx.closePath();
     ctx.fill();
-    
-    ctx.fillStyle = "green";
-    ctx.beginPath();
-    ctx.fillText("Incoming edge", 360,60); 
-    ctx.closePath();
-    ctx.fill();
+
     
     
 }

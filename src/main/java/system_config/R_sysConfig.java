@@ -11,7 +11,7 @@ public class R_sysConfig {
 
         Properties prog = new Properties();
         try {
-            InputStream path = getClass().getClassLoader().getResourceAsStream("db.properties");
+            InputStream path = getClass().getClassLoader().getResourceAsStream("sys.configurations");
 
             if (path != null) {
                 prog.load(path);
