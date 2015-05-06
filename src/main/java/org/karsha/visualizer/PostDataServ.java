@@ -1,19 +1,14 @@
 package org.karsha.visualizer;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Properties;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,22 +17,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
-import org.json.JSONArray;
-
-import system_config.R_sysConfig;
 import DBconnect.ConnectionPool;
 import DBconnect.QueryDB;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.stream.JsonReader;
-
 import java.util.logging.*;
 
 /**
@@ -79,7 +68,7 @@ public class PostDataServ extends HttpServlet {
 		connect = con.getConnection();
 		DBconnect.QueryDB qdb = new QueryDB();
 
-		String q_gt = qdb.getFromDB("select * from nodes", connect).toString();
+		String q_gt = qdb.getFromDB("select * from emid_nodes", connect).toString();
 		ObjectMapper mapper = new ObjectMapper();
 
 		try {
@@ -146,17 +135,12 @@ public class PostDataServ extends HttpServlet {
 
 			connect = con.getConnection();
 			DBconnect.QueryDB qdb = new QueryDB();
-			String year = request.getParameter("year");
-			int Q = Integer.parseInt(request.getParameter("Q"));
+			
+			String Q = request.getParameter("Q");
 			String Query = null;
-			if (Q == -1) {
-				Query = "select source,target from year where p_value_" + year
-						+ "=1";
-			} else {
-				Query = "select  source,target from quarter where p_value_"
-						+ year + "_Q" + Q + "=1";
-
-			}
+			
+			Query = "SELECT `source`,`target` FROM `emid_all_data` WHERE `"+Q+"`=1";
+			System.out.println("it's Q"+Query);
 
 			String q_gt = qdb.getFromDB(Query, connect).toString();
 			ObjectMapper mapper = new ObjectMapper();
@@ -265,7 +249,7 @@ public class PostDataServ extends HttpServlet {
 			 * */
 		} else if (userPath.equals("/Outdegree")) {
 			logger.info("userPath is " + userPath);
-			int quater = Integer.parseInt(request.getParameter("Q"));
+			
 			DirectedGraph<Node, DefaultEdge> gg;
 
 			gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, linkSet);
@@ -326,7 +310,6 @@ public class PostDataServ extends HttpServlet {
 			 * */
 		} else if (userPath.equals("/IncompleteTriad")) {
 			logger.info("userPath is " + userPath);
-			int quater = Integer.parseInt(request.getParameter("Quater"));
 			DirectedGraph<Node, DefaultEdge> gg = DirectedGraphDemoServ
 					.createHrefGraph(nodeSet, linkSet);
 
@@ -493,9 +476,6 @@ public class PostDataServ extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			
 			
-			
-			
-
 			for (int i = 1; i < 6; i++) {
 				Links[] link = DirectedGraphDemoServ.link_filter(i, linkSet);
 				edges_count_arry.add(link.length);
