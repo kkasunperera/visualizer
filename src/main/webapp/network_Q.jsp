@@ -387,14 +387,10 @@ text {
 								<div id="borderIn" style="border: 2px solid;">
 
 									<br />
-									<canvas id="graph_note1" width="500" height="75"
-										style="float: right">                                
-                                        </canvas>
+									
 									&nbsp; Max Indegree:
 									<l id="max_indegree"></l>
 									<script type="text/javascript">
-									   		var ctx = document.getElementById("graph_note1").getContext("2d");					                            
-				                            SvgLoadDegree(ctx);
 											$("#In").click(function(){	
 												/* pass quarter number and request Indegree servlet and return set of links and objects in success function*/
 							   					$.ajax({
@@ -424,15 +420,11 @@ text {
 							<div class="tab-pane fade" id="outdegree">
 								<div id="borderOut" style="border: 2px solid;">
 									<br />
-									<canvas id="graph_note2" width="500" height="75"
-										style="float: right">                                
-                                        </canvas>
+									
 									&nbsp; Max Outdegree:
 									<l id="max_outdegree"></l>
 									<script type="text/javascript">
-									   		var ctx1 = document.getElementById("graph_note2").getContext("2d");					                            
-				                            SvgLoadDegree(ctx1);
-				                            
+									   		
 											$("#Out").click(function(){							   												   					
 							   					$.ajax({
 							   					  type: 'GET',
@@ -668,11 +660,17 @@ text {
 		<script src="js/jquery-ui.js"></script>
 		<script>
 			
-		
+		<%
+			String selector = request.getParameter("Q");
+			int a = Character.getNumericValue(selector.charAt(3))-3;
+			if(a<0) a = 7;
+			
+		%>
+			
 			$("#accordion").accordion();
-			<%-- $("#accordion").accordion({
+			 $("#accordion").accordion({
 				active :<%=a%>
-			}); --%>
+			}); 
 			$(function() {
 				$("#tooltip-1").tooltip();
 				$("#tooltip-2").tooltip();
