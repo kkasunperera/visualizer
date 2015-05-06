@@ -474,7 +474,53 @@ public class PostDataServ extends HttpServlet {
 			ArrayList<Double> cc_count_arry = new ArrayList<Double>();
 
 			PrintWriter out = response.getWriter();
+			ObjectMapper mapper = new ObjectMapper();
+			response.setContentType("application/json");
+			DirectedGraph<Node, DefaultEdge> gg;
 			
+			DBconnect.ConnectionPool con = new ConnectionPool();
+			connect = con.getConnection();
+			DBconnect.QueryDB qdb = new QueryDB();
+			String Q = null,Query = null;;
+			for (int i = 2003; i < 2011; i++) {
+				for (int j = 1; j < 13; j++) {
+					if((i==2003 & j<7)|(i==2010 & j>4)) continue;
+					if(j<10){
+						Q = i+"-0"+j;
+					}else{
+						Q = i+"-"+j;
+					}
+					
+					Query = "SELECT `source`,`target` FROM `emid_all_data` WHERE `"+Q+"`=1";
+					String q_gt = qdb.getFromDB(Query, connect).toString();
+					
+					Links[] linkSetCount = mapper.readValue(q_gt, Links[].class);
+					
+					
+					gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, linkSetCount);
+					
+					edges_count_arry.add(linkSetCount.length);
+					completed_traid_count_arry.add(DirectedGraphDemoServ
+							.CompleteTriad_count(gg, nodeSet));
+					incompleted_traid_count_arry.add(DirectedGraphDemoServ
+							.InCompleteTriad_count(gg, nodeSet));
+					cc_count_arry.add(DirectedGraphDemoServ.clusteringCoefficient(
+							gg, nodeSet, linkSetCount));
+					
+					
+				}
+			}
+			out.println("edges count : " + edges_count_arry);
+			out.println("completed traid : " + completed_traid_count_arry);
+			out.println("incompleted traid : " + incompleted_traid_count_arry);
+			out.println("cc value : " + cc_count_arry);
+			
+			
+			
+			
+			
+			
+		/*	
 			
 			for (int i = 1; i < 6; i++) {
 				Links[] link = DirectedGraphDemoServ.link_filter(i, linkSet);
@@ -496,7 +542,7 @@ public class PostDataServ extends HttpServlet {
 			out.println("completed traid : " + completed_traid_count_arry);
 			out.println("incompleted traid : " + incompleted_traid_count_arry);
 			out.println("cc value : " + cc_count_arry);
-
+*/
 			out.close();
 
 		} else if (userPath.equals("/get_degrees")) {
