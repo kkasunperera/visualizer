@@ -19,17 +19,25 @@ var chart = c3.generate({
     data: {
     	 x : 'x',
          columns: [
-             ['x', '2005','2006','2007','2008','2009','2010','2011','2012'],
-             ['Q1', 0],
-             ['Q2', 0],
-             ['Q3', 0],
-             ['Q4', 0]
+             ['x', '2003-2006','2004-2007','2005-2008','2006-2009','2007-2010','2008-2011','2009-2012','2010-2013'],
+             ['1', 0],
+             ['2', 0],
+             ['3', 0],
+             ['4', 0],
+             ['5', 0],
+             ['6', 0],
+             ['7', 0],
+             ['8', 0],
+             ['9', 0],
+             ['10', 0],
+             ['11', 0],
+             ['12', 0]
          ],
          type: 'bar'
     },
     bar: {
         width: {
-            ratio: 0.5 // this makes bar width 50% of length between ticks
+            ratio: 0.25 // this makes bar width 50% of length between ticks
         }
         // or
         //width: 100 // this makes bar width 100px
@@ -37,11 +45,16 @@ var chart = c3.generate({
     axis: {
         x: {
             type: 'category' // this needed to load string x value
+            
         },
         y:{
         	label: y_lbl
         }
-    }
+    },
+    zoom: {
+  	  enabled: true
+  	}
+
     
 });
 setTimeout(function () {
@@ -78,13 +91,23 @@ function c3_barGrp(tag,typ){
 	    },
 	    axis: {
 	        x: {
-	            type: 'category' // this needed to load string x value
+	            type: 'category', // this needed to load string x value
+	            tick: {
+	               // rotate: 75,
+	                multiline: false
+	            },
+	        
 	        },
 	        y:{
 	        	label: 'Number of Edges'
 	        }
 	    	
-	    }
+	    },
+	    zoom: {
+	    	  enabled: true
+	    	}
+
+	    
 	    
 	});
 	setTimeout(function () {

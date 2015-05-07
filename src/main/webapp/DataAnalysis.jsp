@@ -148,9 +148,9 @@
 				</div>
 				<br>
 				<div class="row">
-					<div class="col-lg-6" style="border: 2px solid;">
+					<div class="col-lg-12" style="border: 2px solid;font-size: 10px;">
 						<center>
-							<h4 style="z-index: 9;">Single-Edge Annually-Repeat Count
+							<h4 style="z-index: 9;">Single-Edge Repeat Count
 								Distribution</h4>
 						</center>
 						<div id="YrepCount_grp"height:200px">
@@ -160,17 +160,7 @@
 						</div>
 					</div>
 					<!-- <div class="col-lg-1"></div> -->
-					<div class="col-lg-6" style="border: 2px solid;">
-						<center>
-							<h4 style="z-index: 9;">Single-Edge Quarterly-Repeat Count
-								Distribution</h4>
-						</center>
-						<div id="QrepCount_grp"height:200px">
-							<script type="text/javascript">
-								c3_barGrp('#QrepCount_grp', 2);
-							</script>
-						</div>
-					</div>
+				
 				</div>
 				<br>
 				<div class="row">
