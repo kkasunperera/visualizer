@@ -37,7 +37,7 @@ var chart = c3.generate({
     },
     bar: {
         width: {
-            ratio: 0.5 // this makes bar width 50% of length between ticks
+            ratio: 0.25 // this makes bar width 50% of length between ticks
         }
         // or
         //width: 100 // this makes bar width 100px
@@ -45,11 +45,16 @@ var chart = c3.generate({
     axis: {
         x: {
             type: 'category' // this needed to load string x value
+            
         },
         y:{
         	label: y_lbl
         }
-    }
+    },
+    zoom: {
+  	  enabled: true
+  	}
+
     
 });
 setTimeout(function () {
@@ -86,13 +91,23 @@ function c3_barGrp(tag,typ){
 	    },
 	    axis: {
 	        x: {
-	            type: 'category' // this needed to load string x value
+	            type: 'category', // this needed to load string x value
+	            tick: {
+	               // rotate: 75,
+	                multiline: false
+	            },
+	        
 	        },
 	        y:{
 	        	label: 'Number of Edges'
 	        }
 	    	
-	    }
+	    },
+	    zoom: {
+	    	  enabled: true
+	    	}
+
+	    
 	    
 	});
 	setTimeout(function () {
