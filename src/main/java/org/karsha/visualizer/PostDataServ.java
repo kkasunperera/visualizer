@@ -472,6 +472,8 @@ public class PostDataServ extends HttpServlet {
 			ArrayList<Integer> completed_traid_count_arry = new ArrayList<Integer>();
 			ArrayList<Integer> incompleted_traid_count_arry = new ArrayList<Integer>();
 			ArrayList<Double> cc_count_arry = new ArrayList<Double>();
+			ArrayList<Integer> indegree = new ArrayList<Integer>();
+			ArrayList<Integer> outdegree = new ArrayList<Integer>();
 
 			PrintWriter out = response.getWriter();
 			ObjectMapper mapper = new ObjectMapper();
@@ -482,6 +484,7 @@ public class PostDataServ extends HttpServlet {
 			connect = con.getConnection();
 			DBconnect.QueryDB qdb = new QueryDB();
 			String Q = null,Query = null;;
+			
 			for (int i = 2003; i < 2011; i++) {
 				for (int j = 1; j < 13; j++) {
 					if((i==2003 & j<7)|(i==2010 & j>4)) continue;
@@ -507,13 +510,27 @@ public class PostDataServ extends HttpServlet {
 					cc_count_arry.add(DirectedGraphDemoServ.clusteringCoefficient(
 							gg, nodeSet, linkSetCount));
 					
-					
+					DirectedGraphDemoServ.indegree_get(gg, nodeSet,indegree);
+					DirectedGraphDemoServ.outdegree_get(gg, nodeSet,outdegree);
 				}
 			}
-			out.println("edges count : " + edges_count_arry);
-			out.println("completed traid : " + completed_traid_count_arry);
-			out.println("incompleted traid : " + incompleted_traid_count_arry);
-			out.println("cc value : " + cc_count_arry);
+			//out.println("edges count : " + edges_count_arry);
+			//out.println("completed traid : " + completed_traid_count_arry);
+			//out.println("incompleted traid : " + incompleted_traid_count_arry);
+			//out.println("cc value : " + cc_count_arry);
+			out.println("outdegree array length :"+outdegree.size());
+			int counter =1;
+			for (int i = 0; i < outdegree.size(); i++) {
+				
+				if(counter%29==0){
+					out.println(outdegree.get(i)+",");
+				}else{
+					out.print(outdegree.get(i)+",");
+				}
+				counter++;
+			}
+			
+			//out.println("outdegree :"+outdegree);
 			
 			
 			
@@ -546,7 +563,7 @@ public class PostDataServ extends HttpServlet {
 			out.close();
 
 		} else if (userPath.equals("/get_degrees")) {
-			logger.info("userPath is " + userPath);
+			/*logger.info("userPath is " + userPath);
 			ArrayList<Integer> degrees = new ArrayList<Integer>();
 			PrintWriter out = response.getWriter();
 
@@ -556,9 +573,8 @@ public class PostDataServ extends HttpServlet {
 				DirectedGraph<Node, DefaultEdge> gg = DirectedGraphDemoServ
 						.createHrefGraph(nodeSet,
 								DirectedGraphDemoServ.link_filter(i, linkSet));
-				// out.println(i+" : "+DirectedGraphDemoServ.degree_get(gg,
-				// nodeSet));
-				degrees = DirectedGraphDemoServ.degree_get(gg, nodeSet);
+				
+				degrees = DirectedGraphDemoServ.indegree_get(gg, nodeSet);
 				for (int j = 0; j < degrees.size(); j++) {
 					if (j == degrees.size() - 1)
 						out.print(degrees.get(j));
@@ -567,12 +583,12 @@ public class PostDataServ extends HttpServlet {
 
 				}
 				out.println();
-				/*
+				
 				 * DBconnector dbCon = new DBconnector(); try {
 				 * dbCon.dbConnect(); } catch (Exception e) { // TODO
 				 * Auto-generated catch block e.printStackTrace(); }
-				 */
-			}
+				 
+			}*/
 
 		} else if (userPath.equals("/ReadJson")) {
 			PrintWriter out = response.getWriter();

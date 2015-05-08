@@ -946,20 +946,21 @@ public static void TriadInChain(DirectedGraph<Node, DefaultEdge> graph, Node[] n
 	//System.out.println("chain count is "+chainCout);	
 }
 
-public static ArrayList<Integer> degree_get(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
+public static void indegree_get(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes,ArrayList<Integer> degrees) {
 	log.log(Level.SEVERE, "findHighInDegree()  Data:{0},{1}", new Object[] {"graph", "nodes[]" });
-	ArrayList<Integer> degrees = new ArrayList<Integer>();
-	int highInDegre = 0;
-	Set<DefaultEdge> s = null;
-
 	for (int i = 0; i < nodes.length; i++) {
-		// find the degree
+		degrees.add(graph.inDegreeOf(nodes[i]));
+	}
+	
+}
+
+public static void outdegree_get(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes,ArrayList<Integer> degrees) {
+	log.log(Level.SEVERE, "findHighInDegree()  Data:{0},{1}", new Object[] {"graph", "nodes[]" });
+	for (int i = 0; i < nodes.length; i++) {
 		degrees.add(graph.outDegreeOf(nodes[i]));
 	}
-
 	
-	return degrees;
-
 }
+
 }
 

@@ -331,8 +331,8 @@ text {
 								class="fa fa-fw fa-table"></i> Network Summary Statistics</a></li>
 						<li><a href="analysis_extended.jsp"><i
 								class="fa fa-fw fa-file"></i> H-Index Analysis</a></li>
-						<li><a href="presentation.jsp"><i
-								class="fa fa-fw fa-file"></i>Presentation</a></li>
+						<!-- <li><a href="presentation.jsp"><i
+								class="fa fa-fw fa-file"></i>Presentation</a></li> -->
 					</ul>
 				</div>
 			</div>
@@ -400,7 +400,7 @@ text {
 							   					  success: function(data,status) {//data.Links,data.nodes	
 							   						 
 							   					  	document.getElementById("max_indegree").innerHTML = data.links.length;
-							   						var width = 1000,height = 900;		
+							   						var width = 918,height = 900;		
 							   						//drawing the graph in canvas with given data.nodes array and data.links array
 							   						N_OriginalNetworkGraph(data.nodes, data.links,"#borderIn",width,height);
 							   						//DrawDegree(data.nodes, data.links,"#borderIn",width,height);	
@@ -432,7 +432,7 @@ text {
 							   					  url: "Outdegree?Q=<%=request.getParameter("Q")%>", 
 							   					  dataType: 'json',
 							   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
-							   						var width = 1000,height = 900;							   						
+							   						var width = 918,height = 900;							   						
 							   						N_OriginalNetworkGraph(data.nodes, data.links,"#borderOut",width,height);
 							   						document.getElementById("max_outdegree").innerHTML = data.links.length;							   						
 							   					  },
@@ -460,7 +460,7 @@ text {
 						   					  url: "CompleteTriad?Q=<%=request.getParameter("Q")%>",
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
-						   						var width = 1000,height = 900;							   						
+						   						var width = 918,height = 900;							   						
 						   						//DrawGraph(data.nodes, data.Links,"#borderCmp",width,height);	
 						   						
 						   				      DrawTrangleGraph(data.nodes, data.links,"#borderCmp",width,height);	 
@@ -491,7 +491,7 @@ text {
 						   					  url: "IncompleteTriad?Q=<%=request.getParameter("Q")%>",
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
-						   						var width = 1000,height = 900;							   						
+						   						var width = 918,height = 900;							   						
 						   						//draw the incomplete triad graph using fetched data
                                                 DrawIncompleteTriad(data.nodes, data.links,"#borderIncmp",width,height);
 						   					  },
@@ -521,7 +521,7 @@ text {
 						   					  url: "ImmediateCycles?Q=<%=request.getParameter("Q")%>",
 						   					  dataType: 'json',
 						   					  success: function(data,status) {//data.Links,data.nodes							   													   					 							   						    							   												   													   					
-						   						var width = 1000,height = 900;		
+						   						var width = 918,height = 900;		
 						   					 	N_OriginalNetworkGraph(data.nodes, data.links,"#borderImcycle",width,height);							   						
 						   					  },
 						   					  error: function(data,error){alert(error);},
@@ -543,7 +543,7 @@ text {
 									</div>
 									<script type="text/javascript">							   				
 							   			$("#Chain").click(function(){
-							   				var width = 1000,height = 900;
+							   				var width = 918,height = 900;
 							   				var obj = new Object();
 							   				var url = "dataGet?Q=<%=request.getParameter("Q")%>"
 							   				$.ajax({
