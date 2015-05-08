@@ -964,6 +964,14 @@ public static void outdegree_get(DirectedGraph<Node, DefaultEdge> graph, Node[] 
 
 public static void Bonacich(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
 	
+	ArrayList<Node> node_select = new ArrayList<Node>();
+	int i = 0;
+		for (int j = 0; j < nodes.length; j++) {
+			if(graph.containsEdge(nodes[j],nodes[i])){
+				node_select.add(nodes[j]);
+			}
+		}
+	System.out.println("jjjj :"+node_select.size());	
 	
 }
 
