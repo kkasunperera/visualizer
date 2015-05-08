@@ -169,14 +169,12 @@
 			<div class="row">
 				<ul>
 					<p>
-						<strong>The Karsha GC Visualizer presents Granger
-							Causality(GC) based interaction patterns when comparing</br> the
-							market volume of trades in US corporate bonds and US equities,
-							grouped by NAICS industry sectors.
+						<strong>The GC Visualizer presents Granger Causality(GC) based interaction patterns
+                                                    when comparing the stock returns of US banks. GC networks are estimated using
+                                                    a 36 month rolling window from 2003 to 2013. 
 						</strong>
 					</p>
-					<p>We provide the following analysis for each of the Annual and
-						Quarterly GC-Network graphs:</p>
+					<p>We provide the following analysis for each of the GC-Network graphs:</p>
 					<ul>
 						<li>Network and nodes with the greatest indegree and
 							outdegree.</li>
@@ -187,45 +185,16 @@
 						<li>Long chains.</li>
 					</ul>
 					</br>
-					<p>We provide the following temporal analysis:</p>
-					<ul>
-						<li>FALSE: Annual=FALSE and 4 quarters = FALSE.</li>
-						<li>WEAK: Annual= TRUE but GC is FALSE in each of the 4
-							quarters.</li>
-						<li>SUSTAINED: Annual=TRUE and 2 or more (preferably
-							consecutive) quarters = TRUE.</li>
-						<li>EPISODIC - Some quarter = TRUE but NOT SUSTAINED.</li>
-					</ul>
-					</br>
-					<p>We provide the following charts for the Quarterly and Annual
-						GC-Networks:</p>
+					
+					<p>We provide the following charts for the GC-Networks:</p>
 					<ul>
 						<li>Cluster coefficient.</li>
 						<li>Edge count.</li>
 						<li>Complete triad count.</li>
 						<li>Incomplete triad count.</li>
+                                                <li>H-Index analysis</li>
 					</ul>
-					</br>
-					<p>
-						<strong>Dataset</strong></br> We report on the period 2005 - 2012. The
-						data is obtained from the following repositories:</br> <a
-							href="http://www.crsp.com/">The Center for Research in
-							Security Prices(CRSP) </a>Daily Equity Data</br> <a
-							href="http://www.finra.org/industry/compliance/markettransparency/trace/">Trade
-							Reporting and Compliance Engine (TRACE) </a> Daily Bond Data
-					</p>
-					<ul>
-						<li>Match equities and bonds over the ticker and date.</li>
-						<li>Discard unmatched data.</li>
-						<li>Aggregate market volume (total value traded) daily for
-							each equity and bond.</br> The average over the high and low daily
-							prices for the equities are used to determine market volume.
-						</li>
-						<li>Aggregate equity and bond volumes separately by 2-digit
-							NAICS industry sector code to create 22 * 2 portfolios.</br> Then take
-							the log of this volume.
-						</li>
-					</ul>
+			
 				</ul>
 			</div>
 			<div class="row">
