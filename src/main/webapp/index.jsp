@@ -147,8 +147,8 @@
 								class="fa fa-fw fa-table"></i> Network Summary Statistics</a></li>
 						<li><a href="analysis_extended.jsp"><i
 								class="fa fa-fw fa-file"></i> H-Index Analysis</a></li>
-						<li><a href="presentation.jsp"><i
-								class="fa fa-fw fa-file"></i>Presentation</a></li>
+						<!-- <li><a href="presentation.jsp"><i
+								class="fa fa-fw fa-file"></i>Presentation</a></li> -->
 					</ul>
 				</div>
 			</div>

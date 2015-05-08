@@ -358,9 +358,9 @@
 <a href="presentation.jsp">
 <button id="refresh"><h4>Refresh</h4></button><br>
 </a>
- <div class="gridster ready">
+ <div class="gridster ready" style="font-size:8">
     <ul style="height: 5200px; width: 1540px; position: relative;">
-      <li data-row="1" data-col="1" data-sizex="6" data-sizey="6">
+      <li data-row="1" data-col="1" data-sizex="8" data-sizey="6">
       <br><h3>Edge distribution</h3>
       	<div id="edge_graph">
 			<script type="text/javascript">
@@ -368,21 +368,13 @@
 			</script>
 		</div>
       </li>
-      <li data-row="1" data-col="1" data-sizex="4" data-sizey="6" class="gs-w">
-      <br><h4>Single-Edge Annually-Repeat Count Distribution</h4>
+      <li data-row="1" data-col="1" data-sizex="8" data-sizey="6" class="gs-w">
+      <br><h4>Single-Edge Repeat Count Distribution</h4>
       	<div id="YrepCount_grp">
 			<script type="text/javascript">
 			c3_barGrp('#YrepCount_grp', 1);
 			</script>
 		</div>
-      </li>
-      <li data-row="2" data-col="1" data-sizex="4" data-sizey="6" class="gs-w">
-      <br><h4>Single-Edge Quarterly-Repeat Count Distribution</h4>
-      <div id="QrepCount_grp">
-		<script type="text/javascript">
-			c3_barGrp('#QrepCount_grp', 2);
-		</script>
-	  </div>
       </li>
       <li data-row="2" data-col="1" data-sizex="6" data-sizey="6" class="gs-w">
       <br><h4>Clustering Coefficient</h4>
