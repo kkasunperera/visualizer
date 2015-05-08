@@ -962,5 +962,10 @@ public static void outdegree_get(DirectedGraph<Node, DefaultEdge> graph, Node[] 
 	
 }
 
+public static void Bonacich(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
+	
+	
+}
+
 }
 
