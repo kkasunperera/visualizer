@@ -502,7 +502,7 @@ public class PostDataServ extends HttpServlet {
 					
 					gg = DirectedGraphDemoServ.createHrefGraph(nodeSet, linkSetCount);
 					
-					edges_count_arry.add(linkSetCount.length);
+					/*edges_count_arry.add(linkSetCount.length);
 					completed_traid_count_arry.add(DirectedGraphDemoServ
 							.CompleteTriad_count(gg, nodeSet));
 					incompleted_traid_count_arry.add(DirectedGraphDemoServ
@@ -511,7 +511,9 @@ public class PostDataServ extends HttpServlet {
 							gg, nodeSet, linkSetCount));
 					
 					DirectedGraphDemoServ.indegree_get(gg, nodeSet,indegree);
-					DirectedGraphDemoServ.outdegree_get(gg, nodeSet,outdegree);
+					DirectedGraphDemoServ.outdegree_get(gg, nodeSet,outdegree);*/
+					
+					DirectedGraphDemoServ.Bonacich(gg, nodeSet);
 				}
 			}
 			//out.println("edges count : " + edges_count_arry);
