@@ -169,9 +169,7 @@
 			<div class="row">
 				<ul>
 					<p>
-						<strong>The GC Visualizer presents Granger Causality(GC) based interaction patterns
-                                                    when comparing the stock returns of US banks. GC networks are estimated using
-                                                    a 36 month rolling window from 2003 to 2013. 
+						<strong>The Interbank Trading Visualizer presents Granger Causality(GC) interaction patterns when comparing the stock returns of a subset of financial institutions. Granger Causality is estimated over a monthly interval of returns, from 2003 to 2013. 
 						</strong>
 					</p>
 					<p>We provide the following analysis for each of the GC-Network graphs:</p>
