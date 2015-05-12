@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,12 +22,14 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
+
 import DBconnect.ConnectionPool;
 import DBconnect.QueryDB;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+
 import java.util.logging.*;
 
 /**
@@ -474,6 +477,7 @@ public class PostDataServ extends HttpServlet {
 			ArrayList<Double> cc_count_arry = new ArrayList<Double>();
 			ArrayList<Integer> indegree = new ArrayList<Integer>();
 			ArrayList<Integer> outdegree = new ArrayList<Integer>();
+			ArrayList<Node> connected_nodes = new ArrayList<Node>();
 
 			PrintWriter out = response.getWriter();
 			ObjectMapper mapper = new ObjectMapper();
@@ -484,7 +488,7 @@ public class PostDataServ extends HttpServlet {
 			connect = con.getConnection();
 			DBconnect.QueryDB qdb = new QueryDB();
 			String Q = null,Query = null;;
-			
+			int counting = 0;
 			for (int i = 2003; i < 2011; i++) {
 				for (int j = 1; j < 13; j++) {
 					if((i==2003 & j<7)|(i==2010 & j>4)) continue;
@@ -513,9 +517,12 @@ public class PostDataServ extends HttpServlet {
 					DirectedGraphDemoServ.indegree_get(gg, nodeSet,indegree);
 					DirectedGraphDemoServ.outdegree_get(gg, nodeSet,outdegree);*/
 					
-					DirectedGraphDemoServ.Bonacich(gg, nodeSet);
+					connected_nodes = DirectedGraphDemoServ.Bonacich(gg, nodeSet,connected_nodes);
+					System.out.println(counting+" kkkkkkkkkkkk :"+connected_nodes.size());
+					counting++;
 				}
 			}
+			//System.out.println("kkkkkkkkkkkk :"+connected_nodes.size());
 			//out.println("edges count : " + edges_count_arry);
 			//out.println("completed traid : " + completed_traid_count_arry);
 			//out.println("incompleted traid : " + incompleted_traid_count_arry);
