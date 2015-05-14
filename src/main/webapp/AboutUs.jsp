@@ -479,7 +479,7 @@
 								<a href="http://www.umiacs.umd.edu/users/louiqa/" target="_blank">
 									<div class="panel-footer">
 										<span class="pull-left"><h4> Louiqa Raschid</h4></span> <br>
-										<br> <span>Advisors</span>
+										<br> <span>Advisor</span>
 
 									</div>
 								</a>
@@ -502,7 +502,7 @@
 								<a href="http://wso2.com/about/team/srinath-perera/" target="_blank">
 									<div class="panel-footer">
 										<span class="pull-left"><h4>Srinath	Perera</h4></span> <br>
-										<br> <span>Advisors</span>
+										<br> <span>Advisor</span>
 
                                         </div>
                                     </a>
