@@ -156,7 +156,7 @@ function c3_hIndex(tag){
 	
 	var file,y_lbl;
 	file = 'csv/Hindex_year.csv';
-	y_lbl = 'Number of Edges';
+	y_lbl = 'H-Index';
 	
 var chart = c3.generate({
 	bindto: tag,

@@ -297,17 +297,82 @@
 					<!--					<div class="col-lg-12" style="border: 2px solid;">-->
 					<div class="col-lg-12">
 						<!--						<center>-->
-						<p>
-							This web tool was developed as part of research and development
-							in Karsha project</br> Karsha projects aim to develop next generation
-							financial cyberinfrastructure tools and support data science for
-							finance. Karsha was launched through a collaboration between the
-							Smith School of Business at the University of Maryland and the
-							Lanka Software Foundation.
-						</p>
-						<!--						</center>-->
-
+						<p>The Karsha GC Visualizer website and tool was developed to visualize an evolving set of
+						 'Granger Causality' networks where each network is derived from a pair of financial 
+						 data streams.</p>
+						 
+						 <p>The Karsha project aims to develop next generation financial cyberinfrastructure tools
+							to support data science for finance.</p>
+						
+						 <p>Karsha is supported by the Smith School of Business at the University of Maryland, 
+						    the Lanka Software Foundation and the US National Science Foundation.</p>
 					</div>
+					
+					<div class="row">
+						<div class="col-lg-4 col-md-6">
+							<div class="panel panel-primary">
+								<div class="panel-heading" style="background-color:#FFFFFF">
+									<div class="row">
+										<div class="col-xs-5">
+											<img src="img/lsf.jpg"
+												style="width: 260px; height: 110px; border: solid">
+										</div>
+										
+										<div class="col-xs-9 text-right"></div>
+									</div>
+								</div>
+								<a href="http://opensource.lk/" target="_blank">
+									<div class="panel-footer">
+										<span class="pull-left"><h4>Lanka Software Foundation</h4></span> <br>
+										<br> <span></span>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6">
+							<div class="panel panel-primary">
+								<div class="panel-heading" style="background-color:#FFFFFF">
+									<div class="row">
+										<div class="col-xs-5">
+											<img src="img/maryland.jpg"
+												style="width: 260px; height: 110px; border: solid">
+										</div>
+										<div class="col-xs-9 text-right"></div>
+									</div>
+								</div>
+								<a href="http://www.rhsmith.umd.edu/" target="_blank">
+									<div class="panel-footer">
+										<span class="pull-left"><h4><center>Smith School of Business at the University of Maryland</center></h4></span> <br>
+										<br> <span></span>
+
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6">
+							<div class="panel panel-primary">
+								<div class="panel-heading" style="background-color:#FFFFFF">
+									<div class="row">
+									<div class="col-xs-2"></div>
+										<div class="col-xs-5">
+											<img src="img/Nsf.jpg"
+												style="width: 160px; height: 110px; border: solid">
+										</div>
+										
+										<div class="col-xs-9 text-right"></div>
+									</div>
+								</div>
+								<a href="http://www.nsf.gov/" target="_blank">
+									<div class="panel-footer">
+										<span class="pull-left"><h4>US National Science Foundation</h4></span> <br>
+										<br> <span></span>
+
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+					
 					<div class="col-lg-12">
 						<!--						<center>-->
 						<p>
@@ -335,7 +400,7 @@
 												style="width: 100px; height: 110px; border: solid">
 										</div>
 										<div class="col-xs-7">
-											Software Developer and Research fellow  at Lanka Software Foundation. 
+											Software Engineer and Research Fellow at Lanka Software Foundation. 
 										</div>
 										<div class="col-xs-9 text-right"></div>
 									</div>
@@ -358,7 +423,7 @@
 												style="width: 100px; height: 110px; border: solid">
 										</div>
 										<div class="col-xs-7">
-											Software Developer and Research fellow  at Lanka Software Foundation. 
+											Software Engineer(Intern) at Lanka Software Foundation. 
 										</div>
 										<div class="col-xs-9 text-right"></div>
 									</div>
@@ -381,7 +446,7 @@
 												style="width: 100px; height: 110px; border: solid">
 										</div>
 										<div class="col-xs-7">
-											add content here for Kasun 
+											Software Engineer and Research Fellow at Lanka Software Foundation.
 										</div>
 										<div class="col-xs-9 text-right"></div>
 									</div>
@@ -389,7 +454,7 @@
 								<a href="https://lk.linkedin.com/pub/kasun-perera/17/53/76a" target="_blank">
 									<div class="panel-footer">
 										<span class="pull-left"><h4>Kasun Perera</h4></span> <br>
-										<br> <span>Software Engineer</span>
+										<br> <span>Project Manager</span>
 
 									</div>
 								</a>
@@ -406,7 +471,7 @@
 												style="width: 100px; height: 110px; border: solid">
 										</div>
 										<div class="col-xs-7">
-											add content here for louiqa . 
+											Professor, University of Maryland. 
 										</div>
 										<div class="col-xs-9 text-right"></div>
 									</div>
@@ -429,7 +494,7 @@
 												style="width: 100px; height: 110px; border: solid">
 										</div>
 										<div class="col-xs-7">
-											add content for srinath 
+											Director of Research at WSO2.
 										</div>
 										<div class="col-xs-9 text-right"></div>
 									</div>

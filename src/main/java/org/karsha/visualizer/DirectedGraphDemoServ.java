@@ -962,18 +962,66 @@ public static void outdegree_get(DirectedGraph<Node, DefaultEdge> graph, Node[] 
 	
 }
 
-public static void Bonacich(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes) {
+public static ArrayList<Node> Bonacich(DirectedGraph<Node, DefaultEdge> graph, Node[] nodes,ArrayList<Node> node_select, int node,int pattern) {
+	 /*pattern = 1 -> indegree 
+	 pattern = 2 -> outdegree*/
+	 
+	ArrayList<Node> node_select_2 = new ArrayList<Node>();	
+	ArrayList<Node> dup_filter = new ArrayList<Node>();		 
+	int i = node;
 	
-	ArrayList<Node> node_select = new ArrayList<Node>();
-	int i = 0;
+	
+	
+	if(pattern==1){
 		for (int j = 0; j < nodes.length; j++) {
 			if(graph.containsEdge(nodes[j],nodes[i])){
 				node_select.add(nodes[j]);
 			}
 		}
-	System.out.println("jjjj :"+node_select.size());	
+		for (int j = 0; j < node_select.size(); j++) {
+			for (int j2 = 0; j2 < nodes.length; j2++) {
+				if(graph.containsEdge(nodes[j2],node_select.get(j))){
+					node_select_2.add(nodes[j2]);
+				}
+			}
+		}
+		
+		for (Node x : node_select_2) {
+			if (!node_select.contains(x)) {
+				node_select.add(x);
+			}
+		}
+		
+	}else {
+		for (int j = 0; j < nodes.length; j++) {
+			if(graph.containsEdge(nodes[i],nodes[j])){
+				node_select.add(nodes[j]);
+			}
+		}
+		for (int j = 0; j < node_select.size(); j++) {
+			for (int j2 = 0; j2 < nodes.length; j2++) {
+				if(graph.containsEdge(node_select.get(j),nodes[j2])){
+					node_select_2.add(nodes[j2]);
+				}
+			}
+		}
+		for (Node x : node_select_2) {
+			if (!node_select.contains(x)) {
+				node_select.add(x);
+			}
+		}
+	}
+	
+		for(Node x : node_select){
+			if(!dup_filter.contains(x)){
+				dup_filter.add(x);
+			}
+		}
+		return dup_filter;
 	
 }
+
+ 
 
 }
 
