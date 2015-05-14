@@ -477,8 +477,8 @@ public class PostDataServ extends HttpServlet {
 			ArrayList<Double> cc_count_arry = new ArrayList<Double>();
 			ArrayList<Integer> indegree = new ArrayList<Integer>();
 			ArrayList<Integer> outdegree = new ArrayList<Integer>();
-			ArrayList<Node> connected_nodes = new ArrayList<Node>();
-
+			
+			
 			PrintWriter out = response.getWriter();
 			ObjectMapper mapper = new ObjectMapper();
 			response.setContentType("application/json");
@@ -489,6 +489,12 @@ public class PostDataServ extends HttpServlet {
 			DBconnect.QueryDB qdb = new QueryDB();
 			String Q = null,Query = null;;
 			int counting = 0;
+			
+			for (int i = 0; i < 29; i++) {
+			out.print(i+",");
+			}
+			out.println();
+			
 			for (int i = 2003; i < 2011; i++) {
 				for (int j = 1; j < 13; j++) {
 					if((i==2003 & j<7)|(i==2010 & j>4)) continue;
@@ -517,17 +523,30 @@ public class PostDataServ extends HttpServlet {
 					DirectedGraphDemoServ.indegree_get(gg, nodeSet,indegree);
 					DirectedGraphDemoServ.outdegree_get(gg, nodeSet,outdegree);*/
 					
-					connected_nodes = DirectedGraphDemoServ.Bonacich(gg, nodeSet,connected_nodes);
-					System.out.println(counting+" kkkkkkkkkkkk :"+connected_nodes.size());
+					ArrayList<Node> connected_nodes_out = new ArrayList<Node>();
+					
+					
+					//connected_nodes_out = DirectedGraphDemoServ.Bonacich(gg, nodeSet,connected_nodes_out,1,2);
+					//System.out.println(counting+" :"+connected_nodes_in+" "+connected_nodes_in.size()+" : "+connected_nodes_out.size()+" :"+connected_nodes_out);
+					for (int k = 0; k < 29; k++) {
+						ArrayList<Node> connected_nodes_in1 = new ArrayList<Node>();
+						ArrayList<Node> connected_nodes_in = DirectedGraphDemoServ.Bonacich(gg, nodeSet,connected_nodes_in1,k,1);
+						out.print(connected_nodes_in.size()+",");
+					}
+					out.println();
+					
+					
 					counting++;
+					
 				}
 			}
+			//System.out.println("node name : "+nodeSet[1].description);
 			//System.out.println("kkkkkkkkkkkk :"+connected_nodes.size());
 			//out.println("edges count : " + edges_count_arry);
 			//out.println("completed traid : " + completed_traid_count_arry);
 			//out.println("incompleted traid : " + incompleted_traid_count_arry);
 			//out.println("cc value : " + cc_count_arry);
-			out.println("outdegree array length :"+outdegree.size());
+			//out.println("outdegree array length :"+outdegree.size());
 			int counter =1;
 			for (int i = 0; i < outdegree.size(); i++) {
 				
